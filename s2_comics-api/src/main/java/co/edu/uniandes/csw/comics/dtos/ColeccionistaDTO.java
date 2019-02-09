@@ -128,5 +128,4 @@ public class ColeccionistaDTO
         this.puntuacion = puntuacion;
     }
     
-    
 }
