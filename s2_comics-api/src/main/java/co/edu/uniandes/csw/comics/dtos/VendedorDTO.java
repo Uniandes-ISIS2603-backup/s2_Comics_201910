@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author estudiante
  */
-public class VendedorDTO implements Serializable
+public class VendedorDTO extends ColeccionistaDTO implements Serializable
 {
     public VendedorDTO()
     {
