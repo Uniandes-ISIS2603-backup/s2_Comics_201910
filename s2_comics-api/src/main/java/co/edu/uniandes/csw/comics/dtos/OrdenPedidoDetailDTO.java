@@ -15,7 +15,8 @@ import java.io.Serializable;
 public class OrdenPedidoDetailDTO extends OrdenPedidoDTO implements Serializable 
 {
     //ATRIBUTOS
-    
+ //  private List<ComicsDTO> comics;
+  
     //CONSTRUCTORES
     public OrdenPedidoDetailDTO(){
         

@@ -41,10 +41,7 @@ public class OrdenPedidoDTO implements Serializable
      */
     public OrdenPedidoDTO()
     {
-    comprador=null;
-    vendedor=null;
-    estado=1;
-    numeroComprasComprador=0;
+        
     }
     
     /**
