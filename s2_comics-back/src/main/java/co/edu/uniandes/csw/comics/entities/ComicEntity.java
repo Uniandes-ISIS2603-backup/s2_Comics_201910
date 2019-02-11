@@ -3,36 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.comics.dtos;
+package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+@Entity
 
 /**
  *
- * @author estudiante
+ * @author Sebastian Baquero
  */
-public class ComicDTO implements Serializable {
-    
-    
-   
+public class ComicEntity extends BaseEntity implements Serializable {
     
     private String nombre;
     private String autor;
     private Date anioSalida;
-    private boolean perteneceColeccion;
-    private boolean perteneceSerie;
+    private Boolean perteneceColeccion;
+    private Boolean perteneceSerie;
     private double precio;
     private Enum temaGlobal;
     private List listaDeComicsTrueque;
     private Boolean enVenta;
     
     
-    public ComicDTO (){
+    public ComicEntity (){
     
     }
-
+  @PersistenceContext(unitName = "ComicPU")
+    public ComicEntity create (ComicEntity pEntidad){
+     
+       EntityManager em;
+       em.persist(pEntidad);
+       
+        return pEntidad;
+    }
     /**
      * @return the nombre
      */
@@ -158,8 +167,4 @@ public class ComicDTO implements Serializable {
     public void setEnVenta(Boolean enVenta) {
         this.enVenta = enVenta;
     }
-    
-    
-    
-    
 }
