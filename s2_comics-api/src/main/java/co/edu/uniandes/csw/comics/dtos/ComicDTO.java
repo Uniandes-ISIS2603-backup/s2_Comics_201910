@@ -5,14 +5,18 @@
  */
 package co.edu.uniandes.csw.comics.dtos;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+=======
+>>>>>>> 23c9fd0fc5ce8b61463ea58d9b08f813b44a3d23
 /**
  *
  * @author estudiante
  */
+<<<<<<< HEAD
 public class ComicDTO implements Serializable {
     
     
@@ -161,5 +165,8 @@ public class ComicDTO implements Serializable {
     
     
     
+=======
+public class ComicDTO {
+>>>>>>> 23c9fd0fc5ce8b61463ea58d9b08f813b44a3d23
     
 }
