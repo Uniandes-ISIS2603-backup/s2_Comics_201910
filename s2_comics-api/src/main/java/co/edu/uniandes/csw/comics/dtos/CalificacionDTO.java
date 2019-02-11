@@ -30,8 +30,8 @@ public class CalificacionDTO implements Serializable {
      * cosntructor vacio
      */
     public CalificacionDTO() {
-        comentarios="";
-        puntuacion= 0.0;
+       
+        
     }
     /**
      * constructor con valores
