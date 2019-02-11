@@ -12,6 +12,13 @@ import java.io.Serializable;
  *
  * @author estudiante
  */
-public class OrdenPedidoDetailDTO extends OrdenPedidoDTO implements Serializable {
+public class OrdenPedidoDetailDTO extends OrdenPedidoDTO implements Serializable 
+{
+    //ATRIBUTOS
     
+    //CONSTRUCTORES
+    public OrdenPedidoDetailDTO(){
+        
+    }
+    //METODOS
 }

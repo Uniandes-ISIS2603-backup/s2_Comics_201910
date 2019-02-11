@@ -61,5 +61,59 @@ public class OrdenPedidoDTO implements Serializable
     }
     
     //METODOS
+    /**
+     *@return vendedor
+     */
+    public VendedorDTO getVendedor(){
+        return vendedor;
+    }
+    /**
+     * @set actualiza vendedor
+     * @param pVendedor , nuevo vendedor
+     */
+    public void setVendedor(VendedorDTO pVendedor){
+        vendedor=pVendedor;
+    }
     
+    /**
+     *@return Comprador
+     */
+    public CompradorDTO getComprador(){
+        return comprador;
+    }
+    /**
+     * @set actualiza comprador
+     * @param pComprador , nuevo comprador
+     */
+    public void setComprador(CompradorDTO pComprador){
+        comprador=pComprador;
+    }
+    
+     /**
+     *@return Estado
+     */
+    public Integer getEstado(){
+        return estado;
+    }
+    /**
+     * @set actualiza el estado de la orden
+     * @param pEstado , nuevo estado
+     */
+    public void setEstado(Integer pEstado){
+        estado=pEstado;
+    }
+    
+      /**
+     *@return numeroComprasComprador
+     */
+    public Integer getNumeroComprasComprador(){
+        return numeroComprasComprador;
+    }
+    /**
+     * @set actualiza el numeroComprasComprador
+     * @param pNumero , nuevo numeroComprasComprador
+     */
+    public void setnumeroComprasComprador(Integer pNumero){
+        numeroComprasComprador=pNumero;
+    }
 }
