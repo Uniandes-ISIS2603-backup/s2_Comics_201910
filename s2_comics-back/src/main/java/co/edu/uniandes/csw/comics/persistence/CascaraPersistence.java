@@ -35,7 +35,8 @@ import javax.persistence.PersistenceContext;
  * @author ISIS2603
  */
 @Stateless
-public class CascaraPersistence {
+public class CascaraPersistence
+{
 
     private static final Logger LOGGER = Logger.getLogger(CascaraPersistence.class.getName());
 
