@@ -56,6 +56,28 @@ public class CompradorResource
     }
     
     @GET
+    public HashMap<String, CompradorDTO> getCompradores()
+    {
+        return compradores;
+    }
+    
+    @DELETE
+    @Path("{name: [a-zA-Z][a-zA-Z]*}")
+    public CompradorDTO deleteComprador(@PathParam("name") String alias)throws Exception
+    {
+        try
+        {
+            CompradorDTO eliminado = compradores.get(alias);
+            compradores.remove(alias);
+            return eliminado;
+        }
+        catch(Exception e)
+        {
+            throw new Exception("No se puede eliminar el compador porque no se encontró");
+        }
+    }
+    
+    @GET
         @Path("{name: [a-zA-Z][a-zA-Z]*}")
     public CompradorDTO getCompradorByAlias(@PathParam("name") String alias)throws Exception
     {
@@ -67,9 +89,6 @@ public class CompradorResource
         {
             throw new Exception("No se encontró ningún comprador asociado a ese alias");
         }
-    }
-    
-    
-    
+    }    
 }
     
