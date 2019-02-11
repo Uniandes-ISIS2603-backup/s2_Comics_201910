@@ -43,35 +43,33 @@ public class CalificacionDTO implements Serializable {
         puntuacion= pPuntuacion;
     }
     //METODOS
-   
-   /**
-   * @return  los comentarios
-   */
-    public String getComentarios(){
+
+    /**
+     * @return the comentarios
+     */
+    public String getComentarios() {
         return comentarios;
     }
-    
-   /**
-   * @set actualiza los comentarios
-   * @param pComentarios los nuevos comentarios
-   */
-    public void setComentarios(String pComentarios){
-        comentarios=pComentarios;
-    }
-    
+
     /**
-   * @return  la puntuacion
-   */
-    public Double getPuntuacion(){
+     * @param comentarios the comentarios to set
+     */
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    /**
+     * @return the puntuacion
+     */
+    public Double getPuntuacion() {
         return puntuacion;
     }
-    
-   /**
-   * @set actualiza l puntuacion
-   * @param pPuntuacion los nuevos comentarios
-   */
-    public void setPuntuacion(Double pPuntuacion){
-        puntuacion=pPuntuacion;
+
+    /**
+     * @param puntuacion the puntuacion to set
+     */
+    public void setPuntuacion(Double puntuacion) {
+        this.puntuacion = puntuacion;
     }
-    
+   
 }

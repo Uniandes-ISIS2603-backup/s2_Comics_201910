@@ -38,6 +38,10 @@ public class OrdenPedidoTruequeDTO extends OrdenPedidoDTO implements Serializabl
         comicTrueque= pComicTrueque;
         comic =pComic;
     }
+    
+    public OrdenPedidoTruequeDTO(){
+        
+    }
     //METODOS
     
     /**
