@@ -68,7 +68,8 @@ public class OrdenPedidoTruequeDTO extends OrdenPedidoDTO implements Serializabl
      * @set actualiza comicTrueque
      * @param pComicTrueque , nuevo comicTrueque
      */
-    public void setComic(ComicDTO pComicTrueque){
+   public void setComicTrueque(ComicDTO pComicTrueque){
         comicTrueque=pComicTrueque;
     }
+   
 }

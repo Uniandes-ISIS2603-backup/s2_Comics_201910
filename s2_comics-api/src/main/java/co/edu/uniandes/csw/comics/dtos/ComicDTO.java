@@ -27,6 +27,11 @@ public class ComicDTO implements Serializable {
     private Enum temaGlobal;
     private List listaDeComicsTrueque;
     private Boolean enVenta;
+    
+    
+    public ComicDTO (){
+    
+    }
 
     /**
      * @return the nombre
