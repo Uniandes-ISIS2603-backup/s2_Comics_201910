@@ -18,11 +18,11 @@ public class OrdenPedidoTruequeDTO extends OrdenPedidoDTO implements Serializabl
     /**
      * comic a intercambiar (comprador)
      */
-     public ComicDTO comicTrueque;
+ //   private ComicDTO comicTrueque;
      /**
       * comic del vendedor 
       */
-     public ComicDTO comic;
+     //public ComicDTO comic;
      
     //CONSTRUCTORES
    /**
@@ -35,8 +35,8 @@ public class OrdenPedidoTruequeDTO extends OrdenPedidoDTO implements Serializabl
     */
     public OrdenPedidoTruequeDTO(VendedorDTO pVendedor, CompradorDTO pComprador, Integer pNumero, ComicDTO pComicTrueque, ComicDTO pComic){
         super( pVendedor,pComprador,pNumero);
-        comicTrueque= pComicTrueque;
-        comic =pComic;
+       // comicTrueque= pComicTrueque;
+        //comic =pComic;
     }
     
     public OrdenPedidoTruequeDTO(){
@@ -47,28 +47,28 @@ public class OrdenPedidoTruequeDTO extends OrdenPedidoDTO implements Serializabl
     /**
      *@return Comic
      */
-    public ComicDTO getComic(){
-        return comic;
-    }
+  //  public ComicDTO getComic(){
+    //    return comic;
+    //}
     /**
      * @set actualiza comic
      * @param pComic , nuevo comic
      */
     public void setComic(ComicDTO pComic){
-        comic=pComic;
+  //      comic=pComic;
     }
     
     /**
      *@return ComicTrueque
      */
-    public ComicDTO getComicTrueque(){
-        return comicTrueque;
-    }
+   // public ComicDTO getComicTrueque(){
+  //      return comicTrueque;
+   // }
     /**
      * @set actualiza comicTrueque
      * @param pComicTrueque , nuevo comicTrueque
      */
-    public void setComic(ComicDTO pComicTrueque){
-        comicTrueque=pComicTrueque;
+    public void setComicTrueque(ComicDTO pComicTrueque){
+ //     comicTrueque=pComicTrueque;
     }
 }
