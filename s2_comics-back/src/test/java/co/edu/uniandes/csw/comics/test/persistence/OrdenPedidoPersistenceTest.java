@@ -36,7 +36,7 @@ public class OrdenPedidoPersistenceTest {
    @Test
    public void createTest(){
        PodamFactory factory = new PodamFactoryImpl();
-       OrdenPedidoEntity op = ;
+    //   OrdenPedidoEntity op = ;
        
    }
 }
