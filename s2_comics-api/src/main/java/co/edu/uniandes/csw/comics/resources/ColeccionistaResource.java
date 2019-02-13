@@ -47,9 +47,5 @@ public class ColeccionistaResource {
     public ColeccionistaDTO actualizarColeccionista (@PathParam("coleccionistasId")long id){
         return null;
     }
-      @DELETE
-      @Path("{coleccionistasId:\\d+}")
-    public ColeccionistaDTO eliminaroleccionista (@PathParam("coleccionistasId")long id){
-        return null;
-    }
+     
 }

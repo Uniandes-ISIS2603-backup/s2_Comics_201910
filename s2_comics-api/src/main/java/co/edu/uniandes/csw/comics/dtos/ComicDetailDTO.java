@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.dtos;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,9 @@ import java.io.Serializable;
  */
 public class ComicDetailDTO extends ComicDTO implements Serializable {
     
+    private List<VendedorDTO> vendedorDTO;
+    
+    public ComicDetailDTO (){
+    
+    }
 }

@@ -11,17 +11,21 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-@Entity
+
 
 /**
  *
  * @author Sebastian Baquero
  */
+@Entity
 public class ComicEntity extends BaseEntity implements Serializable {
     
     private String nombre;
     private String autor;
+    @Temporal(TemporalType.DATE)
     private Date anioSalida;
     private Boolean perteneceColeccion;
     private Boolean perteneceSerie;
@@ -34,14 +38,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
     public ComicEntity (){
     
     }
-  @PersistenceContext(unitName = "ComicPU")
-    public ComicEntity create (ComicEntity pEntidad){
-     
-       EntityManager em;
-       em.persist(pEntidad);
-       
-        return pEntidad;
-    }
+ 
     /**
      * @return the nombre
      */
