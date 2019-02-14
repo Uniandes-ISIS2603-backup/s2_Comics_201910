@@ -28,7 +28,7 @@ public class ComicDTO implements Serializable {
     private boolean perteneceColeccion;
     private boolean perteneceSerie;
     private double precio;
-    private Enum temaGlobal;
+    //private Enum temaGlobal;
     private List listaDeComicsTrueque;
     private Boolean enVenta;
     
@@ -124,16 +124,16 @@ public class ComicDTO implements Serializable {
     /**
      * @return the temaGlobal
      */
-    public Enum getTemaGlobal() {
-        return temaGlobal;
-    }
+ //   public Enum getTemaGlobal() {
+   //     return temaGlobal;
+    //}
 
     /**
      * @param temaGlobal the temaGlobal to set
      */
-    public void setTemaGlobal(Enum temaGlobal) {
-        this.temaGlobal = temaGlobal;
-    }
+  //  public void setTemaGlobal(Enum temaGlobal) {
+    //    this.temaGlobal = temaGlobal;
+   // }
 
     /**
      * @return the listaDeComicsTrueque
