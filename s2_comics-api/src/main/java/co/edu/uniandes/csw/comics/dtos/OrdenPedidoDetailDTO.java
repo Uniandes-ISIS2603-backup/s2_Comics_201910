@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.dtos;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -15,7 +16,7 @@ import java.io.Serializable;
 public class OrdenPedidoDetailDTO extends OrdenPedidoDTO implements Serializable 
 {
     //ATRIBUTOS
- //  private List<ComicsDTO> comics;
+  private List<ComicDTO> comics;
   
     //CONSTRUCTORES
     public OrdenPedidoDetailDTO(){

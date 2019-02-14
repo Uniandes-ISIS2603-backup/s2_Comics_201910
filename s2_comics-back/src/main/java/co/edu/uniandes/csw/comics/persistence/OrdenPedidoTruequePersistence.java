@@ -21,7 +21,7 @@ public class OrdenPedidoTruequePersistence {
   @PersistenceContext(unitName = "comicsPU")
     protected EntityManager em;
     
-  private final static Logger LOGGER = Logger.getLogger(VendedorPersistence.class.getName());
+  private final static Logger LOGGER = Logger.getLogger(OrdenPedidoTruequePersistence.class.getName());
     
     public OrdenPedidoTruequePersistence(){
         

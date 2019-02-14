@@ -14,6 +14,11 @@ import java.io.Serializable;
 public class OrdenPedidoDTO implements Serializable
 {
    //ATRIBUTOS
+    
+    /**
+     * identificacdor de la orden de pedido
+     */
+    private Integer id;
     /**
      * numero de compras realizadas por el comprador
      */
@@ -49,12 +54,15 @@ public class OrdenPedidoDTO implements Serializable
      * @param pVendedor
      * @param pComprador
      * @param pNumero
+     * @param pId
      */
-    public OrdenPedidoDTO(VendedorDTO pVendedor, CompradorDTO pComprador, Integer pNumero){
+    public OrdenPedidoDTO(VendedorDTO pVendedor, CompradorDTO pComprador, Integer pNumero, Integer pId){
         vendedor=pVendedor;
         comprador=pComprador;
         numeroComprasComprador=pNumero;
         estado=1;
+        id=pId;
+        
     }
     
     //METODOS
@@ -113,6 +121,20 @@ public class OrdenPedidoDTO implements Serializable
      */
     public void setVendedor(VendedorDTO vendedor) {
         this.vendedor = vendedor;
+    }
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
    
 }
