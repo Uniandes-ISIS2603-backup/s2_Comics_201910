@@ -19,7 +19,7 @@ public class VendedorPersistence
 {
     private final static Logger LOGGER = Logger.getLogger(VendedorPersistence.class.getName());
     
-    @PersistenceContext(unitName="ComicsPU")
+    @PersistenceContext(unitName="comicsPU")
     protected EntityManager em;
     
     

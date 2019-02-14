@@ -11,8 +11,10 @@ import java.io.Serializable;
  *
  * @author estudiante
  */
+@javax.persistence.Entity
 public class VendedorEntity extends BaseEntity implements Serializable
 {
+    @javax.persistence.Id
     private String alias;
     
     public VendedorEntity()
