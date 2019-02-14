@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.comics.persistence;
 import co.edu.uniandes.csw.comics.entities.VendedorEntity;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,6 +16,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author estudiante
  */
+@Stateless
 public class VendedorPersistence
 {
     private final static Logger LOGGER = Logger.getLogger(VendedorPersistence.class.getName());

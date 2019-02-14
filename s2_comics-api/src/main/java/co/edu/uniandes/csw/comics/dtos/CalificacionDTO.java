@@ -38,10 +38,10 @@ public class CalificacionDTO implements Serializable {
      * @param pComentarios
      * @param pPuntuacion
      */
-    public CalificacionDTO(String pComentarios,Double pPuntuacion){
+    /**public CalificacionDTO(String pComentarios,Double pPuntuacion){
         comentarios = pComentarios;
         puntuacion= pPuntuacion;
-    }
+    }*/
     //METODOS
 
     /**

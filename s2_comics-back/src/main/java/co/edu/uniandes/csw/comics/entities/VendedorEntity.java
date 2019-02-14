@@ -6,15 +6,16 @@
 package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 
 /**
  *
  * @author estudiante
  */
-@javax.persistence.Entity
+@Entity
 public class VendedorEntity extends BaseEntity implements Serializable
 {
-    @javax.persistence.Id
+    
     private String alias;
     
     public VendedorEntity()
