@@ -49,21 +49,21 @@ public class OrdenPedidoDTO implements Serializable
         
     }
     
-    /**
-     * constructor con valores
-     * @param pVendedor
-     * @param pComprador
-     * @param pNumero
-     * @param pId
-     */
-    public OrdenPedidoDTO(VendedorDTO pVendedor, CompradorDTO pComprador, Integer pNumero, Integer pId){
-        vendedor=pVendedor;
-        comprador=pComprador;
-        numeroComprasComprador=pNumero;
-        estado=1;
-        id=pId;
+   // /**
+   //  * constructor con valores
+   //  * @param pVendedor
+   //  * @param pComprador
+   //  * @param pNumero
+   //  * @param pId
+   //  */
+   // public OrdenPedidoDTO(VendedorDTO pVendedor, CompradorDTO pComprador, Integer pNumero, Integer pId){
+     //   vendedor=pVendedor;
+     //   comprador=pComprador;
+     //   numeroComprasComprador=pNumero;
+     //   estado=1;
+     //   id=pId;
         
-    }
+   // }
     
     //METODOS
 
