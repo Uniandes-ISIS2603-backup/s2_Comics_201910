@@ -30,7 +30,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
     private Boolean perteneceColeccion;
     private Boolean perteneceSerie;
     private double precio;
-    private Enum temaGlobal;
+    //private Enum temaGlobal;
     private List listaDeComicsTrueque;
     private Boolean enVenta;
     
@@ -125,17 +125,16 @@ public class ComicEntity extends BaseEntity implements Serializable {
 
     /**
      * @return the temaGlobal
-     */
+     
     public Enum getTemaGlobal() {
         return temaGlobal;
-    }
-
+    }*/
     /**
      * @param temaGlobal the temaGlobal to set
-     */
+     
     public void setTemaGlobal(Enum temaGlobal) {
         this.temaGlobal = temaGlobal;
-    }
+    }*/
 
     /**
      * @return the listaDeComicsTrueque

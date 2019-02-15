@@ -8,7 +8,7 @@ package co.edu.uniandes.csw.comics.test.persistence;
 import javax.persistence.EntityManager;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoTruequeEntity;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoTruequePersistence;
-import co.edu.uniandes.csw.comics.persistence.VendedorPersistence;
+//import co.edu.uniandes.csw.comics.persistence.VendedorPersistence;
 import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
