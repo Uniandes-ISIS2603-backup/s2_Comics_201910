@@ -14,9 +14,8 @@ import javax.persistence.Entity;
 @Entity
 public class VendedorEntity extends BaseEntity implements java.io.Serializable
 {
+
     private String alias;
-    
-    private String email;
 
     /**
      * @return the alias
@@ -31,18 +30,5 @@ public class VendedorEntity extends BaseEntity implements java.io.Serializable
     public void setAlias(String alias) {
         this.alias = alias;
     }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
+        
 }
