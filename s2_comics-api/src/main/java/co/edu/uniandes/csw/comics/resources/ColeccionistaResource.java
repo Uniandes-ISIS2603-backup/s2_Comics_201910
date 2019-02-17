@@ -33,10 +33,10 @@ public class ColeccionistaResource {
     public ColeccionistaDTO crearColeccionista (ColeccionistaDTO coleccionista){
         return coleccionista;
     }
-     @GET
-    public ColeccionistaDTO obtenerColeccionistas (ColeccionistaDTO coleccionista){
-        return coleccionista;
-    }
+  //   @GET
+  //  public ColeccionistaDTO obtenerColeccionistas (ColeccionistaDTO coleccionista){
+  //      return coleccionista;
+  //  }
       @GET
       @Path("{coleccionistasId:\\d+}")
     public ColeccionistaDTO obtenerColeccionistaId (@PathParam("coleccionistasId")long id){
