@@ -9,12 +9,11 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author Juan Pablo Cano
+ * @author estudiante
  */
 @Entity
-public class VendedorEntity extends BaseEntity implements java.io.Serializable
+public class CompradorEntity extends BaseEntity implements java.io.Serializable
 {
-
     private String alias;
     
     private String email;
@@ -46,5 +45,5 @@ public class VendedorEntity extends BaseEntity implements java.io.Serializable
     public void setEmail(String email) {
         this.email = email;
     }
-        
+    
 }
