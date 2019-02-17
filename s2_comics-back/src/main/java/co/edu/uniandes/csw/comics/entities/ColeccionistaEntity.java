@@ -22,6 +22,11 @@ public class ColeccionistaEntity extends BaseEntity implements java.io.Serializa
         return alias;
     }
     
+    public String getAliasCapital()
+    {
+        return alias.toUpperCase();
+    }
+    
     public void setAlias(String alias)
     {
         this.alias = alias;
