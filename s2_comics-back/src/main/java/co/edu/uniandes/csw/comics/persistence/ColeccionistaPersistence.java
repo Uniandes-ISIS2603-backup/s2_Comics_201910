@@ -5,10 +5,13 @@
  */
 package co.edu.uniandes.csw.comics.persistence;
 
+import co.edu.uniandes.csw.comics.entities.CalificacionEntity;
 import co.edu.uniandes.csw.comics.entities.ColeccionistaEntity;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -25,4 +28,14 @@ public class ColeccionistaPersistence {
         em.persist(entity);
         return entity;
     }
+        
+    
+    public ColeccionistaEntity find(Long coleccionistaId){
+        return em.find(ColeccionistaEntity.class, coleccionistaId);
+    }
+      public List<ColeccionistaEntity> findAll(){
+          
+          TypedQuery<ColeccionistaEntity> query=em.createQuery("select u from ColeccionistaEntity u",ColeccionistaEntity.class);
+          return query.getResultList();
+      }  
 }

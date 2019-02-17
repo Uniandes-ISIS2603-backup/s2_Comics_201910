@@ -5,9 +5,13 @@
  */
 package co.edu.uniandes.csw.comics.test.persistence;
 
+import co.edu.uniandes.csw.comics.entities.CalificacionEntity;
 import co.edu.uniandes.csw.comics.entities.ColeccionistaEntity;
+import co.edu.uniandes.csw.comics.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.comics.persistence.ColeccionistaPersistence;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -28,16 +32,27 @@ public class ColeccionistaPersistenceTest {
     @Inject
     private ColeccionistaPersistence coleccionista;
     
+    @PersistenceContext
+    private EntityManager em;
     @Deployment
     public static JavaArchive createDeployment(){
-        return ShrinkWrap.create(JavaArchive.class).addPackage(ColeccionistaEntity.class.getPackage()).addPackage(ColeccionistaPersistence.class.getPackage()).addAsManifestResource("META-INF/beans.xml","beans.xml");
+        return ShrinkWrap.create(JavaArchive.class)
+                .addPackage(CalificacionEntity.class.getPackage())
+                .addPackage(CalificacionPersistence.class.getPackage())
+                .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml","beans.xml");
+        
+        
     }
     @Test
-    public void createTest(){
+    public void createColeccionistaTest(){
         PodamFactory factory=new PodamFactoryImpl();
-        ColeccionistaEntity newEntity=factory.manufacturePojo(ColeccionistaEntity.class);
-       ColeccionistaEntity resultado= coleccionista.create(newEntity);
-       Assert.assertNotNull(resultado);
-       
+        ColeccionistaEntity newColeccionistaEntity=factory.manufacturePojo(ColeccionistaEntity.class);
+        ColeccionistaEntity ce=coleccionista.create(newColeccionistaEntity);
+        
+        Assert.assertNotNull(ce);
+        
+        ColeccionistaEntity entity=em.find(ColeccionistaEntity.class,ce.getId());
+        Assert.assertEquals(newColeccionistaEntity.getNombre(),entity.getNombre());
     }
 }

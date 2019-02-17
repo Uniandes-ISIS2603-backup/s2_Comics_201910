@@ -5,10 +5,13 @@
  */
 package co.edu.uniandes.csw.comics.entities;
 
+import javax.persistence.Entity;
+
 /**
  *
- * @author estudiante
+ * @author ca.orduz
  */
+@Entity
 public class ColeccionistaEntity extends BaseEntity implements java.io.Serializable
 {
     private String alias;

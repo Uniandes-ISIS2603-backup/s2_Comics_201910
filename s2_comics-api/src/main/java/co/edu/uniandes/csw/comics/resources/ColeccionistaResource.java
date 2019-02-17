@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author estudiante
+ * @author ca.orduz
  */
 @Path("coleccionistas")
 @Produces("application/json")
@@ -33,10 +33,10 @@ public class ColeccionistaResource {
     public ColeccionistaDTO crearColeccionista (ColeccionistaDTO coleccionista){
         return coleccionista;
     }
-  //   @GET
-  //  public ColeccionistaDTO obtenerColeccionistas (ColeccionistaDTO coleccionista){
-  //      return coleccionista;
-  //  }
+     @GET
+    public ColeccionistaDTO obtenerColeccionistas (){
+        return null;
+    }
       @GET
       @Path("{coleccionistasId:\\d+}")
     public ColeccionistaDTO obtenerColeccionistaId (@PathParam("coleccionistasId")long id){
