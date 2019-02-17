@@ -45,8 +45,8 @@ public class VendedorResource
     
     @GET
     @Path("{name: [a-zA-Z][a-zA-Z]*}")
-    public VendedorDTO getVendedor(String alias) throws Exception
-    {/*
+    public VendedorDTO getVendedor(@PathParam("name") String alias) throws Exception
+    {
         try
         {
             return vendedores.get(alias);
@@ -55,8 +55,6 @@ public class VendedorResource
         {
             throw new Exception("No se encontró el vendedor solicitado");
         }
-*/
-        return null;
     }
     
     @DELETE

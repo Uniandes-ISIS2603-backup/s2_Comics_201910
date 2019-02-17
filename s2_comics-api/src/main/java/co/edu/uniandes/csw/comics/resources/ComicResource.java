@@ -32,7 +32,8 @@ public class ComicResource {
     private static final Logger LOGGER=Logger.getLogger(ComicResource.class.getName());
     
     @POST
-    public ComicDTO crearComic (ComicDTO pComic){
+    public ComicDTO crearComic (ComicDTO pComic)
+    {
         return pComic;
     }
     
@@ -44,13 +45,15 @@ public class ComicResource {
     
     @GET
     @Path("{comicsId:\\d+}")
-    public ComicDTO getComicID (@PathParam("comicsId")long id){
-    return null;
+    public ComicDTO getComicID (@PathParam("comicsId")long id)
+    {
+        return null;
     }
     
     @PUT
     @Path("{comicsId:\\d+}")
-    public ComicDTO actualizarComic (@PathParam("comicsId")long id){
+    public ComicDTO actualizarComic (@PathParam("comicsId")long id)
+    {
     return null;
     }
     
