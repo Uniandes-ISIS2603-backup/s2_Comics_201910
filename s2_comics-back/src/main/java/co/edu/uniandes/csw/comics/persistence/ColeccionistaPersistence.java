@@ -20,7 +20,8 @@ public class ColeccionistaPersistence {
     protected EntityManager em;
     
     
-    public ColeccionistaEntity create(ColeccionistaEntity entity){
+    public ColeccionistaEntity create(ColeccionistaEntity entity)
+    {
         em.persist(entity);
         return entity;
     }

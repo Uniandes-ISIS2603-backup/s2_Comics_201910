@@ -6,6 +6,9 @@
 package co.edu.uniandes.csw.comics.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
+import java.util.*;
 
 /**
  *
@@ -18,6 +21,10 @@ public class VendedorEntity extends BaseEntity implements java.io.Serializable
     private String alias;
     
     private String email;
+    
+    @PodamExclude
+    @OneToMany(mappedBy="vendedor")
+    private List<ComicEntity> comics = new ArrayList<ComicEntity>();
 
     /**
      * @return the alias
@@ -36,7 +43,8 @@ public class VendedorEntity extends BaseEntity implements java.io.Serializable
     /**
      * @return the email
      */
-    public String getEmail() {
+    public String getEmail() 
+    {
         return email;
     }
 
@@ -45,6 +53,20 @@ public class VendedorEntity extends BaseEntity implements java.io.Serializable
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the comics
+     */
+    public List<ComicEntity> getComics() {
+        return comics;
+    }
+
+    /**
+     * @param comics the comics to set
+     */
+    public void setComics(List<ComicEntity> comics) {
+        this.comics = comics;
     }
         
 }

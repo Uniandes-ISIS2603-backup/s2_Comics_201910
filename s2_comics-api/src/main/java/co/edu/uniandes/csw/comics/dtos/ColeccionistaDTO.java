@@ -11,12 +11,13 @@ import java.io.Serializable;
  *
  * @author estudiante
  */
-public class ColeccionistaDTO implements Serializable{
+public class ColeccionistaDTO implements Serializable
+{
     private String nombre;
-    private String alias;
+    protected String alias;
     private String foto;
    
-    private String correoElectronico;
+    protected String correoElectronico;
     private String intereses;
 
     

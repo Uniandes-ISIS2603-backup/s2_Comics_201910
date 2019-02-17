@@ -45,7 +45,7 @@ public class CompradorPersistence
     
     public CompradorEntity findByAlias(String alias)
     {
-        LOGGER.log(Level.INFO, "", alias);
+        LOGGER.log(Level.INFO, "Se buscará al comprador por el alias", alias);
         
         TypedQuery query = em.createQuery("Select u From CompradorEntity u where u.alias = :alias", CompradorEntity.class);
         
@@ -66,6 +66,34 @@ public class CompradorPersistence
         else
         {
             result = sameAlias.get(0);
+        }
+        
+        return result;
+    }
+    
+    public CompradorEntity findByEmail(String email)
+    {
+        LOGGER.log(Level.INFO, "Se buscará un comprador por el mail", email);
+        
+        TypedQuery query = em.createQuery("Select u From CompradorEntity u where u.email = :email", CompradorEntity.class);
+        
+        query = query.setParameter("email", email);
+        
+        List<CompradorEntity> sameMail = query.getResultList();
+        
+        CompradorEntity result;
+        
+        if(sameMail == null)
+        {
+            result = null;
+        }
+        else if(sameMail.isEmpty())
+        {
+            result = null;
+        }
+        else
+        {
+            result = sameMail.get(0);
         }
         
         return result;

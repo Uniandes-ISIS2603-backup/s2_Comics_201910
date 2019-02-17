@@ -9,10 +9,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 
 
@@ -23,6 +24,20 @@ import javax.persistence.TemporalType;
 @Entity
 public class ComicEntity extends BaseEntity implements Serializable {
     
+    public enum TemaGlobal
+    {
+        ACCION,
+        DEPORTE
+    }
+    
+    @PodamExclude
+    @ManyToMany
+    private List<CompradorEntity> compradores;
+    
+    @PodamExclude
+    @ManyToOne
+    private VendedorEntity vendedor;
+    
     private String nombre;
     private String autor;
     @Temporal(TemporalType.DATE)
@@ -30,15 +45,10 @@ public class ComicEntity extends BaseEntity implements Serializable {
     private Boolean perteneceColeccion;
     private Boolean perteneceSerie;
     private double precio;
-    //private Enum temaGlobal;
+    private TemaGlobal tema;
     private List listaDeComicsTrueque;
     private Boolean enVenta;
-    
-    
-    public ComicEntity (){
-    
-    }
- 
+     
     /**
      * @return the nombre
      */
@@ -162,5 +172,33 @@ public class ComicEntity extends BaseEntity implements Serializable {
      */
     public void setEnVenta(Boolean enVenta) {
         this.enVenta = enVenta;
+    }
+
+    /**
+     * @return the comprador
+     */
+    public List<CompradorEntity> getComprador() {
+        return compradores;
+    }
+
+    /**
+     * @param comprador the comprador to set
+     */
+    public void setComprador(List<CompradorEntity> comprador) {
+        this.compradores = comprador;
+    }
+
+    /**
+     * @return the vendedor
+     */
+    public VendedorEntity getVendedor() {
+        return vendedor;
+    }
+
+    /**
+     * @param vendedor the vendedor to set
+     */
+    public void setVendedor(VendedorEntity vendedor) {
+        this.vendedor = vendedor;
     }
 }

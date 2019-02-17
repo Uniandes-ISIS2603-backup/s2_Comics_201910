@@ -107,4 +107,18 @@ public class VendedorPersistenceTest
         Assert.assertEquals("Hay un error", result.getAlias(), entity.getAlias());
         Assert.assertEquals("", result.getEmail(), entity.getEmail());
     }
+    
+    @Test
+    public void findVendedorByAliasTest()
+    {
+        VendedorEntity comprador = data.get(0);
+        VendedorEntity entity = vendedorPersistence.findByAlias(comprador.getAlias());
+        
+        Assert.assertNotNull(entity);
+        Assert.assertEquals(entity.getAlias(), comprador.getAlias());
+        
+        entity = vendedorPersistence.findByAlias(null);
+        Assert.assertNull(entity);
+        
+    }
 }

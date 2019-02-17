@@ -18,6 +18,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class CalificacionEntity extends BaseEntity implements Serializable {
     private String comentarios;
     private Double puntuacion;
+    
     @PodamExclude
     @ManyToOne
     private VendedorEntity vendedor;
