@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.comics.resources;
 
+
 import co.edu.uniandes.csw.comics.dtos.ColeccionistaDTO;
 import co.edu.uniandes.csw.comics.dtos.ComicDTO;
+import co.edu.uniandes.csw.comics.dtos.OrdenPedidoDTO;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
@@ -20,46 +22,37 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Sebastian Baquero
+ * @author estudiante
  */
-
-@Path("comics")
+@Path("OrdenesPedido")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-public class ComicResource {
-    
-    private static final Logger LOGGER=Logger.getLogger(ComicResource.class.getName());
+public class OrdenPedidoResource {
+    private static final Logger LOGGER=Logger.getLogger(OrdenPedidoResource.class.getName());
     
     @POST
-    public ComicDTO crearComic (ComicDTO pComic)
-    {
-        return pComic;
+    public OrdenPedidoDTO crearOrdenPedido (OrdenPedidoDTO OrdenPedido){
+        return OrdenPedido;
     }
     
- //   @GET
- //   public ComicDTO getComic (ComicDTO pComic){
-    
- //       return pComic;
- //   }
-    
-    @GET
-    @Path("{comicsId:\\d+}")
-    public ComicDTO getComicID (@PathParam("comicsId")long id)
+   @GET
+    @Path("{OdenesPedidoId:\\d+}")
+    public OrdenPedidoDTO getOrdenPedidoID (@PathParam("OrdenesPedidoId")long id)
     {
         return null;
     }
     
     @PUT
-    @Path("{comicsId:\\d+}")
-    public ComicDTO actualizarComic (@PathParam("comicsId")long id)
+    @Path("{OdenesPedidoId:\\d+}")
+    public OrdenPedidoDTO actualizarOrdenPedido (@PathParam("OdenesPedidoId")long id)
     {
     return null;
     }
     
      @DELETE
-      @Path("{comicsId:\\d+}")
-    public ColeccionistaDTO eliminaroleccionista (@PathParam("comicsId")long id){
+      @Path("{OdenesPedidoId:\\d+}")
+    public OrdenPedidoDTO eliminarOrdenPedido (@PathParam("OdenesPedidoId")long id){
         return null;
     }
 }

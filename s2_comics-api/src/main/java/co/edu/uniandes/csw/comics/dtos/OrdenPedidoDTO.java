@@ -14,6 +14,11 @@ import java.io.Serializable;
 public class OrdenPedidoDTO implements Serializable
 {
    //ATRIBUTOS
+   
+    /**
+     * tarjeta de credito asiciada con la compra
+     */
+    private String tarjetaCredito;
     
     /**
      * identificacdor de la orden de pedido
@@ -39,6 +44,17 @@ public class OrdenPedidoDTO implements Serializable
      * vendedor al cual esta dirigida la orden
      */
     private VendedorDTO vendedor;
+    
+    /**
+     * comic que se va a comprar o intercambiar
+     */
+    private ComicDTO comic;
+    
+    /**
+     * comic que se va a intercambiar
+     */
+    private ComicDTO trueque;
+    
     
     //CONSTRUCTORES
     /**
@@ -135,6 +151,48 @@ public class OrdenPedidoDTO implements Serializable
      */
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    /**
+     * @return the tarjetaCredito
+     */
+    public String getTarjetaCredito() {
+        return tarjetaCredito;
+    }
+
+    /**
+     * @param tarjetaCredito the tarjetaCredito to set
+     */
+    public void setTarjetaCredito(String tarjetaCredito) {
+        this.tarjetaCredito = tarjetaCredito;
+    }
+
+    /**
+     * @return the comic
+     */
+    public ComicDTO getComic() {
+        return comic;
+    }
+
+    /**
+     * @param comic the comic to set
+     */
+    public void setComic(ComicDTO comic) {
+        this.comic = comic;
+    }
+
+    /**
+     * @return the trueque
+     */
+    public ComicDTO getTrueque() {
+        return trueque;
+    }
+
+    /**
+     * @param trueque the trueque to set
+     */
+    public void setTrueque(ComicDTO trueque) {
+        this.trueque = trueque;
     }
    
 }
