@@ -11,8 +11,10 @@ import java.io.Serializable;
  *
  * @author estudiante
  */
-public class ColeccionistaDTO implements Serializable
-{
+//<<<<<<< HEAD
+public class ColeccionistaDTO implements Serializable{
+    
+
     private String nombre;
     protected String alias;
     private String foto;
@@ -97,6 +99,7 @@ public class ColeccionistaDTO implements Serializable
      */
     public void setIntereses(String intereses) {
         this.intereses = intereses;
+        
     }
     
 }

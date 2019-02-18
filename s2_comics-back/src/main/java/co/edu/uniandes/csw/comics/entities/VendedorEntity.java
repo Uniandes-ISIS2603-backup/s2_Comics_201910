@@ -10,13 +10,14 @@ import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import java.util.*;
 
+
 /**
  *
  * @author Juan Pablo Cano
  */
 @Entity
 public class VendedorEntity extends ColeccionistaEntity implements java.io.Serializable
-{    
+{        
     @PodamExclude
     @OneToMany(mappedBy="vendedor")
     private List<ComicEntity> comics = new ArrayList<ComicEntity>();
@@ -33,6 +34,5 @@ public class VendedorEntity extends ColeccionistaEntity implements java.io.Seria
      */
     public void setComics(List<ComicEntity> comics) {
         this.comics = comics;
-    }
-        
+    }        
 }

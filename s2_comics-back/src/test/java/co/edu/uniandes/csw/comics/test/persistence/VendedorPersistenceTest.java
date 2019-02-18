@@ -105,7 +105,7 @@ public class VendedorPersistenceTest
         VendedorEntity entity = em.find(VendedorEntity.class, result.getId());
         
         Assert.assertEquals("Hay un error", result.getAlias(), entity.getAlias());
-   //     Assert.assertEquals("", result.getEmail(), entity.getEmail());
+        Assert.assertEquals("", result.getEmail(), entity.getEmail());
     }
     
     @Test

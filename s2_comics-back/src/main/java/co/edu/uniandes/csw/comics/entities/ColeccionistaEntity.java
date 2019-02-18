@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
 
 /**
  *
- * @author estudiante
+ * @author Sebastian Baquero
  */
 @MappedSuperclass
 public abstract class ColeccionistaEntity extends BaseEntity implements java.io.Serializable
@@ -19,78 +19,76 @@ public abstract class ColeccionistaEntity extends BaseEntity implements java.io.
     protected String intereses;
     protected String nombre;
     protected String foto;
-    
+
+    /**
+     * @return the alias
+     */
     public String getAlias()
     {
         return alias;
     }
-    
-    public void setAlias(String alias)
-    {
+
+    /**
+     * @param alias the alias to set
+     */
+    public void setAlias(String alias) {
         this.alias = alias;
     }
 
     /**
-     * @return the correoElectronico
+     * @return the email
      */
-    public String getEmail() 
-    {
+    public String getEmail() {
         return email;
     }
 
     /**
-     * @param correoElectronico the correoElectronico to set
+     * @param email the email to set
      */
-    public void setEmail(String correoElectronico) 
-    {
-        this.email = correoElectronico;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
      * @return the intereses
      */
-    public String getIntereses()
-    {
+    public String getIntereses() {
         return intereses;
     }
 
     /**
      * @param intereses the intereses to set
      */
-    public void setIntereses(String intereses)
-    {
+    public void setIntereses(String intereses) {
         this.intereses = intereses;
     }
 
     /**
      * @return the nombre
      */
-    public String getNombre()
-    {
+    public String getNombre() {
         return nombre;
     }
 
     /**
      * @param nombre the nombre to set
      */
-    public void setNombre(String nombre) 
-    {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
      * @return the foto
      */
-    public String getFoto()
-    {
+    public String getFoto() {
         return foto;
     }
 
     /**
      * @param foto the foto to set
      */
-    public void setFoto(String foto)
-    {
+    public void setFoto(String foto) {
         this.foto = foto;
-    }
+    }    
 }
+

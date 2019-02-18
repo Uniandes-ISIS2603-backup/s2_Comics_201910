@@ -33,7 +33,9 @@ public class VendedorResource
     @POST
     public VendedorDTO crearVendedor(VendedorDTO vendedor)
     {
-        vendedores.put(vendedor.getAlias(), vendedor);
+        
+        
+       vendedores.put(vendedor.getAlias(), vendedor);
         return vendedor;
     }
     

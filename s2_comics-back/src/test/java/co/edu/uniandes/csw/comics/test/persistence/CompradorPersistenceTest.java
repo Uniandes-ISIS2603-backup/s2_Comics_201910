@@ -25,7 +25,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author estudiante
+ * @author Juan Pablo Cano
  */
 @RunWith(Arquillian.class)
 public class CompradorPersistenceTest 

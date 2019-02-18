@@ -33,7 +33,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToMany
     private List<CompradorEntity> compradores;
-    
+
     @PodamExclude
     @ManyToOne
     private VendedorEntity vendedor;
@@ -54,7 +54,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
      */
     public String getNombre() {
         return nombre;
-    }
+}
 
     /**
      * @param nombre the nombre to set

@@ -20,32 +20,51 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author estudiante
+<<<<<<< HEAD
+ * @author Sebastian Baquero
+=======
+ * @author ca.orduz
+>>>>>>> 93f909dc5cbf9acf09a8c3a07663e1be63d8055c
  */
 @Path("coleccionistas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class ColeccionistaResource {
+    
     private static final Logger LOGGER=Logger.getLogger(ColeccionistaResource.class.getName());
     
-    @POST
-    public ColeccionistaDTO crearColeccionista (ColeccionistaDTO coleccionista){
-        return coleccionista;
+//<<<<<<< HEAD
+    public ColeccionistaResource() {
+    
     }
-  //   @GET
-  //  public ColeccionistaDTO obtenerColeccionistas (ColeccionistaDTO coleccionista){
-  //      return coleccionista;
-  //  }
-      @GET
-      @Path("{coleccionistasId:\\d+}")
-    public ColeccionistaDTO obtenerColeccionistaId (@PathParam("coleccionistasId")long id){
-        return null;
-    }
-      @PUT
-      @Path("{coleccionistasId:\\d+}")
-    public ColeccionistaDTO actualizarColeccionista (@PathParam("coleccionistasId")long id){
-        return null;
-    }
+    
+//=======
+   
+    //@POST
+    //public ColeccionistaDTO crearColeccionista (ColeccionistaDTO pColeccionista){
+      //  return pColeccionista;
+    //}
+    // @GET
+    //public ColeccionistaDTO obtenerColeccionistas (ColeccionistaDTO coleccionista){
+     //   return coleccionista;
+    //}
+     // @GET
+      //@Path("{coleccionistasId:\\d+}")
+    //public ColeccionistaDTO obtenerColeccionistaId (@PathParam("coleccionistasId")long id){
+      //  return null;
+  // }
+     // @PUT
+      //@Path("{coleccionistasId:\\d+}")
+    //public ColeccionistaDTO actualizarColeccionista (@PathParam("coleccionistasId")long id){
+      //  return null;
+    //}
+    
+   // @DELETE
+    //Alias del coleccionista
+    //@Path("{name: [a-zA-Z][a-zA-Z]*}")
+    //public ColeccionistaDTO deleteColeccionista(@PathParam("name") String pAlias){
+      //  return null;
+    //}
      
 }
