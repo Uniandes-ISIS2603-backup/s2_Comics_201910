@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
  * @author estudiante
  */
 
-@Path("coleccionistas")
+@Path("calificaciones")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

@@ -11,13 +11,15 @@ import java.io.Serializable;
  *
  * @author estudiante
  */
+//<<<<<<< HEAD
 public class ColeccionistaDTO implements Serializable{
     
+
     private String nombre;
-    private String alias;
+    protected String alias;
     private String foto;
-    private String avatar;
-    private String correoElectronico;
+   
+    protected String correoElectronico;
     private String intereses;
 
     
@@ -69,16 +71,7 @@ public class ColeccionistaDTO implements Serializable{
     /**
      * @return the avatar
      */
-    public String getAvatar() {
-        return avatar;
-    }
 
-    /**
-     * @param avatar the avatar to set
-     */
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 
     /**
      * @return the correoElectronico

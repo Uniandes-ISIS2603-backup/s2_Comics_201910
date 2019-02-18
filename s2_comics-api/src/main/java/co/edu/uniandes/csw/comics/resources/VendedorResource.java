@@ -47,7 +47,7 @@ public class VendedorResource
     
     @GET
     @Path("{name: [a-zA-Z][a-zA-Z]*}")
-    public VendedorDTO getVendedor(String alias) throws Exception
+    public VendedorDTO getVendedor(@PathParam("name") String alias) throws Exception
     {
         try
         {

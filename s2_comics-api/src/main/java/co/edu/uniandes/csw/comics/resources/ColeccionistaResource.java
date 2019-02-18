@@ -20,7 +20,11 @@ import javax.ws.rs.Produces;
 
 /**
  *
+<<<<<<< HEAD
  * @author Sebastian Baquero
+=======
+ * @author ca.orduz
+>>>>>>> 93f909dc5cbf9acf09a8c3a07663e1be63d8055c
  */
 @Path("coleccionistas")
 @Produces("application/json")
@@ -30,9 +34,13 @@ public class ColeccionistaResource {
     
     private static final Logger LOGGER=Logger.getLogger(ColeccionistaResource.class.getName());
     
-    public ColeccionistaResource(){
+//<<<<<<< HEAD
+    public ColeccionistaResource() {
     
     }
+    
+//=======
+   
     //@POST
     //public ColeccionistaDTO crearColeccionista (ColeccionistaDTO pColeccionista){
       //  return pColeccionista;

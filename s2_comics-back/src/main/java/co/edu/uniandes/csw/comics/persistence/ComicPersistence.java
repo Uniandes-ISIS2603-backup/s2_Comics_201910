@@ -5,10 +5,12 @@
  */
 package co.edu.uniandes.csw.comics.persistence;
 
+
 /**
  *
  * @author estudiante
  */
 public class ComicPersistence {
+    
     
 }

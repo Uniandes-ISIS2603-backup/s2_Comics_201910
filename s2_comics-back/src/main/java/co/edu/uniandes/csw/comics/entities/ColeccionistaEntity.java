@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.comics.entities;
 
+//<<<<<<< HEAD
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
