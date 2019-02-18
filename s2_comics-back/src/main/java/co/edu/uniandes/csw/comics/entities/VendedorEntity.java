@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.comics.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
 
+
 /**
  *
  * @author estudiante

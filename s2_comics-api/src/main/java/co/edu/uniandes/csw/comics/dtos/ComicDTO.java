@@ -21,15 +21,15 @@ public class ComicDTO implements Serializable {
     
     
    
-    
+    private Long idComic;
     private String nombre;
     private String autor;
-    private Date anioSalida;
+   // private Date anioSalida;
     private boolean perteneceColeccion;
     private boolean perteneceSerie;
     private double precio;
     //private Enum temaGlobal;
-    private List listaDeComicsTrueque;
+   // private List listaDeComicsTrueque;
     private Boolean enVenta;
     
     
@@ -68,16 +68,16 @@ public class ComicDTO implements Serializable {
     /**
      * @return the anioSalida
      */
-    public Date getAnioSalida() {
-        return anioSalida;
-    }
+   // public Date getAnioSalida() {
+     //   return anioSalida;
+    //}
 
     /**
      * @param anioSalida the anioSalida to set
      */
-    public void setAnioSalida(Date anioSalida) {
-        this.anioSalida = anioSalida;
-    }
+    //public void setAnioSalida(Date anioSalida) {
+      //  this.anioSalida = anioSalida;
+    //}
 
     /**
      * @return the perteneceColeccion
@@ -138,16 +138,16 @@ public class ComicDTO implements Serializable {
     /**
      * @return the listaDeComicsTrueque
      */
-    public List getListaDeComicsTrueque() {
-        return listaDeComicsTrueque;
-    }
+   // public List getListaDeComicsTrueque() {
+     //   return listaDeComicsTrueque;
+    //}
 
     /**
      * @param listaDeComicsTrueque the listaDeComicsTrueque to set
      */
-    public void setListaDeComicsTrueque(List listaDeComicsTrueque) {
-        this.listaDeComicsTrueque = listaDeComicsTrueque;
-    }
+   // public void setListaDeComicsTrueque(List listaDeComicsTrueque) {
+     //   this.listaDeComicsTrueque = listaDeComicsTrueque;
+    //}
 
     /**
      * @return the enVenta
@@ -168,6 +168,13 @@ public class ComicDTO implements Serializable {
 //=======
 //public class ComicDTO {
 //>>>>>>> 23c9fd0fc5ce8b61463ea58d9b08f813b44a3d23
+
+    /**
+     * @return the idComic
+     */
+    public Long getIdComic() {
+        return idComic;
+    }
   
     
 }

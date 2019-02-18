@@ -16,8 +16,8 @@ import java.util.*;
  */
 
 @Path("vendedor")
-@Consumes("Application/JSON")
-@Produces("Application/JSON")
+@Consumes("application/json")
+@Produces("application/json")
 @RequestScoped
 public class VendedorResource
 {
@@ -33,7 +33,9 @@ public class VendedorResource
     @POST
     public VendedorDTO crearVendedor(VendedorDTO vendedor)
     {
-        vendedores.put(vendedor.getAlias(), vendedor);
+        
+        
+       vendedores.put(vendedor.getAlias(), vendedor);
         return vendedor;
     }
     

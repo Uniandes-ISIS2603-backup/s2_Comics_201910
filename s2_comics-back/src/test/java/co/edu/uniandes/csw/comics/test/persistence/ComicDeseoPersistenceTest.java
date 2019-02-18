@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.comics.persistence;
+package co.edu.uniandes.csw.comics.test.persistence;
 
 /**
  *
- * @author estudiante
+ * @author Sebastian Baquero
  */
-public class ComicPersistence {
+public class ComicDeseoPersistenceTest {
     
 }

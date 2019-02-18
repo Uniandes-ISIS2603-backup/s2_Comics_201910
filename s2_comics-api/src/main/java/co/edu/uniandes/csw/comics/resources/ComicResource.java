@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.comics.resources;
 
 import co.edu.uniandes.csw.comics.dtos.ColeccionistaDTO;
 import co.edu.uniandes.csw.comics.dtos.ComicDTO;
+import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
@@ -30,33 +32,73 @@ import javax.ws.rs.Produces;
 public class ComicResource {
     
     private static final Logger LOGGER=Logger.getLogger(ComicResource.class.getName());
+    private HashMap<Long, ComicDTO> comics;
     
+    public ComicResource(){
+        
+    comics = new HashMap<Long, ComicDTO>();
+    
+    }
     @POST
     public ComicDTO crearComic (ComicDTO pComic){
+        
+        //comics.put(pComic.getIdComic(), pComic);
         return pComic;
     }
-    
+   
     @GET
-    public ComicDTO getComic (ComicDTO pComic){
+    public ComicDTO getComics (ComicDTO pComicDTO){
     
-        return pComic;
+        return pComicDTO;
+       
     }
     
     @GET
     @Path("{comicsId:\\d+}")
-    public ComicDTO getComicID (@PathParam("comicsId")long id){
-    return null;
-    }
+    
+     public ComicDTO getComicXID (@PathParam("comicsId")long id)throws  Exception{
+        
+        try{
+          //  return comics.get(id);
+          return null;
+            
+        }catch(Exception e)
+        {
+        throw new Exception("No se encontro el comic solicitado");
+       }
+        
+    
+   }
     
     @PUT
     @Path("{comicsId:\\d+}")
     public ComicDTO actualizarComic (@PathParam("comicsId")long id){
-    return null;
+        
+        try{
+            
+            return null;
+           //ComicDTO updateComic = comics.get(id);
+           //updateComic.setAnioSalida(anioSalida);
+        
+        }catch(Exception e)
+        {
+        
+       }
+        return null;
     }
     
      @DELETE
       @Path("{comicsId:\\d+}")
-    public ColeccionistaDTO eliminaroleccionista (@PathParam("comicsId")long id){
-        return null;
+    public ComicDTO eliminarComic (@PathParam("comicsId")long id)throws Exception{
+        try{
+            
+            ComicDTO deleComic = comics.get(id);
+            comics.remove(id);
+            return deleComic;
+            
+        }catch(Exception e)
+        {
+        throw new Exception("No se pudo eliminar el comic solicitado");
+        }
     }
 }

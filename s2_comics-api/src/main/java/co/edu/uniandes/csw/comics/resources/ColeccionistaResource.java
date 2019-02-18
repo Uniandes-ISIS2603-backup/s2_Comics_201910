@@ -20,32 +20,43 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author estudiante
+ * @author Sebastian Baquero
  */
 @Path("coleccionistas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class ColeccionistaResource {
+    
     private static final Logger LOGGER=Logger.getLogger(ColeccionistaResource.class.getName());
     
-    @POST
-    public ColeccionistaDTO crearColeccionista (ColeccionistaDTO coleccionista){
-        return coleccionista;
+    public ColeccionistaResource(){
+    
     }
-     @GET
-    public ColeccionistaDTO obtenerColeccionistas (ColeccionistaDTO coleccionista){
-        return coleccionista;
-    }
-      @GET
-      @Path("{coleccionistasId:\\d+}")
-    public ColeccionistaDTO obtenerColeccionistaId (@PathParam("coleccionistasId")long id){
-        return null;
-    }
-      @PUT
-      @Path("{coleccionistasId:\\d+}")
-    public ColeccionistaDTO actualizarColeccionista (@PathParam("coleccionistasId")long id){
-        return null;
-    }
+    //@POST
+    //public ColeccionistaDTO crearColeccionista (ColeccionistaDTO pColeccionista){
+      //  return pColeccionista;
+    //}
+    // @GET
+    //public ColeccionistaDTO obtenerColeccionistas (ColeccionistaDTO coleccionista){
+     //   return coleccionista;
+    //}
+     // @GET
+      //@Path("{coleccionistasId:\\d+}")
+    //public ColeccionistaDTO obtenerColeccionistaId (@PathParam("coleccionistasId")long id){
+      //  return null;
+  // }
+     // @PUT
+      //@Path("{coleccionistasId:\\d+}")
+    //public ColeccionistaDTO actualizarColeccionista (@PathParam("coleccionistasId")long id){
+      //  return null;
+    //}
+    
+   // @DELETE
+    //Alias del coleccionista
+    //@Path("{name: [a-zA-Z][a-zA-Z]*}")
+    //public ColeccionistaDTO deleteColeccionista(@PathParam("name") String pAlias){
+      //  return null;
+    //}
      
 }

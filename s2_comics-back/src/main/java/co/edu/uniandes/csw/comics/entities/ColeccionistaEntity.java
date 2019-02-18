@@ -3,27 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.comics.dtos;
+package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
+
+
 
 /**
  *
- * @author estudiante
+ * @author Sebastian Baquero
  */
-public class ColeccionistaDTO implements Serializable{
+@Entity
+public class ColeccionistaEntity extends BaseEntity implements Serializable {
     
     private String nombre;
     private String alias;
     private String foto;
-    private String avatar;
     private String correoElectronico;
     private String intereses;
-
     
-    public ColeccionistaDTO(){
-        
-    }
+    @PodamExclude
+    @OneToOne
+    private VendedorEntity vendedor;
+    
+    //@PodamExclude
+    //@OneToOne
+    //private CompradorEntity comprador;
+    
+    
+    
+    
+   
+
     /**
      * @return the nombre
      */
@@ -67,20 +81,6 @@ public class ColeccionistaDTO implements Serializable{
     }
 
     /**
-     * @return the avatar
-     */
-    public String getAvatar() {
-        return avatar;
-    }
-
-    /**
-     * @param avatar the avatar to set
-     */
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    /**
      * @return the correoElectronico
      */
     public String getCorreoElectronico() {
@@ -106,7 +106,7 @@ public class ColeccionistaDTO implements Serializable{
      */
     public void setIntereses(String intereses) {
         this.intereses = intereses;
-        
     }
     
 }
+
