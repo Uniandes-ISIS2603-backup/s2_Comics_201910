@@ -5,26 +5,24 @@
  */
 package co.edu.uniandes.csw.comics.entities;
 
+import javax.persistence.MappedSuperclass;
+
 /**
  *
  * @author estudiante
  */
-public class ColeccionistaEntity extends BaseEntity implements java.io.Serializable
+@MappedSuperclass
+public abstract class ColeccionistaEntity extends BaseEntity implements java.io.Serializable
 {
-    private String alias;
-    private String correoElectronico;
-    private String intereses;
-    private String nombre;
-    private String foto;
+    protected String alias;
+    protected String email;
+    protected String intereses;
+    protected String nombre;
+    protected String foto;
     
     public String getAlias()
     {
         return alias;
-    }
-    
-    public String getAliasCapital()
-    {
-        return alias.toUpperCase();
     }
     
     public void setAlias(String alias)
@@ -35,17 +33,17 @@ public class ColeccionistaEntity extends BaseEntity implements java.io.Serializa
     /**
      * @return the correoElectronico
      */
-    public String getCorreoElectronico() 
+    public String getEmail() 
     {
-        return correoElectronico;
+        return email;
     }
 
     /**
      * @param correoElectronico the correoElectronico to set
      */
-    public void setCorreoElectronico(String correoElectronico) 
+    public void setEmail(String correoElectronico) 
     {
-        this.correoElectronico = correoElectronico;
+        this.email = correoElectronico;
     }
 
     /**

@@ -17,13 +17,8 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author estudiante
  */
 @Entity
-public class CompradorEntity extends BaseEntity implements java.io.Serializable
+public class CompradorEntity extends ColeccionistaEntity implements java.io.Serializable
 {
-
-    
-    private String alias;
-    
-    private String email;
     
     @PodamExclude
     @OneToMany(mappedBy = "comprador", fetch=FetchType.LAZY, targetEntity=OrdenPedidoEntity.class)
@@ -32,38 +27,6 @@ public class CompradorEntity extends BaseEntity implements java.io.Serializable
     @PodamExclude
     @ManyToMany(mappedBy = "compradores")
     private List<ComicEntity> carro = new ArrayList<ComicEntity>();
-    
-    /**
-     * @return the alias
-     */
-    public String getAlias() 
-    {
-        return alias;
-    }
-
-    /**
-     * @param alias the alias to set
-     */
-    public void setAlias(String alias) 
-    {
-        this.alias = alias;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail()
-    {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) 
-    {
-        this.email = email;
-    }
     
     /**
      * @return the ordenPedidoCompra
