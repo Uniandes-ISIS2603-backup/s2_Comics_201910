@@ -12,7 +12,8 @@ import java.io.Serializable;
  * @author Sebastian 
  */
 //<<<<<<< HEAD
-public class ColeccionistaDTO implements Serializable{
+public abstract class ColeccionistaDTO implements Serializable
+{
     
 
     private String nombre;
