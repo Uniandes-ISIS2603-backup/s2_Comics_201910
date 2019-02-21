@@ -17,5 +17,6 @@ public class ColeccionistaDetailDTO extends ColeccionistaDTO implements Serializ
     
     public ColeccionistaDetailDTO(){
         
+        
     }
 }

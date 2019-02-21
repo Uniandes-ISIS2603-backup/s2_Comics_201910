@@ -14,6 +14,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -37,21 +38,50 @@ public class ComicDeseoPersistence {
    return pComicE;
   }
   
-  public List<ComicDeseoEntity> findAll(){
-      LOGGER.log(Level.INFO, "Consultando todos los Comic deseo");
-        Query q = em.createQuery("select u from ComicDeseoEntity u");
-        return q.getResultList();
+  public ComicDeseoEntity find(String pCompradoresAlias,Long pComicsDId){
+      
+      LOGGER.log(Level.INFO, "Consultando el comic deseo con id = {0} del comprador con alias = " +pCompradoresAlias, pComicsDId);
+      TypedQuery<ComicDeseoEntity> q = em.createQuery("select p from ComicDeseoEntity p where (p.comprador.alias = :compradoresAlias)and (p.id = comicsDId )",ComicDeseoEntity.class);
+      q.setParameter("compradoresAlias", pCompradoresAlias);
+      q.setParameter("comicsDId", pComicsDId);
+      List<ComicDeseoEntity> results = q.getResultList();
+      ComicDeseoEntity comicsD = null;
+      if(results == null){
+          comicsD = null;
+      }else if(results.isEmpty()){
+      comicsD = null;
+      }else if(results.size() >= 1){
+      comicsD = results.get(0);
+      }
+      
+       LOGGER.log(Level.INFO, "Saliendo de consultar el comic deseo con id = {0} del comprador con alias = " +pCompradoresAlias, pComicsDId);
+      return comicsD;
   }
   
-   public ComicDeseoEntity find(Long pComicDeseoId){
+ 
+  /**
+   public ComicDeseoEntity findXId(Long pComicDeseoId){
     
-        LOGGER.log(Level.INFO, "Consultando Comic Deseo con id = {0}", pComicDeseoId);
-        return em.find(ComicDeseoEntity.class, pComicDeseoId);
+       TypedQuery<ComicDeseoEntity> q = em.createQuery("Select e From ComicDeseoEntity e where e.id = :id", ComicDeseoEntity.class);
+       q = q.setParameter("id", pComicDeseoId);
+        //LOGGER.log(Level.INFO, "Consultando Comic Deseo con id = {0}", pComicDeseoId);
+        //return em.find(ComicDeseoEntity.class, pComicDeseoId);
+        List<ComicDeseoEntity> sameName = q.getResultList();
+        ComicDeseoEntity result;
+        if(sameName == null){
+        result = null;
+        }else if(sameName.isEmpty()){
+        result = null;
+        }else{
+        result = sameName.get(0);
+        }
+        return result;
     }
+    * */
    
    public ComicDeseoEntity update(ComicDeseoEntity pComicDeseoEn){
     
-    LOGGER.log(Level.INFO, "Actualizando informacion del comic deseo con id = {0}", pComicDeseoEn);
+    LOGGER.log(Level.INFO, "Actualizando informacion del comic deseo con id = {0}", pComicDeseoEn.getId());
     return em.merge(pComicDeseoEn);
     }
    
