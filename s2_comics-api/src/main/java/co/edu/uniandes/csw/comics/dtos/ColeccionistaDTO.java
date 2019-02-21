@@ -22,11 +22,7 @@ public abstract class ColeccionistaDTO implements Serializable
    
     protected String correoElectronico;
     private String intereses;
-
     
-    public ColeccionistaDTO(){
-        
-    }
     /**
      * @return the nombre
      */

@@ -22,8 +22,11 @@ public class VendedorDTO extends ColeccionistaDTO implements Serializable
     public VendedorDTO(VendedorEntity entity)
     {
         if(entity != null)
+        {
             alias = entity.getAlias();
             correoElectronico = entity.getEmail();
+            
+        }
     }
     
     public VendedorEntity toEntity()
@@ -32,25 +35,5 @@ public class VendedorDTO extends ColeccionistaDTO implements Serializable
         entity.setAlias(alias);
         entity.setEmail(correoElectronico);
         return entity;
-    }
-    
-    public String getAlias()
-    {
-        return alias;
-    }
-    
-    public void setAlias(String alias)
-    {
-        this.alias = alias;
-    }
-    
-    public String getCorreo()
-    {
-        return correoElectronico;
-    }
-    
-    public void setCorreo(String correo)
-    {
-        correoElectronico = correo;
     }
 }

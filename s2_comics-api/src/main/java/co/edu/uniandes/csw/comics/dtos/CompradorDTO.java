@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.comics.dtos;
 
+import co.edu.uniandes.csw.comics.entities.CompradorEntity;
 import java.io.Serializable;
 
 /**
@@ -19,7 +20,22 @@ public class CompradorDTO extends ColeccionistaDTO implements Serializable
     public CompradorDTO()
     {
         
+    }    
+    
+    public CompradorDTO(CompradorEntity entity)
+    {
+        if(entity != null)
+        {
+            alias = entity.getAlias();
+            correoElectronico = entity.getEmail();
+        }
     }
     
-    
+    public CompradorEntity toEntity()
+    {
+        CompradorEntity entity = new CompradorEntity();
+        entity.setAlias(alias);
+        entity.setEmail(correoElectronico);
+        return entity;
+    }
 }
