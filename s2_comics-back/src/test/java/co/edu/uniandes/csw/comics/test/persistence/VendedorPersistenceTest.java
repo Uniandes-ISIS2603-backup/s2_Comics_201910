@@ -121,4 +121,47 @@ public class VendedorPersistenceTest
         Assert.assertNull(entity);
         
     }
+         @Test
+    public void getVendedoresTest() {
+        List<VendedorEntity> list = vendedorPersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (VendedorEntity ent : list) {
+            boolean found = false;
+            for (VendedorEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+       @Test
+    public void getVendedorTest() {
+        VendedorEntity entity = data.get(0);
+        VendedorEntity newEntity = vendedorPersistence.findByAlias(entity.getAlias());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getEmail(), newEntity.getEmail());
+    }
+       @Test
+    public void updateVendedorTest() {
+        VendedorEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+       VendedorEntity newEntity = factory.manufacturePojo(VendedorEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        vendedorPersistence.update(newEntity);
+
+        VendedorEntity resp = em.find(VendedorEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+    }
+        @Test
+    public void deleteCalificacionTest() {
+        VendedorEntity entity = data.get(0);
+        vendedorPersistence.delete(entity.getId());
+        VendedorEntity deleted = em.find(VendedorEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 }

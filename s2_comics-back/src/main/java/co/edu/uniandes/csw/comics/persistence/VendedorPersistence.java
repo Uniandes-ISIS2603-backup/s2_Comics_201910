@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.comics.persistence;
 
+import co.edu.uniandes.csw.comics.entities.CalificacionEntity;
 import co.edu.uniandes.csw.comics.entities.VendedorEntity;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,5 +66,18 @@ public class VendedorPersistence
         }
         
         return result;
+    }
+     public VendedorEntity update(VendedorEntity vendedorEntity) {
+        LOGGER.log(Level.INFO, "Actualizando el vendedor con id={0}", vendedorEntity.getAlias());
+      
+        return em.merge(vendedorEntity);
+          }
+     public void delete(Long vendedorId) {
+
+        LOGGER.log(Level.INFO, "Borrando el vendedor con id={0}", vendedorId);
+        // Se hace uso de mismo método que esta explicado en public AuthorEntity find(Long id) para obtener la author a borrar.
+      VendedorEntity vendedorEntity = em.find(VendedorEntity.class, vendedorId);
+       
+        em.remove(vendedorEntity);
     }
 }
