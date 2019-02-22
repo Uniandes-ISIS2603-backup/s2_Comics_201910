@@ -48,28 +48,38 @@ public class ComicDeseoLogic {
         LOGGER.log(Level.INFO,"Inicia proceso de consultar todos los comics deseo del comprador con el alias = {0}",compradoresAlias);
         CompradorEntity compradorEntity = persistenceComprador.findByAlias(compradoresAlias);
         LOGGER.log(Level.INFO,"Termina proceso de consultar todos los comics deseo del comprador con el alias = {0}", compradoresAlias);
-      //  return compradorEntity.getComicsDeseos();
-        List<ComicDeseoEntity> nc = new ArrayList<ComicDeseoEntity>();
+      // return compradorEntity.getComicsDeseos();
+    //  return compradorEntity.
+       List<ComicDeseoEntity> nc = new ArrayList<ComicDeseoEntity>();
          return nc;
        
     }
     
     public ComicDeseoEntity getComicDeseo(String compradoresAlias, Long comicsDeseoId){
-    LOGGER.log(Level.INFO, "Inicia proceso de consultar el comic deseo con id={0} del comprador con alias = "+ compradoresAlias, comicsDeseoId);
-    return persistenceComicD.find(compradoresAlias, comicsDeseoId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el comic deseo con id={0} del comprador con alias = "+ compradoresAlias, comicsDeseoId);
+        return persistenceComicD.find(compradoresAlias, comicsDeseoId);
     
     }
     
     public void deleteComicDeseo(String compradoresAlias, Long comicsDeseoId) throws BusinessLogicException{
-    LOGGER.log(Level.INFO, "Inicia proceso de borrado del comic deseo con id={0} del comprador con alias = "+ compradoresAlias, comicsDeseoId);
-    ComicDeseoEntity viejo = getComicDeseo(compradoresAlias, comicsDeseoId);
-    if(viejo==null){   
-    throw new BusinessLogicException("El comic deseo con id ="+comicsDeseoId+ "no esta asociado al comprador con el alias de"+compradoresAlias);
+        LOGGER.log(Level.INFO, "Inicia proceso de borrado del comic deseo con id={0} del comprador con alias = "+ compradoresAlias, comicsDeseoId);
+        ComicDeseoEntity viejo = getComicDeseo(compradoresAlias, comicsDeseoId);
+        if(viejo==null){   
+        throw new BusinessLogicException("El comic deseo con id ="+comicsDeseoId+ "no esta asociado al comprador con el alias de"+compradoresAlias);
     } 
-    persistenceComicD.delete(viejo.getId());
-    LOGGER.log(Level.INFO, "Terminado el proceso de borrado del comic deseo con id={0} del comprador con alias = "+ compradoresAlias, comicsDeseoId);
+        persistenceComicD.delete(viejo.getId());
+        LOGGER.log(Level.INFO, "Terminado el proceso de borrado del comic deseo con id={0} del comprador con alias = "+ compradoresAlias, comicsDeseoId);
 
     
+    }
+    
+    public ComicDeseoEntity updateComicDeseo(String compradorAlias, ComicDeseoEntity comicDEntity) {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el comic deseo con id = {0} del comprador con alias = " + compradorAlias, comicDEntity.getId());
+        CompradorEntity compradorEntity = persistenceComprador.findByAlias(compradorAlias);
+        comicDEntity.setComprador(compradorEntity);
+        persistenceComicD.update(comicDEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar el comicDeseo con id = {0} del comprador con alias = " + compradorAlias, comicDEntity.getId());
+        return comicDEntity;
     }
     
     

@@ -41,9 +41,9 @@ public class ComicDeseoPersistence {
   public ComicDeseoEntity find(String pCompradoresAlias,Long pComicsDId){
       
       LOGGER.log(Level.INFO, "Consultando el comic deseo con id = {0} del comprador con alias = " +pCompradoresAlias, pComicsDId);
-      TypedQuery<ComicDeseoEntity> q = em.createQuery("select p from ComicDeseoEntity p where (p.comprador.alias = :compradoresAlias)and (p.id = comicsDId )",ComicDeseoEntity.class);
+      TypedQuery<ComicDeseoEntity> q = em.createQuery("select p from ComicDeseoEntity p where (p.comprador.alias = :compradoresAlias)and (p.id = :pComicsDId )",ComicDeseoEntity.class);
       q.setParameter("compradoresAlias", pCompradoresAlias);
-      q.setParameter("comicsDId", pComicsDId);
+      q.setParameter("pComicsDId", pComicsDId);
       List<ComicDeseoEntity> results = q.getResultList();
       ComicDeseoEntity comicsD = null;
       if(results == null){

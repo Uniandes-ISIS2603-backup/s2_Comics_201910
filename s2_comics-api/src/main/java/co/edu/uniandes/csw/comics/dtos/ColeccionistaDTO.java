@@ -9,14 +9,16 @@ import java.io.Serializable;
 
 /**
  *
- * @author Sebastian 
+ * @author Sebastian Baquero
  */
 //<<<<<<< HEAD
+
 public abstract class ColeccionistaDTO implements Serializable
 {
     
 
     private String nombre;
+    
     protected String alias;
     private String foto;
    
