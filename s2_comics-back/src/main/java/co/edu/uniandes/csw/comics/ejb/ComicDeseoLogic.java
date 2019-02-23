@@ -81,6 +81,5 @@ public class ComicDeseoLogic {
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el comicDeseo con id = {0} del comprador con alias = " + compradorAlias, comicDEntity.getId());
         return comicDEntity;
     }
-    
-    
+       
 }

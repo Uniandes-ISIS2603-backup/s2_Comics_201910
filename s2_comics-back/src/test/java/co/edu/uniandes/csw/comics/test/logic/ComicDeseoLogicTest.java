@@ -178,7 +178,7 @@ public class ComicDeseoLogicTest {
         pojoEntity.setId(entity.getId());
 
         comicDLogic.updateComicDeseo(dataComprador.get(1).getAlias(), pojoEntity);
-
+       
         ComicDeseoEntity resp = em.find(ComicDeseoEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());

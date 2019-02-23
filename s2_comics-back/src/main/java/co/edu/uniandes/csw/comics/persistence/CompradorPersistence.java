@@ -43,6 +43,11 @@ public class CompradorPersistence
         return q.getResultList();
     }
     
+    public CompradorEntity find(long id)
+    {
+        return em.find(CompradorEntity.class, id);
+    }
+    
     public CompradorEntity findByAlias(String alias)
     {
         LOGGER.log(Level.INFO, "Se buscará al comprador por el alias", alias);
@@ -97,5 +102,25 @@ public class CompradorPersistence
         }
         
         return result;
+    }
+    
+    public void deleteByAlias(String alias)
+    {
+        LOGGER.log(Level.INFO,"Eliminando un comprador con alias={0}", alias);
+        CompradorEntity eliminado = findByAlias(alias);
+        em.remove(eliminado);
+    }
+    
+    public void delete(long id)
+    {
+        LOGGER.log(Level.INFO, "Eliminando un comprador con id={0}", id);
+        CompradorEntity eliminado = em.find(CompradorEntity.class, id);
+        em.remove(eliminado);
+    }
+    
+    public CompradorEntity update(CompradorEntity entity)
+    {
+        LOGGER.log(Level.INFO,"Actualizando el comprador con id={0}", entity.getId());
+        return em.merge(entity);
     }
 }

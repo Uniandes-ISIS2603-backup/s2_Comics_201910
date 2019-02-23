@@ -28,6 +28,10 @@ public class CompradorEntity extends ColeccionistaEntity implements java.io.Seri
     @ManyToMany(mappedBy = "compradores")
     private List<ComicEntity> carro = new ArrayList<ComicEntity>();
     
+    @PodamExclude
+    @OneToMany(mappedBy="comprador")
+    private List<ComicDeseoEntity> listaDeseos = new ArrayList<ComicDeseoEntity>();
+    
     /**
      * @return the ordenPedidoCompra
      */
@@ -55,5 +59,19 @@ public class CompradorEntity extends ColeccionistaEntity implements java.io.Seri
      */
     public void setCarro(List<ComicEntity> carro) {
         this.carro = carro;
+    }
+
+    /**
+     * @return the listaDeseos
+     */
+    public List<ComicDeseoEntity> getListaDeseos() {
+        return listaDeseos;
+    }
+
+    /**
+     * @param listaDeseos the listaDeseos to set
+     */
+    public void setListaDeseos(List<ComicDeseoEntity> listaDeseos) {
+        this.listaDeseos = listaDeseos;
     }
 }

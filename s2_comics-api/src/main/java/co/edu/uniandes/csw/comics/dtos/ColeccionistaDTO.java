@@ -17,13 +17,11 @@ public abstract class ColeccionistaDTO implements Serializable
 {
     
 
-    private String nombre;
-    
+    protected String nombre;
     protected String alias;
-    private String foto;
-   
+    protected String foto;
     protected String correoElectronico;
-    private String intereses;
+    protected String intereses;
     
     /**
      * @return the nombre

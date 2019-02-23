@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author estudiante
+ * @author Juan Pablo
  */
 
 
@@ -28,6 +28,9 @@ public class CompradorDTO extends ColeccionistaDTO implements Serializable
         {
             alias = entity.getAlias();
             correoElectronico = entity.getEmail();
+            intereses = entity.getIntereses();
+            nombre = entity.getNombre();
+            foto = entity.getFoto();
         }
     }
     
