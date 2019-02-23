@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.comics.entities;
 
+import java.io.Serializable;
 import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +18,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author estudiante
  */
 @Entity
-public class CompradorEntity extends ColeccionistaEntity implements java.io.Serializable
+public class CompradorEntity extends ColeccionistaEntity implements Serializable
 {
     
     @PodamExclude

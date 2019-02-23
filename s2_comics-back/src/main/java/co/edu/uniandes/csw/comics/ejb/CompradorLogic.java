@@ -29,9 +29,19 @@ public class CompradorLogic
     @Inject
     private CompradorPersistence persistencia;
     
-    public CompradorEntity createComprador(CompradorEntity entity)
+    public CompradorEntity createComprador(CompradorEntity entity)throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del comprador");
+        CompradorEntity exists = getCompradorByAlias(entity.getAlias());
+        CompradorEntity existsMail = getCompradorByEmail(entity.getEmail());
+        if(exists != null)
+        {
+            throw new BusinessLogicException("Ya existe un comprador con este alias");
+        }
+        if(existsMail != null)
+        {
+            throw new BusinessLogicException("Ya existe un comprador con este email");
+        }
         CompradorEntity newEntity = persistencia.create(entity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del comprador");
         return newEntity;

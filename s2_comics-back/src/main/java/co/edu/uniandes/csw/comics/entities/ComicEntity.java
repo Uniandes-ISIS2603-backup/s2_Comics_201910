@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
     
     @PodamExclude
     @ManyToMany
-    private List<CompradorEntity> compradores;
+    private List<CompradorEntity> compradores = new ArrayList();
 
     @PodamExclude
     @ManyToOne
