@@ -34,6 +34,7 @@ public class CompradorLogic
         LOGGER.log(Level.INFO, "Inicia proceso de creación del comprador");
         CompradorEntity exists = getCompradorByAlias(entity.getAlias());
         CompradorEntity existsMail = getCompradorByEmail(entity.getEmail());
+        CompradorEntity existsId = findComprador(entity.getId());
         if(exists != null)
         {
             throw new BusinessLogicException("Ya existe un comprador con este alias");
@@ -41,6 +42,10 @@ public class CompradorLogic
         if(existsMail != null)
         {
             throw new BusinessLogicException("Ya existe un comprador con este email");
+        }
+        if(existsId != null)
+        {
+            throw new BusinessLogicException("Ya existe un comprador con este Id");
         }
         CompradorEntity newEntity = persistencia.create(entity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del comprador");
@@ -95,24 +100,23 @@ public class CompradorLogic
         List<OrdenPedidoEntity> lista1 = entity.getOrdenPedidoCompra();
         List<ComicEntity> lista2 = entity.getCarro();
         List<ComicDeseoEntity> lista3 = entity.getListaDeseos();
-        if(lista1 != null || !lista1.isEmpty())
+        if(!lista1.isEmpty())
         {
             throw new BusinessLogicException("No se puede elminar el comprador porque hay comics en su orden de pedido");
         }
         
-        if(lista2 != null || !lista2.isEmpty())
+        if(!lista2.isEmpty())
         {
             throw new BusinessLogicException("No se puede elminar el comprador porque hay comics en su carro");
         }
         
-        if(lista3 != null || !lista3.isEmpty())
+        if(!lista3.isEmpty())
         {
             throw new BusinessLogicException("No se puede elminar el comprador porque hay comics en su lista de deseos");
         }
-        else
-        {
-            persistencia.delete(id);
-            LOGGER.log(Level.INFO, "Se ha terminado el proceso de eliminación del comprador con id={0}", id);
-        }
+        
+        persistencia.delete(id);
+        LOGGER.log(Level.INFO, "Se ha terminado el proceso de eliminación del comprador con id={0}", id);
+        
     }
 }

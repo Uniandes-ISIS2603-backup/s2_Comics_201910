@@ -27,11 +27,11 @@ public class CompradorEntity extends ColeccionistaEntity implements Serializable
     
     @PodamExclude
     @ManyToMany(mappedBy = "compradores")
-    private List<ComicEntity> carro = new ArrayList<ComicEntity>();
+    private List<ComicEntity> carro = new ArrayList();
     
     @PodamExclude
     @OneToMany(mappedBy="comprador")
-    private List<ComicDeseoEntity> listaDeseos = new ArrayList<ComicDeseoEntity>();
+    private List<ComicDeseoEntity> listaDeseos = new ArrayList();
     
     /**
      * @return the ordenPedidoCompra

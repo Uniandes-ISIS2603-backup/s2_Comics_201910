@@ -82,9 +82,9 @@ public class CompradorLogicTest
     
     private void clearData()
     {
-        //em.createQuery("delete from OrdenPedidoEntity").executeUpdate();
-        //em.createQuery("delete from ComicEntity").executeUpdate();
-        //em.createQuery("delete from ComicDeseoEntity").executeUpdate();
+        em.createQuery("delete from OrdenPedidoEntity").executeUpdate();
+        em.createQuery("delete from ComicEntity").executeUpdate();
+        em.createQuery("delete from ComicDeseoEntity").executeUpdate();
         em.createQuery("delete from CompradorEntity").executeUpdate();
     }
     
@@ -98,7 +98,7 @@ public class CompradorLogicTest
             //entity.setListaDeseos(new ArrayList<>());
             //entity.setOrdenPedidoCompra(new ArrayList());
             data.add(entity);
-        }    
+        }        
     }
     
     @Test
@@ -157,9 +157,39 @@ public class CompradorLogicTest
     }
     
     @Test
+    public void crearCompradorMismoId()
+    {
+        try
+        {
+            CompradorEntity entity = factory.manufacturePojo(CompradorEntity.class);
+            entity.setId(data.get(2).getId());
+            Assert.assertEquals(entity.getId(), data.get(2).getId());
+            comprador.createComprador(entity);
+            Assert.fail("No debería crear un comprador con un Id existente");
+        }
+        catch(Exception e)
+        {
+            //Debería generar Exception
+        }
+    }
+    
+    @Test
     public void getCompradoresTest()
     {
-        
+        List<CompradorEntity> lista = comprador.getCompradores();
+        Assert.assertEquals(data.size(), lista.size());
+        for(CompradorEntity entity : lista)
+        {
+            boolean found = false;
+            for(CompradorEntity stored : data)
+            {
+                if(entity.getId() == stored.getId())
+                {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
     
     @Test
@@ -168,5 +198,40 @@ public class CompradorLogicTest
         CompradorEntity entity = data.get(0);
         CompradorEntity result = comprador.getCompradorByAlias(entity.getAlias());
         Assert.assertNotNull(result);
+        Assert.assertEquals(entity.getAlias(), result.getAlias());
+        Assert.assertEquals(entity.getEmail(), result.getEmail());
+    }
+    
+    @Test
+    public void updateTest()
+    {
+        CompradorEntity entity = data.get(0);
+        CompradorEntity pojoEntity = factory.manufacturePojo(CompradorEntity.class);
+        
+        pojoEntity.setId(entity.getId());
+        comprador.updateComprador(pojoEntity.getId(), pojoEntity);
+        CompradorEntity result = em.find(CompradorEntity.class, entity.getId());
+        
+        Assert.assertEquals(result.getId(), pojoEntity.getId());
+        Assert.assertEquals(result.getAlias(), pojoEntity.getAlias());
+        Assert.assertEquals(result.getEmail(), pojoEntity.getEmail());
+    }
+    
+    @Test
+    public void deleteTest()
+    {
+        CompradorEntity entity = data.get(0);
+        Assert.assertTrue(entity.getOrdenPedidoCompra().isEmpty());
+        try
+        {
+            comprador.deleteComprador(entity.getId());
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error en: " + e.getMessage());
+            Assert.fail("No debería generar Exception");
+        }
+        CompradorEntity result = em.find(CompradorEntity.class, entity.getId());
+        Assert.assertNull(result);
     }
 }

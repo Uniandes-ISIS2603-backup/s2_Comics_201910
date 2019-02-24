@@ -30,6 +30,7 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
      * identificacdor de la orden de pedido
      */
     private Integer identificador;
+    
     /**
      * numero de compras realizadas por el comprador
      */
