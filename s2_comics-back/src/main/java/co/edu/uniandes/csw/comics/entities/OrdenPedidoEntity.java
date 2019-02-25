@@ -29,7 +29,7 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     /**
      * identificacdor de la orden de pedido
      */
-    private Integer identificador;
+    private Long identificador;
     
     /**
      * numero de compras realizadas por el comprador
@@ -68,7 +68,7 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     /**
      * @return the id
      */
-    public Integer getIdentificador()
+    public Long getId()
     {
         return identificador;
     }
@@ -76,7 +76,7 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     /**
      * @param id the id to set
      */
-    public void setIdentificador(Integer pId) 
+    public void setId(Long pId) 
     {
         this.identificador = pId;
     }

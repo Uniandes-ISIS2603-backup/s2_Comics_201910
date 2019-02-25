@@ -49,5 +49,12 @@ public class OrdenPedidoPersistence {
     return q.getResultList();
     
     }
-    
+     public void delete(Long ordenPedidoId) {
+
+        LOGGER.log(Level.INFO, "Borrando la ordenPedido con id={0}", ordenPedidoId);
+        // Se hace uso de mismo método que esta explicado en public AuthorEntity find(Long id) para obtener la author a borrar.
+       OrdenPedidoEntity ordenPedidoEntity = em.find(OrdenPedidoEntity.class, ordenPedidoId);
+       
+        em.remove(ordenPedidoEntity);
+    }
 }
