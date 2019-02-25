@@ -6,8 +6,6 @@
 package co.edu.uniandes.csw.comics.resources;
 
 
-import co.edu.uniandes.csw.comics.dtos.ColeccionistaDTO;
-import co.edu.uniandes.csw.comics.dtos.ComicDTO;
 import co.edu.uniandes.csw.comics.dtos.OrdenPedidoDTO;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
