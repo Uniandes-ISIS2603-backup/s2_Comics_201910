@@ -98,7 +98,12 @@ public class CompradorLogicTest
             //entity.setListaDeseos(new ArrayList<>());
             //entity.setOrdenPedidoCompra(new ArrayList());
             data.add(entity);
-        }        
+        }   
+        
+        /*ComicEntity comic = factory.manufacturePojo(ComicEntity.class);
+        data.get(0).getCarro().add(comic);
+        comic.setComprador(new ArrayList());
+        comic.getComprador().add(data.get(0));*/
     }
     
     @Test
@@ -228,7 +233,7 @@ public class CompradorLogicTest
         }
         catch(Exception e)
         {
-            System.out.println("Error en: " + e.getMessage());
+            //System.out.println("Error en: " + e.getMessage());
             Assert.fail("No debería generar Exception");
         }
         CompradorEntity result = em.find(CompradorEntity.class, entity.getId());
