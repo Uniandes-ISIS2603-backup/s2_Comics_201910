@@ -6,55 +6,65 @@
 package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
-
-
 
 /**
  *
- * @author Sebastian Baquero
+ * @author Pietro Ehrlich
  */
 @Entity
 public class ComicEntity extends BaseEntity implements Serializable {
     
-    public enum TemaGlobal
-    {
-        ACCION,
-        DEPORTE
+    public static enum TemaGlobal{
+        AVENTURA_ACCION,
+        ARTE_ILUSTRACION,
+        COMEDIA,
+        ENCICLOPEDIA_DOCUMENTAL,
+        DRAMA,
+        EROTIQUE,
+        FANTASTICO,
+        NOVELA_GRAFICA,
+        HEROICO_FANTASIA_MAGIA,
+        HISTORICO,
+        HUMOR,
+        AMOR_AMISTAD,
+        POLAR_THRILLER,
+        CIENCIA_FICCION,
+        DEPORTE,
+        VIEJO_OESTE
     }
-    
-    @PodamExclude
-    @ManyToMany
-    private List<CompradorEntity> compradores;
-
-    @PodamExclude
-    @ManyToOne
-    private VendedorEntity vendedor;
     
     private String nombre;
     private String autor;
-    @Temporal(TemporalType.DATE)
-    private Date anioSalida;
+    private Integer anioSalida;
     private Boolean perteneceColeccion;
     private Boolean perteneceSerie;
-    private double precio;
+    private Double precio;
     private TemaGlobal tema;
-    private List listaDeComicsTrueque;
     private Boolean enVenta;
-     
+    
+    @javax.persistence.ManyToOne(
+    )
+    private VendedorEntity vendedor;
+    
+    @javax.persistence.OneToMany(mappedBy = "comic", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ComicEntity> comicsTrueque;
+
+    public ComicEntity(){
+        
+    }
+
     /**
      * @return the nombre
      */
     public String getNombre() {
         return nombre;
-}
+    }
 
     /**
      * @param nombre the nombre to set
@@ -80,14 +90,14 @@ public class ComicEntity extends BaseEntity implements Serializable {
     /**
      * @return the anioSalida
      */
-    public Date getAnioSalida() {
+    public Integer getAnioSalida() {
         return anioSalida;
     }
 
     /**
      * @param anioSalida the anioSalida to set
      */
-    public void setAnioSalida(Date anioSalida) {
+    public void setAnioSalida(Integer anioSalida) {
         this.anioSalida = anioSalida;
     }
 
@@ -122,42 +132,29 @@ public class ComicEntity extends BaseEntity implements Serializable {
     /**
      * @return the precio
      */
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
     /**
      * @param precio the precio to set
      */
-    public void setPrecio(double precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
     /**
-     * @return the temaGlobal
-     
-    public Enum getTemaGlobal() {
-        return temaGlobal;
-    }*/
-    /**
-     * @param temaGlobal the temaGlobal to set
-     
-    public void setTemaGlobal(Enum temaGlobal) {
-        this.temaGlobal = temaGlobal;
-    }*/
-
-    /**
-     * @return the listaDeComicsTrueque
+     * @return the tema
      */
-    public List getListaDeComicsTrueque() {
-        return listaDeComicsTrueque;
+    public TemaGlobal getTema() {
+        return tema;
     }
 
     /**
-     * @param listaDeComicsTrueque the listaDeComicsTrueque to set
+     * @param tema the tema to set
      */
-    public void setListaDeComicsTrueque(List listaDeComicsTrueque) {
-        this.listaDeComicsTrueque = listaDeComicsTrueque;
+    public void setTema(TemaGlobal tema) {
+        this.tema = tema;
     }
 
     /**
@@ -175,20 +172,6 @@ public class ComicEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return the comprador
-     */
-    public List<CompradorEntity> getComprador() {
-        return compradores;
-    }
-
-    /**
-     * @param comprador the comprador to set
-     */
-    public void setComprador(List<CompradorEntity> comprador) {
-        this.compradores = comprador;
-    }
-
-    /**
      * @return the vendedor
      */
     public VendedorEntity getVendedor() {
@@ -201,4 +184,20 @@ public class ComicEntity extends BaseEntity implements Serializable {
     public void setVendedor(VendedorEntity vendedor) {
         this.vendedor = vendedor;
     }
+
+    /**
+     * @return the comicsTrueque
+     */
+    public List<ComicEntity> getComicsTrueque() {
+        return comicsTrueque;
+    }
+
+    /**
+     * @param comicsTrueque the comicsTrueque to set
+     */
+    public void setComicsTrueque(List<ComicEntity> comicsTrueque) {
+        this.comicsTrueque = comicsTrueque;
+    }
+
+    
 }

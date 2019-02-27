@@ -22,21 +22,20 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Sebastian Baquero
+ * @author Pietro Ehrlich
  */
 
 @RunWith(Arquillian.class)
 public class ComicPersistenceTest {
     
     @Inject
-    private ComicPersistence cP;
+    private ComicPersistence cp;
     
     @PersistenceContext
     private EntityManager em;
     
     @Deployment
     public static JavaArchive createDeployment (){
-    
         return ShrinkWrap.create(JavaArchive.class)
                .addPackage(ComicEntity.class.getPackage())
                .addPackage(ComicPersistence.class.getPackage())
@@ -46,20 +45,13 @@ public class ComicPersistenceTest {
     
     @Test
     public void createComicTest(){
+        PodamFactory factory = new PodamFactoryImpl();
+        ComicEntity newComicEntity = factory.manufacturePojo(ComicEntity.class);
+        ComicEntity ce = cp.create(newComicEntity);
         
-  //ComicEntity nComicEntity = new ComicEntity();  
-    PodamFactory factory = new PodamFactoryImpl();
-    ComicEntity nEntity = factory.manufacturePojo(ComicEntity.class);
-    
-//    ComicEntity cE = cP.create(nEntity);
-    
-   // Assert.assertNotNull(cE);
-    
-    //ComicEntity entity = em.find(ComicEntity.class, cE.getId()); 
-    
-   // Assert.assertEquals(nEntity.getNombre(),entity.getNombre());
+        Assert.assertNotNull(ce);
+        
+        ComicEntity entity = em.find(ComicEntity.class,ce.getId());
+        Assert.assertEquals(newComicEntity.getNombre() , entity.getNombre());
     }
-    
-    
-    
 }

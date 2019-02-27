@@ -5,38 +5,53 @@
  */
 package co.edu.uniandes.csw.comics.dtos;
 
-//<<<<<<< HEAD
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
-//=======
-//>>>>>>> 23c9fd0fc5ce8b61463ea58d9b08f813b44a3d23
-/**
- *
- * @author estudiante
- */
-//<<<<<<< HEAD
 public class ComicDTO implements Serializable {
     
-    
-   
-    private Long idComic;
     private String nombre;
     private String autor;
-   // private Date anioSalida;
-    private boolean perteneceColeccion;
-    private boolean perteneceSerie;
-    private double precio;
-    //private Enum temaGlobal;
-   // private List listaDeComicsTrueque;
+    private Integer anioSalida;
+    private Boolean perteneceColeccion;
+    private Boolean perteneceSerie;
+    private Double precio;
+    private ComicEntity.TemaGlobal tema;
     private Boolean enVenta;
-    
-    
-    public ComicDTO (){
-    
-    }
+    private VendedorDTO vendedor;
 
+    public ComicDTO(){
+        
+    }
+    
+    public ComicDTO(ComicEntity ent){
+        if(ent != null){
+            nombre = ent.getNombre();
+            autor = ent.getAutor();
+            anioSalida = ent.getAnioSalida();
+            perteneceColeccion = ent.getPerteneceColeccion();
+            perteneceSerie = ent.getPerteneceSerie();
+            precio = ent.getPrecio();
+            tema = ent.getTema();
+            enVenta = ent.getEnVenta();
+            //vendedor = ent.getVendedor();
+        }
+    }
+    
+    public ComicEntity toEntity(){
+        ComicEntity ent = new ComicEntity();
+        ent.setNombre(nombre);
+        ent.setAutor(autor);
+        ent.setAnioSalida(anioSalida);
+        ent.setPerteneceColeccion(perteneceColeccion);
+        ent.setPerteneceSerie(perteneceSerie);
+        ent.setPrecio(precio);
+        ent.setTema(tema);
+        ent.setEnVenta(enVenta);
+        //ent.setVendedor(vendedor);
+        return ent;
+    }
+    
     /**
      * @return the nombre
      */
@@ -68,16 +83,16 @@ public class ComicDTO implements Serializable {
     /**
      * @return the anioSalida
      */
-   // public Date getAnioSalida() {
-     //   return anioSalida;
-    //}
+    public Integer getAnioSalida() {
+        return anioSalida;
+    }
 
     /**
      * @param anioSalida the anioSalida to set
      */
-    //public void setAnioSalida(Date anioSalida) {
-      //  this.anioSalida = anioSalida;
-    //}
+    public void setAnioSalida(Integer anioSalida) {
+        this.anioSalida = anioSalida;
+    }
 
     /**
      * @return the perteneceColeccion
@@ -110,44 +125,30 @@ public class ComicDTO implements Serializable {
     /**
      * @return the precio
      */
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
     /**
      * @param precio the precio to set
      */
-    public void setPrecio(double precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
     /**
-     * @return the temaGlobal
+     * @return the tema
      */
- //   public Enum getTemaGlobal() {
-   //     return temaGlobal;
-    //}
+    public ComicEntity.TemaGlobal getTema() {
+        return tema;
+    }
 
     /**
-     * @param temaGlobal the temaGlobal to set
+     * @param tema the tema to set
      */
-  //  public void setTemaGlobal(Enum temaGlobal) {
-    //    this.temaGlobal = temaGlobal;
-   // }
-
-    /**
-     * @return the listaDeComicsTrueque
-     */
-   // public List getListaDeComicsTrueque() {
-     //   return listaDeComicsTrueque;
-    //}
-
-    /**
-     * @param listaDeComicsTrueque the listaDeComicsTrueque to set
-     */
-   // public void setListaDeComicsTrueque(List listaDeComicsTrueque) {
-     //   this.listaDeComicsTrueque = listaDeComicsTrueque;
-    //}
+    public void setTema(ComicEntity.TemaGlobal tema) {
+        this.tema = tema;
+    }
 
     /**
      * @return the enVenta
@@ -162,19 +163,18 @@ public class ComicDTO implements Serializable {
     public void setEnVenta(Boolean enVenta) {
         this.enVenta = enVenta;
     }
-    
-    
-    
-//=======
-//public class ComicDTO {
-//>>>>>>> 23c9fd0fc5ce8b61463ea58d9b08f813b44a3d23
 
     /**
-     * @return the idComic
+     * @return the vendedor
      */
-    public Long getIdComic() {
-        return idComic;
+    public VendedorDTO getVendedor() {
+        return vendedor;
     }
-  
-    
+
+    /**
+     * @param vendedor the vendedor to set
+     */
+    public void setVendedor(VendedorDTO vendedor) {
+        this.vendedor = vendedor;
+    }
 }

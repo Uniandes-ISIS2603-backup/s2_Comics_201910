@@ -10,10 +10,7 @@
     <packaging>pom</packaging>
     <name>s2_comics</name>
  
-    <modules>
-        <module>s2_comics-back</module>
-        <module>s2_comics-api</module>
-    </modules>
+    <modules></modules>
     
     <repositories>
         <repository>
