@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.comics.ejb;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -36,6 +38,17 @@ public class OrdenPedidoLogic {
        ordenPedido= persistence.create(ordenPedido);
         return ordenPedido;
     }
+    public OrdenPedidoEntity getOrdenPedido(Long id){
+        return null;
+    }
     
+    public List<OrdenPedidoEntity> getOrdenesPedido(){
+       List< OrdenPedidoEntity > resp= new  ArrayList<OrdenPedidoEntity >();
+       return resp;
+    }
+    
+    public void eliminarOrdenPedido(Long id){
+        
+    }
     
 }

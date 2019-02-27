@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -20,6 +21,8 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     @PodamExclude
     @ManyToOne
    
+    private ArrayList<OrdenPedidoEntity> ordenesPedido;
+    
     private ComicEntity comic;
     
     private ComicEntity trueque;
@@ -201,4 +204,16 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     public void setTrueque(ComicEntity trueque) {
         this.trueque = trueque;
     }
+    
+    public OrdenPedidoEntity getOrdenPedidoById(Long idOdenPedido){
+        OrdenPedidoEntity resp=null;
+        for (int i =0; i< ordenesPedido.size(); i++){
+            if(ordenesPedido.get(i).getId() == idOdenPedido ){
+                resp= ordenesPedido.get(i);
+            }
+        }
+        return resp;
+    }
+
+    
 }
