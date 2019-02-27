@@ -15,7 +15,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author estudiante
+ * @author juan pablo cano
  */
 @Entity
 public class CompradorEntity extends ColeccionistaEntity implements Serializable

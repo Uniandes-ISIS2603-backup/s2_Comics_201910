@@ -7,7 +7,7 @@ package co.edu.uniandes.csw.comics.resources;
 
 /**
  *
- * @author estudiante
+ * @author juan pablo cano
  */
 public class CompradorOrdenPedidoResource 
 {

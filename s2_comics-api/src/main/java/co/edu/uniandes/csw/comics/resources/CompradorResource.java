@@ -20,7 +20,7 @@ import javax.ws.rs.GET;
 
 /**
  *
- * @author estudiante
+ * @author juan pablo cano
  */
 @Path("/comprador")
 @Produces("application/json")
