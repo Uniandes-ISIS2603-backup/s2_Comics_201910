@@ -7,9 +7,10 @@ package co.edu.uniandes.csw.comics.persistence;
 
 import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -19,6 +20,7 @@ import javax.persistence.TypedQuery;
  *
  * @author estudiante
  */
+@Stateless
 public class OrdenPedidoPersistence {
     private static final Logger LOGGER = Logger.getLogger(OrdenPedidoPersistence.class.getName());
     
@@ -56,5 +58,40 @@ public class OrdenPedidoPersistence {
        OrdenPedidoEntity ordenPedidoEntity = em.find(OrdenPedidoEntity.class, ordenPedidoId);
        
         em.remove(ordenPedidoEntity);
+    }
+     
+     public OrdenPedidoEntity findById(Long id)
+    {
+        LOGGER.log(Level.INFO, "Se buscará la ordenPedido por el id", id);
+        
+        TypedQuery query = em.createQuery("Select u From OrdenPedidoEntity u where u.id = :id", OrdenPedidoEntity.class);
+        
+        query = query.setParameter("id", id);
+        
+        List<OrdenPedidoEntity> sameId = query.getResultList();
+        
+        OrdenPedidoEntity result;
+        
+        if(sameId == null)
+        {
+            result = null;
+        }
+        else if(sameId.isEmpty())
+        {
+            result = null;
+        }
+        else
+        {
+            result = sameId.get(0);
+        }
+        
+        return result;
+    }
+     
+      public void deleteById(Long id)
+    {
+        LOGGER.log(Level.INFO,"Eliminando una ordenPedido con id={0}", id);
+        OrdenPedidoEntity eliminado = findById(id);
+        em.remove(eliminado);
     }
 }
