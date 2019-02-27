@@ -39,6 +39,9 @@ public class CompradorDTO extends ColeccionistaDTO implements Serializable
         CompradorEntity entity = new CompradorEntity();
         entity.setAlias(alias);
         entity.setEmail(correoElectronico);
+        entity.setIntereses(intereses);
+        entity.setNombre(nombre);
+        entity.setFoto(foto);
         return entity;
     }
 }
