@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.comics.dtos;
 
+import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import java.io.Serializable;
 
 /**
@@ -23,7 +24,7 @@ public class OrdenPedidoDTO implements Serializable
     /**
      * identificacdor de la orden de pedido
      */
-    private Integer id;
+    private Long id;
     /**
      * numero de compras realizadas por el comprador
      */
@@ -55,6 +56,11 @@ public class OrdenPedidoDTO implements Serializable
      */
     private ComicDTO trueque;
     
+/**
+ * 
+ */
+    private Integer numeroCompras;
+    
     
     //CONSTRUCTORES
     /**
@@ -65,21 +71,12 @@ public class OrdenPedidoDTO implements Serializable
         
     }
     
-   // /**
-   //  * constructor con valores
-   //  * @param pVendedor
-   //  * @param pComprador
-   //  * @param pNumero
-   //  * @param pId
-   //  */
-   // public OrdenPedidoDTO(VendedorDTO pVendedor, CompradorDTO pComprador, Integer pNumero, Integer pId){
-     //   vendedor=pVendedor;
-     //   comprador=pComprador;
-     //   numeroComprasComprador=pNumero;
-     //   estado=1;
-     //   id=pId;
+     public OrdenPedidoDTO(OrdenPedidoEntity ordenPedidoEntity)
+    {
         
-   // }
+    }
+    
+  
     
     //METODOS
 
@@ -142,14 +139,14 @@ public class OrdenPedidoDTO implements Serializable
     /**
      * @return the id
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -194,5 +191,23 @@ public class OrdenPedidoDTO implements Serializable
     public void setTrueque(ComicDTO trueque) {
         this.trueque = trueque;
     }
+    
+     /**
+     * @return the numeroCompras
+     */
+    public Integer getNumeroCompras() {
+        return numeroCompras;
+    }
+
+    /**
+     * @param numeroCompras the numeroCompras to set
+     */
+    public void setNumeroCompras(Integer numeroCompras) {
+        this.numeroCompras = numeroCompras;
+    }
    
+    public  OrdenPedidoEntity toEntity(){
+        return null;
+    }
+    
 }

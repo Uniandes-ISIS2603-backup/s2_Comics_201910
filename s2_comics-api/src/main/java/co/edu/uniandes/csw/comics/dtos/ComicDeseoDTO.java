@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.comics.dtos;
 
+import co.edu.uniandes.csw.comics.entities.ComicDeseoEntity;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,10 +18,40 @@ import java.util.Date;
 public class ComicDeseoDTO implements Serializable {
  
     private Date fechaAgregado;
+    private CompradorDTO comprador;
     
     
     public ComicDeseoDTO (){
     
+    }
+    
+    /**
+     * Crea un objeto AuthorDTO a partir de un objeto AuthorEntity.
+     *
+     * @param comicDeseoEntity Entidad AuthorEntity desde la cual se va a crear el
+     * nuevo objeto.
+     *
+     */
+    
+  public ComicDeseoDTO(ComicDeseoEntity pComicDE){
+        
+    this.fechaAgregado = pComicDE.getFechaAgregado();
+    
+   }
+   
+    /**
+     * COnvierte un objeto ComicDeseoDTO a ComicDeseoEntity
+     */
+    
+    public ComicDeseoEntity toEntity (){
+    
+       ComicDeseoEntity cDE = new ComicDeseoEntity();
+       cDE.setFechaAgregado(this.getFechaAgregado());
+       if(this.comprador !=null){
+           
+       //cDE.setComprador(this.comprador.toEntity);
+       }
+       return cDE;
     }
 
     /**

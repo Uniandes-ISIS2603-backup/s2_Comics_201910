@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -19,7 +20,16 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
 {
     @PodamExclude
     @ManyToOne
+   
+    private ArrayList<OrdenPedidoEntity> ordenesPedido;
+    
+    private ComicEntity comic;
+    
+    private ComicEntity trueque;
+    
     private CompradorEntity comprador;
+    
+    private VendedorEntity vendedor;
     
     /**
      * tarjeta de credito asiciada con la compra
@@ -29,7 +39,8 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     /**
      * identificacdor de la orden de pedido
      */
-    private Integer identificador;
+    private Long identificador;
+    
     /**
      * numero de compras realizadas por el comprador
      */
@@ -67,17 +78,17 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     /**
      * @return the id
      */
-    public Integer getIdentificador()
+    public Long getId()
     {
-        return identificador;
+        return getIdentificador();
     }
 
     /**
      * @param id the id to set
      */
-    public void setIdentificador(Integer pId) 
+    public void setId(Long pId) 
     {
-        this.identificador = pId;
+        this.setIdentificador(pId);
     }
 
     /**
@@ -123,4 +134,86 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     public void setComprador(CompradorEntity comprador) {
         this.comprador = comprador;
     }
+
+    /**
+     * @return the vendedor
+     */
+    public VendedorEntity getVendedor() {
+        return vendedor;
+    }
+
+    /**
+     * @param vendedor the vendedor to set
+     */
+    public void setVendedor(VendedorEntity vendedor) {
+        this.vendedor = vendedor;
+    }
+
+    /**
+     * @return the identificador
+     */
+    public Long getIdentificador() {
+        return identificador;
+    }
+
+    /**
+     * @param identificador the identificador to set
+     */
+    public void setIdentificador(Long identificador) {
+        this.identificador = identificador;
+    }
+
+    /**
+     * @return the estadosOrden
+     */
+    public Boolean getEstadosOrden() {
+        return estadosOrden;
+    }
+
+    /**
+     * @param estadosOrden the estadosOrden to set
+     */
+    public void setEstadosOrden(Boolean estadosOrden) {
+        this.estadosOrden = estadosOrden;
+    }
+
+    /**
+     * @return the comic
+     */
+    public ComicEntity getComic() {
+        return comic;
+    }
+
+    /**
+     * @param comic the comic to set
+     */
+    public void setComic(ComicEntity comic) {
+        this.comic = comic;
+    }
+
+    /**
+     * @return the trueque
+     */
+    public ComicEntity getTrueque() {
+        return trueque;
+    }
+
+    /**
+     * @param trueque the trueque to set
+     */
+    public void setTrueque(ComicEntity trueque) {
+        this.trueque = trueque;
+    }
+    
+    public OrdenPedidoEntity getOrdenPedidoById(Long idOdenPedido){
+        OrdenPedidoEntity resp=null;
+        for (int i =0; i< ordenesPedido.size(); i++){
+            if(ordenesPedido.get(i).getId() == idOdenPedido ){
+                resp= ordenesPedido.get(i);
+            }
+        }
+        return resp;
+    }
+
+    
 }

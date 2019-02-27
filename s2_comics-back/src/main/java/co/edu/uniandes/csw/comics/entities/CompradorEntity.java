@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.comics.entities;
 
+import java.io.Serializable;
 import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +18,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author estudiante
  */
 @Entity
-public class CompradorEntity extends ColeccionistaEntity implements java.io.Serializable
+public class CompradorEntity extends ColeccionistaEntity implements Serializable
 {
     
     @PodamExclude
@@ -26,7 +27,11 @@ public class CompradorEntity extends ColeccionistaEntity implements java.io.Seri
     
     @PodamExclude
     @ManyToMany(mappedBy = "compradores")
-    private List<ComicEntity> carro = new ArrayList<ComicEntity>();
+    private List<ComicEntity> carro = new ArrayList();
+    
+    @PodamExclude
+    @OneToMany(mappedBy="comprador")
+    private List<ComicDeseoEntity> listaDeseos = new ArrayList();
     
     /**
      * @return the ordenPedidoCompra
@@ -55,5 +60,19 @@ public class CompradorEntity extends ColeccionistaEntity implements java.io.Seri
      */
     public void setCarro(List<ComicEntity> carro) {
         this.carro = carro;
+    }
+
+    /**
+     * @return the listaDeseos
+     */
+    public List<ComicDeseoEntity> getListaDeseos() {
+        return listaDeseos;
+    }
+
+    /**
+     * @param listaDeseos the listaDeseos to set
+     */
+    public void setListaDeseos(List<ComicDeseoEntity> listaDeseos) {
+        this.listaDeseos = listaDeseos;
     }
 }

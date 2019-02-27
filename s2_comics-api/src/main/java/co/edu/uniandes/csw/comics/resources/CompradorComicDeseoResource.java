@@ -17,12 +17,13 @@ import javax.ws.rs.Produces;
 /**
  *
  * @author estudiante
- */@Path("coleccionistas")
+ */
+@Path("coleccionistas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class CompradorComicDeseoResource {
-     private static final Logger LOGGER=Logger.getLogger(ColeccionistaResource.class.getName());
+     private static final Logger LOGGER=Logger.getLogger(CompradorComicDeseoResource.class.getName());
      
      
      

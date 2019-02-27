@@ -92,6 +92,17 @@ public class CompradorPersistenceTest
     }
     
     @Test
+    public void findTest()
+    {
+        CompradorEntity entity = data.get(0);
+        CompradorEntity newEntity = comprador.find(entity.getId());
+        
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getAlias(), newEntity.getAlias());
+        Assert.assertEquals(entity.getEmail(), newEntity.getEmail());
+    }
+    
+    @Test
     public void createTest()
     {
         PodamFactory podam = new PodamFactoryImpl();
@@ -137,5 +148,43 @@ public class CompradorPersistenceTest
         
         newEntity = comprador.findByAlias(null);
         Assert.assertNull(newEntity);
+    }
+    
+    @Test
+    public void deleteByAliasTest()
+    {
+        CompradorEntity entity = data.get(0);
+        comprador.deleteByAlias(entity.getAlias());
+        CompradorEntity eliminado = comprador.findByAlias(entity.getAlias());
+        Assert.assertNull(eliminado);
+    }
+    
+    @Test
+    public void deleteTest()
+    {
+        CompradorEntity entity = data.get(0);
+        comprador.delete(entity.getId());
+        CompradorEntity eliminado = em.find(CompradorEntity.class, entity.getId());
+        Assert.assertNull(eliminado);
+    }
+    
+    @Test
+    public void updateCompradorTest()
+    {
+        CompradorEntity entity = data.get(0);
+        PodamFactory podam = new PodamFactoryImpl();
+        CompradorEntity newEntity = podam.manufacturePojo(CompradorEntity.class);
+        
+        newEntity.setId(entity.getId());
+        
+        comprador.update(newEntity);
+        
+        CompradorEntity resp = em.find(CompradorEntity.class, entity.getId());
+        
+        Assert.assertEquals(newEntity.getAlias(), resp.getAlias());
+        Assert.assertEquals(newEntity.getIntereses(), resp.getIntereses());
+        Assert.assertEquals(newEntity.getEmail(), resp.getEmail());
+        Assert.assertEquals(newEntity.getFoto(), resp.getFoto());
+        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
     }
 }

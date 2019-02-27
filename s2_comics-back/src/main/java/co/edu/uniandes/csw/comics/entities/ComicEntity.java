@@ -38,7 +38,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
         DEPORTE,
         VIEJO_OESTE
     }
-    
+
     private String nombre;
     private String autor;
     private Integer anioSalida;
@@ -48,10 +48,12 @@ public class ComicEntity extends BaseEntity implements Serializable {
     private TemaGlobal tema;
     private Boolean enVenta;
     
+    @PodamExclude
     @javax.persistence.ManyToOne(
     )
     private VendedorEntity vendedor;
     
+    @PodamExclude
     @javax.persistence.OneToMany(mappedBy = "comic", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ComicEntity> comicsTrueque;
 

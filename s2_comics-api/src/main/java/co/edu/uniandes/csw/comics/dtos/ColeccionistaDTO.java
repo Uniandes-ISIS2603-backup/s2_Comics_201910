@@ -9,23 +9,20 @@ import java.io.Serializable;
 
 /**
  *
- * @author estudiante
+ * @author Sebastian Baquero
  */
 //<<<<<<< HEAD
-public class ColeccionistaDTO implements Serializable{
+
+public abstract class ColeccionistaDTO implements Serializable
+{
     
 
-    private String nombre;
+    protected String nombre;
     protected String alias;
-    private String foto;
-   
+    protected String foto;
     protected String correoElectronico;
-    private String intereses;
-
+    protected String intereses;
     
-    public ColeccionistaDTO(){
-        
-    }
     /**
      * @return the nombre
      */
