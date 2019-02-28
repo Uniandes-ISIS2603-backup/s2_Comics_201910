@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.comics.dtos;
 
 //<<<<<<< HEAD
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
+import co.edu.uniandes.csw.comics.entities.VendedorEntity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +38,17 @@ public class ComicDTO implements Serializable {
     public ComicDTO (){
     
     }
-
+    public ComicDTO (ComicEntity entity){
+    if(entity!=null){
+        idComic=entity.getId();
+        nombre=entity.getNombre();
+        autor=entity.getAutor();
+        perteneceColeccion=entity.getPerteneceColeccion();
+        perteneceSerie=entity.getPerteneceSerie();
+        precio=entity.getPrecio();
+        enVenta=entity.getEnVenta();
+    }
+    }
     /**
      * @return the nombre
      */
@@ -175,6 +187,17 @@ public class ComicDTO implements Serializable {
     public Long getIdComic() {
         return idComic;
     }
-  
+     public ComicEntity toEntity()
+    {
+        ComicEntity entity = new ComicEntity();
+        entity.setAutor(autor);
+        entity.setNombre(nombre);
+        entity.setEnVenta(enVenta);
+        entity.setId(idComic);
+        entity.setPerteneceColeccion(perteneceColeccion);
+        entity.setPerteneceSerie(perteneceSerie);
+        entity.setPrecio(precio);
+        return entity;
+    }
     
 }

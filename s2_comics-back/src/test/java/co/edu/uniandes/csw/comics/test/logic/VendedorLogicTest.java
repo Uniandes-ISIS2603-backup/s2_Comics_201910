@@ -97,7 +97,7 @@ public class VendedorLogicTest {
         Assert.assertEquals(newEntity.getAlias(), entity.getAlias());
     }
      @Test(expected = BusinessLogicException.class)
-    public void createEditorialConMismoNombreTest() throws BusinessLogicException {
+    public void createVendedorConMismoNombreTest() throws BusinessLogicException {
         VendedorEntity newEntity = factory.manufacturePojo(VendedorEntity.class);
         newEntity.setAlias(data.get(0).getAlias());
         vendedorLogic.createVendedor(newEntity);
@@ -119,7 +119,7 @@ public class VendedorLogicTest {
       @Test
     public void getVendedorTest() {
         VendedorEntity entity = data.get(0);
-        VendedorEntity resultEntity = vendedorLogic.getVendedor(entity.getAlias());
+        VendedorEntity resultEntity = vendedorLogic.getVendedor(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
@@ -129,7 +129,7 @@ public class VendedorLogicTest {
         VendedorEntity entity = data.get(0);
         VendedorEntity pojoEntity = factory.manufacturePojo(VendedorEntity.class);
         pojoEntity.setId(entity.getId());
-        vendedorLogic.updateVendedor(pojoEntity.getAlias(), pojoEntity);
+        vendedorLogic.updateVendedor(pojoEntity.getId(), pojoEntity);
         VendedorEntity resp = em.find(VendedorEntity.class, entity.getId());
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());

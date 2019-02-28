@@ -26,7 +26,7 @@ public class VendedorPersistence
     private final static Logger LOGGER = Logger.getLogger(VendedorPersistence.class.getName());
     
     @PersistenceContext(unitName = "comicsPU")
-    private EntityManager em;
+    protected EntityManager em;
     
     public VendedorEntity create(VendedorEntity vendedor)
     {
@@ -42,7 +42,11 @@ public class VendedorPersistence
         Query q = em.createQuery("select u from VendedorEntity u");
         return q.getResultList();
     }
-    
+        public VendedorEntity find(Long vendedoresId) {
+        LOGGER.log(Level.INFO, "Consultando el autor con id={0}", vendedoresId);
+      
+        return em.find(VendedorEntity.class, vendedoresId);
+    }
     public VendedorEntity findByAlias(String alias)
     {
         LOGGER.log(Level.INFO, "Se buscará un vendedor", alias);
@@ -52,7 +56,7 @@ public class VendedorPersistence
         List<VendedorEntity> sameAlias = query.getResultList();
         VendedorEntity result;
         
-        if(sameAlias == null)
+        if(sameAlias== null)
         {
             result = null;
         }
@@ -63,6 +67,30 @@ public class VendedorPersistence
         else
         {
             result = sameAlias.get(0);
+        }
+        
+        return result;
+    }
+    public VendedorEntity findByEmail(String email)
+    {
+        LOGGER.log(Level.INFO, "Se buscará un vendedor", email);
+        TypedQuery query = em.createQuery("Select u From VendedorEntity u where u.email = :email", VendedorEntity.class);
+        query = query.setParameter("email", email);
+        
+        List<VendedorEntity> sameEmail = query.getResultList();
+        VendedorEntity result;
+        
+        if(sameEmail == null)
+        {
+            result = null;
+        }
+        else if(sameEmail.isEmpty())
+        {
+            result = null;
+        }
+        else
+        {
+            result = sameEmail.get(0);
         }
         
         return result;

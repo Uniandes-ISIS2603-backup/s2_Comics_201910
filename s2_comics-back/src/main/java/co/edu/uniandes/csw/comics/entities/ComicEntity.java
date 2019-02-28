@@ -36,8 +36,8 @@ public class ComicEntity extends BaseEntity implements Serializable {
     private List<CompradorEntity> compradores = new ArrayList();
 
     @PodamExclude
-    @ManyToOne
-    private VendedorEntity vendedor;
+    @ManyToMany
+    private List<VendedorEntity> vendedores;
     
     private String nombre;
     private String autor;
@@ -192,14 +192,19 @@ public class ComicEntity extends BaseEntity implements Serializable {
     /**
      * @return the vendedor
      */
-    public VendedorEntity getVendedor() {
-        return vendedor;
+    public List<VendedorEntity> getVendedores() {
+        return vendedores;
     }
 
     /**
      * @param vendedor the vendedor to set
      */
-    public void setVendedor(VendedorEntity vendedor) {
-        this.vendedor = vendedor;
+    public void setVendedores(List<VendedorEntity> vendedor) {
+        this.vendedores = vendedor;
     }
+
+    /**
+     * @return the vendedor
+     */
+
 }
