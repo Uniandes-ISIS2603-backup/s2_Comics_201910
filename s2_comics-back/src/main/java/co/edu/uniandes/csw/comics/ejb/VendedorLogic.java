@@ -23,12 +23,18 @@ public class VendedorLogic {
     @Inject
     private VendedorPersistence persistence;
     
+    
+    
      public VendedorEntity createVendedor(VendedorEntity vendedorEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del vendedor");
        
         if (persistence.findByAlias(vendedorEntity.getAlias()) != null) {
             throw new BusinessLogicException("Ya existe un vendedor con el alias " + vendedorEntity.getAlias() + "\"");
         }
+        if (persistence.findByEmail(vendedorEntity.getEmail()) != null) {
+            throw new BusinessLogicException("Ya existe un vendedor con el email " + vendedorEntity.getEmail() + "\"");
+        }
+         
         // Invoca la persistencia para crear la editorial
         persistence.create(vendedorEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del vendedor");
@@ -41,17 +47,17 @@ public class VendedorLogic {
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos los vendedores");
         return vendedores;
     }
-         public VendedorEntity getVendedor(String vendedorId) {
+         public VendedorEntity getVendedor(Long vendedorId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el vendedor con id = {0}", vendedorId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
-        VendedorEntity vendedorEntity = persistence.findByAlias(vendedorId);
-        if (vendedorEntity.equals(null)) {
+        VendedorEntity vendedorEntity = persistence.find(vendedorId);
+        if (vendedorEntity==(null)) {
             LOGGER.log(Level.SEVERE, "El vendedor con el id = {0} no existe", vendedorId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar el vendedor con id = {0}", vendedorId);
         return vendedorEntity;
     }
-          public VendedorEntity updateVendedor(String vendedorId, VendedorEntity vendedorEntity) {
+          public VendedorEntity updateVendedor(Long vendedorId, VendedorEntity vendedorEntity) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el vendedor con id = {0}", vendedorId);
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
         VendedorEntity newEntity = persistence.update(vendedorEntity);

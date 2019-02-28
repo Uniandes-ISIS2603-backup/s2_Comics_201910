@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import java.util.*;
+import javax.persistence.ManyToMany;
 
 
 /**
@@ -17,11 +18,14 @@ import java.util.*;
  */
 @Entity
 public class VendedorEntity extends ColeccionistaEntity implements java.io.Serializable
-{        
+{      
+    
     @PodamExclude
-    @OneToMany(mappedBy="vendedor")
+    @ManyToMany(mappedBy="vendedores")
     private List<ComicEntity> comics = new ArrayList<ComicEntity>();
-
+     @PodamExclude
+    @OneToMany(mappedBy="vendedor")
+    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
     /**
      * @return the comics
      */
@@ -35,4 +39,21 @@ public class VendedorEntity extends ColeccionistaEntity implements java.io.Seria
     public void setComics(List<ComicEntity> comics) {
         this.comics = comics;
     }        
+
+    /**
+     * @return the name
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
 }

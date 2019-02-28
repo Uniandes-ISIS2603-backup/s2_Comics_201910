@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.comics.dtos;
 
+import co.edu.uniandes.csw.comics.entities.CalificacionEntity;
 import java.io.Serializable;
 /**
  *
@@ -32,6 +33,12 @@ public class CalificacionDTO implements Serializable {
     public CalificacionDTO() {
        
         
+    }
+    public CalificacionDTO(CalificacionEntity entity){
+        if(entity!=null){
+        this.puntuacion=entity.getPuntuacion();
+        this.comentarios=entity.getComentarios();
+        }
     }
     /**
      * constructor con valores
@@ -71,5 +78,10 @@ public class CalificacionDTO implements Serializable {
     public void setPuntuacion(Double puntuacion) {
         this.puntuacion = puntuacion;
     }
-   
+   public CalificacionEntity toEntity(){
+       CalificacionEntity entity=new CalificacionEntity();
+       entity.setPuntuacion(puntuacion);
+       entity.setComentarios(comentarios);
+       return entity;
+   }
 }
