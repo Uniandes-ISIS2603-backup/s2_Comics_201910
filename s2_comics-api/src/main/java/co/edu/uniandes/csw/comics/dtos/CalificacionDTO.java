@@ -25,6 +25,8 @@ public class CalificacionDTO implements Serializable {
    * calificacion otorgada al vendedor
    */
     private Double puntuacion;
+    
+    private Long id;
      
     //CONSTTRUCTORES
     /**
@@ -38,6 +40,7 @@ public class CalificacionDTO implements Serializable {
         if(entity!=null){
         this.puntuacion=entity.getPuntuacion();
         this.comentarios=entity.getComentarios();
+        this.id=entity.getId();
         }
     }
     /**
@@ -82,6 +85,21 @@ public class CalificacionDTO implements Serializable {
        CalificacionEntity entity=new CalificacionEntity();
        entity.setPuntuacion(puntuacion);
        entity.setComentarios(comentarios);
+       entity.setId(id);
        return entity;
    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

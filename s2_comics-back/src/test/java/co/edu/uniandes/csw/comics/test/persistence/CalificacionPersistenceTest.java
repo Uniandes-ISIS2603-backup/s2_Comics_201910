@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.test.persistence;
 
 import co.edu.uniandes.csw.comics.entities.CalificacionEntity;
+import co.edu.uniandes.csw.comics.entities.VendedorEntity;
 import co.edu.uniandes.csw.comics.persistence.CalificacionPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class CalificacionPersistenceTest {
      @Inject
     UserTransaction utx;
       private List<CalificacionEntity> data = new ArrayList<>();
+       private List<VendedorEntity> dataVendedor = new ArrayList<VendedorEntity>();
     @Deployment
     public static JavaArchive createDeployment(){
         return ShrinkWrap.create(JavaArchive.class)
@@ -67,12 +69,22 @@ public class CalificacionPersistenceTest {
     }
       private void clearData() {
         em.createQuery("delete from CalificacionEntity").executeUpdate();
+        em.createQuery("delete from VendedorEntity").executeUpdate();
     }
         private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) {
-            CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
+     
+           for (int i = 0; i < 3; i++) {
+            VendedorEntity entity = factory.manufacturePojo(VendedorEntity.class);
 
+            em.persist(entity);
+            dataVendedor.add(entity);
+        }
+              for (int i = 0; i < 3; i++) {
+            CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
+            if(i==0){
+                entity.setVendedor(dataVendedor.get(0));
+            }
             em.persist(entity);
             data.add(entity);
         }
@@ -88,24 +100,11 @@ public class CalificacionPersistenceTest {
         CalificacionEntity entity=em.find(CalificacionEntity.class,ce.getId());
         Assert.assertEquals(newCalificacionEntity.getComentarios(),entity.getComentarios());
     }
-       @Test
-    public void getCalificacionesTest() {
-        List<CalificacionEntity> list = cp.findAll();
-        Assert.assertEquals(data.size(), list.size());
-        for (CalificacionEntity ent : list) {
-            boolean found = false;
-            for (CalificacionEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
+
        @Test
     public void getCalificacionTest() {
         CalificacionEntity entity = data.get(0);
-        CalificacionEntity newEntity = cp.find(entity.getId());
+        CalificacionEntity newEntity = cp.find(dataVendedor.get(0).getId(),entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getPuntuacion(), newEntity.getPuntuacion());
         Assert.assertEquals(entity.getComentarios(), newEntity.getComentarios());

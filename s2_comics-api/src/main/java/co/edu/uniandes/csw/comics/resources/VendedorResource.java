@@ -21,7 +21,7 @@ import javax.inject.Inject;
  * @author estudiante
  */
 
-@Path("/vendedores")
+@Path("vendedores")
 @Consumes("application/json")
 @Produces("application/json")
 @RequestScoped
@@ -70,6 +70,13 @@ public class VendedorResource
         VendedorDetailDTO detailDTO = new VendedorDetailDTO(vendedorEntity);
         LOGGER.log(Level.INFO, "AuthorResource getAuthor: output: {0}", detailDTO);
         return detailDTO;
+    }
+        @Path("{vendedoresId: \\d+}/calificaciones")
+    public Class<CalificacionResource> getCalificacionResource(@PathParam("vendedoresId") Long vendedoresId) {
+        if (vendedorLogic.getVendedor(vendedoresId) == null) {
+            throw new WebApplicationException("El recurso /vendedores/" + vendedoresId + "/calificaciones no existe.", 404);
+        }
+        return CalificacionResource.class;
     }
       @PUT
     @Path("{vendedoresId: \\d+}")
