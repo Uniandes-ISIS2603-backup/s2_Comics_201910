@@ -105,16 +105,6 @@ public class CompradorLogic
             throw new BusinessLogicException("No se puede elminar el comprador porque hay comics en su orden de pedido");
         }
         
-        if(!lista2.isEmpty())
-        {
-            throw new BusinessLogicException("No se puede elminar el comprador porque hay comics en su carro");
-        }
-        
-        if(!lista3.isEmpty())
-        {
-            throw new BusinessLogicException("No se puede elminar el comprador porque hay comics en su lista de deseos");
-        }
-        
         persistencia.delete(id);
         LOGGER.log(Level.INFO, "Se ha terminado el proceso de eliminación del comprador con id={0}", id);
         
