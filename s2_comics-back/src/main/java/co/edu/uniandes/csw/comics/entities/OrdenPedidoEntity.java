@@ -6,8 +6,9 @@
 package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+//import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -18,18 +19,20 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class OrdenPedidoEntity extends BaseEntity implements Serializable
 {
+   @PodamExclude
+    @ManyToOne
+    private CompradorEntity comprador;
+   
     @PodamExclude
     @ManyToOne
+    private VendedorEntity vendedor;
    
-    private ArrayList<OrdenPedidoEntity> ordenesPedido;
-    
+    @PodamExclude
     private ComicEntity comic;
-    
+    @PodamExclude
     private ComicEntity trueque;
     
-    private CompradorEntity comprador;
     
-    private VendedorEntity vendedor;
     
     /**
      * tarjeta de credito asiciada con la compra
@@ -39,14 +42,13 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     /**
      * identificacdor de la orden de pedido
      */
-    private Long identificador;
-    
+    @Id
+    private Long id;
     /**
      * numero de compras realizadas por el comprador
      */
     private Integer numeroComprasComprador;
 
-    private Boolean estadosOrden;
     
     /**
      * estado de la orden, es una enumeracion, puede estar 
@@ -80,7 +82,7 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
      */
     public Long getId()
     {
-        return getIdentificador();
+        return id;
     }
 
     /**
@@ -88,7 +90,7 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
      */
     public void setId(Long pId) 
     {
-        this.setIdentificador(pId);
+        this.id=pId;
     }
 
     /**
@@ -149,33 +151,7 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
         this.vendedor = vendedor;
     }
 
-    /**
-     * @return the identificador
-     */
-    public Long getIdentificador() {
-        return identificador;
-    }
-
-    /**
-     * @param identificador the identificador to set
-     */
-    public void setIdentificador(Long identificador) {
-        this.identificador = identificador;
-    }
-
-    /**
-     * @return the estadosOrden
-     */
-    public Boolean getEstadosOrden() {
-        return estadosOrden;
-    }
-
-    /**
-     * @param estadosOrden the estadosOrden to set
-     */
-    public void setEstadosOrden(Boolean estadosOrden) {
-        this.estadosOrden = estadosOrden;
-    }
+   
 
     /**
      * @return the comic
@@ -205,15 +181,7 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
         this.trueque = trueque;
     }
     
-    public OrdenPedidoEntity getOrdenPedidoById(Long idOdenPedido){
-        OrdenPedidoEntity resp=null;
-        for (int i =0; i< ordenesPedido.size(); i++){
-            if(ordenesPedido.get(i).getId() == idOdenPedido ){
-                resp= ordenesPedido.get(i);
-            }
-        }
-        return resp;
-    }
+    
 
     
 }

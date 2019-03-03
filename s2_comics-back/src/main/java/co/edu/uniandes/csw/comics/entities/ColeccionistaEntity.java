@@ -5,15 +5,19 @@
  */
 package co.edu.uniandes.csw.comics.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
  *
  * @author Sebastian Baquero
  */
+
 @MappedSuperclass
 public abstract class ColeccionistaEntity extends BaseEntity implements java.io.Serializable
 {
+    
     protected String alias;
     protected String email;
     protected String intereses;

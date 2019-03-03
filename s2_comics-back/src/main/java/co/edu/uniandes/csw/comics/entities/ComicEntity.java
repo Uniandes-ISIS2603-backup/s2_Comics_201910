@@ -192,10 +192,11 @@ public class ComicEntity extends BaseEntity implements Serializable {
     /**
      * @return the comicsTrueque
      */
+
     public List<ComicEntity> getComicsTrueque() {
         return comicsTrueque;
     }
-
+    
     /**
      * @param comicsTrueque the comicsTrueque to set
      */
@@ -216,7 +217,4 @@ public class ComicEntity extends BaseEntity implements Serializable {
     public void setDeTrueque(ComicEntity deTrueque) {
         this.deTrueque = deTrueque;
     }
-
-    
-    
 }

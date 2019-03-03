@@ -23,8 +23,12 @@ public class VendedorDTO extends ColeccionistaDTO implements Serializable
     {
         if(entity != null)
         {
+            nombre=entity.getNombre();
+            foto=entity.getFoto();
+            intereses=entity.getIntereses();
             alias = entity.getAlias();
             correoElectronico = entity.getEmail();
+            id=entity.getId();
             
         }
     }
@@ -33,7 +37,11 @@ public class VendedorDTO extends ColeccionistaDTO implements Serializable
     {
         VendedorEntity entity = new VendedorEntity();
         entity.setAlias(alias);
+        entity.setNombre(nombre);
+        entity.setFoto(foto);
+        entity.setIntereses(intereses);
         entity.setEmail(correoElectronico);
+        entity.setId(id);
         return entity;
     }
 }

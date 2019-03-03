@@ -10,18 +10,23 @@ import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import java.util.*;
 
-
 /**
  *
  * @author Juan Pablo Cano
  */
 @Entity
 public class VendedorEntity extends ColeccionistaEntity implements java.io.Serializable
-{        
+{      
+    
     @PodamExclude
     @OneToMany(mappedBy="vendedor")
     private List<ComicEntity> comics = new ArrayList<ComicEntity>();
-
+     @PodamExclude
+    @OneToMany(mappedBy="vendedor")
+    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+     @PodamExclude
+      @OneToMany(mappedBy="vendedor")
+    private List<OrdenPedidoEntity> ordenes = new ArrayList<OrdenPedidoEntity>();
     /**
      * @return the comics
      */
@@ -35,4 +40,35 @@ public class VendedorEntity extends ColeccionistaEntity implements java.io.Seria
     public void setComics(List<ComicEntity> comics) {
         this.comics = comics;
     }        
+
+    /**
+     * @return the name
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the ordenes
+     */
+    public List<OrdenPedidoEntity> getOrdenes() {
+        return ordenes;
+    }
+
+    /**
+     * @param ordenes the ordenes to set
+     */
+    public void setOrdenes(List<OrdenPedidoEntity> ordenes) {
+        this.ordenes = ordenes;
+    }
 }

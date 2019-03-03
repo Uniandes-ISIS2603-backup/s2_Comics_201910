@@ -7,8 +7,8 @@ package co.edu.uniandes.csw.comics.test.persistence;
 
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -39,13 +39,12 @@ public class OrdenPedidoPersistenceTest {
     
     @Inject
     UserTransaction utx;
+    private List<OrdenPedidoEntity> data = new ArrayList<>();
     
-    private List<OrdenPedidoEntity> data = new ArrayList<OrdenPedidoEntity>();
-    
-    @Deployment
+ @Deployment
     public static JavaArchive createDeployment()
     {
-        return ShrinkWrap.create(JavaArchive.class)
+   return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(OrdenPedidoEntity.class.getPackage())
                 .addPackage(OrdenPedidoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
@@ -95,26 +94,29 @@ public class OrdenPedidoPersistenceTest {
     @Test
     public void findTest()
     {
-        OrdenPedidoEntity entity = data.get(0);
+         OrdenPedidoEntity entity = data.get(0);
         OrdenPedidoEntity newEntity = ordenPedido.find(entity.getId());
         
         Assert.assertNotNull(newEntity);
-         }
+        Assert.assertEquals(entity.getId(), newEntity.getId());
+        Assert.assertEquals(entity.getEstado(), newEntity.getEstado());
+        Assert.assertEquals(entity.getTarjetaCredito(), newEntity.getTarjetaCredito());
+     }
     
     @Test
     public void createTest()
     {
-        PodamFactory podam = new PodamFactoryImpl();
+      PodamFactory podam = new PodamFactoryImpl();
         OrdenPedidoEntity newEntity= podam.manufacturePojo(OrdenPedidoEntity.class);
         OrdenPedidoEntity result = ordenPedido.create(newEntity);
         
-        Assert.assertNotNull("no deberia ser nulo",result);
+        Assert.assertNotNull(result);
         
         OrdenPedidoEntity entity = em.find(OrdenPedidoEntity.class, result.getId());
         
-         Assert.assertNotNull("deberia encontrarlo si lo creo",entity);
-       
-         }
+        Assert.assertEquals(result.getNumeroComprasComprador(), entity.getNumeroComprasComprador());
+        Assert.assertEquals(result.getTarjetaCredito(), entity.getTarjetaCredito());
+     }
     
  
     
@@ -129,20 +131,28 @@ public class OrdenPedidoPersistenceTest {
        
     }
       @Test
-    public void updateOrdenPedidoTest() {
-        OrdenPedidoEntity entity = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
-       OrdenPedidoEntity newEntity = factory.manufacturePojo(OrdenPedidoEntity.class);
-
-        newEntity.setEstado(entity.getEstado()+1);
-
-     //   Assert.assertSame(newEntity.getEstado(),entity.getEstado()+1);
-    }
+    public void updateOrdenesPedidoTest() {
+          List<OrdenPedidoEntity> lista = ordenPedido.findAll();
+        Assert.assertTrue(lista.size() == data.size());
+        
+        for(OrdenPedidoEntity ce: lista)
+        {
+            boolean found = false;
+             for(int i = 0; i < data.size() && !found; i++)
+             {
+                 if(data.get(i).getId().equals(ce.getId()))
+                 {
+                     found = true;
+                 }
+             }
+             Assert.assertTrue(found);
+        }}
        @Test
     public void deleteOrdenPedidTest() {
+      
         OrdenPedidoEntity entity = data.get(0);
-        ordenPedido.delete(entity.getId());
-        OrdenPedidoEntity deleted = em.find(OrdenPedidoEntity.class, entity.getId());
-        Assert.assertNull(deleted);
+        ordenPedido.deleteById(entity.getId());
+        OrdenPedidoEntity eliminado = ordenPedido.findById(entity.getId());
+        Assert.assertNull("no se elimino Correctamente ",eliminado);
     }
 }

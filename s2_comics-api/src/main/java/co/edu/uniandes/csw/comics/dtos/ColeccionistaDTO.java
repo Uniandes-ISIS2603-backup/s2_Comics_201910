@@ -22,7 +22,7 @@ public abstract class ColeccionistaDTO implements Serializable
     protected String foto;
     protected String correoElectronico;
     protected String intereses;
-    
+    protected Long id;
     /**
      * @return the nombre
      */
@@ -97,6 +97,20 @@ public abstract class ColeccionistaDTO implements Serializable
     public void setIntereses(String intereses) {
         this.intereses = intereses;
         
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }

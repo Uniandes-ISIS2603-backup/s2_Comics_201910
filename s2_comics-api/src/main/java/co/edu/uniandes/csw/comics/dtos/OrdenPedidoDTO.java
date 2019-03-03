@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.comics.dtos;
 
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -25,10 +27,6 @@ public class OrdenPedidoDTO implements Serializable
      * identificacdor de la orden de pedido
      */
     private Long id;
-    /**
-     * numero de compras realizadas por el comprador
-     */
-    private Integer numeroComprasComprador;
     /**
      * estado de la orden, es una enumeracion, puede estar 
      * 1. en espera: se genero la orden y esta esperando la confirmacion del vendedor
@@ -71,29 +69,27 @@ public class OrdenPedidoDTO implements Serializable
         
     }
     
+    /**
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param ordenPedidoEntity: Es la entidad que se va a convertir a DTO
+     */
      public OrdenPedidoDTO(OrdenPedidoEntity ordenPedidoEntity)
     {
-        
+        if (ordenPedidoEntity != null) {
+            this.id = ordenPedidoEntity.getId();
+            this.estado = ordenPedidoEntity.getEstado();
+            this.tarjetaCredito=ordenPedidoEntity.getTarjetaCredito();
+            this.numeroCompras=ordenPedidoEntity.getNumeroComprasComprador(); 
+        }
     }
     
   
     
     //METODOS
 
-    /**
-     * @return the numeroComprasComprador
-     */
-    public Integer getNumeroComprasComprador() {
-        return numeroComprasComprador;
-    }
-
-    /**
-     * @param numeroComprasComprador the numeroComprasComprador to set
-     */
-    public void setNumeroComprasComprador(Integer numeroComprasComprador) {
-        this.numeroComprasComprador = numeroComprasComprador;
-    }
-
+    
     /**
      * @return the estado
      */
@@ -206,8 +202,22 @@ public class OrdenPedidoDTO implements Serializable
         this.numeroCompras = numeroCompras;
     }
    
+    
     public  OrdenPedidoEntity toEntity(){
-        return null;
+       OrdenPedidoEntity ordenPedidoEntity = new OrdenPedidoEntity();
+        ordenPedidoEntity.setId(this.id);
+         ordenPedidoEntity.setEstado(this.estado);
+          ordenPedidoEntity.setNumeroComprasComprador(this.numeroCompras);
+           ordenPedidoEntity.setTarjetaCredito(this.tarjetaCredito);
+     //      ordenPedidoEntity.setComic(comic.toEntity);
+      ordenPedidoEntity.setComprador(this.comprador.toEntity());
+       ordenPedidoEntity.setVendedor(this.vendedor.toEntity());
+    //    ordenPedidoEntity.setTrueque(this.trueque.toEntity());
+        return ordenPedidoEntity;
     }
     
+    @Override
+		    public String toString() {
+		        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+		    }
 }
