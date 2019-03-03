@@ -26,6 +26,7 @@ public class OrdenPedidoLogic {
     private OrdenPedidoPersistence persistence;
     
     public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido)throws BusinessLogicException{
+      /*
         if(ordenPedido.getComprador()==null || ordenPedido.getVendedor()==null ){
             throw new BusinessLogicException("La orden Pedido debe tener un cliente y un vendedor asociado.");
         }
@@ -34,8 +35,9 @@ public class OrdenPedidoLogic {
         }
         if( ordenPedido.getComic().getEnVenta()==false && ordenPedido.getTrueque()==null ){
             throw new BusinessLogicException("Si el  comic asociado a la orden esta para truque debe tener asociado el comic con el cual se hara el truque.");
-        }
-       ordenPedido= persistence.create(ordenPedido);
+      }
+      */
+ordenPedido= persistence.create(ordenPedido);
         return ordenPedido;
     }
     public OrdenPedidoEntity getOrdenPedido(Long id){

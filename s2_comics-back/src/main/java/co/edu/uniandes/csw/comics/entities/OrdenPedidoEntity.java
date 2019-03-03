@@ -27,9 +27,9 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     @ManyToOne
     private VendedorEntity vendedor;
    
-    
+    @PodamExclude
     private ComicEntity comic;
-    
+    @PodamExclude
     private ComicEntity trueque;
     
     
