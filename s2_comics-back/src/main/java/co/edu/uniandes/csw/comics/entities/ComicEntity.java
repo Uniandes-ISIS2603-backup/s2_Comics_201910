@@ -7,10 +7,9 @@ package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -49,13 +48,16 @@ public class ComicEntity extends BaseEntity implements Serializable {
     private Boolean enVenta;
     
     @PodamExclude
-    @javax.persistence.ManyToOne(
-    )
+    @javax.persistence.ManyToOne
     private VendedorEntity vendedor;
     
     @PodamExclude
-    @javax.persistence.OneToMany(mappedBy = "comic", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "deTrueque")
     private List<ComicEntity> comicsTrueque;
+    
+    @PodamExclude
+    @ManyToOne
+    private ComicEntity deTrueque;
 
     public ComicEntity(){
         
@@ -201,5 +203,20 @@ public class ComicEntity extends BaseEntity implements Serializable {
         this.comicsTrueque = comicsTrueque;
     }
 
+    /**
+     * @return the deTrueque
+     */
+    public ComicEntity getDeTrueque() {
+        return deTrueque;
+    }
+
+    /**
+     * @param deTrueque the deTrueque to set
+     */
+    public void setDeTrueque(ComicEntity deTrueque) {
+        this.deTrueque = deTrueque;
+    }
+
+    
     
 }
