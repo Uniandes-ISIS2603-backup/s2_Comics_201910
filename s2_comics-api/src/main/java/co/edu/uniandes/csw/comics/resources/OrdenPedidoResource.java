@@ -12,6 +12,7 @@ import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -58,7 +59,7 @@ public class OrdenPedidoResource {
       LOGGER.info("OrdenpedidoResourse createOrdenPedido: input:" + ordenPedido.toString());
         OrdenPedidoEntity ordenPedidoEntity= ordenPedido.toEntity();
         //invoca la logica para crear la nueva orden de pedido
-        OrdenPedidoEntity nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity);
+        OrdenPedidoEntity nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId() );
         //como debe retornar un DTO (json) se invoca el contructor de DTO con argumento el entity nuevo
         OrdenPedidoDTO nuevaOrdenPedidoDTO= new OrdenPedidoDTO(nuevaOrdenPedidoEntity);
         LOGGER.info("OrdenpedidoResourse createOrdenPedido: output:" + nuevaOrdenPedidoDTO.toString());
@@ -80,13 +81,17 @@ public class OrdenPedidoResource {
     @Path("{OrdenesPedidoId:\\d+}")
     public OrdenPedidoDTO getOrdenPedido (@PathParam("OrdenesPedidoId")Long OrdenesPedidoId) throws WebApplicationException
     {
-        OrdenPedidoEntity ordenPedidoEntity = ordenPedidoLogic.getOrdenPedido(OrdenesPedidoId);
-        if(ordenPedidoEntity == null){
-            throw new WebApplicationException("El recurso/ordenesPedido/" + OrdenesPedidoId + " no existe. ", 404 );
-        }  
-              
-        OrdenPedidoDTO detailDTO = new OrdenPedidoDTO(ordenPedidoEntity);
-        return detailDTO;
+        LOGGER.log(Level.INFO, "ComicDeseoResource findComicDeseoXId: input: {0}", OrdenesPedidoId);
+      OrdenPedidoEntity entity = ordenPedidoLogic.getOrdenPedido(OrdenesPedidoId);
+     if(entity == null){
+     
+         throw new WebApplicationException("El recurso/ordenesPedido/"+OrdenesPedidoId +"no existe.", 404);
+         
+     }
+     OrdenPedidoDTO ordenPedidoDTO = new OrdenPedidoDTO(entity);
+     LOGGER.log(Level.INFO, "ComicDeseoResource findComicDeseoXId: output: {0}", ordenPedidoDTO);
+     return ordenPedidoDTO;
+      
     }
     
     /**
@@ -104,27 +109,30 @@ public class OrdenPedidoResource {
     }
     
      /**
-     * Actualiza la OrdenPedido con el id recibido en la URL con la informacion
+     * Actualiza la ordenPedido con el id recibido en la URL con la informacion
      * que se recibe en el cuerpo de la petición.
      *
-     * @param OdenesPedidoId Identificador de la editorial que se desea
+     * @param ordenesPedidoId Identificador de la ordenPedido que se desea
      * actualizar. Este debe ser una cadena de dígitos.
-     * @param ordenPedido {@link OrdenPedidoDTO} La ordenPedido que se desea guardar.
-     * @return JSON {@link OrdenPedidoDTO} - La ordenPedido guardada.
+     * @param ordenPedido {@link OrdenPedidoDTO} La ordenPedido que se desea
+     * guardar.
+     * @return JSON {@link OrdenPedidoDetailDTO} - La ordenPedido guardada.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la ordenPedido a
+     * Error de lógica que se genera cuando no se encuentra la editorial a
      * actualizar.
      */
     @PUT
-    @Path("{OdenesPedidoId:\\d+}")
-    public OrdenPedidoDTO actualizarOrdenPedido (@PathParam("OdenesPedidoId")long OdenesPedidoId, OrdenPedidoDTO ordenPedido) throws WebApplicationException
-    {
-        OrdenPedidoEntity ordenPedidoEntity = ordenPedidoLogic.getOrdenPedido(OdenesPedidoId);
-        if(ordenPedidoEntity == null){
-            throw new WebApplicationException("El recurso/ordenesPedido/" + OdenesPedidoId + " no existe. ", 404 );
-            
+    @Path("{ordenesPedidoId: \\d+}")
+    public OrdenPedidoDTO updateOrdenPedido(@PathParam("ordenesPedidoId") Long ordenesPedidoId, OrdenPedidoDTO ordenPedido) throws WebApplicationException {
+        LOGGER.log(Level.INFO, "ordenPedidoResource updateOrdenPedido: input: id:{0} , editorial: {1}", new Object[]{ordenesPedidoId, ordenPedido});
+        ordenPedido.setId(ordenesPedidoId);
+        if (ordenPedidoLogic.getOrdenPedido(ordenesPedidoId) == null) {
+            throw new WebApplicationException("El recurso /editorials/" + ordenesPedidoId + " no existe.", 404);
         }
-    return null;
+        OrdenPedidoDTO detailDTO = new OrdenPedidoDTO(ordenPedidoLogic.updateOrdenPedido(ordenesPedidoId, ordenPedido.toEntity()));
+        LOGGER.log(Level.INFO, "OrdenPedidoResource updateOrdenPedido: output: {0}", detailDTO);
+        return detailDTO;
+
     }
     
     /**
@@ -138,13 +146,16 @@ public class OrdenPedidoResource {
      * Error de lógica que se genera cuando no se encuentra la ordenPedido.
      */
      @DELETE
-      @Path("{id:\\d+}")
-    public void eliminarOrdenPedido (@PathParam("id")long id) throws BusinessLogicException{
-      
-        if (ordenPedidoLogic.getOrdenPedido(id)==null) {
-            throw new WebApplicationException("El recurso /ordenesPedido/" + id + " no existe.", 404);
+      @Path("{OrdenesPedidoId:\\d+}")
+    public void deletOrdenPedido (@PathParam("OrdenesPedidoId")long OrdenesPedidoId) throws BusinessLogicException{
+       {
+         LOGGER.log(Level.INFO, "OrdenPedidoResource deleteOrdenPedido: input: {0}", OrdenesPedidoId);
+        if (ordenPedidoLogic.getOrdenPedido(OrdenesPedidoId) == null) {
+            throw new WebApplicationException("El recurso /authors/" + OrdenesPedidoId + " no existe.", 404);
         }
-        ordenPedidoLogic.eliminarOrdenPedido(id);
+        ordenPedidoLogic.deleteOrdenPedido(OrdenesPedidoId);
+        LOGGER.info("OrdenPedidoResource deleteOrdenPedido: output: void");
+    }
        
     }
     
@@ -165,4 +176,6 @@ public class OrdenPedidoResource {
         }
         return list;
     }
+    
+   
 }

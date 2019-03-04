@@ -44,6 +44,8 @@ public class OrdenPedidoDTO implements Serializable
      */
     private VendedorDTO vendedor;
     
+  
+    
     /**
      * comic que se va a comprar o intercambiar
      */
@@ -82,6 +84,10 @@ public class OrdenPedidoDTO implements Serializable
             this.estado = ordenPedidoEntity.getEstado();
             this.tarjetaCredito=ordenPedidoEntity.getTarjetaCredito();
             this.numeroCompras=ordenPedidoEntity.getNumeroComprasComprador(); 
+            CompradorDTO c= new CompradorDTO(ordenPedidoEntity.getComprador());
+            this.comprador=c;
+            VendedorDTO v= new VendedorDTO(ordenPedidoEntity.getVendedor());
+            this.vendedor=v;
         }
     }
     
@@ -209,10 +215,10 @@ public class OrdenPedidoDTO implements Serializable
          ordenPedidoEntity.setEstado(this.estado);
           ordenPedidoEntity.setNumeroComprasComprador(this.numeroCompras);
            ordenPedidoEntity.setTarjetaCredito(this.tarjetaCredito);
-     //      ordenPedidoEntity.setComic(comic.toEntity);
+      //   ordenPedidoEntity.setComic(comic.toEntity);
       ordenPedidoEntity.setComprador(this.comprador.toEntity());
-       ordenPedidoEntity.setVendedor(this.vendedor.toEntity());
-    //    ordenPedidoEntity.setTrueque(this.trueque.toEntity());
+      ordenPedidoEntity.setVendedor(this.vendedor.toEntity());
+     //  ordenPedidoEntity.setTrueque(this.trueque.toEntity());
         return ordenPedidoEntity;
     }
     
