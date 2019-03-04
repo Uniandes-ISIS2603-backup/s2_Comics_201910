@@ -26,6 +26,9 @@ public class VendedorEntity extends ColeccionistaEntity implements java.io.Seria
      @PodamExclude
     @OneToMany(mappedBy="vendedor")
     private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+     @PodamExclude
+      @OneToMany(mappedBy="vendedor")
+    private List<OrdenPedidoEntity> ordenes = new ArrayList<OrdenPedidoEntity>();
     /**
      * @return the comics
      */
@@ -55,5 +58,19 @@ public class VendedorEntity extends ColeccionistaEntity implements java.io.Seria
      */
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the ordenes
+     */
+    public List<OrdenPedidoEntity> getOrdenes() {
+        return ordenes;
+    }
+
+    /**
+     * @param ordenes the ordenes to set
+     */
+    public void setOrdenes(List<OrdenPedidoEntity> ordenes) {
+        this.ordenes = ordenes;
     }
 }

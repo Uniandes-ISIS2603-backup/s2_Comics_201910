@@ -78,6 +78,13 @@ public class VendedorResource
         }
         return CalificacionResource.class;
     }
+      @Path("{vendedoresId: \\d+}/ordenesPedido")
+    public Class<VendedorOrdenPedidoResource> getVendedorOrdenPedidoResource(@PathParam("vendedoresId") Long vendedoresId) {
+        if (vendedorLogic.getVendedor(vendedoresId) == null) {
+            throw new WebApplicationException("El recurso /vendedores/" + vendedoresId + " no existe.", 404);
+        }
+        return VendedorOrdenPedidoResource.class;
+    }
       @PUT
     @Path("{vendedoresId: \\d+}")
     public VendedorDetailDTO updateVendedor(@PathParam("vendedoresId") Long vendedoresId, VendedorDetailDTO vendedor) {
