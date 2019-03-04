@@ -16,12 +16,11 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author estudiante
+ * @author juan pablo cano
  */
-@Path("coleccionistas")
+@Path("/comprador/{compradorId: \\d+}/comicDeseo/{comicDeseoId: \\d+}")
 @Produces("application/json")
 @Consumes("application/json")
-@RequestScoped
 public class CompradorComicDeseoResource {
      private static final Logger LOGGER=Logger.getLogger(CompradorComicDeseoResource.class.getName());
      

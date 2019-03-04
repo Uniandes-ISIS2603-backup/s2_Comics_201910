@@ -33,8 +33,6 @@ public class CompradorResource
 {
     private static final Logger LOGGER = Logger.getLogger(CompradorResource.class.getName());
     
-    private HashMap<String, CompradorDTO> compradores; 
-    
     @Inject
     private CompradorLogic compradorLogic;
     

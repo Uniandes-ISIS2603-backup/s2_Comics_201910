@@ -33,6 +33,11 @@ public class CompradorEntity extends ColeccionistaEntity implements Serializable
     @OneToMany(mappedBy="comprador")
     private List<ComicDeseoEntity> listaDeseos = new ArrayList();
     
+    public CompradorEntity()
+    {
+        
+    }
+    
     /**
      * @return the ordenPedidoCompra
      */

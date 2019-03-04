@@ -27,6 +27,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author juan pablo cano
  */
+@Path("/comprador/{compradorId: \\d+}/pedido/{pedidoId: \\d+}")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CompradorOrdenPedidoResource 
@@ -60,6 +61,52 @@ public class CompradorOrdenPedidoResource
         List<OrdenPedidoDTO> dtos = listEntity2DTO(compradorOrdenLogic.getOrdenes(idComprador));
         LOGGER.log(Level.INFO, "");
         return dtos;
+    }
+    
+    @GET
+    @Path("{pedidoId: \\d+}")
+    public OrdenPedidoDTO getPedido(@PathParam("compradorId")long compradorId, @PathParam("pedidoId")long ordenId) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "CompradorOrdenPedidoResource getBook: input: compradorid: {0}, ordenId: {1}", new Object[]{compradorId, ordenId});
+        if(ordenPedidoLogic.getOrdenPedido(ordenId) == null)
+        {
+            throw new WebApplicationException("El recurso /ordenes/" + ordenId + " no existe.", 404);
+        }
+        
+        OrdenPedidoDTO orden = new OrdenPedidoDTO(compradorOrdenLogic.getOrden(compradorId, ordenId));
+        LOGGER.log(Level.INFO, "CompradorOrdenPedidoResource getOrden: output: {0}", orden);
+        return orden;
+    }
+    
+    @PUT
+    public List<OrdenPedidoDTO> replaceOrdenes(@PathParam("compradorId") long compradorId, List<OrdenPedidoDTO> ordenes)
+    {
+        LOGGER.log(Level.INFO, "CompradorOrdenPedidoResource replaceOrdenes: input: compradorId: {0}, ordenes: {1}", new Object[]{compradorId, ordenes});
+        for(OrdenPedidoDTO orden : ordenes)
+        {
+            if(ordenPedidoLogic.getOrdenPedido(orden.getId()) == null)
+            {
+                throw new WebApplicationException("El recurso /ordenes/" + orden.getId() + " no existe.", 404);
+            }
+        }
+        
+        List<OrdenPedidoDTO> lista = listEntity2DTO(compradorOrdenLogic.replaceOrden(compradorId, listDtoToEntity(ordenes)));
+        LOGGER.log(Level.INFO, "CompradorOrdenPedidoResource replaceOrdenes: output: {0}", lista);
+        return lista;
+    }
+    
+    @DELETE
+    @Path("{pedidoId: \\d+}")
+    public void removeOrder(@PathParam("compradorId") long compradorId, @PathParam("pedidoId") long ordenId)throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "CompradorOrdenPedidoResource removeOrden: input: compradorId: {0}, ordenId: {1}", new Object[]{compradorId, ordenId});
+        if(ordenPedidoLogic.getOrdenPedido(ordenId) == null)
+        {
+            throw new WebApplicationException("El recurso /ordenes/" + ordenId + " no existe.", 404);
+        }
+        
+        compradorOrdenLogic.eliminarOrden(compradorId, ordenId);
+        LOGGER.info("CompradorOrdenPedidoResource removeOrden: output: void");
     }
     
     private List<OrdenPedidoDTO> listEntity2DTO(List<OrdenPedidoEntity> list)

@@ -28,6 +28,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author juan pablo cano
  */
+@Path("/comprador/{compradorId: \\d+}/comic/{comicId: \\d+}")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CompradorComicsResource 
@@ -39,6 +40,8 @@ public class CompradorComicsResource
     
     @Inject
     private ComicLogic comicLogic;
+    
+    
     
     private List<ComicEntity> listDto2Entity(List<ComicDTO> comics)
     {
