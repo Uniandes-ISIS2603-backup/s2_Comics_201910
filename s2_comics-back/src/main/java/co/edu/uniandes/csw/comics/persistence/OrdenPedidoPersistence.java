@@ -5,14 +5,15 @@
  */
 package co.edu.uniandes.csw.comics.persistence;
 
-import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
+import static java.awt.Event.DELETE;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 
@@ -47,20 +48,22 @@ public class OrdenPedidoPersistence {
     
     public List<OrdenPedidoEntity> findAll (){
         
-    TypedQuery<OrdenPedidoEntity> q = em.createQuery("select u from ComicEntity u", OrdenPedidoEntity.class);
-    return q.getResultList();
+     LOGGER.log(Level.INFO, "Se buscarán todos las ordenes Pedido");
+        Query q = em.createQuery("select u from OrdenPedidoEntity u");
+        return q.getResultList();
     
     }
+    
+    
      public void delete(Long ordenPedidoId) {
-
-        LOGGER.log(Level.INFO, "Borrando la ordenPedido con id={0}", ordenPedidoId);
+  LOGGER.log(Level.INFO, "Borrando el vendedor con id={0}", ordenPedidoId);
         // Se hace uso de mismo método que esta explicado en public AuthorEntity find(Long id) para obtener la author a borrar.
-       OrdenPedidoEntity ordenPedidoEntity = em.find(OrdenPedidoEntity.class, ordenPedidoId);
+      OrdenPedidoEntity ordenPedidoEntity = em.find(OrdenPedidoEntity.class, ordenPedidoId);
        
         em.remove(ordenPedidoEntity);
-    }
+     }
      
-     public OrdenPedidoEntity findById(Long id)
+    /** public OrdenPedidoEntity findById(Long id)
     {
         LOGGER.log(Level.INFO, "Se buscará la ordenPedido por el id", id);
         
@@ -87,11 +90,15 @@ public class OrdenPedidoPersistence {
         
         return result;
     }
+     */
      
-      public void deleteById(Long id)
-    {
-        LOGGER.log(Level.INFO,"Eliminando una ordenPedido con id={0}", id);
-        OrdenPedidoEntity eliminado = findById(id);
-        em.remove(eliminado);
-    }
+ 
+      
+      public OrdenPedidoEntity update(OrdenPedidoEntity ordenPedidoEntity){
+        LOGGER.log(Level.INFO, "Actualizando la orden pedido con id={0}", ordenPedidoEntity.getId() );
+      
+        return em.merge(ordenPedidoEntity);
+          }
+      
+   
 }

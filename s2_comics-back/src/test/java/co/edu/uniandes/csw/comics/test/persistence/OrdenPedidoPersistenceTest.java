@@ -127,32 +127,29 @@ public class OrdenPedidoPersistenceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getEstado(), newEntity.getEstado());
         Assert.assertEquals(entity.getTarjetaCredito(), newEntity.getTarjetaCredito());
-        Assert.assertEquals(entity.getComprador().getAlias(), newEntity.getComprador().getAlias());
        
     }
       @Test
     public void updateOrdenesPedidoTest() {
-          List<OrdenPedidoEntity> lista = ordenPedido.findAll();
-        Assert.assertTrue(lista.size() == data.size());
-        
-        for(OrdenPedidoEntity ce: lista)
-        {
-            boolean found = false;
-             for(int i = 0; i < data.size() && !found; i++)
-             {
-                 if(data.get(i).getId().equals(ce.getId()))
-                 {
-                     found = true;
-                 }
-             }
-             Assert.assertTrue(found);
-        }}
+            OrdenPedidoEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+       OrdenPedidoEntity newEntity = factory.manufacturePojo(OrdenPedidoEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        ordenPedido.update(newEntity);
+
+        OrdenPedidoEntity resp = em.find(OrdenPedidoEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getTarjetaCredito(), resp.getTarjetaCredito());
+    
+    }
        @Test
     public void deleteOrdenPedidTest() {
       
         OrdenPedidoEntity entity = data.get(0);
-        ordenPedido.deleteById(entity.getId());
-        OrdenPedidoEntity eliminado = ordenPedido.findById(entity.getId());
-        Assert.assertNull("no se elimino Correctamente ",eliminado);
+        ordenPedido.delete(entity.getId());
+        OrdenPedidoEntity eliminado = ordenPedido.find(entity.getId());
+        Assert.assertNull(eliminado);
     }
 }

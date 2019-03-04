@@ -109,8 +109,8 @@ public class VendedorOrdenPedidoLogicTest {
     public void addOrdenTest() throws BusinessLogicException {
         OrdenPedidoEntity newOrden = factory.manufacturePojo(OrdenPedidoEntity.class);
         newOrden.setComprador(comprador);
-       
-        ordenPedidoLogic.createOrdenPedido(newOrden);
+       newOrden.setVendedor(vendedor);
+        ordenPedidoLogic.createOrdenPedido(newOrden, comprador.getId(), vendedor.getId());
         OrdenPedidoEntity ordenPedidoEntity = vendedorOrdenLogic.addOrden(vendedor.getId(), newOrden.getId());
         Assert.assertNotNull(ordenPedidoEntity);
 

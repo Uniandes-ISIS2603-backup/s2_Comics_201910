@@ -21,7 +21,7 @@ public class VendedorEntity extends ColeccionistaEntity implements java.io.Seria
 {      
     
     @PodamExclude
-    @ManyToMany(mappedBy="vendedores")
+    @OneToMany(mappedBy="vendedor")
     private List<ComicEntity> comics = new ArrayList<ComicEntity>();
      @PodamExclude
     @OneToMany(mappedBy="vendedor")

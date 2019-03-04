@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -17,9 +18,16 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author estudiante
  */
 @Entity
-public class OrdenPedidoEntity extends BaseEntity implements Serializable
+public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializable
 {
-   @PodamExclude
+   
+    /**
+     * identificacdor de la orden de pedido
+     */
+    @Id
+    private Long id;
+    
+    @PodamExclude
     @ManyToOne
     private CompradorEntity comprador;
    
@@ -28,10 +36,12 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
     private VendedorEntity vendedor;
    
     @PodamExclude
+    @OneToOne
     private ComicEntity comic;
-    @PodamExclude
-    private ComicEntity trueque;
     
+    @PodamExclude
+    @OneToOne
+    private ComicEntity trueque;
     
     
     /**
@@ -39,11 +49,6 @@ public class OrdenPedidoEntity extends BaseEntity implements Serializable
      */
     private String tarjetaCredito;
     
-    /**
-     * identificacdor de la orden de pedido
-     */
-    @Id
-    private Long id;
     /**
      * numero de compras realizadas por el comprador
      */

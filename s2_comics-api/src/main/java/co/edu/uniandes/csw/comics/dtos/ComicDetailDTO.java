@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.csw.comics.dtos;
 
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,9 +16,42 @@ import java.util.List;
  */
 public class ComicDetailDTO extends ComicDTO implements Serializable {
     
-    private List<VendedorDTO> vendedorDTO;
+    private List<ComicDTO> comicsTrueque;
     
     public ComicDetailDTO (){
+        super();
+    }
     
+    public ComicDetailDTO(ComicEntity comicEntity){
+        super(comicEntity);
+        if(comicEntity != null && comicEntity.getComicsTrueque() != null){
+            comicsTrueque = new ArrayList<>();
+            for(ComicEntity en : comicEntity.getComicsTrueque())
+                comicsTrueque.add(new ComicDTO(en));
+        }
+    }
+    
+    public ComicEntity toEntity(){
+        ComicEntity ans = super.toEntity();
+        if(comicsTrueque != null){
+            List<ComicEntity> cTrueque = new ArrayList<>();
+            for(ComicDTO dto : comicsTrueque)
+                cTrueque.add(dto.toEntity());
+        }
+        return ans;
+    }
+
+    /**
+     * @return the comicsTrueque
+     */
+    public List<ComicDTO> getComicsTrueque() {
+        return comicsTrueque;
+    }
+
+    /**
+     * @param comicsTrueque the comicsTrueque to set
+     */
+    public void setComicsTrueque(List<ComicDTO> comicsTrueque) {
+        this.comicsTrueque = comicsTrueque;
     }
 }

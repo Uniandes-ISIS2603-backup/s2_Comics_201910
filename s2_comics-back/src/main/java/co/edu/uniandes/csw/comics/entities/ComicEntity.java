@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -25,37 +26,56 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ComicEntity extends BaseEntity implements Serializable {
     
-    public enum TemaGlobal
-    {
-        ACCION,
-        DEPORTE
+    public static enum TemaGlobal{
+        AVENTURA_ACCION,
+        ARTE_ILUSTRACION,
+        COMEDIA,
+        ENCICLOPEDIA_DOCUMENTAL,
+        DRAMA,
+        EROTIQUE,
+        FANTASTICO,
+        NOVELA_GRAFICA,
+        HEROICO_FANTASIA_MAGIA,
+        HISTORICO,
+        HUMOR,
+        AMOR_AMISTAD,
+        POLAR_THRILLER,
+        CIENCIA_FICCION,
+        DEPORTE,
+        VIEJO_OESTE
     }
+
+    private String nombre;
+    private String autor;
+    private Integer anioSalida;
+    private Boolean perteneceColeccion;
+    private Boolean perteneceSerie;
+    private Double precio;
+    private TemaGlobal tema;
+    private Boolean enVenta;
     
     @PodamExclude
     @ManyToMany
     private List<CompradorEntity> compradores = new ArrayList();
 
     @PodamExclude
-    @ManyToMany
-    private List<VendedorEntity> vendedores;
+    @ManyToOne
+    private VendedorEntity vendedor;
     
-    private String nombre;
-    private String autor;
-    @Temporal(TemporalType.DATE)
-    private Date anioSalida;
-    private Boolean perteneceColeccion;
-    private Boolean perteneceSerie;
-    private double precio;
-    private TemaGlobal tema;
-    private List listaDeComicsTrueque;
-    private Boolean enVenta;
-     
+    @PodamExclude
+    @OneToMany(mappedBy = "deTrueque")
+    private List<ComicEntity> comicsTrueque;
+    
+    @PodamExclude
+    @ManyToOne
+    private ComicEntity deTrueque;
+
     /**
      * @return the nombre
      */
     public String getNombre() {
         return nombre;
-}
+    }
 
     /**
      * @param nombre the nombre to set
@@ -81,14 +101,14 @@ public class ComicEntity extends BaseEntity implements Serializable {
     /**
      * @return the anioSalida
      */
-    public Date getAnioSalida() {
+    public Integer getAnioSalida() {
         return anioSalida;
     }
 
     /**
      * @param anioSalida the anioSalida to set
      */
-    public void setAnioSalida(Date anioSalida) {
+    public void setAnioSalida(Integer anioSalida) {
         this.anioSalida = anioSalida;
     }
 
@@ -123,42 +143,29 @@ public class ComicEntity extends BaseEntity implements Serializable {
     /**
      * @return the precio
      */
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
     /**
      * @param precio the precio to set
      */
-    public void setPrecio(double precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
     /**
-     * @return the temaGlobal
-     
-    public Enum getTemaGlobal() {
-        return temaGlobal;
-    }*/
-    /**
-     * @param temaGlobal the temaGlobal to set
-     
-    public void setTemaGlobal(Enum temaGlobal) {
-        this.temaGlobal = temaGlobal;
-    }*/
-
-    /**
-     * @return the listaDeComicsTrueque
+     * @return the tema
      */
-    public List getListaDeComicsTrueque() {
-        return listaDeComicsTrueque;
+    public TemaGlobal getTema() {
+        return tema;
     }
 
     /**
-     * @param listaDeComicsTrueque the listaDeComicsTrueque to set
+     * @param tema the tema to set
      */
-    public void setListaDeComicsTrueque(List listaDeComicsTrueque) {
-        this.listaDeComicsTrueque = listaDeComicsTrueque;
+    public void setTema(TemaGlobal tema) {
+        this.tema = tema;
     }
 
     /**
@@ -176,35 +183,60 @@ public class ComicEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return the comprador
+     * @return the compradores
      */
-    public List<CompradorEntity> getComprador() {
+    public List<CompradorEntity> getCompradores() {
         return compradores;
     }
 
     /**
-     * @param comprador the comprador to set
+     * @param compradores the compradores to set
      */
-    public void setComprador(List<CompradorEntity> comprador) {
-        this.compradores = comprador;
+    public void setCompradores(List<CompradorEntity> compradores) {
+        this.compradores = compradores;
     }
 
     /**
-     * @return the vendedor
+     * @return the vendedores
      */
-    public List<VendedorEntity> getVendedores() {
-        return vendedores;
+    public VendedorEntity getVendedor() {
+        return vendedor;
     }
 
     /**
-     * @param vendedor the vendedor to set
+     * @param vendedores the vendedores to set
      */
-    public void setVendedores(List<VendedorEntity> vendedor) {
-        this.vendedores = vendedor;
+    public void setVendedor(VendedorEntity vendedor) {
+        this.vendedor = vendedor;
     }
 
     /**
-     * @return the vendedor
+     * @return the comicsTrueque
      */
+    public List<ComicEntity> getComicsTrueque() {
+        return comicsTrueque;
+    }
 
+    /**
+     * @param comicsTrueque the comicsTrueque to set
+     */
+    public void setComicsTrueque(List<ComicEntity> comicsTrueque) {
+        this.comicsTrueque = comicsTrueque;
+    }
+
+    /**
+     * @return the deTrueque
+     */
+    public ComicEntity getDeTrueque() {
+        return deTrueque;
+    }
+
+    /**
+     * @param deTrueque the deTrueque to set
+     */
+    public void setDeTrueque(ComicEntity deTrueque) {
+        this.deTrueque = deTrueque;
+    }
+    
+    
 }
