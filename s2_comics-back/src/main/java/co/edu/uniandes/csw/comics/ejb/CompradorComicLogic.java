@@ -45,7 +45,7 @@ public class CompradorComicLogic
         return comprador.find(idComp).getCarro();
     }
     
-    public ComicEntity getBook(long idComp, long idCom) throws BusinessLogicException
+    public ComicEntity getComic(long idComp, long idCom) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de búsqueda del comic: {0} en el comprador: " + idComp, idCom);
         List<ComicEntity> comics = comprador.find(idComp).getCarro();
@@ -63,7 +63,7 @@ public class CompradorComicLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los comics asocidos al comprador con id = {0}", idComp);
         CompradorEntity comp = comprador.find(idComp);
-        List<ComicEntity> comicsList = comic.findAll();
+        /*List<ComicEntity> comicsList = comic.findAll();
         for(ComicEntity c : comicsList)
         {
             if(comics.contains(c))
@@ -77,7 +77,7 @@ public class CompradorComicLogic
                     c.getComprador().remove(comp);
                 }
             }
-        }
+        }*/
         comp.setCarro(comics);
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los comics asocidos al comprador con id = {0}", idComp);
         return comp.getCarro();
@@ -88,7 +88,8 @@ public class CompradorComicLogic
         LOGGER.log(Level.INFO, "Inicia el proceso de eliminación del comic en el comprador con id: {0}", idComp);
         CompradorEntity entity = comprador.find(idComp);
         ComicEntity comEntity = comic.find(idComic);
-        comEntity.getComprador().remove(entity);
+        //comEntity.getComprador().remove(entity);
+        entity.getCarro().remove(comEntity);
         LOGGER.log(Level.INFO, "Termina el proceso de eliminación del comic en el comprador con id: {0}", idComp);
     }
 }
