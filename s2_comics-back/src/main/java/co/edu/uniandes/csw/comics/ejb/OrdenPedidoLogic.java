@@ -40,15 +40,23 @@ public class OrdenPedidoLogic {
     
     public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido, Long vendedorId, Long compradoraiD)throws BusinessLogicException
     {
+        if(persistence.find(ordenPedido.getId())!=null ){
+        new BusinessLogicException("ya existe una ordenPedido con esta id");  }     
+       
+        if(ordenPedido.getComprador()==null || ordenPedido.getVendedor()==null ){
+            throw new BusinessLogicException("La orden Pedido debe tener un cliente y un vendedor asociado.");
+        }
+        
          VendedorEntity vendedor=vendedorPersistence.find(vendedorId);
          ordenPedido.setVendedor(vendedor);
          CompradorEntity comprador =compradorPersistence.find(compradoraiD);
          ordenPedido.setComprador(comprador);
+         ordenPedido= persistence.create(ordenPedido);
          return ordenPedido;
     }
          
 
-    public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido)throws BusinessLogicException{
+/**    public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido)throws BusinessLogicException{
 
         if(ordenPedido.getComprador()==null || ordenPedido.getVendedor()==null ){
             throw new BusinessLogicException("La orden Pedido debe tener un cliente y un vendedor asociado.");
@@ -59,12 +67,12 @@ public class OrdenPedidoLogic {
         if( ordenPedido.getComic().getEnVenta()==false && ordenPedido.getTrueque()==null ){
             throw new BusinessLogicException("Si el  comic asociado a la orden esta para truque debe tener asociado el comic con el cual se hara el truque.");
 
-        }*/
+        }
        ordenPedido= persistence.create(ordenPedido);
 
      
         return ordenPedido;
-    }
+    }*/
     public OrdenPedidoEntity getOrdenPedido(Long id){
        LOGGER.log(Level.INFO, "Inicia proceso de consultar la orden pedido con id = {0}", id);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.

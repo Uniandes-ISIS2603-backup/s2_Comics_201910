@@ -177,12 +177,12 @@ public class OrdenPedidoLogicTest {
       
             entity.setId(data.get(2).getId());
             Assert.assertEquals(entity.getId(), data.get(2).getId());
-            ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId());
-            Assert.fail("No debería crear un comprador con un Id existente");
+            OrdenPedidoEntity a =ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId());
+            Assert.assertNull("No debería crear un comprador con un Id existente",a );
         }
         catch(Exception e)
         {
-            //Debería generar Exception
+            e.getMessage();//Debería generar Exception
         }
     }
     
@@ -191,7 +191,7 @@ public class OrdenPedidoLogicTest {
     {
         List<OrdenPedidoEntity> lista = ordenPedido.getOrdenesPedido();
         Assert.assertEquals(data.size(), lista.size());
-     /**   for(OrdenPedidoEntity entity : lista)
+     /**  for(OrdenPedidoEntity entity : lista)
         {   int i =0;
             boolean found = false;
             for(OrdenPedidoEntity stored : data)
