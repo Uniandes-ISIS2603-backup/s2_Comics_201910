@@ -98,8 +98,7 @@ public class CompradorLogic
         CompradorEntity entity = findComprador(id);
         
         List<OrdenPedidoEntity> lista1 = entity.getOrdenPedidoCompra();
-        List<ComicEntity> lista2 = entity.getCarro();
-        List<ComicDeseoEntity> lista3 = entity.getListaDeseos();
+        
         if(!lista1.isEmpty())
         {
             throw new BusinessLogicException("No se puede elminar el comprador porque hay comics en su orden de pedido");
