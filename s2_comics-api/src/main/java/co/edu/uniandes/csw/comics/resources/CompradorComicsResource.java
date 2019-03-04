@@ -6,7 +6,8 @@
 package co.edu.uniandes.csw.comics.resources;
 
 import co.edu.uniandes.csw.comics.dtos.ComicDTO;
-import co.edu.uniandes.csw.comics.dtos.CompradorDTO;
+import co.edu.uniandes.csw.comics.dtos.ComicDetailDTO;
+import co.edu.uniandes.csw.comics.dtos.*;
 import co.edu.uniandes.csw.comics.dtos.CompradorDetailDTO;
 import co.edu.uniandes.csw.comics.ejb.*;
 import co.edu.uniandes.csw.comics.entities.ComicEntity;
@@ -41,7 +42,28 @@ public class CompradorComicsResource
     @Inject
     private ComicLogic comicLogic;
     
+    @POST
+    @Path("comicId: \\d+")
+    public ComicDetailDTO addComic(@PathParam("compradorId") long compradorId, @PathParam("comicId") long comicId)
+    {
+        LOGGER.log(Level.INFO, "CompradorComicResource addComic: input: compradorId: {0}, comicId: {1}", new Object[]{compradorId, comicId});
+        if(comicLogic.getComic(comicId) == null)
+        {
+            throw new WebApplicationException("El recurso /comic/" + comicId + " no existe.", 404);
+        }
+        ComicDetailDTO comic = new ComicDetailDTO(compradorLogic.addComicCarrito(compradorId, comicId));
+        LOGGER.log(Level.INFO, "CompradorComicResource addComic: output: ", comic);
+        return comic;
+    }
     
+    @GET
+    public List<ComicDetailDTO> getCarro(@PathParam("compradorId")long compradorId)
+    {
+        LOGGER.log(Level.INFO, "CompradorComicResource getCarro: input: {0}", compradorId);
+        List<ComicDetailDTO> comics = listEntity2DTO(compradorLogic.getComics(compradorId));
+        LOGGER.log(Level.INFO, "CompradorComicResoruce getCarro: output: {0}", comics);
+        return comics;
+    }
     
     private List<ComicEntity> listDto2Entity(List<ComicDTO> comics)
     {
@@ -54,12 +76,12 @@ public class CompradorComicsResource
         return entities;
     }
     
-    private List<ComicDTO> listEntity2DTO(List<ComicEntity> comics)
+    private List<ComicDetailDTO> listEntity2DTO(List<ComicEntity> comics)
     {
-        List<ComicDTO> dtos = new ArrayList();
+        List<ComicDetailDTO> dtos = new ArrayList();
         for(ComicEntity entity : comics)
         {
-            dtos.add(new ComicDTO(entity));
+            dtos.add(new ComicDetailDTO(entity));
         }
         
         return dtos;
