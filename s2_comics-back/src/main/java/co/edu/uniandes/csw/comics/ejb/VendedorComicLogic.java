@@ -33,7 +33,7 @@ public class VendedorComicLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de asociarle un libro al autor con id = {0}", vendedoresId);
         VendedorEntity vendedorEntity = vendedorPersistence.find(vendedoresId);
         ComicEntity comicEntity = comicPersistence.find(comicsId);
-        comicEntity.getVendedores().add(vendedorEntity);
+        comicEntity.setVendedor(vendedorEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle un libro al autor con id = {0}", comicsId);
         return comicPersistence.find(comicsId);
     }
@@ -52,28 +52,28 @@ public class VendedorComicLogic {
         }
         throw new BusinessLogicException("El libro no está asociado al autor");
     }
-               public List<ComicEntity> replaceBooks(Long vendedorId, List<ComicEntity> comics) {
-        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los libros asocidos al author con id = {0}", vendedorId);
-       VendedorEntity vendedorEntity = vendedorPersistence.find(vendedorId);
-        List<ComicEntity> comicList = comicPersistence.findAll();
-        for (ComicEntity comic : comicList) {
-            if (comics.contains(comic)) {
-                if (!comic.getVendedores().contains(vendedorEntity)) {
-                    comic.getVendedores().add(vendedorEntity);
-                }
-            } else {
-                comic.getVendedores().remove(vendedorEntity);
-            }
-        }
-        vendedorEntity.setComics(comics);
-        LOGGER.log(Level.INFO, "Termina proceso de reemplazar los libros asocidos al author con id = {0}", vendedorId);
-        return vendedorEntity.getComics();
-    }
+//               public List<ComicEntity> replaceBooks(Long vendedorId, List<ComicEntity> comics) {
+//        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los libros asocidos al author con id = {0}", vendedorId);
+//       VendedorEntity vendedorEntity = vendedorPersistence.find(vendedorId);
+//        List<ComicEntity> comicList = comicPersistence.findAll();
+//        for (ComicEntity comic : comicList) {
+//            if (comics.contains(comic)) {
+//                if (!comic.getVendedores().contains(vendedorEntity)) {
+//                    comic.getVendedores().add(vendedorEntity);
+//                }
+//            } else {
+//                comic.getVendedores().remove(vendedorEntity);
+//            }
+//        }
+//        vendedorEntity.setComics(comics);
+//        LOGGER.log(Level.INFO, "Termina proceso de reemplazar los libros asocidos al author con id = {0}", vendedorId);
+//        return vendedorEntity.getComics();
+//    }
         public void removeBook(Long vendedoresId, Long comicsId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un libro del author con id = {0}", vendedoresId);
         VendedorEntity authorEntity = vendedorPersistence.find(vendedoresId);
-        ComicEntity comicEntity =comicPersistence.find(comicsId);
-        comicEntity.getVendedores().remove(authorEntity);
+        comicPersistence.delete(comicsId);
+        //comicEntity.getVendedores().remove(authorEntity);
         LOGGER.log(Level.INFO, "Termina proceso de borrar un libro del author con id = {0}", vendedoresId);
     }
 }
