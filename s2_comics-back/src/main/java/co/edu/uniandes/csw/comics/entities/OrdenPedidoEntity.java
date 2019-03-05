@@ -78,7 +78,8 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
     /**
      * @param tarjetaCredito the tarjetaCredito to set
      */
-    public void setTarjetaCredito(String tarjetaCredito) {
+    public void setTarjetaCredito(String tarjetaCredito) 
+    {
         this.tarjetaCredito = tarjetaCredito;
     }
 
