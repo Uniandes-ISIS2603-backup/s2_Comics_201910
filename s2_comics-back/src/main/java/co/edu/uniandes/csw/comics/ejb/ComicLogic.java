@@ -20,7 +20,8 @@ public class ComicLogic {
     @Inject
     private ComicPersistence persistence;
     
-    public ComicEntity createComic(ComicEntity comic){
+    public ComicEntity createComic(ComicEntity comic)
+    {
         
         persistence.create(comic);
         return comic;

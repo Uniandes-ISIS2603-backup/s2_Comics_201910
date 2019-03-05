@@ -11,7 +11,6 @@ import java.io.Serializable;
  *
  * @author Sebastian Baquero
  */
-//<<<<<<< HEAD
 
 public abstract class ColeccionistaDTO implements Serializable
 {

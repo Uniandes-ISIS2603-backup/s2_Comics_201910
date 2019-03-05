@@ -29,7 +29,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author juan pablo cano
  */
-@Path("/comprador/{compradorId: \\d+}/comic/{comicId: \\d+}")
+@Path("/comprador/{compradorId: \\d+}/carro/{comicId: \\d*}")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CompradorComicsResource 

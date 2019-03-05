@@ -13,7 +13,6 @@ import java.io.Serializable;
  * @author Juan Pablo
  */
 
-
 public class CompradorDTO extends ColeccionistaDTO implements Serializable
 {
     
