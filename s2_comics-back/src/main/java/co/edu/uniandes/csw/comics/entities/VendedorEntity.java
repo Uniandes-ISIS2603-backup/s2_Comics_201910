@@ -29,6 +29,9 @@ public class VendedorEntity extends ColeccionistaEntity implements java.io.Seria
      @PodamExclude
       @OneToMany(mappedBy="vendedor")
     private List<OrdenPedidoEntity> ordenes = new ArrayList<OrdenPedidoEntity>();
+    
+    public VendedorEntity(){}
+     
     /**
      * @return the comics
      */

@@ -27,7 +27,7 @@ import javax.inject.Inject;
 @RequestScoped
 public class VendedorResource
 {
-    private final static Logger LOGGER = Logger.getLogger(VendedorDTO.class.getName());
+private final static Logger LOGGER = Logger.getLogger(VendedorDTO.class.getName());
     
    // private HashMap<String, VendedorDTO> vendedores;
     
