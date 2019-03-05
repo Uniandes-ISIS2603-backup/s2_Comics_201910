@@ -63,7 +63,7 @@ public class CompradorResource
     }
     
     @DELETE
-    @Path("{compradorId: \\\\d+}")
+    @Path("{compradorId: \\d+}")
     public void deleteComprador(@PathParam("compradorId") long id) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "CompradorResource deleteComprador: input:{0}", id);
@@ -76,7 +76,7 @@ public class CompradorResource
     }
     
     @GET
-        @Path("{compradorId: \\\\d+}")
+    @Path("{compradorId: \\d+}")
     public CompradorDetailDTO getComprador(@PathParam("compradorId") long id)
     {
         LOGGER.log(Level.INFO, "CompradorResource getComprador: input: {0}", id);
@@ -91,7 +91,7 @@ public class CompradorResource
     }
     
     @GET
-        @Path("{name: [a-zA-Z][a-zA-Z]*}")
+    @Path("{name: [a-zA-Z][a-zA-Z]*}")
     public CompradorDTO getCompradorByAlias(@PathParam("name") String alias)throws Exception
     {
         LOGGER.log(Level.INFO, "CompradorResource getCompradorByAlias:input:{0}", alias);
@@ -99,6 +99,20 @@ public class CompradorResource
         if(entity == null)
         {
             throw new WebApplicationException("El recurso /comprador/" + alias + " no existe.", 404);
+        }
+        CompradorDetailDTO comprador = new CompradorDetailDTO(entity);
+        return comprador;
+    }
+    
+    @GET
+    @Path("{email: /^([\\w\\-\\.]+)@((\\[([0-9]{1,3}\\.){3}[0-9]{1,3}\\])|(([\\w\\-]+\\.)+)([a-zA-Z]{2,4}))$/}")
+    public CompradorDTO getCompradorByEmail(@PathParam("email") String email) throws Exception
+    {
+        LOGGER.log(Level.INFO, "CompradorResource getCompradorByEmail: input: {0}", email);
+        CompradorEntity entity = compradorLogic.getCompradorByEmail(email);
+        if(entity == null)
+        {
+            throw new WebApplicationException("El recurso /comprador/" + email + " no existe.", 404);
         }
         CompradorDetailDTO comprador = new CompradorDetailDTO(entity);
         return comprador;

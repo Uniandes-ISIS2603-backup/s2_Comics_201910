@@ -25,6 +25,7 @@ public class CompradorDTO extends ColeccionistaDTO implements Serializable
     {
         if(entity != null)
         {
+            id = entity.getId();
             alias = entity.getAlias();
             correoElectronico = entity.getEmail();
             intereses = entity.getIntereses();
@@ -36,6 +37,7 @@ public class CompradorDTO extends ColeccionistaDTO implements Serializable
     public CompradorEntity toEntity()
     {
         CompradorEntity entity = new CompradorEntity();
+        entity.setId(id);
         entity.setAlias(alias);
         entity.setEmail(correoElectronico);
         entity.setIntereses(intereses);
