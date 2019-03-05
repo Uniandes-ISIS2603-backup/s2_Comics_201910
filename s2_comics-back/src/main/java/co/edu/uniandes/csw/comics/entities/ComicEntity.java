@@ -7,21 +7,16 @@ package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
-
-
 
 /**
  *
- * @author Sebastian Baquero
+ * @author Pietro
  */
 @Entity
 public class ComicEntity extends BaseEntity implements Serializable {
@@ -53,6 +48,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
     private Double precio;
     private TemaGlobal tema;
     private Boolean enVenta;
+    private String informacion;
     
     @PodamExclude
     @ManyToMany
@@ -70,6 +66,8 @@ public class ComicEntity extends BaseEntity implements Serializable {
     @ManyToOne
     private ComicEntity deTrueque;
 
+    public ComicEntity(){}
+    
     /**
      * @return the nombre
      */
@@ -204,7 +202,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @param vendedores the vendedores to set
+     * @param vendedor the vendedor to set
      */
     public void setVendedor(VendedorEntity vendedor) {
         this.vendedor = vendedor;
@@ -236,6 +234,20 @@ public class ComicEntity extends BaseEntity implements Serializable {
      */
     public void setDeTrueque(ComicEntity deTrueque) {
         this.deTrueque = deTrueque;
+    }
+
+    /**
+     * @return the informacion
+     */
+    public String getInformacion() {
+        return informacion;
+    }
+
+    /**
+     * @param informacion the informacion to set
+     */
+    public void setInformacion(String informacion) {
+        this.informacion = informacion;
     }
     
     

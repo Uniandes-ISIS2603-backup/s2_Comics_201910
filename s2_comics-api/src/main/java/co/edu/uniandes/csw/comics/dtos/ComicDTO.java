@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 public class ComicDTO implements Serializable {
     
+    private Long id;
     private String nombre;
     private String autor;
     private Integer anioSalida;
@@ -19,6 +20,7 @@ public class ComicDTO implements Serializable {
     private ComicEntity.TemaGlobal tema;
     private Boolean enVenta;
     private VendedorDTO vendedor;
+    private String informacion;
 
     public ComicDTO(){
         
@@ -26,6 +28,7 @@ public class ComicDTO implements Serializable {
     
     public ComicDTO(ComicEntity ent){
         if(ent != null){
+            id = ent.getId();
             nombre = ent.getNombre();
             autor = ent.getAutor();
             anioSalida = ent.getAnioSalida();
@@ -34,12 +37,14 @@ public class ComicDTO implements Serializable {
             precio = ent.getPrecio();
             tema = ent.getTema();
             enVenta = ent.getEnVenta();
+            informacion = ent.getInformacion();
             vendedor = new VendedorDTO(ent.getVendedor());
         }
     }
     
     public ComicEntity toEntity(){
         ComicEntity ent = new ComicEntity();
+        ent.setId(getId());
         ent.setNombre(nombre);
         ent.setAutor(autor);
         ent.setAnioSalida(anioSalida);
@@ -48,7 +53,9 @@ public class ComicDTO implements Serializable {
         ent.setPrecio(precio);
         ent.setTema(tema);
         ent.setEnVenta(enVenta);
-        ent.setVendedor(vendedor.toEntity());
+        ent.setInformacion(informacion);
+        if(vendedor != null)
+            ent.setVendedor(vendedor.toEntity());
         return ent;
     }
     
@@ -176,5 +183,33 @@ public class ComicDTO implements Serializable {
      */
     public void setVendedor(VendedorDTO vendedor) {
         this.vendedor = vendedor;
+    }
+
+    /**
+     * @return the informacion
+     */
+    public String getInformacion() {
+        return informacion;
+    }
+
+    /**
+     * @param informacion the informacion to set
+     */
+    public void setInformacion(String informacion) {
+        this.informacion = informacion;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 }

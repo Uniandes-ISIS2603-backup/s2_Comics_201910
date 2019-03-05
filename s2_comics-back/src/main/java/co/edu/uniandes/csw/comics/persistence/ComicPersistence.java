@@ -25,24 +25,32 @@ public class ComicPersistence {
 
     @PersistenceContext(unitName = "comicsPU")
     protected EntityManager em;
-       public ComicEntity create(ComicEntity comicEntity) {
+    
+    public ComicEntity create(ComicEntity comicEntity) {
         LOGGER.log(Level.INFO, "Creando un libro nuevo");
         em.persist(comicEntity);
         LOGGER.log(Level.INFO, "Libro creado");
         return comicEntity;
     }
-       public List<ComicEntity> findAll() {
+    
+    public List<ComicEntity> findAll() {
         LOGGER.log(Level.INFO, "Consultando todos los libros");
         Query q = em.createQuery("select u from ComicEntity u");
         return q.getResultList();
     }
-          public ComicEntity find(Long comicsId) {
+    
+    public ComicEntity find(Long comicsId) {
         LOGGER.log(Level.INFO, "Consultando el libro con id={0}", comicsId);
         return em.find(ComicEntity.class, comicsId);
     }
-            public void delete(Long comicsId) {
+    
+    public void delete(Long comicsId) {
         LOGGER.log(Level.INFO, "Borrando el libro con id={0}", comicsId);
        ComicEntity comicEntity = em.find(ComicEntity.class, comicsId);
         em.remove(comicEntity);
+    }
+    
+    public ComicEntity update(ComicEntity comic){
+        return em.merge(comic);
     }
 }

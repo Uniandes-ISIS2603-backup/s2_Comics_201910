@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.comics.dtos;
 
 import co.edu.uniandes.csw.comics.entities.VendedorEntity;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,13 +37,16 @@ public class VendedorDTO extends ColeccionistaDTO implements Serializable
     
     public VendedorEntity toEntity()
     {
+        Logger LOGGER=Logger.getLogger(VendedorDTO.class.getName());
         VendedorEntity entity = new VendedorEntity();
+        LOGGER.log(Level.INFO, "CreatedVendedorEntity");
         entity.setAlias(alias);
         entity.setNombre(nombre);
         entity.setFoto(foto);
         entity.setIntereses(intereses);
         entity.setEmail(correoElectronico);
         entity.setId(id);
+        LOGGER.log(Level.INFO, "Finished CreatedVendedorEntity");
         return entity;
     }
 }
