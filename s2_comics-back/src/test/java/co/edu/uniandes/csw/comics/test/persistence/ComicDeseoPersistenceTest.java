@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.test.persistence;
 
 import co.edu.uniandes.csw.comics.entities.ComicDeseoEntity;
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.CompradorEntity;
 import co.edu.uniandes.csw.comics.persistence.ComicDeseoPersistence;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class ComicDeseoPersistenceTest {
     
     private List<ComicDeseoEntity> data = new ArrayList<ComicDeseoEntity>();
     
-    private List<CompradorEntity> dataComprador = new ArrayList<CompradorEntity>();
+    private List<ComicEntity> dataComics = new ArrayList<ComicEntity>();
     
     @Deployment 
     public static JavaArchive createDeployment(){
@@ -85,14 +86,14 @@ public class ComicDeseoPersistenceTest {
     private void insertData() {
        PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            CompradorEntity entity = factory.manufacturePojo(CompradorEntity.class);
+            ComicEntity entity = factory.manufacturePojo(ComicEntity.class);
             em.persist(entity);
-            dataComprador.add(entity);
+            dataComics.add(entity);
         }
         for (int i = 0; i < 3; i++) {
             ComicDeseoEntity entity = factory.manufacturePojo(ComicDeseoEntity.class);
             if (i == 0) {
-                entity.setComprador(dataComprador.get(0));
+                entity.setComic(dataComics.get(0));
             }
             em.persist(entity);
             data.add(entity);
@@ -118,7 +119,7 @@ public class ComicDeseoPersistenceTest {
         Assert.assertEquals(newEntity.getId(), entity.getId());
         
         Assert.assertEquals(newEntity.getFechaAgregado(), entity.getFechaAgregado());
-        Assert.assertEquals(newEntity.getComprador(), entity.getComprador());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
     /**
@@ -128,11 +129,11 @@ public class ComicDeseoPersistenceTest {
     public void getComicDeseoTest() {
         ComicDeseoEntity entity = data.get(0);
       
-       ComicDeseoEntity newEntity = comicPersistence.find(dataComprador.get(0).getAlias(), entity.getId());
+       ComicDeseoEntity newEntity = comicPersistence.find(dataComics.get(0).getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
         Assert.assertEquals(entity.getFechaAgregado(), newEntity.getFechaAgregado());
-        Assert.assertEquals(entity.getComprador(), newEntity.getComprador());
+        Assert.assertEquals(entity.getId(), newEntity.getId());
     }
     
     
@@ -165,7 +166,7 @@ public class ComicDeseoPersistenceTest {
 
         Assert.assertEquals(newEntity.getId(), resp.getId());
         Assert.assertEquals(newEntity.getFechaAgregado(), resp.getFechaAgregado());
-        Assert.assertEquals(newEntity.getComprador(), resp.getComprador());
+        Assert.assertEquals(newEntity.getId(), resp.getId());
     }
     
     

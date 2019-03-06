@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.comics.persistence;
 
 import co.edu.uniandes.csw.comics.entities.ColeccionistaEntity;
 import co.edu.uniandes.csw.comics.entities.ComicDeseoEntity;
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,11 +39,10 @@ public class ComicDeseoPersistence {
    return pComicE;
   }
   
-  public ComicDeseoEntity find(String pCompradoresAlias,Long pComicsDId){
+  public ComicDeseoEntity find(Long pComicsDId){
       
-      LOGGER.log(Level.INFO, "Consultando el comic deseo con id = {0} del comprador con alias = " +pCompradoresAlias, pComicsDId);
-      TypedQuery<ComicDeseoEntity> q = em.createQuery("select p from ComicDeseoEntity p where (p.comprador.alias = :compradoresAlias)and (p.id = :pComicsDId )",ComicDeseoEntity.class);
-      q.setParameter("compradoresAlias", pCompradoresAlias);
+      LOGGER.log(Level.INFO, "Consultando el comic con id = {0}", pComicsDId);
+      TypedQuery<ComicDeseoEntity> q = em.createQuery("select p from ComicDeseoEntity p where (p.id = :pComicsDId )",ComicDeseoEntity.class);
       q.setParameter("pComicsDId", pComicsDId);
       List<ComicDeseoEntity> results = q.getResultList();
       ComicDeseoEntity comicsD = null;
@@ -54,30 +54,19 @@ public class ComicDeseoPersistence {
       comicsD = results.get(0);
       }
       
-       LOGGER.log(Level.INFO, "Saliendo de consultar el comic deseo con id = {0} del comprador con alias = " +pCompradoresAlias, pComicsDId);
+       LOGGER.log(Level.INFO, "Saliendo de consultar el comic deseo con id = {0}", pComicsDId);
       return comicsD;
   }
   
  
-  /**
-   public ComicDeseoEntity findXId(Long pComicDeseoId){
+  
+   public List<ComicDeseoEntity> findAll(){
     
-       TypedQuery<ComicDeseoEntity> q = em.createQuery("Select e From ComicDeseoEntity e where e.id = :id", ComicDeseoEntity.class);
-       q = q.setParameter("id", pComicDeseoId);
-        //LOGGER.log(Level.INFO, "Consultando Comic Deseo con id = {0}", pComicDeseoId);
-        //return em.find(ComicDeseoEntity.class, pComicDeseoId);
-        List<ComicDeseoEntity> sameName = q.getResultList();
-        ComicDeseoEntity result;
-        if(sameName == null){
-        result = null;
-        }else if(sameName.isEmpty()){
-        result = null;
-        }else{
-        result = sameName.get(0);
-        }
-        return result;
+      LOGGER.log(Level.INFO, "Consultando todos los ComicDeseoEntity");
+        Query q = em.createQuery("select u from ComicdeseoEntity u");
+        return q.getResultList();
     }
-    * */
+    
    
    public ComicDeseoEntity update(ComicDeseoEntity pComicDeseoEn){
     

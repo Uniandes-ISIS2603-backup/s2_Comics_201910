@@ -6,9 +6,11 @@
 package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -19,10 +21,10 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ComicDeseoEntity extends BaseEntity implements Serializable {
     
-    private Date fechaAgregado;
+    private SimpleDateFormat fechaAgregado;
     @PodamExclude
-    @ManyToOne
-    private CompradorEntity comprador;
+    @OneToOne
+    private ComicEntity comic;
     
     public ComicDeseoEntity(){
     
@@ -31,22 +33,31 @@ public class ComicDeseoEntity extends BaseEntity implements Serializable {
     /**
      * @return the fechaAgregado
      */
-    public Date getFechaAgregado() {
+    public SimpleDateFormat getFechaAgregado() {
         return fechaAgregado;
+        
     }
 
     /**
      * @param fechaAgregado the fechaAgregado to set
      */
-    public void setFechaAgregado(Date fechaAgregado) {
+    public void setFechaAgregado(SimpleDateFormat fechaAgregado) {
         this.fechaAgregado = fechaAgregado;
     }
-    
-    public CompradorEntity getComprador(){
-        return comprador;
+
+    /**
+     * @return the comic
+     */
+    public ComicEntity getComic() {
+        return comic;
+    }
+
+    /**
+     * @param comic the comic to set
+     */
+    public void setComic(ComicEntity comic) {
+        this.comic = comic;
     }
     
-    public void setComprador(CompradorEntity compradorEntity){
-    this.comprador = compradorEntity;
-    }
+   
 }
