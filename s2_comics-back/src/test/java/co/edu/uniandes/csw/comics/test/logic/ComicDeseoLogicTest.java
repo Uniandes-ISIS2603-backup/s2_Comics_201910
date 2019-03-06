@@ -90,7 +90,7 @@ public class ComicDeseoLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from ComicDeseoEntity").executeUpdate();
-        em.createQuery("delete from CompradorEntity").executeUpdate();
+       
        
     }
     
@@ -99,8 +99,12 @@ public class ComicDeseoLogicTest {
      * pruebas.
      */
     private void insertData() {
+        
+        
+       
       
         for (int i = 0; i < 3; i++) {
+            
             ComicEntity entity = factory.manufacturePojo(ComicEntity.class);
             em.persist(entity);
             dataComics.add(entity);
@@ -108,10 +112,11 @@ public class ComicDeseoLogicTest {
 
         for (int i = 0; i < 3; i++) {
             ComicDeseoEntity entity = factory.manufacturePojo(ComicDeseoEntity.class);
-            entity.setComic(dataComics.get(1));
+            entity.setComic(dataComics.get(0));
             em.persist(entity);
             data.add(entity);
         }
+         
     }
     
     /**
@@ -158,13 +163,13 @@ public class ComicDeseoLogicTest {
      * Prueba para consultar un ComicDeseo
      */
     @Test
-    public void getComicDeseoTest() {
+    public void getComicDeseoTest()throws BusinessLogicException {
         ComicDeseoEntity entity = data.get(0);
-        ComicDeseoEntity resultEntity = comicDLogic.getComicDeseo(dataComics.get(1).getId());
+        ComicDeseoEntity resultEntity = comicDLogic.getComicDeseo(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getFechaAgregado(), resultEntity.getFechaAgregado());
-        Assert.assertEquals(entity.getId(), resultEntity.getId());
+       
         
     }
     
@@ -198,20 +203,13 @@ public class ComicDeseoLogicTest {
     public void deleteComicDeseoTest() throws BusinessLogicException {
         ComicDeseoEntity entity = data.get(0);
         comicDLogic.deleteComicDeseo(dataComics.get(1).getId());
-        ComicDeseoEntity deleted = em.find(ComicDeseoEntity.class, entity.getId());
-        Assert.assertNull(deleted);
+        ComicDeseoEntity borrado = em.find(ComicDeseoEntity.class, entity.getId());
+        Assert.assertNull(borrado);
+        
+       
     }
     
-    /**
-     * Prueba para eliminarle un comic deseo a un comprador del cual no pertenece.
-     *
-     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
-     */
-    @Test(expected = BusinessLogicException.class)
-    public void deleteComicDeseoConCompradorNoAsociadoTest() throws BusinessLogicException {
-        ComicDeseoEntity entity = data.get(0);
-        comicDLogic.deleteComicDeseo(dataComics.get(0).getId());
-    }
+   
 
 
   

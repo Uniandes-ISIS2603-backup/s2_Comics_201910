@@ -33,7 +33,7 @@ public class ComicDeseoPersistence {
   }
   
   public ComicDeseoEntity create(ComicDeseoEntity pComicE){
-  LOGGER.log(Level.INFO, "Creando nueva clase");
+  LOGGER.log(Level.INFO, "Creando nuevo comic deseo");
   em.persist(pComicE);
    LOGGER.log(Level.INFO, "Comic deseo creado");
    return pComicE;
@@ -42,20 +42,14 @@ public class ComicDeseoPersistence {
   public ComicDeseoEntity find(Long pComicsDId){
       
       LOGGER.log(Level.INFO, "Consultando el comic con id = {0}", pComicsDId);
-      TypedQuery<ComicDeseoEntity> q = em.createQuery("select p from ComicDeseoEntity p where (p.id = :pComicsDId )",ComicDeseoEntity.class);
-      q.setParameter("pComicsDId", pComicsDId);
-      List<ComicDeseoEntity> results = q.getResultList();
-      ComicDeseoEntity comicsD = null;
-      if(results == null){
-          comicsD = null;
-      }else if(results.isEmpty()){
-      comicsD = null;
-      }else if(results.size() >= 1){
-      comicsD = results.get(0);
-      }
+      //TypedQuery<ComicDeseoEntity> q = em.createQuery("select p from ComicDeseoEntity p where (p.id = :pComicsDId )",ComicDeseoEntity.class);
+     // q.setParameter("pComicsDId", pComicsDId);
+      //List<ComicDeseoEntity> results = q.getResultList();
+      ComicDeseoEntity cd = em.find(ComicDeseoEntity.class, pComicsDId);
+      
       
        LOGGER.log(Level.INFO, "Saliendo de consultar el comic deseo con id = {0}", pComicsDId);
-      return comicsD;
+      return cd;
   }
   
  

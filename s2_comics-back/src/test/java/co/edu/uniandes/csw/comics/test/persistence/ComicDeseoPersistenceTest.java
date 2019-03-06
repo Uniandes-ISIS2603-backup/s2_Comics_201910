@@ -80,7 +80,7 @@ public class ComicDeseoPersistenceTest {
     private void clearData() {
         
         em.createQuery("delete from ComicDeseoEntity").executeUpdate();
-        em.createQuery("delete from CompradorEntity").executeUpdate();
+       
     }
 
     private void insertData() {
@@ -131,9 +131,9 @@ public class ComicDeseoPersistenceTest {
       
        ComicDeseoEntity newEntity = comicPersistence.find(dataComics.get(0).getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getId(), newEntity.getId());
-        Assert.assertEquals(entity.getFechaAgregado(), newEntity.getFechaAgregado());
-        Assert.assertEquals(entity.getId(), newEntity.getId());
+       Assert.assertEquals(entity.getId(), newEntity.getId());
+       Assert.assertEquals(entity.getFechaAgregado(), newEntity.getFechaAgregado());
+       
     }
     
     
@@ -166,7 +166,7 @@ public class ComicDeseoPersistenceTest {
 
         Assert.assertEquals(newEntity.getId(), resp.getId());
         Assert.assertEquals(newEntity.getFechaAgregado(), resp.getFechaAgregado());
-        Assert.assertEquals(newEntity.getId(), resp.getId());
+       
     }
     
     

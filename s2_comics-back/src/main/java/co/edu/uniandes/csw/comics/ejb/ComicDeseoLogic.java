@@ -33,14 +33,19 @@ public class ComicDeseoLogic {
     private static final Logger LOGGER = Logger.getLogger(ComicDeseoLogic.class.getName());
     @Inject
     private ComicDeseoPersistence persistenceComicD;
-    @Inject
-    private CompradorPersistence persistenceComprador;
+    //@Inject
+    //private CompradorPersistence persistenceComprador;
     @Inject
     private ComicPersistence persistenceC;
     
-    public ComicDeseoEntity createComicDeseo (Long comicId, ComicDeseoEntity comicDeseoEntity)throws Exception{
+    public ComicDeseoEntity createComicDeseo (Long comicId, ComicDeseoEntity comicDeseoEntity)throws BusinessLogicException{
       
         LOGGER.log(Level.INFO,"Inicia proceso de crear comic deseo");
+        
+        if(persistenceC.find(comicId)== null){
+        
+            throw new BusinessLogicException("El comic deseo con id"+comicId+"no existe en comics");
+        }
         
         ComicEntity comic =  persistenceC.find(comicId);
         comicDeseoEntity.setComic(comic);
@@ -54,6 +59,7 @@ public class ComicDeseoLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los comics");
         List<ComicDeseoEntity> comics = persistenceComicD.findAll();
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos los comics");
+        
         return comics;
         
         
@@ -61,14 +67,24 @@ public class ComicDeseoLogic {
        
     }
     
-    public ComicDeseoEntity getComicDeseo( Long comicsDeseoId){
+    public ComicDeseoEntity getComicDeseo( Long comicsDeseoId)throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el comic deseo con id={0}", comicsDeseoId);
-        return persistenceComicD.find(comicsDeseoId);
+        ComicDeseoEntity comic = persistenceComicD.find(comicsDeseoId);
+        ComicEntity c = comic.getComic();
+        if(c == null){
+        
+            throw new BusinessLogicException("El comic deseo con id"+comicsDeseoId+"no existe en comics");
+        }
+        return comic;
     
     }
     
-    public void deleteComicDeseo( Long comicsDeseoId) throws BusinessLogicException{
-         LOGGER.log(Level.INFO, "Inicia proceso de borrar el comic desep con id = {0}", comicsDeseoId);
+    public void deleteComicDeseo( Long comicsDeseoId) {
+         LOGGER.log(Level.INFO, "Inicia proceso de borrar el comic deseo con id = {0}", comicsDeseoId);
+         
+         ComicDeseoEntity comic = persistenceComicD.find(comicsDeseoId);
+        ComicEntity c = comic.getComic();
+       
         
         persistenceComicD.delete(comicsDeseoId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el libro con id = {0}", comicsDeseoId);
