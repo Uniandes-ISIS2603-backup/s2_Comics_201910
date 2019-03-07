@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.comics.test.logic;
 
 import co.edu.uniandes.csw.comics.ejb.ComicDeseoLogic;
 import co.edu.uniandes.csw.comics.entities.ComicDeseoEntity;
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.CompradorEntity;
 import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.comics.persistence.ComicDeseoPersistence;
@@ -47,7 +48,7 @@ public class ComicDeseoLogicTest {
   
   private List<ComicDeseoEntity> data = new ArrayList<ComicDeseoEntity>();
   
-  private List<CompradorEntity> dataComprador = new ArrayList<CompradorEntity>();
+  private List<ComicEntity> dataComics = new ArrayList<ComicEntity>();
   
       /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -89,7 +90,7 @@ public class ComicDeseoLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from ComicDeseoEntity").executeUpdate();
-        em.createQuery("delete from CompradorEntity").executeUpdate();
+       
        
     }
     
@@ -98,19 +99,24 @@ public class ComicDeseoLogicTest {
      * pruebas.
      */
     private void insertData() {
+        
+        
+       
       
         for (int i = 0; i < 3; i++) {
-            CompradorEntity entity = factory.manufacturePojo(CompradorEntity.class);
+            
+            ComicEntity entity = factory.manufacturePojo(ComicEntity.class);
             em.persist(entity);
-            dataComprador.add(entity);
+            dataComics.add(entity);
         }
 
         for (int i = 0; i < 3; i++) {
             ComicDeseoEntity entity = factory.manufacturePojo(ComicDeseoEntity.class);
-            entity.setComprador(dataComprador.get(1));
+            entity.setComic(dataComics.get(0));
             em.persist(entity);
             data.add(entity);
         }
+         
     }
     
     /**
@@ -121,13 +127,13 @@ public class ComicDeseoLogicTest {
     @Test
     public void createComicDeseoTest() throws BusinessLogicException, Exception {
         ComicDeseoEntity newEntity = factory.manufacturePojo(ComicDeseoEntity.class);
-        newEntity.setComprador(dataComprador.get(1));
-        ComicDeseoEntity result = comicDLogic.createComicDeseo(dataComprador.get(1).getAlias(), newEntity);
+        newEntity.setComic(dataComics.get(1));
+        ComicDeseoEntity result = comicDLogic.createComicDeseo(dataComics.get(1).getId(), newEntity);
         Assert.assertNotNull(result);
         ComicDeseoEntity entity = em.find(ComicDeseoEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getFechaAgregado(), entity.getFechaAgregado());
-        Assert.assertEquals(newEntity.getComprador(), entity.getComprador());
+       
         
     }
     
@@ -157,13 +163,13 @@ public class ComicDeseoLogicTest {
      * Prueba para consultar un ComicDeseo
      */
     @Test
-    public void getComicDeseoTest() {
+    public void getComicDeseoTest()throws BusinessLogicException {
         ComicDeseoEntity entity = data.get(0);
-        ComicDeseoEntity resultEntity = comicDLogic.getComicDeseo(dataComprador.get(1).getAlias(), entity.getId());
+        ComicDeseoEntity resultEntity = comicDLogic.getComicDeseo(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getFechaAgregado(), resultEntity.getFechaAgregado());
-        Assert.assertEquals(entity.getComprador(), resultEntity.getComprador());
+       
         
     }
     
@@ -177,13 +183,13 @@ public class ComicDeseoLogicTest {
 
         pojoEntity.setId(entity.getId());
 
-        comicDLogic.updateComicDeseo(dataComprador.get(1).getAlias(), pojoEntity);
+        comicDLogic.updateComicDeseo(dataComics.get(1).getId(), pojoEntity);
        
         ComicDeseoEntity resp = em.find(ComicDeseoEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getFechaAgregado(), resp.getFechaAgregado());
-        Assert.assertEquals(pojoEntity.getComprador(), resp.getComprador());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
         
     }
     
@@ -196,21 +202,14 @@ public class ComicDeseoLogicTest {
     @Test
     public void deleteComicDeseoTest() throws BusinessLogicException {
         ComicDeseoEntity entity = data.get(0);
-        comicDLogic.deleteComicDeseo(dataComprador.get(1).getAlias(), entity.getId());
-        ComicDeseoEntity deleted = em.find(ComicDeseoEntity.class, entity.getId());
-        Assert.assertNull(deleted);
+        comicDLogic.deleteComicDeseo(dataComics.get(1).getId());
+        ComicDeseoEntity borrado = em.find(ComicDeseoEntity.class, entity.getId());
+        Assert.assertNull(borrado);
+        
+       
     }
     
-    /**
-     * Prueba para eliminarle un comic deseo a un comprador del cual no pertenece.
-     *
-     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
-     */
-    @Test(expected = BusinessLogicException.class)
-    public void deleteComicDeseoConCompradorNoAsociadoTest() throws BusinessLogicException {
-        ComicDeseoEntity entity = data.get(0);
-        comicDLogic.deleteComicDeseo(dataComprador.get(0).getAlias(), entity.getId());
-    }
+   
 
 
   

@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.comics.dtos;
 
 import co.edu.uniandes.csw.comics.entities.ComicDeseoEntity;
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import java.io.Serializable;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 /**
  *
@@ -16,56 +18,77 @@ import java.util.Date;
 
 
 public class ComicDeseoDTO implements Serializable {
- 
-    private Date fechaAgregado;
-    private CompradorDTO comprador;
-    
-    
-    public ComicDeseoDTO (){
-    
-    }
-    
-    /**
-     * Crea un objeto AuthorDTO a partir de un objeto AuthorEntity.
-     *
-     * @param comicDeseoEntity Entidad AuthorEntity desde la cual se va a crear el
-     * nuevo objeto.
-     *
-     */
-    
-  public ComicDeseoDTO(ComicDeseoEntity pComicDE){
-        
-    this.fechaAgregado = pComicDE.getFechaAgregado();
-    
-   }
-   
-    /**
-     * COnvierte un objeto ComicDeseoDTO a ComicDeseoEntity
-     */
-    
-    public ComicDeseoEntity toEntity (){
-    
-       ComicDeseoEntity cDE = new ComicDeseoEntity();
-       cDE.setFechaAgregado(this.getFechaAgregado());
-       if(this.comprador !=null){
-           
-       //cDE.setComprador(this.comprador.toEntity);
-       }
-       return cDE;
-    }
 
     /**
      * @return the fechaAgregado
      */
-    public Date getFechaAgregado() {
+    public SimpleDateFormat getFechaAgregado() {
         return fechaAgregado;
     }
 
     /**
      * @param fechaAgregado the fechaAgregado to set
      */
-    public void setFechaAgregado(Date fechaAgregado) {
+    public void setFechaAgregado(SimpleDateFormat fechaAgregado) {
         this.fechaAgregado = fechaAgregado;
     }
+
+    /**
+     * @return the comic
+     */
+    public ComicDTO getComic() {
+        return comic;
+    }
+
+    /**
+     * @param comic the comic to set
+     */
+    public void setComic(ComicDTO comic) {
+        this.comic = comic;
+    }
+ 
+   private SimpleDateFormat fechaAgregado;
+   private ComicDTO comic;
     
+    
+    public ComicDeseoDTO (){
+    
+    }
+   public ComicDeseoDTO (ComicDeseoEntity entity){
+       
+        
+        
+        
+       this.fechaAgregado = entity.getFechaAgregado();
+         if(entity.getComic() != null){
+     
+             this.comic = new ComicDTO(entity.getComic());
+             
+        }else{
+             
+             this.comic = null;
+         }
+       
+   }
+   
+   public ComicDeseoEntity toEntity (){
+   
+       ComicDeseoEntity comicD = new ComicDeseoEntity();
+       
+       comicD.setFechaAgregado(this.fechaAgregado);
+      
+       if(this.comic != null){
+       
+           comicD.setComic(this.comic.toEntity());
+       }
+       return comicD;
+       
+       
+   }
+   
+    
+    
+  
+   
+   
 }

@@ -3,7 +3,14 @@
   <persistence-unit name="comicsPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <!--Toca entity por entity, exclude-unlisted-clases = false no funciona-->
-    
+
+    <class>co.edu.uniandes.csw.comics.entities.CalificacionEntity</class>
+    <class>co.edu.uniandes.csw.comics.entities.ColeccionistaEntity</class>
+    <class>co.edu.uniandes.csw.comics.entities.ComicDeseoEntity</class>
+    <class>co.edu.uniandes.csw.comics.entities.ComicEntity</class>
+    <class>co.edu.uniandes.csw.comics.entities.CompradorEntity</class>
+    <class>co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity</class>
+    <class>co.edu.uniandes.csw.comics.entities.vendedorEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
  <shared-cache-mode>NONE</shared-cache-mode>
     <properties>

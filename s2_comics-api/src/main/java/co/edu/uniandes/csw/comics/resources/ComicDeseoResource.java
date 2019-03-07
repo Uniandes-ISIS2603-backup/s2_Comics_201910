@@ -45,11 +45,11 @@ public class ComicDeseoResource {
   
   
   @POST
-  public ComicDeseoDTO createComicDeseo (@PathParam("compradoresAlias") String compradoresAlias,ComicDeseoDTO pComicD)throws BusinessLogicException, Exception{
+  public ComicDeseoDTO createComicDeseo (@PathParam("comicId") Long comicId,ComicDeseoDTO pComicD)throws BusinessLogicException, Exception{
   
         
         LOGGER.log(Level.INFO, "ComicDeseoResource createComicDeseo: input: {0}", pComicD);
-        ComicDeseoDTO nComicDDTO = new ComicDeseoDTO(comicDLogic.createComicDeseo(compradoresAlias, pComicD.toEntity()));
+        ComicDeseoDTO nComicDDTO = new ComicDeseoDTO(comicDLogic.createComicDeseo(comicId, pComicD.toEntity()));
         LOGGER.log(Level.INFO, "ComicDeseoResource createComicDeseo: output: {0}",nComicDDTO );
         return nComicDDTO;
         
@@ -63,23 +63,23 @@ public class ComicDeseoResource {
   }
   
   @GET
-  public List<ComicDeseoDTO> getComicsDeseos (@PathParam("compradoresAlias") String compradoresAlias){
+  public List<ComicDeseoDTO> getComicsDeseos (){
       
-       LOGGER.log(Level.INFO, "ComicDeseoResource getComicsDeseo: input: {0}", compradoresAlias);
-       List<ComicDeseoDTO> listaComicsDDTO = listEntity2DTO(comicDLogic.getComicsDeseo(compradoresAlias));
+       LOGGER.log(Level.INFO, "ComicDeseoResource getComicsDeseo: input: {0}");
+       List<ComicDeseoDTO> listaComicsDDTO = listEntity2DTO(comicDLogic.getComicsDeseo());
        LOGGER.log(Level.INFO, "ComicDeseoResource getComicDeseos: output: {0}", listaComicsDDTO);
        return listaComicsDDTO;
   }
   
   @GET
   @Path("{comicsDeseoId:\\d+}")
-  public ComicDeseoDTO findComicDeseoXId (@PathParam("compradoresAlias")String compradoresAlias, @PathParam("comicsDeseoId") Long comicDeseoId)throws BusinessLogicException{
+  public ComicDeseoDTO findComicDeseoXId ( @PathParam("comicsDeseoId") Long comicDeseoId)throws BusinessLogicException{
      
       LOGGER.log(Level.INFO, "ComicDeseoResource findComicDeseoXId: input: {0}", comicDeseoId);
-      ComicDeseoEntity entity = comicDLogic.getComicDeseo(compradoresAlias,comicDeseoId);
+      ComicDeseoEntity entity = comicDLogic.getComicDeseo(comicDeseoId);
      if(entity == null){
      
-         throw new WebApplicationException("El recurso/compradores/"+compradoresAlias + "/comicDeseo/"+comicDeseoId+"no existe.", 404);
+       //  throw new WebApplicationException("El recurso/compradores/"+compradoresAlias + "/comicDeseo/"+comicDeseoId+"no existe.", 404);
          
      }
      ComicDeseoDTO comicDDTO = new ComicDeseoDTO(entity);
@@ -90,13 +90,13 @@ public class ComicDeseoResource {
   
   @DELETE
   @Path("{comicsDeseoId: \\d+}")
-  public void deleteComicDeseo (@PathParam("compradoresAlias") String compradoresAlias, @PathParam("comicsDeseoId") Long comicsDeseoId) throws BusinessLogicException{
+  public void deleteComicDeseo ( @PathParam("comicsDeseoId") Long comicsDeseoId) throws BusinessLogicException{
  
-      ComicDeseoEntity entity = comicDLogic.getComicDeseo(compradoresAlias, comicsDeseoId);
+      ComicDeseoEntity entity = comicDLogic.getComicDeseo( comicsDeseoId);
       if(entity == null){
-      throw new WebApplicationException("El recurso/compradores/"+compradoresAlias+"/comicsDeseo/"+comicsDeseoId+"no existe.", 404);
+      //throw new WebApplicationException("El recurso/compradores/"+compradoresAlias+"/comicsDeseo/"+comicsDeseoId+"no existe.", 404);
       }
-      comicDLogic.deleteComicDeseo(compradoresAlias, comicsDeseoId);
+      comicDLogic.deleteComicDeseo( comicsDeseoId);
   }
   
   //@PUT
