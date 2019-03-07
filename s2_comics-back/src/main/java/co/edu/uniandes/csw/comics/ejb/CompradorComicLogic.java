@@ -56,7 +56,7 @@ public class CompradorComicLogic
         {
             return comics.get(index);
         }
-        throw new BusinessLogicException("No se encontró el libro");
+        throw new BusinessLogicException("No se encontró el comic");
     } 
     
     public List<ComicEntity> replaceComics(long idComp, List<ComicEntity> comics)

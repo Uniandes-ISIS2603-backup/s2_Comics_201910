@@ -73,9 +73,9 @@ public class CompradorOrdenPedidoLogic
         LOGGER.log(Level.INFO, "Inicia el proceso de eliminación del pedido con id: {0} asociado al comprador con id: " + idComprador, idPedido);
         CompradorEntity compradorEntity = compradorPersistence.find(idComprador);
         OrdenPedidoEntity pedidoEntity = ordenPedidoPersistence.find(idPedido);
-        if(pedidoEntity.getEstado() == 1)
+        if(pedidoEntity.getEstado() != 4)
         {
-            throw new BusinessLogicException("No se puede eliminar la compra debido a que está en espera");
+            throw new BusinessLogicException("No se puede eliminar la compra debido a que no se ha completado");
         }
         compradorEntity.getOrdenPedidoCompra().remove(pedidoEntity);
         LOGGER.log(Level.INFO, "Finaliza el proceso de eliminación del pedido con id: {0} asociado al comprador con id: " + idComprador, idPedido);        
