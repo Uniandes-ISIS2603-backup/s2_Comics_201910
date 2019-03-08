@@ -7,10 +7,7 @@ package co.edu.uniandes.csw.comics.test.logic;
 
 
 import co.edu.uniandes.csw.comics.ejb.*;
-import co.edu.uniandes.csw.comics.ejb.CompradorComicLogic;
-import co.edu.uniandes.csw.comics.ejb.CompradorLogic;
 import co.edu.uniandes.csw.comics.entities.*;
-import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.comics.persistence.CompradorPersistence;
 import javax.inject.Inject;
@@ -50,8 +47,9 @@ public class CompradorComicDeseoLogicTest
     @PersistenceContext
     private EntityManager em;
     
-    private CompradorEntity comprador;
-    private List<ComicDeseoEntity> data;
+    private ComicEntity comicEntity = new ComicEntity();
+    private CompradorEntity comprador = new CompradorEntity();
+    private List<ComicDeseoEntity> data = new ArrayList();
     
     @Deployment
     public static JavaArchive createDeployment()
@@ -97,6 +95,9 @@ public class CompradorComicDeseoLogicTest
     
     private void insertData()
     {
+        comicEntity = factory.manufacturePojo(ComicEntity.class);
+        em.persist(comicEntity);
+        
         comprador = factory.manufacturePojo(CompradorEntity.class);
         comprador.setId(1L);
         comprador.setListaDeseos(new ArrayList());
@@ -105,6 +106,7 @@ public class CompradorComicDeseoLogicTest
         for(int i = 0; i < 3; i++)
         {
             ComicDeseoEntity entity = factory.manufacturePojo(ComicDeseoEntity.class);
+            entity.setComic(comicEntity);
             em.persist(entity);
             data.add(entity);
             comprador.getListaDeseos().add(entity);
@@ -115,34 +117,67 @@ public class CompradorComicDeseoLogicTest
     public void addComicDeseoTest()throws BusinessLogicException
     {
         ComicDeseoEntity entity = factory.manufacturePojo(ComicDeseoEntity.class);
-        comicDeseoLogic.createComicDeseo(entity.getId(), entity);
+        comicDeseoLogic.createComicDeseo(comicEntity.getId(), entity);
         ComicDeseoEntity creado = compradorComicDeseoLogic.addComicListaDeseo(comprador.getId(), entity.getId());
         Assert.assertNotNull(creado);
         
         Assert.assertEquals(entity.getId(), creado.getId());
+        Assert.assertEquals(entity.getComic().getAutor(), creado.getComic().getAutor());
     }
     
     @Test
     public void getComicsDeseoTest()
     {
+        List<ComicDeseoEntity> comicsEntity = compradorComicDeseoLogic.getListaDeseos(comprador.getId());
+        Assert.assertEquals(comicsEntity.size(), data.size());
+        
+        for(int i = 0; i < data.size(); i++)
+        {
+            Assert.assertTrue(comicsEntity.contains(data.get(i)));
+        }
+    }
+    
+    @Test
+    public void getComicDeseoTest() throws BusinessLogicException
+    {
+        ComicDeseoEntity entity = data.get(0);
+        ComicDeseoEntity newEntity = compradorComicDeseoLogic.getComicDeseo(comprador.getId(), entity.getId());
+        
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getComic().getNombre(), entity.getComic().getNombre());
+        Assert.assertEquals(newEntity.getComic().getInformacion(), entity.getComic().getInformacion());
+        Assert.assertEquals(newEntity.getComic().getAutor(), entity.getComic().getAutor());
         
     }
     
     @Test
-    public void getComicDeseoTest()
+    public void replaceComicDeseoTest()throws BusinessLogicException
     {
+        List<ComicDeseoEntity> nuevaLista = new ArrayList();
+        for(int i = 0; i < 3; i++)
+        {
+            ComicDeseoEntity entity = factory.manufacturePojo(ComicDeseoEntity.class);
+            entity.setComic(comicEntity);
+            comicDeseoLogic.createComicDeseo(comicEntity.getId(), entity);
+            nuevaLista.add(entity);
+        }
         
-    }
-    
-    @Test
-    public void replaceComicDeseoTest()
-    {
-        
+        compradorComicDeseoLogic.replaceComicsDeseo(comprador.getId(), nuevaLista);
+        List<ComicDeseoEntity> comicEntities = compradorComicDeseoLogic.getListaDeseos(comprador.getId());
+        for(ComicDeseoEntity aNuevaLista : nuevaLista)
+        {
+            Assert.assertTrue(comicEntities.contains(aNuevaLista));
+        }
     }
     
     @Test
     public void deleteComicDeseoTest()
     {
-        
+        for(ComicDeseoEntity deseo : data)
+        {
+            compradorComicDeseoLogic.removeComic(comprador.getId(), deseo.getId());
+        }
+        Assert.assertTrue(compradorComicDeseoLogic.getListaDeseos(comprador.getId()).isEmpty());
     }
 }

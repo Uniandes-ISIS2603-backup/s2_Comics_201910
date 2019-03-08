@@ -57,7 +57,7 @@ public class CompradorOrdenPedidoResource
     @GET
     public List<OrdenPedidoDTO> getPedidos(@PathParam("compradorId") long idComprador)
     {
-        LOGGER.log(Level.INFO, "");
+        LOGGER.log(Level.INFO, "CompradorOrden");
         List<OrdenPedidoDTO> dtos = listEntity2DTO(compradorOrdenLogic.getOrdenes(idComprador));
         LOGGER.log(Level.INFO, "");
         return dtos;
@@ -67,7 +67,7 @@ public class CompradorOrdenPedidoResource
     @Path("{pedidoId: \\d+}")
     public OrdenPedidoDTO getPedido(@PathParam("compradorId")long compradorId, @PathParam("pedidoId")long ordenId) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "CompradorOrdenPedidoResource getBook: input: compradorid: {0}, ordenId: {1}", new Object[]{compradorId, ordenId});
+        LOGGER.log(Level.INFO, "CompradorOrdenPedidoResource getOrden: input: compradorid: {0}, ordenId: {1}", new Object[]{compradorId, ordenId});
         if(ordenPedidoLogic.getOrdenPedido(ordenId) == null)
         {
             throw new WebApplicationException("El recurso /ordenes/" + ordenId + " no existe.", 404);

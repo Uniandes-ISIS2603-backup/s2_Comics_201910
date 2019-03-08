@@ -186,8 +186,6 @@ public class CompradorComicLogicTest
         {
             compradorComic.deleteComic(compradorEntity.getId(), comic.getId());
         }
-        System.out.println(data.size());
-        System.out.println(compradorComic.getComics(compradorEntity.getId()).size());
         Assert.assertTrue(compradorComic.getComics(compradorEntity.getId()).isEmpty());
     }
 }
