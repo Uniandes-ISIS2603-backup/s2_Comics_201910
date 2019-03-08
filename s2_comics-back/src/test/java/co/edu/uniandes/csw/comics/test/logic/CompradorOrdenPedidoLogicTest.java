@@ -88,8 +88,8 @@ public class CompradorOrdenPedidoLogicTest
     
     private void clearData()
     {
-        em.createQuery("delete from CompradorEntity").executeUpdate();
         em.createQuery("delete from OrdenPedidoEntity").executeUpdate();
+        em.createQuery("delete from CompradorEntity").executeUpdate();
     }
     
     private void insertData()
@@ -147,23 +147,76 @@ public class CompradorOrdenPedidoLogicTest
     public void getOrdenTest() throws BusinessLogicException
     {
         OrdenPedidoEntity entity = data.get(0);
-        OrdenPedidoEntity newEntity = compradorOrdenLogic.getOrden(comprador.getId(), entity.getId());
+        OrdenPedidoEntity newEntity = compradorOrdenLogic.getOrden(comprador.getId(), data.get(0).getId());
         
         Assert.assertNotNull(newEntity);
-        
-        Assert.assertEquals(entity.getId(), newEntity.getId());
+        Assert.assertEquals(entity.getId(), data.get(0).getId());
+        Assert.assertEquals(newEntity.getId(), data.get(0).getId());
         Assert.assertEquals(entity.getComprador().getId(), newEntity.getComprador().getId());
-    }
-    
-    @Test
-    public void replaceOrdenTest()
-    {
+        Assert.assertEquals(entity.getId(), newEntity.getId());
         
     }
     
     @Test
-    public void deleteOrdenTest()
+    public void replaceOrdenTest()throws BusinessLogicException
     {
+        List<OrdenPedidoEntity> lista = new ArrayList();
+        for(int i = 0; i < 3; i++)
+        {
+            OrdenPedidoEntity entity = factory.manufacturePojo(OrdenPedidoEntity.class);
+            entity.setComprador(comprador);
+            entity.setVendedor(vendedor);
+            ordenPedidoLogic.createOrdenPedido(entity, vendedor.getId(), comprador.getId());
+            lista.add(entity);
+        }
         
+        compradorOrdenLogic.replaceOrden(comprador.getId(), lista);
+        List<OrdenPedidoEntity> entities = compradorOrdenLogic.getOrdenes(comprador.getId());
+        for(OrdenPedidoEntity entity : lista)
+        {
+            Assert.assertTrue(entities.contains(entity));
+        }
+    }
+    
+    @Test
+    public void deleteOrdenTest()throws BusinessLogicException
+    {
+        for(OrdenPedidoEntity entity : data)
+        {
+            try
+            {
+                compradorOrdenLogic.eliminarOrden(comprador.getId(), entity.getId());
+                Assert.fail("Debería generar Exception");
+            }
+            catch(Exception e)
+            {
+                //Genera Excepcion
+            }
+        }
+        Assert.assertTrue(!compradorOrdenLogic.getOrdenes(comprador.getId()).isEmpty());
+        
+        for(OrdenPedidoEntity entity: data)
+        {
+            entity.setEstado(4);
+            compradorOrdenLogic.getOrden(comprador.getId(), entity.getId()).setEstado(4);
+        }
+        
+        for(OrdenPedidoEntity entity : data)
+        {
+            try
+            {
+                compradorOrdenLogic.eliminarOrden(comprador.getId(), entity.getId());
+            }
+            catch(Exception e)
+            {
+                for(int i = 0; i < data.size(); i++)
+                {
+                    System.out.println(data.get(i).getEstado());
+                    System.out.println(compradorOrdenLogic.getOrdenes(comprador.getId()).get(i).getEstado());
+                }
+                System.out.println(e.getMessage());
+                Assert.fail("No debería generar exception");
+            }
+        }
     }
 }
