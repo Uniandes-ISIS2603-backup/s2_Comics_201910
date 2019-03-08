@@ -93,7 +93,8 @@ public class OrdenPedidoLogic {
    
     }
     
-    public List<OrdenPedidoEntity> getOrdenesPedido(){
+    public List<OrdenPedidoEntity> getOrdenesPedido()
+    {
        LOGGER.log(Level.INFO, "Inicia proceso de consulta de todas las ordenes pedido");
         List<OrdenPedidoEntity> lista = persistence.findAll();
         LOGGER.log(Level.INFO, "Termina proces de consulta de todas las ordenes pedido");

@@ -110,7 +110,7 @@ public class VendedorOrdenPedidoLogicTest {
         OrdenPedidoEntity newOrden = factory.manufacturePojo(OrdenPedidoEntity.class);
         newOrden.setComprador(comprador);
        newOrden.setVendedor(vendedor);
-        ordenPedidoLogic.createOrdenPedido(newOrden, comprador.getId(), vendedor.getId());
+        ordenPedidoLogic.createOrdenPedido(newOrden, vendedor.getId(),  comprador.getId());
         OrdenPedidoEntity ordenPedidoEntity = vendedorOrdenLogic.addOrden(vendedor.getId(), newOrden.getId());
         Assert.assertNotNull(ordenPedidoEntity);
 
