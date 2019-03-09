@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -62,18 +62,7 @@ public class VendedorOrdenPedidoResource {
      return orden;
     }
     
-    @PUT
-    public List<OrdenPedidoDTO> updateOrdenes(@PathParam("vendedoresId")Long vendedoresId,List<OrdenPedidoDTO> ordenes){
-        for(OrdenPedidoDTO orden:ordenes){
-           if( ordenPedidoLogic.getOrdenPedido(orden.getId())==null){
-             throw new WebApplicationException("El recurso /ordenesPedido/" + orden.getId() + " no existe.", 404);
-        }
-          
-        }
-         List<OrdenPedidoDTO> lista = ordenesListEntity2DTO(vendedorOrdenLogic.replaceOrdenes(vendedoresId, ordenesListDTO2Entity(ordenes)));
-         return lista;
-    }
-    
+   
     @DELETE
     @Path("{OrdenesPedidoId: \\d+}")
     public void removeOrden(@PathParam("vendedoresId") Long vendedoresId, @PathParam("OrdenesPedidoId") Long ordenesId) {

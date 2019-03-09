@@ -11,12 +11,14 @@ import co.edu.uniandes.csw.comics.persistence.VendedorPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author ca.orduz
  */
+@Stateless
 public class VendedorLogic {
      private static final Logger LOGGER = Logger.getLogger(VendedorLogic.class.getName());
 

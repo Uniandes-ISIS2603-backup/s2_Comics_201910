@@ -15,7 +15,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- *
+* Clase que extiende de {@link compradorDTO} para manejar las relaciones entre los
+ * compradorDTO y otros DTOs. Para conocer el contenido de la un comprador vaya a la
+ * documentacion de {@link compradorDTO}
  * @author juan pablo cano
  */
 public class CompradorDetailDTO extends CompradorDTO
@@ -31,6 +33,11 @@ public class CompradorDetailDTO extends CompradorDTO
         super();
     }
     
+    /**
+     * Constructor para transformar un Entity a un DTO
+     *
+     * @param compradorEntity La entidad de la cual se construye el DTO
+     */
     public CompradorDetailDTO(CompradorEntity entity)
     {
         super(entity);
@@ -47,15 +54,14 @@ public class CompradorDetailDTO extends CompradorDTO
             {
                 listaDeseos.add(new ComicDeseoDTO(deseo));
             }
-            
-            /*carro = new ArrayList();
-            for(ComicEntity comic : entity.getCarro())
-            {
-                carro.add(new ComicDTO(comic));
-            }*/
         }
     }
     
+     /**
+     * Transformar el DTO a una entidad
+     *
+     * @return La entidad que representa el comprador.
+     */
     @Override
     public CompradorEntity toEntity()
     {
@@ -132,7 +138,7 @@ public class CompradorDetailDTO extends CompradorDTO
     public void setCarro(ArrayList<ComicDTO> carro) {
         this.carro = carro;
     }
-    
+
     public String toString()
     {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

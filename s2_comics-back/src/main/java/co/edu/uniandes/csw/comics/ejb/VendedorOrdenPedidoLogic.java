@@ -43,13 +43,7 @@ public class VendedorOrdenPedidoLogic {
           }
         return null;
     }
-      
-      public List<OrdenPedidoEntity> replaceOrdenes(Long vendedoresId,List<OrdenPedidoEntity> ordenes){
-          VendedorEntity vendedor=vendedorPersistence.find(vendedoresId);
-          vendedor.setOrdenes(ordenes);
-          return vendedor.getOrdenes();
-      }
-      
+   
          public void removeOrden(Long vendedoresId,Long ordenesId){
          VendedorEntity vendedor=vendedorPersistence.find(vendedoresId);
            OrdenPedidoEntity orden=ordenPersistence.find(ordenesId);

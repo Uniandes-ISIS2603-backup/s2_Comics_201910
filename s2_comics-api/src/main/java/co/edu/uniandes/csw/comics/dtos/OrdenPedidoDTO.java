@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
- * @author estudiante
+ * @author jp.rodriguezv
  */
 public class OrdenPedidoDTO implements Serializable
 {
@@ -34,7 +34,7 @@ public class OrdenPedidoDTO implements Serializable
      * 3. rechazado: el vendedor rechazo la orden
      * 4. compelatado: se termino la transaccion, se entrego el producto
      */
-    private Integer estado;
+    private OrdenPedidoEntity.Estado estado;
     /**
      * comprador que expide la orden de pedido
      */
@@ -57,7 +57,7 @@ public class OrdenPedidoDTO implements Serializable
     private ComicDTO trueque;
     
 /**
- * 
+ * numero de compras realizadas por el comprador asociado a la orden
  */
     private Integer numeroCompras;
     
@@ -96,19 +96,7 @@ public class OrdenPedidoDTO implements Serializable
     //METODOS
 
     
-    /**
-     * @return the estado
-     */
-    public Integer getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(Integer estado) {
-        this.estado = estado;
-    }
+  
 
     /**
      * @return the comprador
@@ -208,17 +196,20 @@ public class OrdenPedidoDTO implements Serializable
         this.numeroCompras = numeroCompras;
     }
    
-    
+    /**
+     * convierte el OrdenPedidoDTO a un ordenPedidoEntity
+     * @return el nuevo OrdenPedidoEntity
+     */
     public  OrdenPedidoEntity toEntity(){
        OrdenPedidoEntity ordenPedidoEntity = new OrdenPedidoEntity();
         ordenPedidoEntity.setId(this.id);
-         ordenPedidoEntity.setEstado(this.estado);
+         ordenPedidoEntity.setEstado(this.getEstado());
           ordenPedidoEntity.setNumeroComprasComprador(this.numeroCompras);
            ordenPedidoEntity.setTarjetaCredito(this.tarjetaCredito);
-      //   ordenPedidoEntity.setComic(comic.toEntity);
+        ordenPedidoEntity.setComic(comic.toEntity());
       ordenPedidoEntity.setComprador(this.comprador.toEntity());
       ordenPedidoEntity.setVendedor(this.vendedor.toEntity());
-     //  ordenPedidoEntity.setTrueque(this.trueque.toEntity());
+      ordenPedidoEntity.setTrueque(this.trueque.toEntity());
         return ordenPedidoEntity;
     }
     
@@ -226,4 +217,18 @@ public class OrdenPedidoDTO implements Serializable
 		    public String toString() {
 		        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
 		    }
+
+    /**
+     * @return the estado
+     */
+    public OrdenPedidoEntity.Estado getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(OrdenPedidoEntity.Estado estado) {
+        this.estado = estado;
+    }
 }

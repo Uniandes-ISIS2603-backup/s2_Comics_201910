@@ -40,9 +40,9 @@ public class OrdenPedidoVendedorLogicTest {
      private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private OrdenPedidoLogic ordenPedidoLogic;
+    private OrdenPedidoLogic ordenPedidoLogic;//atributo para tener acceso a la logica de la aplicacion
     @Inject
-    private OrdenPedidoVendedorLogic ordenPedidoVendedorLogic;
+    private OrdenPedidoVendedorLogic ordenPedidoVendedorLogic; // atributo para tener acceso a ala logica de la aplicacion
 
     @PersistenceContext
     private EntityManager em;
@@ -50,8 +50,14 @@ public class OrdenPedidoVendedorLogicTest {
      @Inject
     private UserTransaction utx;
 
+     /**
+      * lista de vendedores utilizada en las pruebas
+      */
     private List<VendedorEntity> vendedorData = new ArrayList<VendedorEntity>();
 
+    /**
+     * lista de ordenes de pedido utilizada en las pruebas
+     */
     private List<OrdenPedidoEntity> ordenPedidoData = new ArrayList();
 
     /**

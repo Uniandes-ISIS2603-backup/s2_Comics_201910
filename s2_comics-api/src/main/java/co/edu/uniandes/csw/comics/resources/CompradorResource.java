@@ -23,7 +23,9 @@ import javax.ws.rs.GET;
 
 /**
  *
- * @author juan pablo cano
+ * Clase que implementa el recurso "comrpador"
+ * 
+ * @comprador juan pablo cano
  */
 @Path("/comprador")
 @Produces("application/json")
@@ -33,11 +35,18 @@ public class CompradorResource
 {
     private static final Logger LOGGER = Logger.getLogger(CompradorResource.class.getName());
     
-    private HashMap<String, CompradorDTO> compradores; 
-    
     @Inject
     private CompradorLogic compradorLogic;
     
+    /**
+     * Crea un nuevo autor con la informacion que se recibe en el cuerpo de la
+     * petición y se regresa un objeto identico con un id auto-generado por la
+     * base de datos.
+     *
+     * @param comprador {@link CompradorDTO} - EL autor que se desea guardar.
+     * @return JSON {@link CompradorDTO} - El autor guardado con el atributo id
+     * autogenerado.
+     */
     @POST
     public CompradorDTO crearComprador(CompradorDTO comprador)
     {
@@ -55,6 +64,12 @@ public class CompradorResource
         }
     }
     
+    /**
+     * Busca y devuelve todos los autores que existen en la aplicacion.
+     *
+     * @return JSONArray {@link compradorDetailDTO} - Los autores encontrados en la
+     * aplicación. Si no hay ninguno retorna una lista vacía.
+     */
     @GET
     public List<CompradorDetailDTO> getCompradores()
     {
@@ -64,8 +79,18 @@ public class CompradorResource
         return list;
     }
     
+    /**
+     * Borra el autor con el id asociado recibido en la URL.
+     *
+     * @param compradorsId Identificador del autor que se desea borrar. Este debe
+     * ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * si el autor tiene libros asociados
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper}
+     * Error de lógica que se genera cuando no se encuentra el autor a borrar.
+     */
     @DELETE
-    @Path("{compradorId: \\\\d+}")
+    @Path("{compradorId: \\d+}")
     public void deleteComprador(@PathParam("compradorId") long id) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "CompradorResource deleteComprador: input:{0}", id);
@@ -77,8 +102,17 @@ public class CompradorResource
         LOGGER.log(Level.INFO, "CompradorResource deleteComprador:output:void");
     }
     
+    /**
+     * Busca el autor con el id asociado recibido en la URL y lo devuelve.
+     *
+     * @param compradorsId Identificador del autor que se esta buscando. Este debe
+     * ser una cadena de dígitos.
+     * @return JSON {@link compradorDetailDTO} - El autor buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el autor.
+     */
     @GET
-        @Path("{compradorId: \\\\d+}")
+    @Path("{compradorId: \\d+}")
     public CompradorDetailDTO getComprador(@PathParam("compradorId") long id)
     {
         LOGGER.log(Level.INFO, "CompradorResource getComprador: input: {0}", id);
@@ -93,7 +127,7 @@ public class CompradorResource
     }
     
     @GET
-        @Path("{name: [a-zA-Z][a-zA-Z]*}")
+    @Path("{name: [a-zA-Z][a-zA-Z]*}")
     public CompradorDTO getCompradorByAlias(@PathParam("name") String alias)throws Exception
     {
         LOGGER.log(Level.INFO, "CompradorResource getCompradorByAlias:input:{0}", alias);
@@ -105,6 +139,20 @@ public class CompradorResource
         CompradorDetailDTO comprador = new CompradorDetailDTO(entity);
         return comprador;
     }
+    
+    /* @GET
+    @Path("{email: /^([\\w\\-\\.]+)@((\\[([0-9]{1,3}\\.){3}[0-9]{1,3}\\])|(([\\w\\-]+\\.)+)([a-zA-Z]{2,4}))$/}")
+    public CompradorDTO getCompradorByEmail(@PathParam("email") String email) throws Exception
+    {
+        LOGGER.log(Level.INFO, "CompradorResource getCompradorByEmail: input: {0}", email);
+        CompradorEntity entity = compradorLogic.getCompradorByEmail(email);
+        if(entity == null)
+        {
+            throw new WebApplicationException("El recurso /comprador/" + email + " no existe.", 404);
+        }
+        CompradorDetailDTO comprador = new CompradorDetailDTO(entity);
+        return comprador;
+    }*/
     
     private List<CompradorDetailDTO> listEntity2DTO(List<CompradorEntity> entity )
     {

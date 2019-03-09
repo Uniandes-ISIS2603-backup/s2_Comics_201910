@@ -28,7 +28,7 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  *
- * @author estudiante
+ * @author jp.rodriguezv
  */
 @Path("ordenesPedido")
 @Produces("application/json")
@@ -37,18 +37,18 @@ import javax.ws.rs.WebApplicationException;
 public class OrdenPedidoResource {
    
     @Inject
-    OrdenPedidoLogic ordenPedidoLogic;
+    OrdenPedidoLogic ordenPedidoLogic; //variable para acceder a la logica de la aplicacion
     
     private static final Logger LOGGER=Logger.getLogger(OrdenPedidoResource.class.getName());
     
     /**
-     * Crea una nueva editorial con la informacion que se recibe en el cuerpo de
+     * Crea una nueva ordenPedido con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
      * la base de datos.
      *
      * @param ordenPedido {@link OrdenPedidoDTO} - La ordenPedido que se desea
      * guardar.
-     * @return JSON {@link OrdenPedidoDTO} - La editorial guardada con el atributo
+     * @return JSON {@link OrdenPedidoDTO} - La ordenPedido guardada con el atributo
      * id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera cuando ya existe la ordenPedido.
@@ -59,7 +59,7 @@ public class OrdenPedidoResource {
       LOGGER.info("OrdenpedidoResourse createOrdenPedido: input:" + ordenPedido.toString());
         OrdenPedidoEntity ordenPedidoEntity= ordenPedido.toEntity();
         //invoca la logica para crear la nueva orden de pedido
-        OrdenPedidoEntity nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId() );
+        OrdenPedidoEntity nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId(), ordenPedido.getTrueque().getId()  );
         //como debe retornar un DTO (json) se invoca el contructor de DTO con argumento el entity nuevo
         OrdenPedidoDTO nuevaOrdenPedidoDTO= new OrdenPedidoDTO(nuevaOrdenPedidoEntity);
         LOGGER.info("OrdenpedidoResourse createOrdenPedido: output:" + nuevaOrdenPedidoDTO.toString());
@@ -73,7 +73,7 @@ public class OrdenPedidoResource {
      *
      * @param OrdenesPedidoId Identificador de la ordenPedido que se esta buscando.
      * Este debe ser una cadena de dígitos.
-     * @return JSON {@link OrdenPedidoDTO} - La editorial buscada
+     * @return JSON {@link OrdenPedidoDTO} - La ordenPedido buscada
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la ordenPedido.
      */
@@ -95,7 +95,7 @@ public class OrdenPedidoResource {
     }
     
     /**
-     * Busca y devuelve todas las ordenPedido que existen en la aplicacion.
+     * Busca y devuelve todas las ordenesPedido que existen en la aplicacion.
      *
      * @return JSONArray {@link OrdenPedidoDTO} - Las ordenesPedido encontradas en
      * la aplicación. Si no hay ninguna retorna una lista vacía.
@@ -118,7 +118,7 @@ public class OrdenPedidoResource {
      * guardar.
      * @return JSON {@link OrdenPedidoDetailDTO} - La ordenPedido guardada.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la editorial a
+     * Error de lógica que se genera cuando no se encuentra la ordenPedido a
      * actualizar.
      */
     @PUT
@@ -138,7 +138,7 @@ public class OrdenPedidoResource {
     /**
      * Borra la ordenPedido con el id asociado recibido en la URL.
      *
-     * @param id Identificador de la ordenPedido que se desea borrar.
+     * @param OrdenesPedidoId Identificador de la ordenPedido que se desea borrar.
      * Este debe ser una cadena de dígitos.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera cuando no se puede eliminar la ordenPedido.

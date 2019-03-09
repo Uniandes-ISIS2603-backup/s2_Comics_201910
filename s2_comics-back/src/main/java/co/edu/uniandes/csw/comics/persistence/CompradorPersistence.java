@@ -17,7 +17,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author estudiante
+ * @author juan pablo cano
  */
 @Stateless
 public class CompradorPersistence 

@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author estudiante
+ * @author jp.rodriguezv
  */
 @Stateless
 public class OrdenPedidoCompradorLogic {
