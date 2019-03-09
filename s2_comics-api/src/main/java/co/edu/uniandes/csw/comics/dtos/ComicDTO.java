@@ -22,6 +22,7 @@ public class ComicDTO implements Serializable {
     private VendedorDTO vendedor;
     private String informacion;
 
+    
     public ComicDTO(){
         
     }
@@ -40,6 +41,12 @@ public class ComicDTO implements Serializable {
             informacion = ent.getInformacion();
             vendedor = new VendedorDTO(ent.getVendedor());
         }
+    }
+    
+    @Override
+    public String toString(){
+        String ans = id + " " + nombre + " " + autor + " " + anioSalida + " " + perteneceColeccion + " " + perteneceSerie + " " + precio + " " + tema + " " + enVenta + " " + informacion;
+        return ans;
     }
     
     public ComicEntity toEntity(){

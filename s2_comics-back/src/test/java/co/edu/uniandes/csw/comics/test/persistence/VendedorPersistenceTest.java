@@ -121,7 +121,8 @@ public class VendedorPersistenceTest
         Assert.assertNull(entity);
         
     }
-         @Test
+    
+    @Test
     public void getVendedoresTest() {
         List<VendedorEntity> list = vendedorPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());

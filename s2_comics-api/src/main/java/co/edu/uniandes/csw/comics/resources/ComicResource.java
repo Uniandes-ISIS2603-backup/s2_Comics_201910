@@ -73,6 +73,9 @@ public class ComicResource {
     @Path("{id: \\d+}")
     public void deleteComic(@PathParam("id") long id){
         LOGGER.log(Level.INFO, "ComicResource deleteComic: input: {0}", id);
+        ComicEntity entidad = comicLogic.getComic(id);
+        if(entidad == null)
+            throw new WebApplicationException("El recurso /Comic/" + id + " no existe" , 404);
         comicLogic.deleteComic(id);
         LOGGER.log(Level.INFO, "ComicResource deleteComic done");
     }
