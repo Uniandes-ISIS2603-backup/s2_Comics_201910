@@ -6,12 +6,9 @@
 package co.edu.uniandes.csw.comics.resources;
 
 import co.edu.uniandes.csw.comics.dtos.ComicDTO;
-import co.edu.uniandes.csw.comics.dtos.CompradorDTO;
 import co.edu.uniandes.csw.comics.dtos.OrdenPedidoDTO;
 import co.edu.uniandes.csw.comics.ejb.ComicLogic;
-import co.edu.uniandes.csw.comics.ejb.CompradorLogic;
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoComicLogic;
-import co.edu.uniandes.csw.comics.ejb.OrdenPedidoCompradorLogic;
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoLogic;
 import java.util.logging.Logger;
 import javax.inject.Inject;

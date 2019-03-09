@@ -6,10 +6,8 @@
 package co.edu.uniandes.csw.comics.ejb;
 
 import co.edu.uniandes.csw.comics.entities.ComicEntity;
-import co.edu.uniandes.csw.comics.entities.CompradorEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.persistence.ComicPersistence;
-import co.edu.uniandes.csw.comics.persistence.CompradorPersistence;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +20,8 @@ import javax.inject.Inject;
  */
 @Stateless
 public class OrdenPedidoComicLogic {
-       
+    
+    
     private static final Logger LOGGER = Logger.getLogger(OrdenPedidoComicLogic.class.getName());
 
      @Inject

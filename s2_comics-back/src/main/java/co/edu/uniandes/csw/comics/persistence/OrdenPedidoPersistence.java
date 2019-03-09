@@ -23,15 +23,24 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class OrdenPedidoPersistence {
+    
     private static final Logger LOGGER = Logger.getLogger(OrdenPedidoPersistence.class.getName());
     
     @PersistenceContext(unitName = "comicsPU")
     protected EntityManager em;
-    
+   
+    /**
+     * constructor vacio
+     */
     public OrdenPedidoPersistence(){
         
     }
     
+    /**
+     * crea una ordenPedido nueva en la base de datos
+     * @param nuevo , entidad con la informacion de la  nueva ordenPedido
+     * @return la ordenPedidocreada
+     */
     public OrdenPedidoEntity create(OrdenPedidoEntity nuevo)
     {
         LOGGER.log(Level.INFO, "Creando una OrdenPedido nueva");
@@ -41,11 +50,20 @@ public class OrdenPedidoPersistence {
         return nuevo;
     }
     
+    /**
+     * busca una ordenPedido a partir del id
+     * @param OrdenPedidoId, id de la ordenPedido buscada
+     * @return la ordenPedido buscada
+     */
     public OrdenPedidoEntity find (Long OrdenPedidoId){
     
        return em.find(OrdenPedidoEntity.class, OrdenPedidoId);
     }
     
+    /**
+     * devuelve todas las ordenes Pedido que hay en la base de datos
+     * @return todas las ordenesPedido
+     */
     public List<OrdenPedidoEntity> findAll (){
         
      LOGGER.log(Level.INFO, "Se buscarán todos las ordenes Pedido");
@@ -54,7 +72,10 @@ public class OrdenPedidoPersistence {
     
     }
     
-    
+    /**
+     * elimina una ordenPedido a partir de si identificador
+     * @param ordenPedidoId , identificador de la ordenPedido que se dea borrar
+     */
      public void delete(Long ordenPedidoId) {
   LOGGER.log(Level.INFO, "Borrando el vendedor con id={0}", ordenPedidoId);
         // Se hace uso de mismo método que esta explicado en public AuthorEntity find(Long id) para obtener la author a borrar.
@@ -63,37 +84,11 @@ public class OrdenPedidoPersistence {
         em.remove(ordenPedidoEntity);
      }
      
-    /** public OrdenPedidoEntity findById(Long id)
-    {
-        LOGGER.log(Level.INFO, "Se buscará la ordenPedido por el id", id);
-        
-        TypedQuery query = em.createQuery("Select u From OrdenPedidoEntity u where u.id = :id", OrdenPedidoEntity.class);
-        
-        query = query.setParameter("id", id);
-        
-        List<OrdenPedidoEntity> sameId = query.getResultList();
-        
-        OrdenPedidoEntity result;
-        
-        if(sameId == null)
-        {
-            result = null;
-        }
-        else if(sameId.isEmpty())
-        {
-            result = null;
-        }
-        else
-        {
-            result = sameId.get(0);
-        }
-        
-        return result;
-    }
+    /**
+     * actualiza una ordenPedido
+     * @param ordenPedidoEntity , entidad con la informacion nueva de la ordenPedido
+     * @return  la ordenPedidoActualizada
      */
-     
- 
-      
       public OrdenPedidoEntity update(OrdenPedidoEntity ordenPedidoEntity){
         LOGGER.log(Level.INFO, "Actualizando la orden pedido con id={0}", ordenPedidoEntity.getId() );
       

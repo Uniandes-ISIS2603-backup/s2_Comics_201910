@@ -26,21 +26,29 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author estudiante
+ * @author jp.rodriguezv
  */
 @RunWith(Arquillian.class)
 
 public class OrdenPedidoPersistenceTest {
   @Inject
-    private OrdenPedidoPersistence ordenPedido;
+    private OrdenPedidoPersistence ordenPedido; //variable para tener acceso a la persistencia de la apliacacion
     
     @PersistenceContext
     private EntityManager em;
     
     @Inject
     UserTransaction utx;
+    /**
+     * lsiat de entidades ordenes Pedido utilizadas en las pruebas
+     */
     private List<OrdenPedidoEntity> data = new ArrayList<>();
-    
+  
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
  @Deployment
     public static JavaArchive createDeployment()
     {
@@ -50,7 +58,10 @@ public class OrdenPedidoPersistenceTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+   
+     /**
+     * Configuración inicial de la prueba.
+     */
     @Before
     public void configTest()
     {
@@ -75,11 +86,18 @@ public class OrdenPedidoPersistenceTest {
         }
     }
     
+     /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
     private void clearData()
     {
         em.createQuery("delete from OrdenPedidoEntity").executeUpdate();
     }
     
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
     private void insertData()
     {
         PodamFactory podam = new PodamFactoryImpl();
@@ -90,7 +108,10 @@ public class OrdenPedidoPersistenceTest {
             data.add(comp);
         }
     }
-    
+   
+    /**
+     * prueba del correcto funcinamiento del metodo find  de la base de datos  
+     */
     @Test
     public void findTest()
     {
@@ -102,7 +123,9 @@ public class OrdenPedidoPersistenceTest {
         Assert.assertEquals(entity.getEstado(), newEntity.getEstado());
         Assert.assertEquals(entity.getTarjetaCredito(), newEntity.getTarjetaCredito());
      }
-    
+    /**
+     * prueba del correcto funcinamiento del metodo create de la base de datos  
+     */
     @Test
     public void createTest()
     {
@@ -118,7 +141,9 @@ public class OrdenPedidoPersistenceTest {
         Assert.assertEquals(result.getTarjetaCredito(), entity.getTarjetaCredito());
      }
     
- 
+ /**
+     * prueba del correcto funcinamiento del metodo getOrdenPedido  de la base de datos  
+     */
     
        @Test
     public void getOrdenPedidoTest() {
@@ -129,6 +154,10 @@ public class OrdenPedidoPersistenceTest {
         Assert.assertEquals(entity.getTarjetaCredito(), newEntity.getTarjetaCredito());
        
     }
+    
+    /**
+     * prueba del correcto funcinamiento del metodo getOrdensPedido  de la base de datos  
+     */
       @Test
     public void updateOrdenesPedidoTest() {
             OrdenPedidoEntity entity = data.get(0);
@@ -144,6 +173,10 @@ public class OrdenPedidoPersistenceTest {
         Assert.assertEquals(newEntity.getTarjetaCredito(), resp.getTarjetaCredito());
     
     }
+    
+    /**
+     * prueba del correcto funcinamiento del metodo deleteOrdenPedido  de la base de datos  
+     */
        @Test
     public void deleteOrdenPedidTest() {
       
@@ -153,6 +186,9 @@ public class OrdenPedidoPersistenceTest {
         Assert.assertNull(eliminado);
     }
     
+    /**
+     * prueba del correcto funcinamiento del metodo update  de la base de datos  
+     */
     @Test
     public void setEstado(){
         OrdenPedidoEntity entity = data.get(0);

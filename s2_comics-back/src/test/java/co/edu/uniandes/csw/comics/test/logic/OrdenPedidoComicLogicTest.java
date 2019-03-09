@@ -37,9 +37,9 @@ public class OrdenPedidoComicLogicTest {
      private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private OrdenPedidoLogic ordenPedidoLogic;
+    private OrdenPedidoLogic ordenPedidoLogic;//variable para tener acceso a ala logica de la aplicacion
     @Inject
-    private OrdenPedidoComicLogic ordenPedidoComicLogic;
+    private OrdenPedidoComicLogic ordenPedidoComicLogic;//variable para tener acceso a ala logica de la aplicacion
 
     @PersistenceContext
     private EntityManager em;
@@ -47,8 +47,14 @@ public class OrdenPedidoComicLogicTest {
      @Inject
     private UserTransaction utx;
 
+     /**
+      * lista de comics usado en las pruebas 
+      */
     private List<ComicEntity> comicData = new ArrayList<ComicEntity>();
 
+     /**
+      * lista de ordenesPedido usado en las pruebas 
+      */
     private List<OrdenPedidoEntity> ordenPedidoData = new ArrayList();
 
     /**

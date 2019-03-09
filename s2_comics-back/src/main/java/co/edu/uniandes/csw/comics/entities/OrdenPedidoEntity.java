@@ -15,7 +15,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author estudiante
+ * @author jp.rodriguezv
  */
 @Entity
 public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializable
@@ -40,20 +40,35 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
     @Id
     private Long id;
     
+    /**
+     * estado de la orden, es una enumeracion
+     */
     private Estado estado;
     
+    /**
+     * comprador asociado a la ordenPedido
+     */
     @PodamExclude
     @ManyToOne
     private CompradorEntity comprador;
    
+    /**
+     * vendedor asociado a la ordenPedido
+     */
     @PodamExclude
     @ManyToOne
     private VendedorEntity vendedor;
    
+    /**
+     * comic asociado a la ordenPedido
+     */
     @PodamExclude
     @OneToOne
     private ComicEntity comic;
     
+    /**
+     * comic truque asociado a la orden pedido
+     */
     @PodamExclude
     @OneToOne
     private ComicEntity trueque;

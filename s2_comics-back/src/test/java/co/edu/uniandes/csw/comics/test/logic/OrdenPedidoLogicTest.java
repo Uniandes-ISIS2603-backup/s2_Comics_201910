@@ -40,7 +40,7 @@ public class OrdenPedidoLogicTest {
      private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
-    private OrdenPedidoLogic ordenPedido;
+    private OrdenPedidoLogic ordenPedido;//variable para tener acceso a ala logica de la aplicacion
     
     @PersistenceContext
     private EntityManager em;
@@ -48,18 +48,36 @@ public class OrdenPedidoLogicTest {
     @Inject
     private UserTransaction utx;
     
-   
+   /**
+    * lista de Ordenes pedido utilizada en las pruebas
+    */
     private List<OrdenPedidoEntity> data = new ArrayList<>();
     
- 
+ /**
+    * lista de vendedores utilizada en las pruebas
+    */
     private List<VendedorEntity> dataVendedores = new ArrayList<VendedorEntity>();
  
+    /**
+    * lista de comics utilizada en las pruebas
+    */
     private List<ComicEntity> dataComic = new ArrayList<ComicEntity>();
  
+    /**
+    * lista de comics-trueque utilizada en las pruebas
+    */
     private List<ComicEntity> dataTrueque = new ArrayList<ComicEntity>();
    
+    /**
+    * lista de compradores utilizada en las pruebas
+    */
     private List<CompradorEntity> dataCompradores =  new ArrayList<CompradorEntity>() ;
     
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
      @Deployment
     public static JavaArchive createDeployment()
     {
@@ -71,6 +89,9 @@ public class OrdenPedidoLogicTest {
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
     
+    /**
+     * Configuración inicial de la prueba.
+     */
      @Before
     public void configTest()
     {
@@ -95,6 +116,9 @@ public class OrdenPedidoLogicTest {
         }
     }
     
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
      private void clearData()
     {
    em.createQuery("delete from OrdenPedidoEntity").executeUpdate();
@@ -103,6 +127,10 @@ public class OrdenPedidoLogicTest {
       em.createQuery("delete from ComicEntity").executeUpdate();
     }
     
+     /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
     private void insertData()
     {
                   for (int i = 0; i < 3; i++) {
@@ -140,6 +168,10 @@ public class OrdenPedidoLogicTest {
         
     }
     
+    /**
+     * test del metodo crearOrdenPedido 
+     * @throws BusinessLogicException 
+     */
     @Test
     public void createOrdenPedidoTest() throws BusinessLogicException
     {
@@ -161,7 +193,9 @@ public class OrdenPedidoLogicTest {
        
     }
    
-    
+    /**
+     * test que valida la regla de negocio que no perite la creacion de dos ordenes de pedido con el mismo id
+     */
     @Test
     public void crearOrdenPedidoMismoId()
     {
@@ -182,27 +216,20 @@ public class OrdenPedidoLogicTest {
         }
     }
     
+    /**
+     * test que verifica el funcionamiento del metodo getOrdenesPedido
+     */
     @Test
     public void getOrdenesPedidoTest()
     {
         List<OrdenPedidoEntity> lista = ordenPedido.getOrdenesPedido();
         Assert.assertEquals(data.size(), lista.size());
-     /** for(OrdenPedidoEntity entity : lista)
-        {   int i =0;
-            boolean found = false;
-            for(OrdenPedidoEntity stored : data)
-            {
-                if(entity.getId() == stored.getId())
-                {
-                    found = true;
-                }
-            }
-            i++;
-            Assert.assertTrue("no se encontro el data" + i,found);
-     
-        }*/
+    
     }
     
+    /**
+     * test que verifica el funcionamiento del metodo getOrdenPedido
+     */
     @Test
     public void getOrdenPedidoTest()
     {
@@ -213,6 +240,9 @@ public class OrdenPedidoLogicTest {
         Assert.assertEquals(entity.getTarjetaCredito(), result.getTarjetaCredito());
     }
     
+    /**
+     * test que verifica el funcionamiento del metodo UpdateOrdenPeido
+     */
     @Test
     public void updateTest()
     {
@@ -228,6 +258,10 @@ public class OrdenPedidoLogicTest {
         Assert.assertEquals(result.getEstado(), pojoEntity.getEstado());
     }
     
+    /**
+     * test que verifica el funcionamiento  del metodo deletOrdenPeido 
+     * @throws BusinessLogicException 
+     */
     @Test
     public void deleteTest() throws BusinessLogicException
     {
