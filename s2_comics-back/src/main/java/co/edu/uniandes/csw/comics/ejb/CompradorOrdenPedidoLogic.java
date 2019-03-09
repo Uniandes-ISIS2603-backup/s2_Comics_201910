@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.ordenpedidos.ejb;
+package co.edu.uniandes.csw.comics.ejb;
 
-import co.edu.uniandes.csw.OrdenPedidos.entities.*;
-import co.edu.uniandes.csw.OrdenPedidos.entities.OrdenPedidoEntity.Estado;
-import co.edu.uniandes.csw.OrdenPedidos.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.OrdenPedidos.persistence.*;
+
+import co.edu.uniandes.csw.comics.entities.CompradorEntity;
+import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
+import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity.Estado;
+import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.comics.persistence.CompradorPersistence;
+import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

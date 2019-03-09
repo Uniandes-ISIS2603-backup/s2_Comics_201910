@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.pedidos.resources;
+package co.edu.uniandes.csw.comics.resources;
 
-import co.edu.uniandes.csw.pedidos.dtos.*;
-import co.edu.uniandes.csw.pedidos.dtos.OrdenPedidoDTO;
-import co.edu.uniandes.csw.pedidos.ejb.*;
-import co.edu.uniandes.csw.pedidos.entities.*;
-import co.edu.uniandes.csw.pedidos.entities.OrdenPedidoEntity;
-import co.edu.uniandes.csw.pedidos.exceptions.BusinessLogicException;
+
+import co.edu.uniandes.csw.comics.dtos.OrdenPedidoDTO;
+import co.edu.uniandes.csw.comics.ejb.CompradorOrdenPedidoLogic;
+import co.edu.uniandes.csw.comics.ejb.OrdenPedidoLogic;
+import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
+import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
