@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.ejb;
 
 import co.edu.uniandes.csw.comics.entities.*;
+import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity.Estado;
 import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.comics.persistence.*;
 import java.util.List;
@@ -73,7 +74,7 @@ public class CompradorOrdenPedidoLogic
         LOGGER.log(Level.INFO, "Inicia el proceso de eliminación del pedido con id: {0} asociado al comprador con id: " + idComprador, idPedido);
         CompradorEntity compradorEntity = compradorPersistence.find(idComprador);
         OrdenPedidoEntity pedidoEntity = ordenPedidoPersistence.find(idPedido);
-        if(pedidoEntity.getEstado() != 4)
+        if(pedidoEntity.getEstado() != Estado.FINALIZADO)
         {
             throw new BusinessLogicException("No se puede eliminar la compra debido a que no se ha completado");
         }

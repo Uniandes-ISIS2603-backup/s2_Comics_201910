@@ -11,4 +11,3 @@ insert into CompradorEntity(id, alias, email, intereses, nombre, foto) values (6
 insert into CompradorEntity(id, alias, email, intereses, nombre, foto) values (700,'bebecito','bebecito@hotmail.com','DC Comics','Bebecito','');
 insert into CompradorEntity(id, alias, email, intereses, nombre, foto) values (800,'sherlockHolmes','sherlock@hotmail.com','Terror','Sherlock Holmes','https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Statue_of_Sherlock_Holmes_in_Edinburgh.jpg/180px-Statue_of_Sherlock_Holmes_in_Edinburgh.jpg');
 
-

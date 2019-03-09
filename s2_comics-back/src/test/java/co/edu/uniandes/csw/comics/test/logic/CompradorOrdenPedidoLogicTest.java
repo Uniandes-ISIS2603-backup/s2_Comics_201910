@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.comics.test.logic;
 
 import co.edu.uniandes.csw.comics.ejb.*;
 import co.edu.uniandes.csw.comics.entities.*;
+import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity.Estado;
 import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.comics.persistence.CompradorPersistence;
 import javax.inject.Inject;
@@ -46,6 +47,8 @@ public class CompradorOrdenPedidoLogicTest
     @Inject
     private UserTransaction utx;
     
+    private ComicEntity comic = new ComicEntity();
+    private ComicEntity trueque = new ComicEntity();
     private CompradorEntity comprador = new CompradorEntity();
     private VendedorEntity vendedor = new VendedorEntity();
     private ArrayList<OrdenPedidoEntity> data = new ArrayList();
@@ -97,6 +100,12 @@ public class CompradorOrdenPedidoLogicTest
         vendedor = factory.manufacturePojo(VendedorEntity.class);
         em.persist(vendedor);
         
+        comic = factory.manufacturePojo(ComicEntity.class);
+        em.persist(comic);
+        
+        trueque = factory.manufacturePojo(ComicEntity.class);
+        em.persist(trueque);
+        
         comprador = factory.manufacturePojo(CompradorEntity.class);
         comprador.setId(1L);
         comprador.setOrdenPedidoCompra(new ArrayList());
@@ -119,7 +128,8 @@ public class CompradorOrdenPedidoLogicTest
         OrdenPedidoEntity newOrden = factory.manufacturePojo(OrdenPedidoEntity.class);
         newOrden.setComprador(comprador);
         newOrden.setVendedor(vendedor);
-        ordenPedidoLogic.createOrdenPedido(newOrden, comprador.getId(),  vendedor.getId());
+        newOrden.setComic(comic);
+        ordenPedidoLogic.createOrdenPedido(newOrden, comprador.getId(),  vendedor.getId(), comic.getId(), null);
         OrdenPedidoEntity ordenPedidoEntity = compradorOrdenLogic.addOrdenPedido(comprador.getId(), newOrden.getId());
         Assert.assertNotNull(ordenPedidoEntity);
 
@@ -166,7 +176,8 @@ public class CompradorOrdenPedidoLogicTest
             OrdenPedidoEntity entity = factory.manufacturePojo(OrdenPedidoEntity.class);
             entity.setComprador(comprador);
             entity.setVendedor(vendedor);
-            ordenPedidoLogic.createOrdenPedido(entity, vendedor.getId(), comprador.getId());
+            entity.setComic(comic);
+            ordenPedidoLogic.createOrdenPedido(entity, vendedor.getId(), comprador.getId(), comic.getId(), trueque.getId());
             lista.add(entity);
         }
         
@@ -197,8 +208,8 @@ public class CompradorOrdenPedidoLogicTest
         
         for(OrdenPedidoEntity entity: data)
         {
-            entity.setEstado(4);
-            compradorOrdenLogic.getOrden(comprador.getId(), entity.getId()).setEstado(4);
+            entity.setEstado(Estado.FINALIZADO);
+            compradorOrdenLogic.getOrden(comprador.getId(), entity.getId()).setEstado(Estado.FINALIZADO);
         }
         
         for(OrdenPedidoEntity entity : data)
