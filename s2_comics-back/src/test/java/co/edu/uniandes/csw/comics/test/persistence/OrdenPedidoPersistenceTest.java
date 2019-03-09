@@ -152,4 +152,14 @@ public class OrdenPedidoPersistenceTest {
         OrdenPedidoEntity eliminado = ordenPedido.find(entity.getId());
         Assert.assertNull(eliminado);
     }
+    
+    @Test
+    public void setEstado(){
+        OrdenPedidoEntity entity = data.get(0);
+       entity.setEstado(OrdenPedidoEntity.Estado.ACEPTADO);
+       Assert.assertEquals(entity.getEstado(), OrdenPedidoEntity.Estado.ACEPTADO);
+       entity.setEstado(OrdenPedidoEntity.Estado.EN_ESPERA);
+       Assert.assertEquals(entity.getEstado(), OrdenPedidoEntity.Estado.EN_ESPERA);
+       
+    }
 }

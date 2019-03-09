@@ -5,10 +5,12 @@
  */
 package co.edu.uniandes.csw.comics.ejb;
 
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.CompradorEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.entities.VendedorEntity;
 import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.comics.persistence.ComicPersistence;
 import co.edu.uniandes.csw.comics.persistence.CompradorPersistence;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
 import co.edu.uniandes.csw.comics.persistence.VendedorPersistence;
@@ -30,6 +32,9 @@ public class OrdenPedidoLogic {
     @Inject
     private OrdenPedidoPersistence persistence;
     
+     @Inject
+    private ComicPersistence comicPersistence;
+    
 
      @Inject
     private VendedorPersistence vendedorPersistence;
@@ -38,19 +43,33 @@ public class OrdenPedidoLogic {
     private CompradorPersistence compradorPersistence;
    
     
-    public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido, Long vendedorId, Long compradoraiD)throws BusinessLogicException
+    public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido, Long vendedorId, Long compradoraiD, Long comicId, Long truequeId)throws BusinessLogicException
     {
         if(persistence.find(ordenPedido.getId())!=null ){
-        new BusinessLogicException("ya existe una ordenPedido con esta id");  }     
+        new BusinessLogicException("ya existe una ordenPedido con esta id"); 
+        }     
        
         if(ordenPedido.getComprador()==null || ordenPedido.getVendedor()==null ){
             throw new BusinessLogicException("La orden Pedido debe tener un cliente y un vendedor asociado.");
+        }
+         if(ordenPedido.getComic()==null  ){
+            throw new BusinessLogicException("La orden Pedido debe tener uaunquesea un comic asociado.");
+        }
+        if( ordenPedido.getComic().getEnVenta()==false && ordenPedido.getTrueque()==null ){
+            throw new BusinessLogicException("Si el  comic asociado a la orden esta para truque debe tener asociado el comic con el cual se hara el truque.");
+
         }
         
          VendedorEntity vendedor=vendedorPersistence.find(vendedorId);
          ordenPedido.setVendedor(vendedor);
          CompradorEntity comprador =compradorPersistence.find(compradoraiD);
          ordenPedido.setComprador(comprador);
+         ComicEntity comic = comicPersistence.find(comicId);
+         ordenPedido.setComic(comic);
+       if(truequeId!=null){
+         ComicEntity comicTrueque = comicPersistence.find(truequeId);
+         ordenPedido.setTrueque(comicTrueque);
+       }
          ordenPedido= persistence.create(ordenPedido);
          return ordenPedido;
     }
