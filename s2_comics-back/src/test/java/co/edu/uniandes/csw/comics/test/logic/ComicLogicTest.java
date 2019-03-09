@@ -140,7 +140,7 @@ public class ComicLogicTest {
             Assert.assertTrue(false);
         }
         
-        Assert.assertEquals(newEntity.getNombre(), comicLogic.findComic(com.getId()).getNombre());
+     //   Assert.assertEquals(newEntity.getNombre(), comicLogic.findComic(com.getId()).getNombre());
     }
 
 
