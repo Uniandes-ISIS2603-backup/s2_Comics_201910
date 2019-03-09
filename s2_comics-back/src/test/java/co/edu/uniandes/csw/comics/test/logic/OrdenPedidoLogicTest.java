@@ -100,6 +100,7 @@ public class OrdenPedidoLogicTest {
    em.createQuery("delete from OrdenPedidoEntity").executeUpdate();
    em.createQuery("delete from VendedorEntity").executeUpdate();
    em.createQuery("delete from CompradorEntity").executeUpdate();
+      em.createQuery("delete from ComicEntity").executeUpdate();
     }
     
     private void insertData()
@@ -145,8 +146,9 @@ public class OrdenPedidoLogicTest {
         OrdenPedidoEntity entity = factory.manufacturePojo(OrdenPedidoEntity.class);
          entity.setVendedor(dataVendedores.get(1));
          entity.setComprador(dataCompradores.get(1));
-        try
-        {
+         entity.setComic(dataComic.get(1));
+         entity.setTrueque(dataTrueque.get(1));
+       
             OrdenPedidoEntity result = ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId() );
             
             Assert.assertNotNull(result);
@@ -155,11 +157,8 @@ public class OrdenPedidoLogicTest {
             Assert.assertEquals(entity.getId(), newEntity.getId());
             Assert.assertEquals(entity.getEstado(), newEntity.getEstado());
             Assert.assertEquals(entity.getTarjetaCredito(), newEntity.getTarjetaCredito());
-        }
-        catch(Exception e)
-        {
-            Assert.fail(e.getMessage());
-        }
+       
+       
     }
    
     
