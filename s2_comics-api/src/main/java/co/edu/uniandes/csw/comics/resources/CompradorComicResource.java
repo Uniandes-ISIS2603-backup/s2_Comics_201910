@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.comics.resources;
 
-import co.edu.uniandes.csw.comics.dtos.ComicDTO;
+import co.edu.uniandes.csw.comics.dtos.ComicDetailDTO;
 import co.edu.uniandes.csw.comics.dtos.ComicDetailDTO;
 import co.edu.uniandes.csw.comics.dtos.*;
 import co.edu.uniandes.csw.comics.dtos.CompradorDetailDTO;
@@ -26,7 +26,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
+ * Clase que implementa el recurso "comprador/{id}/carro"
  * @author juan pablo cano
  */
 @Path("/comprador/{compradorId: \\d+}/carro/{comicId: \\d*}")
@@ -42,6 +42,15 @@ public class CompradorComicResource
     @Inject
     private ComicLogic comicLogic;
     
+    /**
+     * Asocia un comic existente con un Comprador existente
+     *
+     * @param compradorId El ID del Comprador al cual se le va a asociar el comic
+     * @param comicId El ID del comic que se asocia
+     * @return JSON {@link ComicDetailDTO} - El comic asociado.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el comic.
+     */
     @POST
     @Path("comicId: \\d+")
     public ComicDetailDTO addComic(@PathParam("compradorId") long compradorId, @PathParam("comicId") long comicId)
@@ -56,6 +65,13 @@ public class CompradorComicResource
         return comic;
     }
     
+    /**
+     * Busca y devuelve todos los comics deseo que existen en un comprador.
+     *
+     * @param compradorId El ID del comprador del cual se buscan los comics
+     * @return JSONArray {@link ComicDetailDTO} - Los comics deseo encontrados en el
+     * comprador. Si no hay ninguno retorna una lista vacía.
+     */
     @GET
     public List<ComicDetailDTO> getCarro(@PathParam("compradorId")long compradorId)
     {
@@ -65,6 +81,18 @@ public class CompradorComicResource
         return comics;
     }
     
+    /**
+     * Busca y devuelve el comic deseo con el ID recibido en la URL, relativo a un
+     * comprador.
+     *
+     * @param compradorId El ID del comprador del cual se busca el comic deseo
+     * @param comicId El ID del comic deseo que se busca
+     * @return {@link ComicDetailDTO} - El comic deseo encontrado en el comprador.
+     * @throws co.edu.uniandes.csw.comicstore.exceptions.BusinessLogicException
+     * si el comic deseo no está asociado al comprador
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el comic deseo.
+     */
     @GET
     @Path("comicId: \\d+")
     public ComicDetailDTO getComic(@PathParam("compradorId") long compradorId, @PathParam("comicId") long comicId)
@@ -80,6 +108,17 @@ public class CompradorComicResource
         return comic;
     }
     
+    /**
+     * Actualiza la lista de comics deseo de un comprador con la lista que se recibe en el
+     * cuerpo
+     *
+     * @param compradorId El ID del comprador al cual se le va a asociar el comic
+     * @param comics JSONArray {@link ComicDetailDTO} - La lista de comics deseo que se
+     * desea guardar.
+     * @return JSONArray {@link ComicDetailDTO} - La lista actualizada.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el comic.
+     */
     @PUT
     public List<ComicDetailDTO> replaceComics(@PathParam("compradorId") long compradorId, List<ComicDetailDTO> comics)
     {
@@ -97,6 +136,14 @@ public class CompradorComicResource
         return lista;
     }
     
+    /**
+     * Elimina la conexión entre el comic y e comprador recibidos en la URL.
+     *
+     * @param compradorId El ID del comprador al cual se le va a desasociar el comic
+     * @param ComicId El ID del comic que se desasocia
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el comic.
+     */
     @DELETE
     @Path("comicId: \\d+")
     public void deleteComic(@PathParam("compradorId") long compradorId, @PathParam("comicId")long comicId)
@@ -114,7 +161,7 @@ public class CompradorComicResource
     private List<ComicEntity> listDto2Entity(List<ComicDetailDTO> comics)
     {
         List<ComicEntity> entities = new ArrayList();
-        for(ComicDTO dto : comics)
+        for(ComicDetailDTO dto : comics)
         {
             entities.add(dto.toEntity());
         }

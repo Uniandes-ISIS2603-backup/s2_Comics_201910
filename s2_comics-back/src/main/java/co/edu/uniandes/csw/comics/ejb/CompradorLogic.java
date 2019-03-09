@@ -29,6 +29,12 @@ public class CompradorLogic
     @Inject
     private CompradorPersistence persistencia;
     
+    /**
+     * Se encarga de crear un Comprador en la base de datos.
+     *
+     * @param CompradorEntity Objeto de CompradorEntity con los datos nuevos
+     * @return Objeto de CompradorEntity con los datos nuevos y su ID.
+     */
     public CompradorEntity createComprador(CompradorEntity entity)throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del comprador");
@@ -52,6 +58,11 @@ public class CompradorLogic
         return newEntity;
     }
     
+    /**
+     * Obtiene la lista de los registros de Comprador.
+     *
+     * @return Colección de objetos de CompradorEntity.
+     */
     public List<CompradorEntity> getCompradores()
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consulta de todos los compradores");
@@ -60,6 +71,12 @@ public class CompradorLogic
         return lista;
     }
     
+    /**
+     * Obtiene los datos de una instancia de Comprador a partir de su ID.
+     *
+     * @param id Identificador de la instancia a consultar
+     * @return Instancia de CompradorEntity con los datos del Comprador consultado.
+     */
     public CompradorEntity findComprador(long id)
     {
         LOGGER.log(Level.INFO, "Se inicia la busqueda del comprador con id={0}", id);
@@ -68,6 +85,12 @@ public class CompradorLogic
         return entity;
     }
     
+    /**
+     * Obtiene los datos de una instancia de Comprador a partir de su alias.
+     *
+     * @param alias Identificador de la instancia a consultar
+     * @return Instancia de CompradorEntity con los datos del Comprador consultado.
+     */
     public CompradorEntity getCompradorByAlias(String alias)
     {
         LOGGER.log(Level.INFO, "Se crea un proceso de busqueda de comprador");
@@ -76,6 +99,12 @@ public class CompradorLogic
         return comprador;
     }
     
+    /**
+     * Obtiene los datos de una instancia de Comprador a partir de su email.
+     *
+     * @param email Identificador de la instancia a consultar
+     * @return Instancia de CompradorEntity con los datos del Comprador consultado.
+     */
     public CompradorEntity getCompradorByEmail(String email)
     {
         LOGGER.log(Level.INFO, "Se inicia la consulta por email");
@@ -84,6 +113,13 @@ public class CompradorLogic
         return entity;
     }
     
+     /**
+     * Actualiza la información de una instancia de Comprador.
+     *
+     * @param id Identificador de la instancia a actualizar
+     * @param entity Instancia de CompradorEntity con los nuevos datos.
+     * @return Instancia de CompradorEntity con los datos actualizados.
+     */
     public CompradorEntity updateComprador(long id, CompradorEntity entity)
     {
         LOGGER.log(Level.INFO, "Se inicia la actualización del comprador con id={0}", id);
@@ -92,6 +128,12 @@ public class CompradorLogic
         return newEntity;
     }
     
+    /**
+     * Elimina una instancia de Comprador de la base de datos.
+     *
+     * @param id Identificador de la instancia a eliminar.
+     * @throws BusinessLogicException si el autor tiene libros asociados.
+     */
     public void deleteComprador(long id)throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia el proceso de eliminar al comrpador con id={0}", id);
