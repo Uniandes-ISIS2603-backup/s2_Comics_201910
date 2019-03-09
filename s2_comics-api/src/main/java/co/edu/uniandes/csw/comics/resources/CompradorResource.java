@@ -48,20 +48,14 @@ public class CompradorResource
      * autogenerado.
      */
     @POST
-    public CompradorDTO crearComprador(CompradorDTO comprador)
+    public CompradorDTO crearComprador(CompradorDTO comprador) throws BusinessLogicException
     {
-        try
-        {
-            LOGGER.log(Level.INFO, "CompradorResource createComprador: input:{0}", comprador);
+         LOGGER.log(Level.INFO, "CompradorResource createComprador: input:{0}", comprador);
             CompradorDTO newComprador = new CompradorDTO(compradorLogic.createComprador(comprador.toEntity()));
             LOGGER.log(Level.INFO, "CompradorResource createComprador: output:{0}", newComprador);
             return newComprador;
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+        
+     
     }
     
     /**

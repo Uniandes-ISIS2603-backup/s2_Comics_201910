@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.comics.test.logic;
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoLogic;
 import co.edu.uniandes.csw.comics.ejb.VendedorLogic;
 import co.edu.uniandes.csw.comics.ejb.VendedorOrdenPedidoLogic;
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.CompradorEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.entities.VendedorEntity;
@@ -50,9 +51,11 @@ public class VendedorOrdenPedidoLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private VendedorEntity vendedor = new VendedorEntity();
-   private CompradorEntity comprador = new CompradorEntity();
-    private List<OrdenPedidoEntity> data = new ArrayList<>();
+    
+    private List<CompradorEntity> dataComprador = new ArrayList<CompradorEntity>();
+     private List<VendedorEntity> dataVendedor = new ArrayList<VendedorEntity>();
+        private List<ComicEntity> dataComics = new ArrayList<ComicEntity>();
+     private List<OrdenPedidoEntity> data = new ArrayList<>();
     
         @Deployment
     public static JavaArchive createDeployment() {
@@ -81,42 +84,58 @@ public class VendedorOrdenPedidoLogicTest {
         }
     }
      private void clearData() {
+         em.createQuery("delete from OrdenPedidoEntity").executeUpdate();
+         em.createQuery("delete from ComicEntity").executeUpdate();
+         em.createQuery("delete from CompradorEntity").executeUpdate();
+         
         em.createQuery("delete from VendedorEntity").executeUpdate();
-        em.createQuery("delete from OrdenPedidoEntity").executeUpdate();
+        
+        
     }
         private void insertData() {
-        for (int i = 0; i < 3; i++) {
-            comprador = factory.manufacturePojo(CompradorEntity.class);
-            em.persist(comprador);
+        
+            for (int i = 0; i < 3; i++) {
+            ComicEntity comics = factory.manufacturePojo(ComicEntity.class);
+            em.persist(comics);
+            dataComics.add(comics);
         }
-
-        vendedor = factory.manufacturePojo(VendedorEntity.class);
-        vendedor.setId(1L);
-        vendedor.setOrdenes(new ArrayList<>());
-        em.persist(vendedor);
-
         for (int i = 0; i < 3; i++) {
-            OrdenPedidoEntity entity = factory.manufacturePojo(OrdenPedidoEntity.class);
-          
-            entity.setVendedor(vendedor);
+            VendedorEntity entity = factory.manufacturePojo(VendedorEntity.class);
+            em.persist(entity);
+            dataVendedor.add(entity);
            
+        }
+          for (int i = 0; i < 3; i++) {
+           CompradorEntity entity = factory.manufacturePojo(CompradorEntity.class);
+            em.persist(entity);
+            dataComprador.add(entity);
+           
+        }
+            for (int i = 0; i < 3; i++) {
+           OrdenPedidoEntity entity = factory.manufacturePojo(OrdenPedidoEntity.class);
             em.persist(entity);
             data.add(entity);
-            vendedor.getOrdenes().add(entity);
+          
         }
+           
+           
+        
     }
        @Test
     public void addOrdenTest() throws BusinessLogicException {
-   OrdenPedidoEntity ordenEntity = data.get(1);
-   OrdenPedidoEntity response=vendedorOrdenLogic.addOrden(vendedor.getId(), ordenEntity.getId());
+   OrdenPedidoEntity ordenEntity = data.get(0);
+   OrdenPedidoEntity response=vendedorOrdenLogic.addOrden(dataVendedor.get(0).getId(), ordenEntity.getId());
    Assert.assertNotNull(response);
    Assert.assertEquals(ordenEntity.getId(),response.getId());
-   
+   Assert.assertEquals(ordenEntity.getEstado(),response.getEstado());
+   Assert.assertEquals(ordenEntity.getVendedor(),response.getVendedor());
     }
     
-   /* @Test
-    public void getBooksTest(){
-        List<OrdenPedidoEntity> lista=vendedorOrdenLogic.getOrdenes(vendedor.getId());
-    Assert.assertEquals(1,lista.size());
-    } */  
+    @Test
+    public void getOrdenesTest(){
+        
+        List<OrdenPedidoEntity> lista=vendedorOrdenLogic.getOrdenes(dataVendedor.get(0).getId());
+    
+        Assert.assertEquals(0,lista.size());
+    }  
 }

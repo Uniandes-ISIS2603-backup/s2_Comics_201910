@@ -39,7 +39,15 @@ private final static Logger LOGGER = Logger.getLogger(VendedorDTO.class.getName(
     {
       //  vendedores = new HashMap<String, VendedorDTO>();
     }
-    
+      /**
+     * Crea un nuevo vendedor con la informacion que se recibe en el cuerpo de la
+     * petición y se regresa un objeto identico con un id auto-generado por la
+     * base de datos.
+     *
+     * @param vendedor {@link VendedorDTO} - EL vendedor que se desea guardar.
+     * @return JSON {@link VendedorDTO} - El vendedor guardado con el atributo id
+     * autogenerado.
+     */
     @POST
     public VendedorDTO crearVendedor(VendedorDTO vendedor) throws BusinessLogicException
     {
@@ -49,7 +57,12 @@ private final static Logger LOGGER = Logger.getLogger(VendedorDTO.class.getName(
         LOGGER.log(Level.INFO, "VendedorResource createVendedor: output: {0}", vendedorDTO);
         return vendedorDTO;
     }
-    
+     /**
+     * Busca y devuelve todos los vendedores que existen en la aplicacion.
+     *
+     * @return JSONArray {@link VendedorDetailDTO} - Los vendedores encontrados en la
+     * aplicación. Si no hay ninguno retorna una lista vacía.
+     */
     @GET
     public List<VendedorDetailDTO> getVendedores()
     {
@@ -58,7 +71,15 @@ private final static Logger LOGGER = Logger.getLogger(VendedorDTO.class.getName(
         LOGGER.log(Level.INFO, "AuthorResource getAuthors: output: {0}", listaVendedores);
         return listaVendedores;
     }
-    
+     /**
+     * Busca el autor con el id asociado recibido en la URL y lo devuelve.
+     *
+     * @param vendedoresId Identificador del vendedor que se esta buscando. Este debe
+     * ser una cadena de dígitos.
+     * @return JSON {@link VendedorDetailDTO} - El vendedor buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el vendedor.
+     */
      @GET
     @Path("{vendedoresId: \\d+}")
     public VendedorDetailDTO getVendedor(@PathParam("vendedoresId") Long vendedoresId) {
@@ -85,6 +106,18 @@ private final static Logger LOGGER = Logger.getLogger(VendedorDTO.class.getName(
         }
         return VendedorOrdenPedidoResource.class;
     }
+       /**
+     * Actualiza el vendedor con el id recibido en la URL con la información que se
+     * recibe en el cuerpo de la petición.
+     *
+     * @param vendedoresId Identificador del vendedor que se desea actualizar. Este
+     * debe ser una cadena de dígitos.
+     * @param vendedores {@link VendedorDetailDTO} El vendedor que se desea guardar.
+     * @return JSON {@link VendedorDetailDTO} - El vendedor guardado.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el vendedor a
+     * actualizar.
+     */
       @PUT
     @Path("{vendedoresId: \\d+}")
     public VendedorDetailDTO updateVendedor(@PathParam("vendedoresId") Long vendedoresId, VendedorDetailDTO vendedor) {
@@ -97,6 +130,15 @@ private final static Logger LOGGER = Logger.getLogger(VendedorDTO.class.getName(
         LOGGER.log(Level.INFO, "AuthorResource updateAuthor: output: {0}", detailDTO);
         return detailDTO;
     }
+     /**
+     * Borra el vendedor con el id asociado recibido en la URL.
+     *
+     * @param vendedoresId Identificador del autor que se desea borrar. Este debe
+     * ser una cadena de dígitos.
+
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper}
+     * Error de lógica que se genera cuando no se encuentra el vendedor a borrar.
+     */
     @DELETE
     @Path("{vendedoresId: \\d+}")
     public void deleteVendedor(@PathParam("vendedoresId") Long vendedoresId) throws BusinessLogicException {

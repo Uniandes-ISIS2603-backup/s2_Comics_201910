@@ -27,6 +27,14 @@ public class VendedorDetailDTO extends VendedorDTO implements Serializable
     super();
     
     }
+       /**
+     * Crea un objeto VendedorDetailDTO a partir de un objeto VendedorEntity
+     * incluyendo los atributos de VendedorDTO.
+     *
+     * @param vendedorEntity Entidad VendedorEntity desde la cual se va a crear el
+     * nuevo objeto.
+     *
+     */
     public VendedorDetailDTO(VendedorEntity vendedorEntity){
         super(vendedorEntity);
         if(vendedorEntity!=null){
@@ -44,6 +52,14 @@ public class VendedorDetailDTO extends VendedorDTO implements Serializable
             }
         }
     }
+    
+      /**
+     * Convierte un objeto VendedorDetailDTO a VendedorEntity incluyendo los
+     * atributos de VendedorDTO.
+     *
+     * @return Nueva objeto VendedorEntity.
+     *
+     */
     @Override
     public VendedorEntity toEntity(){
         VendedorEntity vendedorEntity=super.toEntity();

@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "2a142223-fb83-4d23-8958-bb0ec194db22",
+		"name": "CompradorResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/comprador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a4e2c699-233a-47af-8efa-bae910e057f0",
+						"exec": [
+							"tests[\"No genera error en el Get\"]=responseCode.code===200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/comprador",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"comprador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/comprador/8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81ce5a94-2054-42ca-afe7-cadab7b5c393",
+						"exec": [
+							"tests[\"No genera error en el Get\"]=responseCode.code===404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/comprador/8",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"comprador",
+						"8"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

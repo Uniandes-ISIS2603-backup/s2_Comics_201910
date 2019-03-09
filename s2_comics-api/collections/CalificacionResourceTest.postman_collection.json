@@ -1,55 +1,17 @@
 {
 	"info": {
-		"_postman_id": "0a939636-7b36-4bc3-bd7f-bd53571a68b3",
-		"name": "VendedorResourceTest",
-		"description": "Vendedor Resource Test",
+		"_postman_id": "1ad6b348-925d-49d7-82f1-4781f5a607e9",
+		"name": "CalificacionResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores",
+			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/4/calificaciones",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "77b90016-3913-4d60-824a-e50c157bfee6",
-						"exec": [
-							"tests[\"No genera error en el Get\"]=responseCode.code===200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s2_comics-api",
-						"api",
-						"vendedores"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "67e6b144-5a9c-40e1-9b2f-5f19e9484615",
+						"id": "3d6ed3e2-5698-4654-84c8-f064fbd4d630",
 						"exec": [
 							"tests[\"No genera error en el Get\"]=responseCode.code===200;"
 						],
@@ -69,10 +31,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\"comprador\":\"juan antonio\",\"vendedor\":\"www.google.com\",\"intereses\":\"intereses\",\"alias\":\"elddgcejas\",\"correoElectronico\":\"owowadaoiiuwo@keklmao.com\"\r\n\r\n}"
+					"raw": " {\"puntuacion\":4,\"comentarios\":\"yessir\"\r\n\r\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores",
+					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/4/calificaciones",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -81,19 +43,70 @@
 					"path": [
 						"s2_comics-api",
 						"api",
-						"vendedores"
+						"vendedores",
+						"4",
+						"calificaciones"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/6",
+			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/4/calificaciones",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "6c5e57e2-a029-4666-86ad-7618c5a09543",
+						"id": "23850925-63a2-4167-aa0f-a8073f73f6e6",
+						"exec": [
+							"tests[\"No genera error en el Get\"]=responseCode.code===200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/4/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"vendedores",
+						"4",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/4/calificaciones/9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "388e3499-533d-41a8-81d6-b3667afceea9",
 						"exec": [
 							"tests[\"No genera error en el Get\"]=responseCode.code===200;"
 						],
@@ -113,10 +126,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\"comprador\":\"juan antonio\",\"vendedor\":\"www.google.com\",\"intereses\":\"intereses\",\"alias\":\"elddgcejas\",\"correoElectronico\":\"owowadaoiiuwo@keklmao.com\"\r\n\r\n}"
+					"raw": " {\"puntuacion\":4,\"comentarios\":\"nosir\",\r\n\"id\":9\r\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/6",
+					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/4/calificaciones/9",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -126,19 +139,21 @@
 						"s2_comics-api",
 						"api",
 						"vendedores",
-						"6"
+						"4",
+						"calificaciones",
+						"9"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/2",
+			"name": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/4/calificaciones/9",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "30d440d7-7da6-43cf-90ed-0ae8ff2ada30",
+						"id": "dc7b537f-872f-4f8e-b6e3-97cc3e909e55",
 						"exec": [
 							"tests[\"No genera error en el Get\"]=responseCode.code===204;"
 						],
@@ -148,13 +163,20 @@
 			],
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/2",
+					"raw": "http://{{ip}}:{{puerto}}/s2_comics-api/api/vendedores/4/calificaciones/9",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -164,7 +186,9 @@
 						"s2_comics-api",
 						"api",
 						"vendedores",
-						"2"
+						"4",
+						"calificaciones",
+						"9"
 					]
 				}
 			},

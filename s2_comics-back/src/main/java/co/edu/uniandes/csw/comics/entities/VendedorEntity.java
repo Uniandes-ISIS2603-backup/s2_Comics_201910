@@ -69,6 +69,9 @@ public class VendedorEntity extends ColeccionistaEntity implements java.io.Seria
     public List<OrdenPedidoEntity> getOrdenes() {
         return ordenes;
     }
+     public void addOrden(OrdenPedidoEntity entity) {
+       ordenes.add(entity);
+    }
 
     /**
      * @param ordenes the ordenes to set

@@ -15,12 +15,20 @@ import java.util.logging.Logger;
  * @author estudiante
  */
 public class VendedorDTO extends ColeccionistaDTO implements Serializable
-{
+{ /**
+     * Constructor vacio
+     */
     public VendedorDTO()
     {
         
     }
-    
+     /**
+     * Crea un objeto VendedorDTO a partir de un objeto VendedorEntity.
+     *
+     * @param entity Entidad VendedorEntity desde la cual se va a crear el
+     * nuevo objeto.
+     *
+     */
     public VendedorDTO(VendedorEntity entity)
     {
         if(entity != null)
@@ -34,7 +42,12 @@ public class VendedorDTO extends ColeccionistaDTO implements Serializable
             
         }
     }
-    
+     /**
+     * Convierte un objeto VendedorDTO a VendedorEntity.
+     *
+     * @return Nueva objeto VendedorEntity.
+     *
+     */
     public VendedorEntity toEntity()
     {
         Logger LOGGER=Logger.getLogger(VendedorDTO.class.getName());

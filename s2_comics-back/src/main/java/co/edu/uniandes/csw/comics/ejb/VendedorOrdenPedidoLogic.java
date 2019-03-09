@@ -10,12 +10,14 @@ import co.edu.uniandes.csw.comics.entities.VendedorEntity;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
 import co.edu.uniandes.csw.comics.persistence.VendedorPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author ca.orduz
  */
+@Stateless
 public class VendedorOrdenPedidoLogic {
     @Inject
    private VendedorPersistence vendedorPersistence;
@@ -26,12 +28,15 @@ public class VendedorOrdenPedidoLogic {
     public OrdenPedidoEntity addOrden(Long vendedoresId,Long ordenesId){
         OrdenPedidoEntity orden=ordenPersistence.find(ordenesId);
         VendedorEntity vendedor=vendedorPersistence.find(vendedoresId);
+       
         vendedor.getOrdenes().add(orden);
+        
         return ordenPersistence.find(ordenesId);
     }
     
     public List<OrdenPedidoEntity> getOrdenes(Long vendedoresId){
-        return vendedorPersistence.find(vendedoresId).getOrdenes();
+        VendedorEntity vendedor= vendedorPersistence.find(vendedoresId);
+        return vendedor.getOrdenes();
     }
     
       public OrdenPedidoEntity getOrden(Long vendedoresId,Long ordenesId){

@@ -40,6 +40,15 @@ public class CalificacionResource {
     private static final Logger LOGGER=Logger.getLogger(CalificacionResource.class.getName());
      @Inject
      private CalificacionLogic calificacionLogic;
+      /**
+     * Crea una nueva calificacion con la informacion que se recibe en el cuerpo de la
+     * petición y se regresa un objeto identico con un id auto-generado por la
+     * base de datos.
+     *
+     * @param calificacion {@link CalificacionDTO} - La calificacion que se desea guardar.
+     * @return JSON {@link CalificacionDTO} - La calificacion guardado con el atributo id
+     * autogenerado.
+     */
       @POST
     public CalificacionDTO crearCalificacion (@PathParam("vendedoresId")Long vendedorId,CalificacionDTO calificacion)throws BusinessLogicException{
        LOGGER.log(Level.INFO, "CalificacionResource createReview: input: {0}", calificacion);
@@ -47,7 +56,12 @@ public class CalificacionResource {
          LOGGER.log(Level.INFO, "CalificacionResource createReview: output: {0}", nuevaCalificacion);
         return nuevaCalificacion;
     }
-    
+     /**
+     * Busca y devuelve todas las calificaciones que existen en la aplicacion.
+     *
+     * @return JSONArray {@link CalificacionDTO} - Las calificaciones encontrados en la
+     * aplicación. Si no hay ninguno retorna una lista vacía.
+     */
         @GET
     public List<CalificacionDTO> getCalificaciones (@PathParam("vendedoresId")Long vendedorId){
         LOGGER.log(Level.INFO, "CalificacionResource getReviews: input: {0}", vendedorId);
@@ -55,6 +69,15 @@ public class CalificacionResource {
         LOGGER.log(Level.INFO, "CalificacionResource getBooks: output: {0}", listaDTOs);
         return listaDTOs;
     }
+     /**
+     * Busca la calificacion con el id asociado recibido en la URL y lo devuelve.
+     *
+     * @param calificacionesId Identificador la calificaion que se esta buscando. Este debe
+     * ser una cadena de dígitos.
+     * @return JSON {@link CalificacionDTO} - La calificacion buscada
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la calificacion.
+     */
       @GET
       @Path("{calificacionesId: \\d+}")
     public CalificacionDTO getCalificacion (@PathParam("vendedoresId")Long vendedoresId,@PathParam("calificacionesId")Long calificacionesId)throws BusinessLogicException{
@@ -74,6 +97,18 @@ public class CalificacionResource {
         }
         return list;
     }
+         /**
+     * Actualiza la calificacion con el id recibido en la URL con la información que se
+     * recibe en el cuerpo de la petición.
+     *
+     * @param calificacionesId Identificador de la calificacion que se desea actualizar. Este
+     * debe ser una cadena de dígitos.
+     * @param calificacion {@link CalificacionDTO} La calificacion que se desea guardar.
+     * @return JSON {@link CalificacionDTO} - La calificacion guardado.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la calificacion a
+     * actualizar.
+     */
         @PUT
         @Path("{calificacionesId: \\d+}")
     public CalificacionDTO updateCalificacion(@PathParam("vendedoresId") Long vendedoresId, @PathParam("calificacionesId") Long calificacionesId, CalificacionDTO calificacion) throws BusinessLogicException {
@@ -91,6 +126,14 @@ public class CalificacionResource {
         return calificacionDTO;
 
     }
+    /**
+     * Borra la calificacion con el id asociado recibido en la URL.
+     *
+     * @param calificacionesId Identificador de la calificacion que se desea borrar. Este debe
+     * ser una cadena de dígitos.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper}
+     * Error de lógica que se genera cuando no se encuentra la calificacion a borrar.
+     */
     @DELETE
         @Path("{calificacionesId: \\d+}")
     public void deleteCalificacion(@PathParam("vendedoresId") Long vendedoresId, @PathParam("calificacionesId") Long calificacionesId) throws BusinessLogicException {
