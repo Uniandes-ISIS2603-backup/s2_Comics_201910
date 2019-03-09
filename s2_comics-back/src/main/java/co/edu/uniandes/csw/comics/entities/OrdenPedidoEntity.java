@@ -22,10 +22,25 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
 {
    
     /**
+     * estado de la orden, es una enumeracion, puede estar 
+     * 1. en espera: se genero la orden y esta esperando la confirmacion del vendedor
+     * 2. aceptado: el vendedor acepto la orden 
+     * 3. rechazado: el vendedor rechazo la orden
+     * 4. finalizado: se termino la transaccion, se entrego el producto
+     */
+    public static enum Estado{
+        EN_ESPERA,
+        ACEPTADO,
+        RECHAZADO,
+        FINALIZADO
+    }
+    /**
      * identificacdor de la orden de pedido
      */
     @Id
     private Long id;
+    
+    private Estado estado;
     
     @PodamExclude
     @ManyToOne
@@ -55,14 +70,7 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
     private Integer numeroComprasComprador;
 
     
-    /**
-     * estado de la orden, es una enumeracion, puede estar 
-     * 1. en espera: se genero la orden y esta esperando la confirmacion del vendedor
-     * 2. aceptado: el vendedor acepto la orden 
-     * 3. rechazado: el vendedor rechazo la orden
-     * 4. compelatado: se termino la transaccion, se entrego el producto
-     */
-    private Integer estado;
+    
    
     public OrdenPedidoEntity(){
         
@@ -114,21 +122,8 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
         this.numeroComprasComprador = numeroComprasComprador;
     }
 
-    /**
-     * @return the estado
-     */
-    public Integer getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(Integer estado) {
-        this.estado = estado;
-    }
-
-
+   
+    
     /**
      * @return the comprador
      */
@@ -187,7 +182,21 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
         this.trueque = trueque;
     }
     
-    
+  
 
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the estado
+     */
+    public Estado getEstado() {
+        return estado;
+    }
     
 }

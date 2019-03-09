@@ -54,7 +54,7 @@ public class ComicDeseoLogic {
      
     }
     
-    public List<ComicDeseoEntity> getComicsDeseo (){
+    public List<ComicDeseoEntity> getComicsDeseo(){
         
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los comics");
         List<ComicDeseoEntity> comics = persistenceComicD.findAll();

@@ -45,7 +45,7 @@ public class CompradorComicLogic
         return comprador.find(idComp).getCarro();
     }
     
-    public ComicEntity getComic(long idComp, long idCom) throws BusinessLogicException
+    public ComicEntity getComic(long idComp, long idCom)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de búsqueda del comic: {0} en el comprador: " + idComp, idCom);
         List<ComicEntity> comics = comprador.find(idComp).getCarro();
@@ -56,7 +56,7 @@ public class CompradorComicLogic
         {
             return comics.get(index);
         }
-        throw new BusinessLogicException("No se encontró el libro");
+        return null;
     } 
     
     public List<ComicEntity> replaceComics(long idComp, List<ComicEntity> comics)
@@ -88,8 +88,14 @@ public class CompradorComicLogic
         LOGGER.log(Level.INFO, "Inicia el proceso de eliminación del comic en el comprador con id: {0}", idComp);
         CompradorEntity entity = comprador.find(idComp);
         ComicEntity comEntity = comic.find(idComic);
-        //comEntity.getComprador().remove(entity);
-        entity.getCarro().remove(comEntity);
+        System.out.println("Tamaño del arreglo antes: " + comprador.find(idComp).getCarro().size());
+        comEntity.getCompradores().remove(entity);
+        //comprador.find(idComp).getCarro().remove(comEntity);
+        System.out.println("Tamaño del arreglo después: " + comprador.find(idComp).getCarro().size());
+        /*if(getComic(idComp, idComic) != null)
+        {
+            System.out.println("Error, aún sigue en el arreglo");
+        }*/
         LOGGER.log(Level.INFO, "Termina el proceso de eliminación del comic en el comprador con id: {0}", idComp);
     }
 }
