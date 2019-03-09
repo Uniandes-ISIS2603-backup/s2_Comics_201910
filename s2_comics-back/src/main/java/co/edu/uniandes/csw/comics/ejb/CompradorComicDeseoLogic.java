@@ -15,8 +15,8 @@ import javax.ejb.*;
 import javax.inject.Inject;
 
 /**
- * Clase que implementa la conexion con la persistencia para la entidad de Comprador
- * @author juan pablo cano
+ * Clase que implementa la conexion con la persistencia para la relación entre Comprador y comicDeseo
+ * @Comprador juan pablo cano
  */
 @Stateless
 public class CompradorComicDeseoLogic 
@@ -29,6 +29,13 @@ public class CompradorComicDeseoLogic
     @Inject
     private ComicDeseoPersistence comicDeseoPersistence;
     
+    /**
+     * Asocia un ComicDeseo existente a un Comprador
+     *
+     * @param idComprador Identificador de la instancia de Comprador
+     * @param idComicDeseo Identificador de la instancia de ComicDeseo
+     * @return Instancia de ComicDeseoEntity que fue asociada a Comprador
+     */
     public ComicDeseoEntity addComicListaDeseo(long idComprador, long idComicDeseo)
     {
         LOGGER.log(Level.INFO, "Se inicia el proceso de asociación del comicDeseo con id: {0} al comprador con id: {1}", new Object[]{idComicDeseo, idComprador});
@@ -39,6 +46,14 @@ public class CompradorComicDeseoLogic
         return comicDeseo;
     }
     
+    /**
+     * Obtiene una colección de instancias de ComicDeseoEntity asociadas a una
+     * instancia de Comprador
+     *
+     * @param idComprador Identificador de la instancia de Comprador
+     * @return Colección de instancias de ComicDeseoEntity asociadas a la instancia de
+     * Comprador
+     */
     public List<ComicDeseoEntity> getListaDeseos(long idComprador)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de busqueda de lista deseos del comprador con id: {0}", idComprador);
@@ -47,6 +62,14 @@ public class CompradorComicDeseoLogic
         return entity.getListaDeseos();
     }
     
+    /**
+     * Obtiene una instancia de ComicDeseoEntity asociada a una instancia de Comprador
+     *
+     * @param idComprador Identificador de la instancia de Comprador
+     * @param idComicDeseo Identificador de la instancia de ComicDeseo
+     * @return La entidadd de Libro del comprador
+     * @throws BusinessLogicException Si el libro no está asociado al comprador
+     */
     public ComicDeseoEntity getComicDeseo(long idComprador, long idComic) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Inicia proceso de búsqueda del comic: {0} en el comprador: {1}", new Object[]{idComic, idComprador});
@@ -61,6 +84,14 @@ public class CompradorComicDeseoLogic
         throw new BusinessLogicException("El comic no fue encontrado en la lista de deseos");
     }
     
+    /**
+     * Remplaza las instancias de ComicDeseo asociadas a una instancia de Comprador
+     *
+     * @param CompradorId Identificador de la instancia de Comprador
+     * @param list Colección de instancias de ComicDeseoEntity a asociar a instancia
+     * de Comprador
+     * @return Nueva colección de ComicDeseoEntity asociada a la instancia de Comprador
+     */
     public List<ComicDeseoEntity> replaceComicsDeseo(long idComprador, List<ComicDeseoEntity> list)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los comics deseo asocidos al comprador con id = {0}", idComprador);
@@ -70,6 +101,12 @@ public class CompradorComicDeseoLogic
         return compradorEntity.getListaDeseos();
     }
     
+    /**
+     * Desasocia un ComicDeseo existente de un Comprador existente
+     *
+     * @param idComprador Identificador de la instancia de Comprador
+     * @param idComicDeseo Identificador de la instancia de ComicDeseo
+     */
     public void removeComic(long idComprador, long idComic)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de eliminacion del comic deseo con id: {0} asociado al comprador con id: {1}", new Object[]{idComic, idComprador});
