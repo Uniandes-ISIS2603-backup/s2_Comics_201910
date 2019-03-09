@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.comics.test.logic;
 
 
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoLogic;
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.CompradorEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.entities.VendedorEntity;
@@ -53,6 +54,9 @@ public class OrdenPedidoLogicTest {
  
     private List<VendedorEntity> dataVendedores = new ArrayList<VendedorEntity>();
  
+    private List<ComicEntity> dataComic = new ArrayList<ComicEntity>();
+ 
+    private List<ComicEntity> dataTrueque = new ArrayList<ComicEntity>();
    
     private List<CompradorEntity> dataCompradores =  new ArrayList<CompradorEntity>() ;
     
@@ -106,6 +110,20 @@ public class OrdenPedidoLogicTest {
            
             dataVendedores.add(entity);
         }
+                    for (int i = 0; i < 3; i++) {
+                        ComicEntity entity = factory.manufacturePojo(ComicEntity.class);
+            em.persist(entity);
+           
+            dataComic.add(entity);
+        }
+                      for (int i = 0; i < 3; i++) {
+                        ComicEntity entity = factory.manufacturePojo(ComicEntity.class);
+            em.persist(entity);
+           
+            dataTrueque.add(entity);
+        }
+                    
+                    
                             for (int i = 0; i < 3; i++) {
             CompradorEntity entity = factory.manufacturePojo(CompradorEntity.class);
             em.persist(entity);
@@ -129,7 +147,7 @@ public class OrdenPedidoLogicTest {
          entity.setComprador(dataCompradores.get(1));
         try
         {
-            OrdenPedidoEntity result = ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId() );
+            OrdenPedidoEntity result = ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId() );
             
             Assert.assertNotNull(result);
             OrdenPedidoEntity newEntity = em.find(OrdenPedidoEntity.class, result.getId());
@@ -143,28 +161,7 @@ public class OrdenPedidoLogicTest {
             Assert.fail(e.getMessage());
         }
     }
-    
-  
    
-    
-   /**
-    @Test
-    public void crearCompradorMismoMail()
-    {
-        try
-        {
-            CompradorEntity entity = factory.manufacturePojo(CompradorEntity.class);
-            entity.setEmail(data.get(1).getEmail());
-            Assert.assertEquals(entity.getEmail(), data.get(1).getEmail());
-            comprador.createComprador(entity);
-            Assert.fail("No genera exception cuando se crea un comprador que ya existe.");
-        }
-        catch(Exception e)
-        {
-            //Debería generar exception.
-        }        
-    }
-    * */
     
     @Test
     public void crearOrdenPedidoMismoId()
@@ -177,7 +174,7 @@ public class OrdenPedidoLogicTest {
       
             entity.setId(data.get(2).getId());
             Assert.assertEquals(entity.getId(), data.get(2).getId());
-            OrdenPedidoEntity a =ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId());
+            OrdenPedidoEntity a =ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId());
             Assert.assertNull("No debería crear un comprador con un Id existente",a );
         }
         catch(Exception e)
@@ -191,7 +188,7 @@ public class OrdenPedidoLogicTest {
     {
         List<OrdenPedidoEntity> lista = ordenPedido.getOrdenesPedido();
         Assert.assertEquals(data.size(), lista.size());
-     /**  for(OrdenPedidoEntity entity : lista)
+     /** for(OrdenPedidoEntity entity : lista)
         {   int i =0;
             boolean found = false;
             for(OrdenPedidoEntity stored : data)

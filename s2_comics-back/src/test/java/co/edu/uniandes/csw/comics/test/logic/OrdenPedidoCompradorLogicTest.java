@@ -116,8 +116,8 @@ public class OrdenPedidoCompradorLogicTest {
     }
     
      /**
-     * Prueba para remplazar las instancias de Books asociadas a una instancia
-     * de Editorial.
+     * Prueba para remplazar las instancias de Vendedor asociadas a una instancia
+     * de OrdenPedido.
      */
     @Test
     public void replaceVendedorTest() {
