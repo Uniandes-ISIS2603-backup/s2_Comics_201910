@@ -107,20 +107,16 @@ public class VendedorOrdenPedidoLogicTest {
     }
        @Test
     public void addOrdenTest() throws BusinessLogicException {
-        OrdenPedidoEntity newOrden = factory.manufacturePojo(OrdenPedidoEntity.class);
-        newOrden.setComprador(comprador);
-       newOrden.setVendedor(vendedor);
-        ordenPedidoLogic.createOrdenPedido(newOrden, comprador.getId(), vendedor.getId());
-        OrdenPedidoEntity ordenPedidoEntity = vendedorOrdenLogic.addOrden(vendedor.getId(), newOrden.getId());
-        Assert.assertNotNull(ordenPedidoEntity);
-
-        
-        Assert.assertEquals(ordenPedidoEntity.getComic(), newOrden.getComic());
-        Assert.assertEquals(ordenPedidoEntity.getVendedor(), newOrden.getVendedor());
-        Assert.assertEquals(ordenPedidoEntity.getEstado(), newOrden.getEstado());
-        Assert.assertEquals(ordenPedidoEntity.getTarjetaCredito(), newOrden.getTarjetaCredito());
-
-        
+   OrdenPedidoEntity ordenEntity = data.get(1);
+   OrdenPedidoEntity response=vendedorOrdenLogic.addOrden(vendedor.getId(), ordenEntity.getId());
+   Assert.assertNotNull(response);
+   Assert.assertEquals(ordenEntity.getId(),response.getId());
    
+    }
+    
+    @Test
+    public void getBooksTest(){
+        List<OrdenPedidoEntity> lista=vendedorOrdenLogic.getOrdenes(vendedor.getId());
+    Assert.assertEquals(1,lista.size());
     }
 }
