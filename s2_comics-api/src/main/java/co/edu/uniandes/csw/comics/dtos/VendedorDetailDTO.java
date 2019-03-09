@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.comics.entities.CalificacionEntity;
 import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.entities.VendedorEntity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author estudiante
  */
-public class VendedorDetailDTO extends VendedorDTO
+public class VendedorDetailDTO extends VendedorDTO implements Serializable
 {
     private List<ComicDTO> comics;
     private List<CalificacionDTO> calificaciones;
