@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author estudiante
+ * @author jp.rodriguezv
  */
 @Path("ordenesPedido/{ordenPedidoId: \\d+}/comprador")
 @Consumes(MediaType.APPLICATION_JSON)
