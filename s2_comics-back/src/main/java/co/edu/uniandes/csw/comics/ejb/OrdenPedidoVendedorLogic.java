@@ -47,5 +47,10 @@ public class OrdenPedidoVendedorLogic {
         return ordenPedidoEntity;
     }
  
- 
+ public VendedorEntity getVendedor(long idOrdenPedido)
+    {
+       VendedorEntity vendedor = ordenPedidoPersistence.find(idOrdenPedido).getVendedor();
+             return vendedor;
+   
+    } 
 }

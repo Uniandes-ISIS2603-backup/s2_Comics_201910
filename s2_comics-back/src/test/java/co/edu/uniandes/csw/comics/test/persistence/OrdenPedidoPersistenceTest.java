@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.comics.test.persistence;
 
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
+import co.edu.uniandes.csw.comics.entities.CompradorEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
+import co.edu.uniandes.csw.comics.entities.VendedorEntity;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
 import java.util.List;
 import java.util.*;
@@ -103,10 +106,19 @@ public class OrdenPedidoPersistenceTest {
         PodamFactory podam = new PodamFactoryImpl();
         for(int i = 0; i < 3; i++)
         {
+            ComicEntity comic = podam.manufacturePojo(ComicEntity.class);
+            ComicEntity trueque =podam.manufacturePojo(ComicEntity.class);
+            CompradorEntity comprador= podam.manufacturePojo(CompradorEntity.class);
+            VendedorEntity vendedor = podam.manufacturePojo(VendedorEntity.class);
             OrdenPedidoEntity comp = podam.manufacturePojo(OrdenPedidoEntity.class);
+            comp.setComic(comic);
+            comp.setTrueque(trueque);
+            comp.setComprador(comprador);
+            comp.setVendedor(vendedor);
             em.persist(comp);
             data.add(comp);
         }
+        
     }
    
     /**
@@ -198,4 +210,44 @@ public class OrdenPedidoPersistenceTest {
        Assert.assertEquals(entity.getEstado(), OrdenPedidoEntity.Estado.EN_ESPERA);
        
     }
+   
+    /**
+     * prueba del correcto funcinamiento del metodo getComic de la base de datos  
+     */
+    @Test
+    public void getComicTest(){
+        OrdenPedidoEntity ordenPedidoEntity = data.get(0);
+        ComicEntity comic = ordenPedidoEntity.getComic() ;
+         Assert.assertEquals(comic.getAutor(), ordenPedidoEntity.getComic().getAutor());
+    }
+    
+     /**
+     * prueba del correcto funcinamiento del metodo getComicTrueque de la base de datos  
+     */
+     @Test
+    public void getComicTruequeTest(){
+        OrdenPedidoEntity ordenPedidoEntity = data.get(0);
+        ComicEntity comic = ordenPedidoEntity.getTrueque() ;
+         Assert.assertEquals(comic.getAutor(), ordenPedidoEntity.getTrueque().getAutor());
+    }
+     /**
+     * prueba del correcto funcinamiento del metodo getComprador de la base de datos  
+     */
+     @Test
+    public void getCompradorTest(){
+        OrdenPedidoEntity ordenPedidoEntity = data.get(0);
+         CompradorEntity comprador = ordenPedidoEntity.getComprador() ;
+         Assert.assertEquals(comprador.getAlias(), ordenPedidoEntity.getComprador().getAlias());
+    }
+     /**
+     * prueba del correcto funcinamiento del metodo getVendedor de la base de datos  
+     */
+     @Test
+    public void getVendedorTest(){
+        OrdenPedidoEntity ordenPedidoEntity = data.get(0);
+        Assert.assertNotNull( "no deberia ser nulo", ordenPedidoEntity.getVendedor() );
+    }
+    
+    
+    
 }

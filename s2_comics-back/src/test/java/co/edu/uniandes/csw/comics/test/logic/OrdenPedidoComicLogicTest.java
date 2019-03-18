@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.comics.ejb.OrdenPedidoComicLogic;
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoLogic;
 import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
+import co.edu.uniandes.csw.comics.entities.VendedorEntity;
+import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,4 +134,18 @@ public class OrdenPedidoComicLogicTest {
         Assert.assertEquals(entity.getComic(), comicData.get(1));
     }
 
+    /**
+     * prueba para comprobar el correcto funcionamiento del metodo getComic
+     * @throws BusinessLogicException 
+     */
+     @Test 
+     public void getComicTest()throws BusinessLogicException{
+        OrdenPedidoEntity entity=ordenPedidoData.get(0);
+        ComicEntity comicEntity=comicData.get(0);
+        ComicEntity response=ordenPedidoComicLogic.getComic(entity.getId());
+      Assert.assertEquals(comicEntity.getAutor(), response.getAutor());
+   
+        
+        
+     }
 }

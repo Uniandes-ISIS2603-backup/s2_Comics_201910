@@ -45,7 +45,12 @@ public class OrdenPedidoCompradorLogic {
         LOGGER.log(Level.INFO, "Termina proceso de actualizar ordenPedido con id = {0}", ordenPedidoEntity.getId());
         return ordenPedidoEntity;
     }
- 
+ public CompradorEntity getComprador(long idOrdenPedido)
+    {
+       CompradorEntity comprador = ordenPedidoPersistence.find(idOrdenPedido).getComprador();
+             return comprador;
+   
+    } 
  
     
 }

@@ -47,6 +47,12 @@ public class OrdenPedidoComicLogic {
         return ordenPedidoEntity;
     }
  
+  public ComicEntity getComic(long idOrdenPedido)
+    {
+       ComicEntity comic = ordenPedidoPersistence.find(idOrdenPedido).getComic();
+             return comic;
+   
+    } 
  
      
 }

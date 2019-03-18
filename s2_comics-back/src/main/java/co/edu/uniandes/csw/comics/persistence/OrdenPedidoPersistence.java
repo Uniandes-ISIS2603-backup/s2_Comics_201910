@@ -66,10 +66,10 @@ public class OrdenPedidoPersistence {
      */
     public List<OrdenPedidoEntity> findAll (){
         
-     LOGGER.log(Level.INFO, "Se buscarán todos las ordenes Pedido");
+    LOGGER.log(Level.INFO, "Consultar todos las ordenesPedido");
         Query q = em.createQuery("select u from OrdenPedidoEntity u");
         return q.getResultList();
-    
+   
     }
     
     /**

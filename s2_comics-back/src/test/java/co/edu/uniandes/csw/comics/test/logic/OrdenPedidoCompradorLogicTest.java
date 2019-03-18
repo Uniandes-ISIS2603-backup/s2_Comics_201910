@@ -7,8 +7,10 @@ package co.edu.uniandes.csw.comics.test.logic;
 
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoLogic;
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoCompradorLogic;
+import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.entities.CompradorEntity;
+import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -133,4 +135,15 @@ public class OrdenPedidoCompradorLogicTest {
         Assert.assertEquals(entity.getComprador(), compradorData.get(1));
     }
 
+    /**
+     * metodo para comprobar el correcto funcionamiento del metodo getComprador
+     * @throws BusinessLogicException 
+     */
+     @Test 
+     public void getCompradorTest()throws BusinessLogicException{
+        OrdenPedidoEntity entity=ordenPedidoData.get(0);
+        CompradorEntity compradorEntity=compradorData.get(0);
+        CompradorEntity response=ordenPedidoCompradorLogic.getComprador(entity.getId());
+      Assert.assertEquals(compradorEntity.getAlias(), response.getAlias());
+}
 }
