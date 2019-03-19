@@ -148,7 +148,7 @@ public class ComicDeseoComicLogicTest {
      * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
      */
     @Test(expected = BusinessLogicException.class)
-    public void removePrizeSinAuthorTest() throws BusinessLogicException {
+    public void removeComicDeseoSinAuthorTest() throws BusinessLogicException {
         cDCL.removeComic(cDD.get(1).getId());
                
     }
