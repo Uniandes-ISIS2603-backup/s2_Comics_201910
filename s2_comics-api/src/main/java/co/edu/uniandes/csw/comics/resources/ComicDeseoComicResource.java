@@ -28,8 +28,8 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Sebastian Baquero
  */
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Produces("application/json")
+@Consumes("application/json")
 public class ComicDeseoComicResource {
     
      private static final Logger LOGGER = Logger.getLogger(ComicDeseoComicResource.class.getName());

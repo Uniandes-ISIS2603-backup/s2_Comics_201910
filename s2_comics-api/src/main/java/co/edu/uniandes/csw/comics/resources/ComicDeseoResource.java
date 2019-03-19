@@ -94,7 +94,7 @@ public class ComicDeseoResource {
       ComicDeseoEntity entity = comicDLogic.getComicDeseo(comicDeseoId);
      if(entity == null){
      
-       //  throw new WebApplicationException("El recurso/compradores/"+compradoresAlias + "/comicDeseo/"+comicDeseoId+"no existe.", 404);
+        throw new WebApplicationException("El recurso/comicDeseo/"+comicDeseoId+"no existe.", 404);
          
      }
      ComicDeseoDTO comicDDTO = new ComicDeseoDTO(entity);
@@ -113,7 +113,7 @@ public class ComicDeseoResource {
  
       ComicDeseoEntity entity = comicDLogic.getComicDeseo( comicsDeseoId);
       if(entity == null){
-      //throw new WebApplicationException("El recurso/compradores/"+compradoresAlias+"/comicsDeseo/"+comicsDeseoId+"no existe.", 404);
+      throw new WebApplicationException("El recurso/comicsDeseo/"+comicsDeseoId+"no existe.", 404);
       }
       comicDLogic.deleteComicDeseo( comicsDeseoId);
   }
