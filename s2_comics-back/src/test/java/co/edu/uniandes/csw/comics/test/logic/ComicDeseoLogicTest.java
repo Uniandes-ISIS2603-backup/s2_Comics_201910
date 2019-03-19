@@ -113,6 +113,7 @@ public class ComicDeseoLogicTest {
         for (int i = 0; i < 3; i++) {
             ComicDeseoEntity entity = factory.manufacturePojo(ComicDeseoEntity.class);
             entity.setComic(dataComics.get(0));
+            
             em.persist(entity);
             data.add(entity);
         }

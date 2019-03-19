@@ -65,8 +65,14 @@ public class ComicEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToOne
     private ComicEntity deTrueque;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "comic")
+    private List<ComicDeseoEntity> comicsDeseo = new ArrayList<ComicDeseoEntity>();
+    
 
     public ComicEntity(){}
+    
     
     /**
      * @return the nombre
@@ -248,6 +254,20 @@ public class ComicEntity extends BaseEntity implements Serializable {
      */
     public void setInformacion(String informacion) {
         this.informacion = informacion;
+    }
+
+    /**
+     * @return the comicsDeseo
+     */
+    public List<ComicDeseoEntity> getComicsDeseo() {
+        return comicsDeseo;
+    }
+    
+    /**
+     * @param comic the comics to set
+     */
+    public void setComics(List<ComicDeseoEntity> comicsD){
+    this.comicsDeseo = comicsD;
     }
     
     

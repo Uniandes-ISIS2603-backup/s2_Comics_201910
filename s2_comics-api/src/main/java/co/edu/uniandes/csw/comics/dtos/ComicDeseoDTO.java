@@ -47,13 +47,29 @@ public class ComicDeseoDTO implements Serializable {
         this.comic = comic;
     }
  
+    /**
+     * Modela la fecha de agregado del comic al la lista de comic deoseo
+     */
+   
    private SimpleDateFormat fechaAgregado;
+   
+   /**
+     * Modela el comic asociado al comic deseo
+     */
    private ComicDTO comic;
     
-    
+    /**
+     * Constructor vacio
+     */
     public ComicDeseoDTO (){
     
     }
+    
+    /**
+     * Constructor convierte entity to DTO
+     * @param entity comic deoseo
+     * @return ComicDeseoDTO
+     */
    public ComicDeseoDTO (ComicDeseoEntity entity){
        
         
@@ -70,6 +86,10 @@ public class ComicDeseoDTO implements Serializable {
          }
        
    }
+   /**
+    * Convierte DTO to entity
+    * @return 
+    */
    
    public ComicDeseoEntity toEntity (){
    

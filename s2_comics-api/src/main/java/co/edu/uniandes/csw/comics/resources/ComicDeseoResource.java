@@ -40,12 +40,18 @@ public class ComicDeseoResource {
  
   private static final Logger LOGGER = Logger.getLogger(ComicDeseoResource.class.getName());
   
+  /**
+   * Inyecta la logica cunado se hace el llamado del recurso
+   */
   @Inject
   private ComicDeseoLogic comicDLogic;
   
-  
-  @POST
-  public ComicDeseoDTO createComicDeseo (@PathParam("comicId") Long comicId,ComicDeseoDTO pComicD)throws BusinessLogicException, Exception{
+  /**
+   * Crea un comic deseo cuando se llama a POST del recurso
+   */
+ 
+   @POST
+  public ComicDeseoDTO createComicDeseo (@PathParam("comicDeseoId") Long comicId,ComicDeseoDTO pComicD)throws BusinessLogicException, Exception{
   
         
         LOGGER.log(Level.INFO, "ComicDeseoResource createComicDeseo: input: {0}", pComicD);
@@ -62,6 +68,10 @@ public class ComicDeseoResource {
      
   }
   
+  /**
+   * Trae los comic deseo
+   */
+  
   @GET
   public List<ComicDeseoDTO> getComicsDeseos (){
       
@@ -71,9 +81,14 @@ public class ComicDeseoResource {
        return listaComicsDDTO;
   }
   
+  /**
+   * Trae un comic deseo con id
+   * @PARAM comic deseo id
+   */
+  
   @GET
-  @Path("{comicsDeseoId:\\d+}")
-  public ComicDeseoDTO findComicDeseoXId ( @PathParam("comicsDeseoId") Long comicDeseoId)throws BusinessLogicException{
+  @Path("{comicDeseoId:\\d+}")
+  public ComicDeseoDTO findComicDeseoXId ( @PathParam("comicDeseoId") Long comicDeseoId)throws BusinessLogicException{
      
       LOGGER.log(Level.INFO, "ComicDeseoResource findComicDeseoXId: input: {0}", comicDeseoId);
       ComicDeseoEntity entity = comicDLogic.getComicDeseo(comicDeseoId);
@@ -88,9 +103,13 @@ public class ComicDeseoResource {
       
   }
   
+  /*
+  * Borrar el comic deseo 
+  */
+ 
   @DELETE
-  @Path("{comicsDeseoId: \\d+}")
-  public void deleteComicDeseo ( @PathParam("comicsDeseoId") Long comicsDeseoId) throws BusinessLogicException{
+  @Path("{comicDeseoId: \\d+}")
+  public void deleteComicDeseo ( @PathParam("comicDeseoId") Long comicsDeseoId) throws BusinessLogicException{
  
       ComicDeseoEntity entity = comicDLogic.getComicDeseo( comicsDeseoId);
       if(entity == null){
@@ -108,6 +127,9 @@ public class ComicDeseoResource {
     //  }
  // }
   
+  /*
+  *Recibe lista de comic deseo entity y lo convierte en lista de DTO
+  */
   
   private List<ComicDeseoDTO> listEntity2DTO(List<ComicDeseoEntity> entityList){
   

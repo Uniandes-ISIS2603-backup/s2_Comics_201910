@@ -31,7 +31,11 @@ public class ComicDeseoPersistence {
   public ComicDeseoPersistence (){
   
   }
-  
+  /**
+   * Crea un comic deseo en la persistencia
+   * @param pComicE ComicDeseoEntity
+   * @return ComicDeseoEntity
+   */
   public ComicDeseoEntity create(ComicDeseoEntity pComicE){
   LOGGER.log(Level.INFO, "Creando nuevo comic deseo");
   em.persist(pComicE);
@@ -39,6 +43,11 @@ public class ComicDeseoPersistence {
    return pComicE;
   }
   
+  /**
+   * Encuentra
+   * @param pComicsDId
+   * @return COmicDeseoEntity
+   */
   public ComicDeseoEntity find(Long pComicsDId){
       
       LOGGER.log(Level.INFO, "Consultando el comic con id = {0}", pComicsDId);
@@ -53,7 +62,10 @@ public class ComicDeseoPersistence {
   }
   
  
-  
+  /**
+   * Retorna toda la lista de comics deseo
+   * @return List<ComicDeseoEntiy>
+   */
    public List<ComicDeseoEntity> findAll(){
     
       LOGGER.log(Level.INFO, "Consultando todos los ComicDeseoEntity");
@@ -61,6 +73,11 @@ public class ComicDeseoPersistence {
         return q.getResultList();
     }
     
+   /**
+    * Actualiza un comic deseo, retorna el comic deseo entity actualizado
+    * @param pComicDeseoEn
+    * @return  ComicDeseoEntity
+    */
    
    public ComicDeseoEntity update(ComicDeseoEntity pComicDeseoEn){
     

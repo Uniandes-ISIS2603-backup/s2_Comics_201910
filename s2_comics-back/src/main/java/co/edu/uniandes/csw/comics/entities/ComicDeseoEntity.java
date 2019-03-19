@@ -16,17 +16,32 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author estudiante
+ * @author Sebastian Baquero
  */
 
 @Entity
 public class ComicDeseoEntity extends BaseEntity implements Serializable {
     
+    /**
+     * Atributo modela la fecha de agregado del comic deseo
+     */
     private SimpleDateFormat fechaAgregado;
+    
+    /**
+     * Atributo modela la relacion con un comic que es one to one
+     */
+    
     @PodamExclude
-    @OneToOne
+    @ManyToOne
     private ComicEntity comic;
     
+   // @PodamExclude
+  //  @OneToOne
+  //  private ComicEntity comic;
+    
+    /**
+     * Constructor vacio de comic deseo entity
+     */
     public ComicDeseoEntity(){
     
     }
