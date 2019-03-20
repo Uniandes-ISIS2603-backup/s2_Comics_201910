@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import java.io.*;
 
 /**
 * Clase que extiende de {@link compradorDTO} para manejar las relaciones entre los
@@ -20,7 +21,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * documentacion de {@link compradorDTO}
  * @author juan pablo cano
  */
-public class CompradorDetailDTO extends CompradorDTO
+public class CompradorDetailDTO extends CompradorDTO implements Serializable
 {
     private ArrayList<OrdenPedidoDTO> pedidos;
     

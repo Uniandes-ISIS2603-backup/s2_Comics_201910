@@ -54,8 +54,6 @@ public class CompradorResource
             CompradorDTO newComprador = new CompradorDTO(compradorLogic.createComprador(comprador.toEntity()));
             LOGGER.log(Level.INFO, "CompradorResource createComprador: output:{0}", newComprador);
             return newComprador;
-        
-     
     }
     
     /**
@@ -122,7 +120,7 @@ public class CompradorResource
     
     @GET
     @Path("{name: [a-zA-Z][a-zA-Z]*}")
-    public CompradorDTO getCompradorByAlias(@PathParam("name") String alias)throws Exception
+    public CompradorDetailDTO getCompradorByAlias(@PathParam("name") String alias)throws Exception
     {
         LOGGER.log(Level.INFO, "CompradorResource getCompradorByAlias:input:{0}", alias);
         CompradorEntity entity = compradorLogic.getCompradorByAlias(alias);
