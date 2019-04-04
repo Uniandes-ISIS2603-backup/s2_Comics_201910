@@ -39,6 +39,7 @@ public class VendedorDTO extends ColeccionistaDTO implements Serializable
             alias = entity.getAlias();
             correoElectronico = entity.getEmail();
             id=entity.getId();
+            password=entity.getPassword();
             
         }
     }
@@ -58,6 +59,7 @@ public class VendedorDTO extends ColeccionistaDTO implements Serializable
         entity.setFoto(foto);
         entity.setIntereses(intereses);
         entity.setEmail(correoElectronico);
+        entity.setPassword(password);
         entity.setId(id);
         LOGGER.log(Level.INFO, "Finished CreatedVendedorEntity");
         return entity;

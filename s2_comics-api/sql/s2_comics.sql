@@ -1,8 +1,10 @@
 delete from CompradorEntity;
-delete from VendedorEntity;
+delete from VendedorEntity ;
 delete from ComicEntity_CompradorEntity;
 delete from ComicEntity_VendedorEntity;
+
 delete from CompradorEntity_ComicDeseoEntity;
+delete from OrdenPedidoEntity_VendedorEntity;
 
 insert into CompradorEntity(id, alias, email, intereses, nombre, foto) values (100,'heavyRock','juan@hotmail.com','Musica','Juan Pedro', 'http://www.esvivir.com/uploads/eres_persona_motivada_711_26121651.jpg');
 insert into CompradorEntity(id, alias, email, intereses, nombre, foto) values (200,'mariaDB','maria@yahoo.com','Juegos','Maria Davalos','');
@@ -25,3 +27,4 @@ insert into VendedorEntity (id, alias, email, intereses, nombre, foto) values (9
 insert into VendedorEntity (id, alias, email, intereses, nombre, foto) values (10, 'dsorton9', 'dsorton9@miitbeian.gov.cn', 'Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.', 'Devlen Sorton', 'https://robohash.org/eautsuscipit.png?size=50x50&set=set1');
 
 select * from VendedorEntity;
+select * from CalificacionEntity;

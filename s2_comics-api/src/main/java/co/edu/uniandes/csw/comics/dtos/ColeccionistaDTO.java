@@ -22,6 +22,7 @@ public abstract class ColeccionistaDTO implements Serializable
     protected String correoElectronico;
     protected String intereses;
     protected Long id;
+    protected String password;
     /**
      * @return the nombre
      */
@@ -111,5 +112,14 @@ public abstract class ColeccionistaDTO implements Serializable
     public void setId(Long id) {
         this.id = id;
     }
-    
+      public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
