@@ -21,7 +21,7 @@ import javax.inject.Inject;
  * @author estudiante
  */
 
-@Path("vendedores")
+@Path("/vendedores")
 @Consumes("application/json")
 @Produces("application/json")
 @RequestScoped
