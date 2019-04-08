@@ -18,7 +18,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class CalificacionEntity extends BaseEntity implements Serializable {
     private String comentarios;
     private Double puntuacion;
-    
+    private String usuario;
     @PodamExclude
     @ManyToOne
     private VendedorEntity vendedor;
@@ -66,4 +66,19 @@ public class CalificacionEntity extends BaseEntity implements Serializable {
     public void setVendedor(VendedorEntity vendedor) {
         this.vendedor = vendedor;
     }
+
+    /**
+     * @return the usuario
+     */
+    public String getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+    
 }
