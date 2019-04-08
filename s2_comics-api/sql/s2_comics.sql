@@ -2,7 +2,7 @@ delete from CompradorEntity;
 delete from VendedorEntity ;
 delete from ComicEntity_CompradorEntity;
 delete from ComicEntity_VendedorEntity;
-
+select * from VendedorEntity;
 delete from CompradorEntity_ComicDeseoEntity;
 delete from OrdenPedidoEntity_VendedorEntity;
 

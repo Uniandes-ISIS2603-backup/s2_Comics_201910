@@ -50,10 +50,10 @@ public class CompradorResource
     @POST
     public CompradorDTO crearComprador(CompradorDTO comprador) throws BusinessLogicException
     {
-         LOGGER.log(Level.INFO, "CompradorResource createComprador: input:{0}", comprador);
-            CompradorDTO newComprador = new CompradorDTO(compradorLogic.createComprador(comprador.toEntity()));
-            LOGGER.log(Level.INFO, "CompradorResource createComprador: output:{0}", newComprador);
-            return newComprador;
+        LOGGER.log(Level.INFO, "CompradorResource createComprador: input:{0}", comprador);
+        CompradorDTO newComprador = new CompradorDTO(compradorLogic.createComprador(comprador.toEntity()));
+        LOGGER.log(Level.INFO, "CompradorResource createComprador: output:{0}", newComprador);
+        return newComprador;
     }
     
     /**
@@ -109,7 +109,7 @@ public class CompradorResource
         comprador.setId(id);
         if(compradorLogic.findComprador(id) == null)
         {
-            throw new WebApplicationException("", 404);
+            throw new WebApplicationException("No se encontró el comprador con el id: " + id, 404);
         }
         CompradorDetailDTO detail = new CompradorDetailDTO(compradorLogic.updateComprador(id, comprador.toEntity()));
         LOGGER.log(Level.INFO, "Comprador updated: output: {0}", detail);

@@ -106,6 +106,22 @@ private final static Logger LOGGER = Logger.getLogger(VendedorDTO.class.getName(
         }
         return VendedorOrdenPedidoResource.class;
     }
+    
+    @GET
+    @Path("{name: [a-zA-Z0-9][a-zA-Z0-9]*}")
+    public VendedorDetailDTO getVendedorByAlias(@PathParam("name") String alias) throws Exception
+    {
+        LOGGER.log(Level.INFO, "");
+        VendedorEntity entity = vendedorLogic.getVendedorByAlias(alias);
+        
+        if(entity == null)
+        {
+            throw new WebApplicationException("el recurso /vendedores/" + alias + " no existe", 404);
+            
+        }
+        VendedorDetailDTO vendedor = new VendedorDetailDTO(entity);
+        return vendedor;
+    }
        /**
      * Actualiza el vendedor con el id recibido en la URL con la información que se
      * recibe en el cuerpo de la petición.

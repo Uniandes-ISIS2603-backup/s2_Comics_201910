@@ -40,7 +40,6 @@ public class CompradorLogic
         LOGGER.log(Level.INFO, "Inicia proceso de creación del comprador");
         CompradorEntity exists = getCompradorByAlias(entity.getAlias());
         CompradorEntity existsMail = getCompradorByEmail(entity.getEmail());
-        CompradorEntity existsId = findComprador(entity.getId());
         if(exists != null)
         {
             throw new BusinessLogicException("Ya existe un comprador con este alias");
@@ -48,10 +47,6 @@ public class CompradorLogic
         if(existsMail != null)
         {
             throw new BusinessLogicException("Ya existe un comprador con este email");
-        }
-        if(existsId != null)
-        {
-            throw new BusinessLogicException("Ya existe un comprador con este Id");
         }
         CompradorEntity newEntity = persistencia.create(entity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del comprador");
