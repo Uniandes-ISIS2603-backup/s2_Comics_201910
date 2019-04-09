@@ -118,3 +118,5 @@ insert into ComicEntity (id, nombre, autor, anioSalida, perteneceColeccion, pert
 insert into ComicEntity (id, nombre, autor, anioSalida, perteneceColeccion, perteneceSerie, precio, tema, enVenta, informacion) values (118, 'Deer, white-tailed', 'Willie Davidowsky', 1997, 0, 1, 487.64, 6, 1, 'embrace impactful markets');
 insert into ComicEntity (id, nombre, autor, anioSalida, perteneceColeccion, perteneceSerie, precio, tema, enVenta, informacion) values (119, 'Tawny eagle', 'Kellyann Navarro', 1997, 1, 1, 504.06, 1, 0, 'harness frictionless paradigms');
 insert into ComicEntity (id, nombre, autor, anioSalida, perteneceColeccion, perteneceSerie, precio, tema, enVenta, informacion) values (120, 'Cardinal, black-throated', 'Burke Heard', 2005, 1, 1, 330.1, 6, 1, 'deploy cross-media users');
+
+select * from ComicEntity;

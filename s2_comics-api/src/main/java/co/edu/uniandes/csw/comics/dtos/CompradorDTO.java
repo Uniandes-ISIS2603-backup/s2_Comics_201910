@@ -42,7 +42,7 @@ public class CompradorDTO extends ColeccionistaDTO implements Serializable
             intereses = entity.getIntereses();
             nombre = entity.getNombre();
             foto = entity.getFoto();
-            password=entity.getPassword();
+            password = entity.getPassword();
         }
     }
     

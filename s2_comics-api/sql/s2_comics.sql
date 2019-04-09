@@ -5,7 +5,7 @@ delete from ComicEntity_VendedorEntity;
 select * from VendedorEntity;
 delete from CompradorEntity_ComicDeseoEntity;
 delete from OrdenPedidoEntity_VendedorEntity;
-
+select * from VendedorEntity;
 insert into VendedorEntity (id, alias, email, intereses, nombre, foto) values (1, 'dcopozio0', 'dcopozio0@illinois.edu', 'Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.', 'Dawn Copozio', 'https://robohash.org/praesentiumquisquammaxime.jpg?size=50x50&set=set1');
 insert into VendedorEntity (id, alias, email, intereses, nombre, foto) values (2, 'tdraye1', 'tdraye1@ameblo.jp', 'Suspendisse potenti. In eleifend quam a odio.', 'Teodora Draye', 'https://robohash.org/nihiloditest.bmp?size=50x50&set=set1');
 insert into VendedorEntity (id, alias, email, intereses, nombre, foto) values (3, 'qtimewell2', 'qtimewell2@stanford.edu', 'Suspendisse potenti.', 'Quinn Timewell', 'https://robohash.org/accusantiumquialiquid.jpg?size=50x50&set=set1');
@@ -23,3 +23,5 @@ select * from CalificacionEntity;
 INSERT INTO COMPRADORENTITY (ALIAS, EMAIL, FOTO, INTERESES, NOMBRE, PASSWORD) VALUES (asdasd, asdasd@asdasd.com, null, asdasd, asdasd, asdasA12);
 
 select * from CompradorEntity;
+
+delete from CalificacionEntity;

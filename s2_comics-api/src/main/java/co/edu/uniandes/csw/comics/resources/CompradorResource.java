@@ -23,11 +23,11 @@ import javax.ws.rs.GET;
 
 /**
  *
- * Clase que implementa el recurso "comrpador"
+ * Clase que implementa el recurso "comprador"
  * 
  * @comprador juan pablo cano
  */
-@Path("/comprador")
+@Path("comprador")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -173,6 +173,22 @@ public class CompradorResource
         CompradorDetailDTO comprador = new CompradorDetailDTO(entity);
         return comprador;
     }*/
+    
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    @Path("{compradorId: \\d+}/comics")
+    public Class<CompradorComicResource> getCompradorComicResource(@PathParam("compradorId") Long id)
+    {
+        if(compradorLogic.findComprador(id) == null)
+        {
+            throw new WebApplicationException("El recurso /comrpador/" + id + " no existe.", 404);
+        }
+        
+        return CompradorComicResource.class;
+    }
     
     private List<CompradorDetailDTO> listEntity2DTO(List<CompradorEntity> entity )
     {
