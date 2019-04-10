@@ -47,9 +47,9 @@ public class ComicDeseoLogic {
             throw new BusinessLogicException("El comic deseo con id"+comicId+"no existe en comics");
         }
         
-        ComicEntity comic =  persistenceC.find(comicId);
-        comicDeseoEntity.setComic(comic);
-        LOGGER.log(Level.INFO,"Termina proceso de crear comic deseo");
+       // ComicEntity comic =  persistenceC.find(comicId);
+       // comicDeseoEntity.setComic(comic);
+       // LOGGER.log(Level.INFO,"Termina proceso de crear comic deseo");
         return persistenceComicD.create(comicDeseoEntity);
      
     }

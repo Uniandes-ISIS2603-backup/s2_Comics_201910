@@ -30,7 +30,7 @@ import javax.ws.rs.WebApplicationException;
  * @author Sebastian Baquero
  */
 
-@Path("comicDeseo")
+@Path("/comicDeseo")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

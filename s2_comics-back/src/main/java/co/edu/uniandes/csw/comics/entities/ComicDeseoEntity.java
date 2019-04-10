@@ -25,7 +25,7 @@ public class ComicDeseoEntity extends BaseEntity implements Serializable {
     /**
      * Atributo modela la fecha de agregado del comic deseo
      */
-    private SimpleDateFormat fechaAgregado;
+    private String fechaAgregado;
     
     /**
      * Atributo modela la relacion con un comic que es one to one
@@ -49,7 +49,7 @@ public class ComicDeseoEntity extends BaseEntity implements Serializable {
     /**
      * @return the fechaAgregado
      */
-    public SimpleDateFormat getFechaAgregado() {
+    public String getFechaAgregado() {
         return fechaAgregado;
         
     }
@@ -57,7 +57,7 @@ public class ComicDeseoEntity extends BaseEntity implements Serializable {
     /**
      * @param fechaAgregado the fechaAgregado to set
      */
-    public void setFechaAgregado(SimpleDateFormat fechaAgregado) {
+    public void setFechaAgregado(String fechaAgregado) {
         this.fechaAgregado = fechaAgregado;
     }
 

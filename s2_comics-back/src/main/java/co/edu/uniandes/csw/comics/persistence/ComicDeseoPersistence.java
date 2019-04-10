@@ -69,7 +69,7 @@ public class ComicDeseoPersistence {
    public List<ComicDeseoEntity> findAll(){
     
       LOGGER.log(Level.INFO, "Consultando todos los ComicDeseoEntity");
-        Query q = em.createQuery("select u from ComicdeseoEntity u");
+        Query q = em.createQuery("select u from ComicDeseoEntity u");
         return q.getResultList();
     }
     

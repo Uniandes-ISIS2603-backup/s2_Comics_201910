@@ -19,39 +19,13 @@ import java.text.SimpleDateFormat;
 
 public class ComicDeseoDTO implements Serializable {
 
-    /**
-     * @return the fechaAgregado
-     */
-    public SimpleDateFormat getFechaAgregado() {
-        return fechaAgregado;
-    }
-
-    /**
-     * @param fechaAgregado the fechaAgregado to set
-     */
-    public void setFechaAgregado(SimpleDateFormat fechaAgregado) {
-        this.fechaAgregado = fechaAgregado;
-    }
-
-    /**
-     * @return the comic
-     */
-    public ComicDTO getComic() {
-        return comic;
-    }
-
-    /**
-     * @param comic the comic to set
-     */
-    public void setComic(ComicDTO comic) {
-        this.comic = comic;
-    }
+   
  
     /**
      * Modela la fecha de agregado del comic al la lista de comic deoseo
      */
    
-   private SimpleDateFormat fechaAgregado;
+   private String fechaAgregado;
    
    /**
      * Modela el comic asociado al comic deseo
@@ -107,7 +81,33 @@ public class ComicDeseoDTO implements Serializable {
    }
    
     
-    
+     /**
+     * @return the fechaAgregado
+     */
+    public String getFechaAgregado() {
+        return fechaAgregado;
+    }
+
+    /**
+     * @param fechaAgregado the fechaAgregado to set
+     */
+    public void setFechaAgregado(String fechaAgregado) {
+        this.fechaAgregado = fechaAgregado;
+    }
+
+    /**
+     * @return the comic
+     */
+    public ComicDTO getComic() {
+        return comic;
+    }
+
+    /**
+     * @param comic the comic to set
+     */
+    public void setComic(ComicDTO comic) {
+        this.comic = comic;
+    }
   
    
    
