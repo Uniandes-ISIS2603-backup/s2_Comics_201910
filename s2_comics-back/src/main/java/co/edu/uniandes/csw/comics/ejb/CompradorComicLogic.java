@@ -39,11 +39,12 @@ public class CompradorComicLogic
     public ComicEntity addComicCarrito(long idComp, long idComic)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un comic a un comprador: {0}", idComp);
-        CompradorEntity comp = comprador.find(idComp);
+        //CompradorEntity comp = comprador.find(idComp);
         ComicEntity com = comic.find(idComic);
-        comp.getCarro().add(com);
+        comprador.find(idComp).getCarro().add(com);
+        int i = comprador.find(idComp).getCarro().indexOf(com);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un comic a un comprador: {0}", idComp);
-        return comic.find(idComic);
+        return comprador.find(idComp).getCarro().get(i);
     }
     
     /**
@@ -125,14 +126,10 @@ public class CompradorComicLogic
         LOGGER.log(Level.INFO, "Inicia el proceso de eliminación del comic en el comprador con id: {0}", idComp);
         CompradorEntity entity = comprador.find(idComp);
         ComicEntity comEntity = comic.find(idComic);
-        System.out.println("Tamaño del arreglo antes: " + comprador.find(idComp).getCarro().size());
-        comEntity.getCompradores().remove(entity);
-        //comprador.find(idComp).getCarro().remove(comEntity);
-        System.out.println("Tamaño del arreglo después: " + comprador.find(idComp).getCarro().size());
-        /*if(getComic(idComp, idComic) != null)
-        {
-            System.out.println("Error, aún sigue en el arreglo");
-        }*/
+        //System.out.println("Tamaño del arreglo antes: " + comprador.find(idComp).getCarro().size());
+        comic.find(idComic).getCompradores().remove(entity);
+        comprador.find(idComp).getCarro().remove(comEntity);
+        //System.out.println("Tamaño del arreglo después: " + comprador.find(idComp).getCarro().size());
         LOGGER.log(Level.INFO, "Termina el proceso de eliminación del comic en el comprador con id: {0}", idComp);
     }
 }

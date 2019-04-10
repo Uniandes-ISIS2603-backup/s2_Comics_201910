@@ -42,6 +42,7 @@ public class CompradorDTO extends ColeccionistaDTO implements Serializable
             intereses = entity.getIntereses();
             nombre = entity.getNombre();
             foto = entity.getFoto();
+            password = entity.getPassword();
         }
     }
     
@@ -60,6 +61,7 @@ public class CompradorDTO extends ColeccionistaDTO implements Serializable
         entity.setIntereses(intereses);
         entity.setNombre(nombre);
         entity.setFoto(foto);
+        entity.setPassword(password);
         return entity;
     }
 }

@@ -23,11 +23,11 @@ import javax.ws.rs.GET;
 
 /**
  *
- * Clase que implementa el recurso "comrpador"
+ * Clase que implementa el recurso "comprador"
  * 
  * @comprador juan pablo cano
  */
-@Path("/comprador")
+@Path("comprador")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -50,10 +50,10 @@ public class CompradorResource
     @POST
     public CompradorDTO crearComprador(CompradorDTO comprador) throws BusinessLogicException
     {
-         LOGGER.log(Level.INFO, "CompradorResource createComprador: input:{0}", comprador);
-            CompradorDTO newComprador = new CompradorDTO(compradorLogic.createComprador(comprador.toEntity()));
-            LOGGER.log(Level.INFO, "CompradorResource createComprador: output:{0}", newComprador);
-            return newComprador;
+        LOGGER.log(Level.INFO, "CompradorResource createComprador: input:{0}", comprador);
+        CompradorDTO newComprador = new CompradorDTO(compradorLogic.createComprador(comprador.toEntity()));
+        LOGGER.log(Level.INFO, "CompradorResource createComprador: output:{0}", newComprador);
+        return newComprador;
     }
     
     /**
@@ -95,6 +95,28 @@ public class CompradorResource
     }
     
     /**
+     * 
+     * @param id
+     * @param comprador
+     * @return
+     * @throws BusinessLogicException 
+     */
+    @PUT
+    @Path("{compradorId: \\d+}")
+    public CompradorDetailDTO updateComprador(@PathParam("compradorId") long id, CompradorDetailDTO comprador)throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "CompradorResource updateComprador: input: {0}, comprador: {1}", new Object[]{id, comprador});
+        comprador.setId(id);
+        if(compradorLogic.findComprador(id) == null)
+        {
+            throw new WebApplicationException("No se encontró el comprador con el id: " + id, 404);
+        }
+        CompradorDetailDTO detail = new CompradorDetailDTO(compradorLogic.updateComprador(id, comprador.toEntity()));
+        LOGGER.log(Level.INFO, "Comprador updated: output: {0}", detail);
+        return detail;
+    }
+    
+    /**
      * Busca el autor con el id asociado recibido en la URL y lo devuelve.
      *
      * @param compradorsId Identificador del autor que se esta buscando. Este debe
@@ -118,8 +140,14 @@ public class CompradorResource
         return comprador;
     }
     
+    /**
+     * 
+     * @param alias
+     * @return
+     * @throws Exception 
+     */
     @GET
-    @Path("{name: [a-zA-Z][a-zA-Z]*}")
+    @Path("{name: [a-zA-Z0-9][a-zA-Z0-9]*}")
     public CompradorDetailDTO getCompradorByAlias(@PathParam("name") String alias)throws Exception
     {
         LOGGER.log(Level.INFO, "CompradorResource getCompradorByAlias:input:{0}", alias);
@@ -132,9 +160,9 @@ public class CompradorResource
         return comprador;
     }
     
-    /* @GET
-    @Path("{email: /^([\\w\\-\\.]+)@((\\[([0-9]{1,3}\\.){3}[0-9]{1,3}\\])|(([\\w\\-]+\\.)+)([a-zA-Z]{2,4}))$/}")
-    public CompradorDTO getCompradorByEmail(@PathParam("email") String email) throws Exception
+    /*@GET
+    @Path("{email}")
+    public CompradorDetailDTO getCompradorByEmail(@PathParam("email") String email) throws Exception
     {
         LOGGER.log(Level.INFO, "CompradorResource getCompradorByEmail: input: {0}", email);
         CompradorEntity entity = compradorLogic.getCompradorByEmail(email);
@@ -145,6 +173,22 @@ public class CompradorResource
         CompradorDetailDTO comprador = new CompradorDetailDTO(entity);
         return comprador;
     }*/
+    
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    @Path("{compradorId: \\d+}/comics")
+    public Class<CompradorComicResource> getCompradorComicResource(@PathParam("compradorId") Long id)
+    {
+        if(compradorLogic.findComprador(id) == null)
+        {
+            throw new WebApplicationException("El recurso /comrpador/" + id + " no existe.", 404);
+        }
+        
+        return CompradorComicResource.class;
+    }
     
     private List<CompradorDetailDTO> listEntity2DTO(List<CompradorEntity> entity )
     {

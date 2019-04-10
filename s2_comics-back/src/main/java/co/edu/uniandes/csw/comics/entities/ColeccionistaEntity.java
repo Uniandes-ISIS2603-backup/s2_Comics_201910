@@ -23,7 +23,7 @@ public abstract class ColeccionistaEntity extends BaseEntity implements java.io.
     protected String intereses;
     protected String nombre;
     protected String foto;
-
+    protected String password;
     /**
      * @return the alias
      */
@@ -94,5 +94,20 @@ public abstract class ColeccionistaEntity extends BaseEntity implements java.io.
     public void setFoto(String foto) {
         this.foto = foto;
     }    
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
 }
 
