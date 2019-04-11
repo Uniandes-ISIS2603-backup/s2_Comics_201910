@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 //import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,9 +19,8 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author jp.rodriguezv
  */
 @Entity
-public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializable
+public class OrdenPedidoEntity  extends BaseEntity implements Serializable
 {
-   
     /**
      * estado de la orden, es una enumeracion, puede estar 
      * 1. en espera: se genero la orden y esta esperando la confirmacion del vendedor
@@ -32,13 +32,10 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
         EN_ESPERA,
         ACEPTADO,
         RECHAZADO,
+        ENVIADO,
         FINALIZADO
     }
-    /**
-     * identificacdor de la orden de pedido
-     */
-    @Id
-    private Long id;
+   
     
     /**
      * estado de la orden, es una enumeracion
@@ -62,15 +59,11 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
     /**
      * comic asociado a la ordenPedido
      */
-    @PodamExclude
-    @OneToOne
     private ComicEntity comic;
     
     /**
      * comic truque asociado a la orden pedido
      */
-    @PodamExclude
-    @OneToOne
     private ComicEntity trueque;
     
     
@@ -84,7 +77,16 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
      */
     private Integer numeroComprasComprador;
 
+        /**
+     * fecha estimada de enrega
+     */
+    private SimpleDateFormat fechaEstimadaEntrega;
     
+    /**
+     * comentario de rechazo
+     */
+    private String comentario;
+
     
    
     public OrdenPedidoEntity(){
@@ -106,21 +108,8 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
         this.tarjetaCredito = tarjetaCredito;
     }
 
-    /**
-     * @return the id
-     */
-    public Long getId()
-    {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long pId) 
-    {
-        this.id=pId;
-    }
+    
+    
 
     /**
      * @return the numeroComprasComprador
@@ -212,6 +201,34 @@ public class OrdenPedidoEntity  extends BaseEntity implements java.io.Serializab
      */
     public Estado getEstado() {
         return estado;
+    }
+
+    /**
+     * @return the fechaEstimadaEntrega
+     */
+    public SimpleDateFormat getFechaEstimadaEntrega() {
+        return fechaEstimadaEntrega;
+    }
+
+    /**
+     * @param fechaEstimadaEntrega the fechaEstimadaEntrega to set
+     */
+    public void setFechaEstimadaEntrega(SimpleDateFormat fechaEstimadaEntrega) {
+        this.fechaEstimadaEntrega = fechaEstimadaEntrega;
+    }
+
+    /**
+     * @return the comentario
+     */
+    public String getComentario() {
+        return comentario;
+    }
+
+    /**
+     * @param comentario the comentario to set
+     */
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
     
 }
