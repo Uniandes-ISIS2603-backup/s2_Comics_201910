@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.comics.test.logic;
 
 import co.edu.uniandes.csw.comics.ejb.ComicLogic;
 import co.edu.uniandes.csw.comics.entities.ComicEntity;
+import co.edu.uniandes.csw.comics.persistence.ComicPersistence;
+import co.edu.uniandes.csw.comics.persistence.VendedorPersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -50,6 +52,7 @@ public class ComicLogicTest {
         return ShrinkWrap.create(JavaArchive.class)
                .addPackage(ComicEntity.class.getPackage())
                .addPackage(ComicLogic.class.getPackage())
+               .addPackage(ComicPersistence.class.getPackage())
                .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
@@ -135,7 +138,7 @@ public class ComicLogicTest {
         ComicEntity newEntity = factory.manufacturePojo(ComicEntity.class);
         newEntity.setId(com.getId());
         try{
-            comicLogic.updateComic(newEntity);
+            comicLogic.updateComic(com.getId(),newEntity);
         }catch(Exception e){
             Assert.assertTrue(false);
         }

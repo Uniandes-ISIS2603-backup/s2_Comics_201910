@@ -81,8 +81,9 @@ public class ComicResource {
     }
     
     @PUT
-    public ComicDetailDTO updateComic(ComicDTO comic) throws BusinessLogicException{
-        return new ComicDetailDTO(comicLogic.updateComic(comic.toEntity()));
+    @Path("{id: \\d+}")
+    public ComicDetailDTO updateComic(@PathParam("id") long id, ComicDTO comic) throws BusinessLogicException{
+        return new ComicDetailDTO(comicLogic.updateComic(id, comic.toEntity()));
     }
     
     private List<ComicDetailDTO> listEntityToDTO(List<ComicEntity> entity){

@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "a7b07693-ce45-45d6-9902-2474cb00318f",
+		"name": "ComicTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post comic",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b54fcdac-6141-4fd2-b09d-69d289d06da7",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"newId\",data.id);",
+							"tests[\"no hay error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"nombre\": \"Full Moon High\",\r\n  \"autor\": \"Alic Parmiter\",\r\n  \"anioSalida\": 1959,\r\n  \"perteneceColeccion\": false,\r\n  \"perteneceSerie\": false,\r\n  \"precio\": 39.42,\r\n  \"tema\": \"DEPORTE\",\r\n  \"enVenta\": false,\r\n  \"informacion\": \"Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\",\r\n  \"imagen\": \"http://dummyimage.com/700x400.png/5fa2dd/ffffff\"\r\n}"
+				},
+				"url": {
+					"raw": "{{ip}}:{{puerto}}/s2_comics-api/api/comic",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"comic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post comic 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b54fcdac-6141-4fd2-b09d-69d289d06da7",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"newId2\",data.id);",
+							"tests[\"no hay error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"nombre\": \"Partly Cloudy\",\r\n  \"autor\": \"Magdaia Cotterill\",\r\n  \"anioSalida\": 2019,\r\n  \"perteneceColeccion\": true,\r\n  \"perteneceSerie\": true,\r\n  \"precio\": 7.28,\r\n  \"tema\": \"VIEJO_OESTE\",\r\n  \"enVenta\": true,\r\n  \"informacion\": \"Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti.\",\r\n  \"imagen\": \"http://dummyimage.com/700x400.png/cc0000/ffffff\"\r\n}"
+				},
+				"url": {
+					"raw": "{{ip}}:{{puerto}}/s2_comics-api/api/comic",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"comic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post comic 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b54fcdac-6141-4fd2-b09d-69d289d06da7",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"newId3\",data.id);",
+							"tests[\"no hay error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"nombre\": \"Cape No. 7 (Hái-kak chhit-ho)\",\r\n  \"autor\": \"Iorgos Greatex\",\r\n  \"anioSalida\": 1964,\r\n  \"perteneceColeccion\": true,\r\n  \"perteneceSerie\": true,\r\n  \"precio\": 87.89,\r\n  \"tema\": \"AMOR_AMISTAD\",\r\n  \"enVenta\": false,\r\n  \"informacion\": \"Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit.\",\r\n  \"imagen\": \"http://dummyimage.com/700x400.png/cc0000/ffffff\"\r\n}"
+				},
+				"url": {
+					"raw": "{{ip}}:{{puerto}}/s2_comics-api/api/comic",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"comic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get comic",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b54fcdac-6141-4fd2-b09d-69d289d06da7",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ip}}:{{puerto}}/s2_comics-api/api/comic",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"comic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get comic id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b54fcdac-6141-4fd2-b09d-69d289d06da7",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"no hay error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ip}}:{{puerto}}/s2_comics-api/api/comic/{{newId}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"comic",
+						"{{newId}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Comic",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d5024d1-08c1-446a-9904-b79639492db4",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"cambio exitoso\"] = data.anioSalida === 3141;",
+							"tests[\"no hay error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Partly Cloudy\",\r\n  \"autor\": \"Magdaia Cotterill\",\r\n  \"anioSalida\": 3141,\r\n  \"perteneceColeccion\": true,\r\n  \"perteneceSerie\": true,\r\n  \"precio\": 7.28,\r\n  \"tema\": \"VIEJO_OESTE\",\r\n  \"enVenta\": true,\r\n  \"informacion\": \"Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti.\",\r\n  \"imagen\": \"http://dummyimage.com/700x400.png/cc0000/ffffff\"\r\n}"
+				},
+				"url": {
+					"raw": "{{ip}}:{{puerto}}/s2_comics-api/api/comic/{{newId2}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"comic",
+						"{{newId2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete comic id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b54fcdac-6141-4fd2-b09d-69d289d06da7",
+						"exec": [
+							"tests[\"no hay error\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{ip}}:{{puerto}}/s2_comics-api/api/comic/{{newId}}",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s2_comics-api",
+						"api",
+						"comic",
+						"{{newId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
