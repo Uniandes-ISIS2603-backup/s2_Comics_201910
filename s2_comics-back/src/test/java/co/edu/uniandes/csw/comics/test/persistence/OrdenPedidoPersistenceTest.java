@@ -12,6 +12,8 @@ import co.edu.uniandes.csw.comics.entities.VendedorEntity;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
 import java.util.List;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,7 +38,11 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class OrdenPedidoPersistenceTest {
   @Inject
     private OrdenPedidoPersistence ordenPedido; //variable para tener acceso a la persistencia de la apliacacion
+  
+
+    private static final Logger LOGGER=Logger.getLogger(OrdenPedidoPersistenceTest.class.getName());
     
+  
     @PersistenceContext
     private EntityManager em;
     
@@ -145,6 +151,9 @@ public class OrdenPedidoPersistenceTest {
         OrdenPedidoEntity newEntity= podam.manufacturePojo(OrdenPedidoEntity.class);
         OrdenPedidoEntity result = ordenPedido.create(newEntity);
         
+         
+        System.out.println ("modelo de una fecha"  + result.getFechaEstimadaEntrega());
+         System.exit(0);
         Assert.assertNotNull(result);
         
         OrdenPedidoEntity entity = em.find(OrdenPedidoEntity.class, result.getId());

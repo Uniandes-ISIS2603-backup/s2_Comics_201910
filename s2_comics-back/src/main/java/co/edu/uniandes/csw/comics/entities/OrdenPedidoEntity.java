@@ -36,7 +36,16 @@ public class OrdenPedidoEntity  extends BaseEntity implements Serializable
         FINALIZADO
     }
    
+      /**
+     * fecha estimada de enrega
+     */
+    private String fechaEstimadaEntrega;
     
+    /**
+     * comentario de rechazo
+     */
+    private String comentario;
+
     /**
      * estado de la orden, es una enumeracion
      */
@@ -77,16 +86,7 @@ public class OrdenPedidoEntity  extends BaseEntity implements Serializable
      */
     private Integer numeroComprasComprador;
 
-        /**
-     * fecha estimada de enrega
-     */
-    private SimpleDateFormat fechaEstimadaEntrega;
-    
-    /**
-     * comentario de rechazo
-     */
-    private String comentario;
-
+      
     
    
     public OrdenPedidoEntity(){
@@ -206,14 +206,14 @@ public class OrdenPedidoEntity  extends BaseEntity implements Serializable
     /**
      * @return the fechaEstimadaEntrega
      */
-    public SimpleDateFormat getFechaEstimadaEntrega() {
+    public String getFechaEstimadaEntrega() {
         return fechaEstimadaEntrega;
     }
 
     /**
      * @param fechaEstimadaEntrega the fechaEstimadaEntrega to set
      */
-    public void setFechaEstimadaEntrega(SimpleDateFormat fechaEstimadaEntrega) {
+    public void setFechaEstimadaEntrega(String fechaEstimadaEntrega) {
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
     }
 

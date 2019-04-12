@@ -71,7 +71,7 @@ public class OrdenPedidoDTO implements Serializable
     /**
      * fecha estimada de enrega
      */
-    private SimpleDateFormat fechaEstimadaEntrega;
+    private String fechaEstimadaEntrega;
     
     /**
      * comentario de rechazo
@@ -96,6 +96,9 @@ public class OrdenPedidoDTO implements Serializable
      public OrdenPedidoDTO(OrdenPedidoEntity ordenPedidoEntity)
     {
         if (ordenPedidoEntity != null) {
+            
+            this.fechaEstimadaEntrega= ordenPedidoEntity.getFechaEstimadaEntrega();
+            
             this.id = ordenPedidoEntity.getId();
             this.estado = ordenPedidoEntity.getEstado();
             this.tarjetaCredito=ordenPedidoEntity.getTarjetaCredito();
@@ -105,7 +108,6 @@ public class OrdenPedidoDTO implements Serializable
             VendedorDTO v= new VendedorDTO(ordenPedidoEntity.getVendedor());
             this.vendedor=v;
             this.comentario = ordenPedidoEntity.getComentario();
-            this.fechaEstimadaEntrega= ordenPedidoEntity.getFechaEstimadaEntrega();
             ComicDTO d= new ComicDTO(ordenPedidoEntity.getComic());
             this.comic=d;
             ComicDTO t= new ComicDTO(ordenPedidoEntity.getTrueque());
@@ -228,11 +230,14 @@ public class OrdenPedidoDTO implements Serializable
         OrdenPedidoEntity ordenPedidoEntity = new OrdenPedidoEntity();
         ordenPedidoEntity.setId(this.id);
          ordenPedidoEntity.setEstado(this.estado);
+         ordenPedidoEntity.setComentario(this.comentario);
+         ordenPedidoEntity.setFechaEstimadaEntrega(this.fechaEstimadaEntrega);
           ordenPedidoEntity.setNumeroComprasComprador(this.numeroCompras);
            ordenPedidoEntity.setTarjetaCredito(this.tarjetaCredito);
         ordenPedidoEntity.setComic(this.comic.toEntity());
       ordenPedidoEntity.setComprador(this.comprador.toEntity());
       ordenPedidoEntity.setVendedor(this.vendedor.toEntity());
+      
       LOGGER.log(Level.INFO, "convertido a Entity 1");
       ordenPedidoEntity.setTrueque(this.trueque.toEntity());
       LOGGER.log(Level.INFO, "convertido a Entity");
@@ -263,14 +268,14 @@ public class OrdenPedidoDTO implements Serializable
     /**
      * @return the fechaAgregado
      */
-    public SimpleDateFormat getFechaEstimadaEntrega() {
+    public String getFechaEstimadaEntrega() {
         return fechaEstimadaEntrega;
     }
 
     /**
      * @param fechaEstimadaEntrega the fechaAgregado to set
      */
-    public void setFechaAgregado(SimpleDateFormat fechaEstimadaEntrega) {
+    public void setFechaEstimadaEntrega(String fechaEstimadaEntrega) {
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
     }
 
