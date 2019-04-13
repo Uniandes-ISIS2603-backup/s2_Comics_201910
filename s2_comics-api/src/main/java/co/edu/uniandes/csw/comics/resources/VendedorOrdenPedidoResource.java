@@ -27,7 +27,6 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author ca.orduz
  */
-@Path("/vendedores/{vendedoresId: \\d+}/pedido")
 @Consumes("application/json")
 @Produces("application/json")
 public class VendedorOrdenPedidoResource {

@@ -27,7 +27,7 @@ import javax.ws.rs.core.MediaType;
  * Clase que implementa el recurso "comprador/{id}/pedido"
  * @author juan pablo cano
  */
-@Path("/comprador/{compradorId: \\d+}/pedido")
+@Path("/comprador/{compradorId: \\d+}/pedido/{pedidoId: \\d+}")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CompradorOrdenPedidoResource 
