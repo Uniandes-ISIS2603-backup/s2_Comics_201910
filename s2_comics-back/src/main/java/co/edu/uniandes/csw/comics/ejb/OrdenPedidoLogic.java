@@ -57,11 +57,10 @@ public class OrdenPedidoLogic {
      */
     public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido, Long vendedorId, Long compradoraiD, Long comicId, Long truequeId)throws BusinessLogicException
     {
-         LOGGER.log(Level.INFO, "creando ordenPedido");
-     /**   if(persistence.find(ordenPedido.getId())!=null ){
+        if(persistence.find(ordenPedido.getId())!=null ){
         new BusinessLogicException("ya existe una ordenPedido con esta id"); 
         }     
-     
+       
         if(ordenPedido.getComprador()==null || ordenPedido.getVendedor()==null ){
             throw new BusinessLogicException("La orden Pedido debe tener un cliente y un vendedor asociado.");
         }
@@ -72,10 +71,9 @@ public class OrdenPedidoLogic {
             throw new BusinessLogicException("Si el  comic asociado a la orden esta para truque debe tener asociado el comic con el cual se hara el truque.");
 
         }
-        **/
+        
          VendedorEntity vendedor=vendedorPersistence.find(vendedorId);
          ordenPedido.setVendedor(vendedor);
-         
          CompradorEntity comprador =compradorPersistence.find(compradoraiD);
          ordenPedido.setComprador(comprador);
          ComicEntity comic = comicPersistence.find(comicId);
@@ -85,9 +83,6 @@ public class OrdenPedidoLogic {
          ordenPedido.setTrueque(comicTrueque);
        }
          ordenPedido= persistence.create(ordenPedido);
-         
-         LOGGER.log(Level.INFO, "creando ordenPedido 3");
-    
          return ordenPedido;
     }
          
@@ -117,27 +112,11 @@ public class OrdenPedidoLogic {
           public OrdenPedidoEntity updateOrdenPedido(Long id, OrdenPedidoEntity ordenPedidoEntity) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la ordenPedido con id = {0}", id);
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
-       
         OrdenPedidoEntity newEntity = persistence.update(ordenPedidoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la ordenPedido con id = {0}", ordenPedidoEntity.getId());
         return newEntity;
    
     }
-          
-          public void ActualizarEstado(Long id, OrdenPedidoEntity.Estado nuevoEstado) throws BusinessLogicException{
-              OrdenPedidoEntity orden = persistence.find(id);
-              if(orden.getEstado()==OrdenPedidoEntity.Estado.FINALIZADO){
-                throw new BusinessLogicException("la orden ya esta finalizada");
-              }
-              if(orden.getEstado()==OrdenPedidoEntity.Estado.ACEPTADO && nuevoEstado==OrdenPedidoEntity.Estado.RECHAZADO){
-                  throw new BusinessLogicException("la orden se encuentra aceptada, no se puede rechazar");
-              }
-               if(orden.getEstado()== nuevoEstado){
-                  throw new BusinessLogicException("la orden ya se encuentra en este estado");
-              }
-                 orden.setEstado(nuevoEstado);
-                 updateOrdenPedido(id, orden);
-          }
    
           /** 
            * devuelve todas las ordenes pedido que tiene almacenada la aplicacion
@@ -154,14 +133,15 @@ public class OrdenPedidoLogic {
     public void deleteOrdenPedido(Long id) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia el proceso de eliminar a la ordenPedido con id={0}", id);
         OrdenPedidoEntity entity = getOrdenPedido(id);
-      if(entity.getEstado()==OrdenPedidoEntity.Estado.FINALIZADO || entity.getEstado()==OrdenPedidoEntity.Estado.EN_ESPERA )
+   /**     if(entity.getEstado()==4)
         { 
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Se ha terminado el proceso de eliminación del comprador con id={0}", id);
         }
         else{
-             throw new BusinessLogicException("La orden Pedido debe estar en estado -finalizado- o -En espera- para poderla eliminar .");
-        }
+             throw new BusinessLogicException("La orden Pedido debe estar en estado -finalizado- para poderla eliminar .");
+        }*/
+   persistence.delete(id);
         
     }
     

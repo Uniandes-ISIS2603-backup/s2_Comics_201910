@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.comics.persistence;
 
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
+import static java.awt.Event.DELETE;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +14,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 
 /**
  *
@@ -23,10 +26,16 @@ public class OrdenPedidoPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(OrdenPedidoPersistence.class.getName());
     
-   @PersistenceContext(unitName = "comicsPU")
-    private EntityManager em;
+    @PersistenceContext(unitName = "comicsPU")
+    protected EntityManager em;
    
-   
+    /**
+     * constructor vacio
+     */
+    public OrdenPedidoPersistence(){
+        
+    }
+    
     /**
      * crea una ordenPedido nueva en la base de datos
      * @param nuevo , entidad con la informacion de la  nueva ordenPedido
