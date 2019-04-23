@@ -6,7 +6,11 @@
 package co.edu.uniandes.csw.comics.dtos;
 
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
+import co.edu.uniandes.csw.comics.resources.OrdenPedidoResource;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -17,22 +21,25 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class OrdenPedidoDTO implements Serializable
 {
    //ATRIBUTOS
-   
-    /**
-     * tarjeta de credito asiciada con la compra
-     */
-    private String tarjetaCredito;
+   private static final Logger LOGGER=Logger.getLogger(OrdenPedidoDTO.class.getName());
     
+     
     /**
      * identificacdor de la orden de pedido
      */
     private Long id;
     /**
+     * tarjeta de credito asiciada con la compra
+     */
+    private String tarjetaCredito;
+   
+    /**
      * estado de la orden, es una enumeracion, puede estar 
      * 1. en espera: se genero la orden y esta esperando la confirmacion del vendedor
      * 2. aceptado: el vendedor acepto la orden 
      * 3. rechazado: el vendedor rechazo la orden
-     * 4. compelatado: se termino la transaccion, se entrego el producto
+     * 4. en proceso: el vendedor  ya envio el comic fisico y se espera ña confirmacion del comprador
+     * 5. compelatado: se termino la transaccion, se entrego el producto
      */
     private OrdenPedidoEntity.Estado estado;
     /**
@@ -61,7 +68,16 @@ public class OrdenPedidoDTO implements Serializable
  */
     private Integer numeroCompras;
     
+    /**
+     * fecha estimada de enrega
+     */
+    private String fechaEstimadaEntrega;
     
+    /**
+     * comentario de rechazo
+     */
+    private String comentario;
+  
     //CONSTRUCTORES
     /**
      * Constructoe vacio
@@ -88,6 +104,12 @@ public class OrdenPedidoDTO implements Serializable
             this.comprador=c;
             VendedorDTO v= new VendedorDTO(ordenPedidoEntity.getVendedor());
             this.vendedor=v;
+            this.comentario = ordenPedidoEntity.getComentario();
+            this.fechaEstimadaEntrega= ordenPedidoEntity.getFechaEstimadaEntrega();
+            ComicDTO d= new ComicDTO(ordenPedidoEntity.getComic());
+            this.comic=d;
+            ComicDTO t= new ComicDTO(ordenPedidoEntity.getTrueque());
+            this.trueque=t;
         }
     }
     
@@ -201,16 +223,22 @@ public class OrdenPedidoDTO implements Serializable
      * @return el nuevo OrdenPedidoEntity
      */
     public  OrdenPedidoEntity toEntity(){
-       OrdenPedidoEntity ordenPedidoEntity = new OrdenPedidoEntity();
+    
+       
+        OrdenPedidoEntity ordenPedidoEntity = new OrdenPedidoEntity();
         ordenPedidoEntity.setId(this.id);
-         ordenPedidoEntity.setEstado(this.getEstado());
+         ordenPedidoEntity.setEstado(this.estado);
           ordenPedidoEntity.setNumeroComprasComprador(this.numeroCompras);
            ordenPedidoEntity.setTarjetaCredito(this.tarjetaCredito);
-        ordenPedidoEntity.setComic(comic.toEntity());
+        ordenPedidoEntity.setComic(this.comic.toEntity());
       ordenPedidoEntity.setComprador(this.comprador.toEntity());
       ordenPedidoEntity.setVendedor(this.vendedor.toEntity());
+      LOGGER.log(Level.INFO, "convertido a Entity 1");
       ordenPedidoEntity.setTrueque(this.trueque.toEntity());
-        return ordenPedidoEntity;
+      LOGGER.log(Level.INFO, "convertido a Entity");
+   
+      return ordenPedidoEntity;
+        
     }
     
     @Override
@@ -230,5 +258,33 @@ public class OrdenPedidoDTO implements Serializable
      */
     public void setEstado(OrdenPedidoEntity.Estado estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return the fechaAgregado
+     */
+    public String getFechaEstimadaEntrega() {
+        return fechaEstimadaEntrega;
+    }
+
+    /**
+     * @param fechaEstimadaEntrega the fechaAgregado to set
+     */
+    public void setFechaAgregado(String fechaEstimadaEntrega) {
+        this.fechaEstimadaEntrega = fechaEstimadaEntrega;
+    }
+
+    /**
+     * @return the comentario
+     */
+    public String getComentario() {
+        return comentario;
+    }
+
+    /**
+     * @param comentario the comentario to set
+     */
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 }

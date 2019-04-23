@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -71,6 +72,13 @@ public class ComicEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "comic")
     private List<ComicDeseoEntity> comicsDeseo = new ArrayList<ComicDeseoEntity>();
     
+    @PodamExclude
+    @OneToOne
+    private OrdenPedidoEntity orden1;
+    
+     @PodamExclude
+    @OneToOne
+    private OrdenPedidoEntity orden2;
 
     public ComicEntity(){}
     
