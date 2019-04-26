@@ -265,9 +265,15 @@ public class OrdenPedidoLogicTest {
     @Test
     public void deleteTest() throws BusinessLogicException
     {
-        OrdenPedidoEntity entity = data.get(0);
-        ordenPedido.deleteOrdenPedido(entity.getId());
+        for(int i =0; i<data.size(); i++){
+          OrdenPedidoEntity entity = data.get(i);
+        if(data.get(i).getEstado().equals(OrdenPedidoEntity.Estado.FINALIZADO)|| data.get(i).getEstado().equals(OrdenPedidoEntity.Estado.EN_ESPERA))
+        { 
+         ordenPedido.deleteOrdenPedido(entity.getId());
         OrdenPedidoEntity result = em.find(OrdenPedidoEntity.class, entity.getId());
         Assert.assertNull(result);
+        }
+          
+        }
     }
 }
