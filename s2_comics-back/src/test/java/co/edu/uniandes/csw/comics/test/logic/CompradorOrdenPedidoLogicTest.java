@@ -222,6 +222,7 @@ public class CompradorOrdenPedidoLogicTest
             {
                 for(int i = 0; i < data.size(); i++)
                 {
+                    
                     System.out.println(data.get(i).getEstado());
                     System.out.println(compradorOrdenLogic.getOrdenes(comprador.getId()).get(i).getEstado());
                 }
