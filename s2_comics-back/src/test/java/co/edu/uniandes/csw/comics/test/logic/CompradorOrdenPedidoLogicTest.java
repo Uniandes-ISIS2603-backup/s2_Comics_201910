@@ -218,6 +218,8 @@ public class CompradorOrdenPedidoLogicTest
         {
             try
             {
+                //System.out.println("El estado es: " + entity.getEstado());
+                
                 compradorOrdenLogic.eliminarOrden(comprador.getId(), entity.getId());
             }
             catch(Exception e)
@@ -225,8 +227,8 @@ public class CompradorOrdenPedidoLogicTest
                 for(int i = 0; i < data.size(); i++)
                 {
                     
-                    System.out.println(data.get(i).getEstado());
-                    System.out.println(compradorOrdenLogic.getOrdenes(comprador.getId()).get(i).getEstado());
+                    //System.out.println("El estado es: " + data.get(i).getEstado());
+                    //System.out.println("El estado es: " + compradorOrdenLogic.getOrdenes(comprador.getId()).get(i).getEstado());
                 }
                 System.out.println(e.getMessage());
                 Assert.fail("No debería generar exception");
