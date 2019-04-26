@@ -60,8 +60,13 @@ public class OrdenPedidoResource {
       OrdenPedidoEntity ordenPedidoEntity = ordenPedido.toEntity();
         //invoca la logica para crear la nueva orden de pedido
          LOGGER.log(Level.INFO, "Iniciando create ordenesPedido");
-   
-        OrdenPedidoEntity nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId(), ordenPedido.getTrueque().getId()  );
+         OrdenPedidoEntity nuevaOrdenPedidoEntity;
+   if(ordenPedido.getComic().getEnVenta())
+   { 
+        nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId()  );}
+   else{
+        nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedidoTrueque(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId(), ordenPedido.getTrueque().getId());
+   }
         //como debe retornar un DTO (json) se invoca el contructor de DTO con argumento el entity nuevo
         OrdenPedidoDTO nuevaOrdenPedidoDTO= new OrdenPedidoDTO(nuevaOrdenPedidoEntity);
        
