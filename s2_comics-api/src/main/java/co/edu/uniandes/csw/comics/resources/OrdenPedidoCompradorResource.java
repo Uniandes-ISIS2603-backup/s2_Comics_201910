@@ -7,9 +7,13 @@ package co.edu.uniandes.csw.comics.resources;
 
 import co.edu.uniandes.csw.comics.dtos.OrdenPedidoDTO;
 import co.edu.uniandes.csw.comics.dtos.CompradorDTO;
+import co.edu.uniandes.csw.comics.dtos.CompradorDetailDTO;
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoLogic;
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoCompradorLogic;
 import co.edu.uniandes.csw.comics.ejb.CompradorLogic;
+import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
+import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -31,7 +35,8 @@ public class OrdenPedidoCompradorResource {
     
       private static final Logger LOGGER = Logger.getLogger(OrdenPedidoCompradorResource.class.getName());
 
-      @Inject
+    
+     @Inject
     private OrdenPedidoLogic ordenPedidoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     @Inject
@@ -63,5 +68,13 @@ public class OrdenPedidoCompradorResource {
         return ordenPedidoDTO;
     }
     
-    
+    public void crearOrdenCarrito(List<OrdenPedidoEntity> carrito) throws BusinessLogicException{
+        for(int i =0; i< carrito.size(); i++){
+          if(  carrito.get(i).getComic().getEnVenta())
+          {
+            OrdenPedidoEntity orden=  carrito.get(i);
+              ordenPedidoLogic.createOrdenPedido(orden,orden.getVendedor().getId(), orden.getComprador().getId(),orden.getComic().getId() );
+          }
+        }
+    }
 }

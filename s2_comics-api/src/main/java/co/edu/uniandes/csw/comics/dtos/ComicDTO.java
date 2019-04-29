@@ -23,7 +23,7 @@ public class ComicDTO implements Serializable {
     //Falto
     private VendedorDTO vendedor;
     private String informacion;
-
+    private String imagen;
     
     public ComicDTO(){
         
@@ -41,6 +41,7 @@ public class ComicDTO implements Serializable {
             tema = ent.getTema();
             enVenta = ent.getEnVenta();
             informacion = ent.getInformacion();
+            imagen = ent.getImagen();
             vendedor = new VendedorDTO(ent.getVendedor());
         }
     }
@@ -63,6 +64,7 @@ public class ComicDTO implements Serializable {
         ent.setTema(tema);
         ent.setEnVenta(enVenta);
         ent.setInformacion(informacion);
+        ent.setImagen(getImagen());
         if(vendedor != null)
             ent.setVendedor(vendedor.toEntity());
         return ent;
@@ -220,5 +222,19 @@ public class ComicDTO implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the imagen
+     */
+    public String getImagen() {
+        return imagen;
+    }
+
+    /**
+     * @param imagen the imagen to set
+     */
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

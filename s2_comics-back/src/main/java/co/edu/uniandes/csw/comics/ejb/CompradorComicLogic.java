@@ -15,20 +15,22 @@ import javax.ejb.*;
 import javax.inject.Inject;
 
 /**
- * Clase que implementa la conexion con la persistencia para la relación entre Comprador y comic
+ * Clase que implementa la conexion con la persistencia para la relación entre
+ * Comprador y comic
+ *
  * @author juan pablo cano
  */
 @Stateless
-public class CompradorComicLogic
-{
+public class CompradorComicLogic {
+
     private static final Logger LOGGER = Logger.getLogger(CompradorComicLogic.class.getName());
-    
+
     @Inject
     private ComicPersistence comic;
-    
+
     @Inject
     private CompradorPersistence comprador;
-    
+
     /**
      * Asocia un Comic existente a un Comprador
      *
@@ -36,63 +38,66 @@ public class CompradorComicLogic
      * @param idComic Identificador de la instancia de Comic
      * @return Instancia de ComicEntity que fue asociada a Comprador
      */
-    public ComicEntity addComicCarrito(long idComp, long idComic)
-    {
+    public ComicEntity addComicCarrito(long idComp, long idComic) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un comic a un comprador: {0}", idComp);
-        //CompradorEntity comp = comprador.find(idComp);
-        ComicEntity com = comic.find(idComic);
-        comprador.find(idComp).getCarro().add(com);
-        int i = comprador.find(idComp).getCarro().indexOf(com);
+        //System.out.println("ME INVOCARON >.<");
+        CompradorEntity comp = comprador.find(idComp);
+        ComicEntity comicEntity = comic.find(idComic);
+        //System.out.println("Solía tener " + comprador.find(idComp).getCarro().size() + " comics.");
+        //comprador.find(idComp).getCarro().add(com);
+        comicEntity.getCompradores().add(comp);
+        //System.out.println("Ahora tengo " + comprador.find(idComp).getCarro().size() + " comics.");
+        //int i = comprador.find(idComp).getCarro().indexOf(com);
+        //System.out.println("El índice que encontré es: " + i);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un comic a un comprador: {0}", idComp);
-        return comprador.find(idComp).getCarro().get(i);
+        return comic.find(comicEntity.getId());
     }
-    
+
     /**
      * Obtiene una colección de instancias de ComicEntity asociadas a una
      * instancia de Comprador
      *
      * @param idComp Identificador de la instancia de Comprador
-     * @return Colección de instancias de ComicEntity asociadas a la instancia de
-     * Comprador
+     * @return Colección de instancias de ComicEntity asociadas a la instancia
+     * de Comprador
      */
-    public List<ComicEntity> getComics(long idComp)
-    {
+    public List<ComicEntity> getComics(long idComp) {
         LOGGER.log(Level.INFO, "Inicia proceso de obtención de comics del comprador: {0}", idComp);
+        System.out.println("El tamaño del carrito: " + comprador.find(idComp).getCarro().size());
         return comprador.find(idComp).getCarro();
     }
-    
+
     /**
-     * Obtiene una instancia de ComicEntity asociada a una instancia de Comprador
+     * Obtiene una instancia de ComicEntity asociada a una instancia de
+     * Comprador
      *
      * @param idComp Identificador de la instancia de Comprador
      * @param idCom Identificador de la instancia de Comic
      * @return La entidadd de Libro del comprador
      * @throws BusinessLogicException Si el libro no está asociado al comprador
      */
-    public ComicEntity getComic(long idComp, long idCom)
-    {
+    public ComicEntity getComic(long idComp, long idCom) {
         LOGGER.log(Level.INFO, "Inicia proceso de búsqueda del comic: {0} en el comprador: " + idComp, idCom);
         List<ComicEntity> comics = comprador.find(idComp).getCarro();
         ComicEntity entity = comic.find(idCom);
         int index = comics.indexOf(entity);
         LOGGER.log(Level.INFO, "Termina proceso de busqueda del comic: {0} en el comprador: " + idComp, idCom);
-        if(index >= 0)
-        {
+        if (index >= 0) {
             return comics.get(index);
         }
         return null;
-    } 
-    
+    }
+
     /**
      * Remplaza las instancias de Comic asociadas a una instancia de Comprador
      *
      * @param CompradorId Identificador de la instancia de Comprador
      * @param list Colección de instancias de ComicEntity a asociar a instancia
      * de Comprador
-     * @return Nueva colección de ComicEntity asociada a la instancia de Comprador
+     * @return Nueva colección de ComicEntity asociada a la instancia de
+     * Comprador
      */
-    public List<ComicEntity> replaceComics(long idComp, List<ComicEntity> comics)
-    {
+    public List<ComicEntity> replaceComics(long idComp, List<ComicEntity> comics) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los comics asocidos al comprador con id = {0}", idComp);
         CompradorEntity comp = comprador.find(idComp);
         /*List<ComicEntity> comicsList = comic.findAll();
@@ -114,15 +119,14 @@ public class CompradorComicLogic
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los comics asocidos al comprador con id = {0}", idComp);
         return comp.getCarro();
     }
-    
+
     /**
      * Desasocia un Comic existente de un Comprador existente
      *
      * @param idComp Identificador de la instancia de Comprador
      * @param idComic Identificador de la instancia de Comic
      */
-    public void deleteComic(long idComp, long idComic)
-    {
+    public void deleteComic(long idComp, long idComic) {
         LOGGER.log(Level.INFO, "Inicia el proceso de eliminación del comic en el comprador con id: {0}", idComp);
         CompradorEntity entity = comprador.find(idComp);
         ComicEntity comEntity = comic.find(idComic);

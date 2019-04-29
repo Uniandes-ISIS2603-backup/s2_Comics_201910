@@ -117,7 +117,9 @@ public class CompradorComicLogicTest
     {
         ComicEntity newComic = factory.manufacturePojo(ComicEntity.class);
         comic.createComic(newComic);
+        System.out.println("El tamanio antes es: " + compradorEntity.getCarro().size());
         ComicEntity creado = compradorComic.addComicCarrito(compradorEntity.getId(), newComic.getId());
+        System.out.println("El tamanio después es: " + compradorEntity.getCarro().size());
         Assert.assertNotNull(creado);
         
         Assert.assertEquals(creado.getId(), newComic.getId());
@@ -130,6 +132,7 @@ public class CompradorComicLogicTest
     public void getComicsTest()
     {
         List<ComicEntity> comicsEntity = compradorComic.getComics(compradorEntity.getId());
+        //System.out.println("El tamaño es: " + comicsEntity.size());
         Assert.assertEquals(comicsEntity.size(), data.size());
         
         for(int i = 0; i < data.size(); i++)

@@ -60,7 +60,7 @@ public class CompradorComicResource
             throw new WebApplicationException("El recurso /comic/" + comicId + " no existe.", 404);
         }
         ComicDetailDTO comic = new ComicDetailDTO(compradorLogic.addComicCarrito(compradorId, comicId));
-        LOGGER.log(Level.INFO, "CompradorComicResource addComic: output: ", comic);
+        LOGGER.log(Level.INFO, "CompradorComicResource addComic: output: {0}", comic);
         return comic;
     }
     
@@ -75,6 +75,7 @@ public class CompradorComicResource
     public List<ComicDetailDTO> getCarro(@PathParam("compradorId")long compradorId)
     {
         LOGGER.log(Level.INFO, "CompradorComicResource getCarro: input: {0}", compradorId);
+        System.out.println("Tamanio: " + compradorLogic.getComics(compradorId).size());
         List<ComicDetailDTO> comics = listEntity2DTO(compradorLogic.getComics(compradorId));
         LOGGER.log(Level.INFO, "CompradorComicResoruce getCarro: output: {0}", comics);
         return comics;

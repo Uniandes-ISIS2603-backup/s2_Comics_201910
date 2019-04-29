@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.comics.entities.ComicEntity;
 import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.comics.persistence.ComicPersistence;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
@@ -19,7 +21,7 @@ import javax.ws.rs.WebApplicationException;
  */
 @Stateless
 public class ComicLogic {
-   // private final static Logger LOGGER = Logger.getLogger(VendedorDTO.class.getName());
+    private static final Logger LOGGER=Logger.getLogger(ComicLogic.class.getName());
 
     
     @Inject
@@ -48,11 +50,12 @@ public class ComicLogic {
         persistence.delete(id);
     }
 
-    public ComicEntity updateComic(ComicEntity comic) throws BusinessLogicException{
-        if(comic.getId() == null)
-            throw new BusinessLogicException("el comic no tiene id");
-        if(persistence.find(comic.getId()) == null)
+    public ComicEntity updateComic(long id, ComicEntity comic) throws BusinessLogicException{
+        LOGGER.log(Level.INFO, "in 1");
+        if(persistence.find(id) == null)
             throw new WebApplicationException("no existe el comic");
+        comic.setId(id);
+        LOGGER.log(Level.INFO, "in 2");
         return persistence.update(comic);
     }
 }

@@ -87,6 +87,22 @@ public class CompradorOrdenPedidoLogic
     }
     
     /**
+     * 
+     * @param idComprador
+     * @param idPedido
+     * @param orden
+     * @return 
+     */
+    public void updateOrden(long idComprador, long idPedido, OrdenPedidoEntity orden)
+    {
+        CompradorEntity compradorEntity = compradorPersistence.find(idComprador);
+        OrdenPedidoEntity pedidoEntity = ordenPedidoPersistence.find(idPedido);
+        //int index = compradorEntity.getOrdenPedidoCompra().indexOf(pedidoEntity);
+        compradorEntity.getOrdenPedidoCompra().remove(pedidoEntity);
+        compradorPersistence.find(idComprador).getOrdenPedidoCompra().add(orden);
+    }
+    
+    /**
      * Remplaza las instancias de OrdenPedido asociadas a una instancia de Comprador
      *
      * @param CompradorId Identificador de la instancia de Comprador
@@ -116,9 +132,13 @@ public class CompradorOrdenPedidoLogic
         OrdenPedidoEntity pedidoEntity = ordenPedidoPersistence.find(idPedido);
         if(pedidoEntity.getEstado() != Estado.FINALIZADO)
         {
+            System.out.println("El estado es: " + pedidoEntity.getEstado());
             throw new BusinessLogicException("No se puede eliminar la compra debido a que no se ha completado");
         }
-        compradorEntity.getOrdenPedidoCompra().remove(pedidoEntity);
-        LOGGER.log(Level.INFO, "Finaliza el proceso de eliminación del pedido con id: {0} asociado al comprador con id: " + idComprador, idPedido);        
+        else
+        {
+            compradorEntity.getOrdenPedidoCompra().remove(pedidoEntity);
+            LOGGER.log(Level.INFO, "Finaliza el proceso de eliminación del pedido con id: {0} asociado al comprador con id: " + idComprador, idPedido);
+        }      
     }
 }

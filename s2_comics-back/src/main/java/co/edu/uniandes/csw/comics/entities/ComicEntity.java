@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -49,6 +50,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
     private TemaGlobal tema;
     private Boolean enVenta;
     private String informacion;
+    private String imagen;
     
     @PodamExclude
     @ManyToMany
@@ -70,6 +72,13 @@ public class ComicEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "comic")
     private List<ComicDeseoEntity> comicsDeseo = new ArrayList<ComicDeseoEntity>();
     
+    @PodamExclude
+    @OneToOne
+    private OrdenPedidoEntity orden1;
+    
+     @PodamExclude
+    @OneToOne
+    private OrdenPedidoEntity orden2;
 
     public ComicEntity(){}
     
@@ -268,6 +277,20 @@ public class ComicEntity extends BaseEntity implements Serializable {
      */
     public void setComics(List<ComicDeseoEntity> comicsD){
     this.comicsDeseo = comicsD;
+    }
+
+    /**
+     * @return the imagen
+     */
+    public String getImagen() {
+        return imagen;
+    }
+
+    /**
+     * @param imagen the imagen to set
+     */
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
     
     
