@@ -26,10 +26,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Clase que implementa el recurso "comprador/{id}/carro"
+ * Clase que implementa el recurso "comprador/{idComprador}/comics/"
  * @author juan pablo cano
  */
-@Path("/comprador/{compradorId: \\d+}/carro/{comicId: \\d*}")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CompradorComicResource
@@ -52,7 +51,7 @@ public class CompradorComicResource
      * Error de lógica que se genera cuando no se encuentra el comic.
      */
     @POST
-    @Path("comicId: \\d+")
+    @Path("{comicId: \\d+}")
     public ComicDetailDTO addComic(@PathParam("compradorId") long compradorId, @PathParam("comicId") long comicId)
     {
         LOGGER.log(Level.INFO, "CompradorComicResource addComic: input: compradorId: {0}, comicId: {1}", new Object[]{compradorId, comicId});
@@ -94,7 +93,7 @@ public class CompradorComicResource
      * Error de lógica que se genera cuando no se encuentra el comic deseo.
      */
     @GET
-    @Path("comicId: \\d+")
+    @Path("{comicId: \\d+}")
     public ComicDetailDTO getComic(@PathParam("compradorId") long compradorId, @PathParam("comicId") long comicId)
     {
         LOGGER.log(Level.INFO, "CompradorOrdenPedidoResource getComic: input: compradorId: {0}, comicId: {1}", new Object[]{compradorId, comicId});
@@ -145,7 +144,7 @@ public class CompradorComicResource
      * Error de lógica que se genera cuando no se encuentra el comic.
      */
     @DELETE
-    @Path("comicId: \\d+")
+    @Path("{comicId: \\d+}")
     public void deleteComic(@PathParam("compradorId") long compradorId, @PathParam("comicId")long comicId)
     {
         LOGGER.log(Level.INFO, "CompradorComicResource removeComic: input: compradorId: {0}, comicId: {1}", new Object[]{compradorId, comicId});

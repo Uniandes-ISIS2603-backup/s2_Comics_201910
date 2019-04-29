@@ -162,23 +162,6 @@ public class CompradorLogicTest
     }
     
     @Test
-    public void crearCompradorMismoId()
-    {
-        try
-        {
-            CompradorEntity entity = factory.manufacturePojo(CompradorEntity.class);
-            entity.setId(data.get(2).getId());
-            Assert.assertEquals(entity.getId(), data.get(2).getId());
-            comprador.createComprador(entity);
-            Assert.fail("No debería crear un comprador con un Id existente");
-        }
-        catch(Exception e)
-        {
-            //Debería generar Exception
-        }
-    }
-    
-    @Test
     public void getCompradoresTest()
     {
         List<CompradorEntity> lista = comprador.getCompradores();

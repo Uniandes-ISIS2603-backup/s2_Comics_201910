@@ -36,7 +36,7 @@ public class VendedorLogic {
         if (persistence.findByEmail(vendedorEntity.getEmail()) != null) {
             throw new BusinessLogicException("Ya existe un vendedor con el email " + vendedorEntity.getEmail() + "\"");
         }
-         
+        
         // Invoca la persistencia para crear la editorial
         persistence.create(vendedorEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del vendedor");
@@ -49,6 +49,18 @@ public class VendedorLogic {
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos los vendedores");
         return vendedores;
     }
+         /**
+          * 
+          * @param alias
+          * @return 
+          */
+         public VendedorEntity getVendedorByAlias(String alias)
+         {
+             LOGGER.log(Level.INFO, "Se inicia la consulta por alias");
+             VendedorEntity entity = persistence.findByAlias(alias);
+             LOGGER.log(Level.INFO, "Finaliza la consulta");
+             return entity;
+         }
          public VendedorEntity getVendedor(Long vendedorId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el vendedor con id = {0}", vendedorId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
