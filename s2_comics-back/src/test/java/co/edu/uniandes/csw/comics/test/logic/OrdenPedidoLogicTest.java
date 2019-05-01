@@ -180,9 +180,13 @@ public class OrdenPedidoLogicTest {
          entity.setComprador(dataCompradores.get(1));
          entity.setComic(dataComic.get(1));
          entity.setTrueque(dataTrueque.get(1));
-       
-            OrdenPedidoEntity result = ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId() );
-            
+         OrdenPedidoEntity result ;
+       if(entity.getTrueque()!=null)
+       {   
+            result = ordenPedido.createOrdenPedidoTrueque(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId() );
+       }
+      else{    result = ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId() );
+      }
             Assert.assertNotNull(result);
             OrdenPedidoEntity newEntity = em.find(OrdenPedidoEntity.class, result.getId());
 
@@ -207,8 +211,17 @@ public class OrdenPedidoLogicTest {
       
             entity.setId(data.get(2).getId());
             Assert.assertEquals(entity.getId(), data.get(2).getId());
-            OrdenPedidoEntity a =ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId());
+            if(entity.getTrueque()!=null)
+            {
+                OrdenPedidoEntity a =ordenPedido.createOrdenPedidoTrueque(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId());
+            Assert.assertNull("No debería crear un comprador con un Id existente",a );}
+            else{
+                OrdenPedidoEntity a =ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId());
             Assert.assertNull("No debería crear un comprador con un Id existente",a );
+            }
+        
+            
+            
         }
         catch(Exception e)
         {
@@ -265,9 +278,16 @@ public class OrdenPedidoLogicTest {
     @Test
     public void deleteTest() throws BusinessLogicException
     {
-        OrdenPedidoEntity entity = data.get(0);
-        ordenPedido.deleteOrdenPedido(entity.getId());
+        for(int i =0; i<data.size(); i++){
+          OrdenPedidoEntity entity = data.get(i);
+        if(data.get(i).getEstado().equals(OrdenPedidoEntity.Estado.FINALIZADO)|| data.get(i).getEstado().equals(OrdenPedidoEntity.Estado.EN_ESPERA))
+        { 
+         ordenPedido.deleteOrdenPedido(entity.getId());
         OrdenPedidoEntity result = em.find(OrdenPedidoEntity.class, entity.getId());
         Assert.assertNull(result);
+        }
+        
+          
+        }
     }
 }

@@ -56,14 +56,20 @@ public class OrdenPedidoResource {
     @POST
     public OrdenPedidoDTO crearOrdenPedido (OrdenPedidoDTO ordenPedido) throws BusinessLogicException{
       //convierte el DTO (json) en un objeto entity para ser manejado por la logica
-      LOGGER.info("OrdenpedidoResourse createOrdenPedido: input:" + ordenPedido.toString());
-        OrdenPedidoEntity ordenPedidoEntity= ordenPedido.toEntity();
+       LOGGER.log(Level.INFO, "Iniciando post ordenPedido"); 
+      OrdenPedidoEntity ordenPedidoEntity = ordenPedido.toEntity();
         //invoca la logica para crear la nueva orden de pedido
-        OrdenPedidoEntity nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId(), ordenPedido.getTrueque().getId()  );
+         LOGGER.log(Level.INFO, "Iniciando create ordenesPedido");
+         OrdenPedidoEntity nuevaOrdenPedidoEntity;
+   if(ordenPedido.getComic().getEnVenta())
+   { 
+        nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId()  );}
+   else{
+        nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedidoTrueque(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId(), ordenPedido.getTrueque().getId());
+   }
         //como debe retornar un DTO (json) se invoca el contructor de DTO con argumento el entity nuevo
         OrdenPedidoDTO nuevaOrdenPedidoDTO= new OrdenPedidoDTO(nuevaOrdenPedidoEntity);
-        LOGGER.info("OrdenpedidoResourse createOrdenPedido: output:" + nuevaOrdenPedidoDTO.toString());
-        
+       
       return nuevaOrdenPedidoDTO;
               
     }

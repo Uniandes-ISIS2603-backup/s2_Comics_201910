@@ -129,7 +129,7 @@ public class CompradorOrdenPedidoLogicTest
         newOrden.setComprador(comprador);
         newOrden.setVendedor(vendedor);
         newOrden.setComic(comic);
-        ordenPedidoLogic.createOrdenPedido(newOrden, comprador.getId(),  vendedor.getId(), comic.getId(), null);
+        ordenPedidoLogic.createOrdenPedido(newOrden, comprador.getId(),  vendedor.getId(), comic.getId());
         OrdenPedidoEntity ordenPedidoEntity = compradorOrdenLogic.addOrdenPedido(comprador.getId(), newOrden.getId());
         Assert.assertNotNull(ordenPedidoEntity);
 
@@ -177,7 +177,9 @@ public class CompradorOrdenPedidoLogicTest
             entity.setComprador(comprador);
             entity.setVendedor(vendedor);
             entity.setComic(comic);
-            ordenPedidoLogic.createOrdenPedido(entity, vendedor.getId(), comprador.getId(), comic.getId(), trueque.getId());
+            if(entity.getComic().getEnVenta())
+            {ordenPedidoLogic.createOrdenPedido(entity, vendedor.getId(), comprador.getId(), comic.getId());}
+            else{ordenPedidoLogic.createOrdenPedidoTrueque(entity, vendedor.getId(), comprador.getId(), comic.getId(), trueque.getId());}
             lista.add(entity);
         }
         
@@ -216,14 +218,17 @@ public class CompradorOrdenPedidoLogicTest
         {
             try
             {
+                //System.out.println("El estado es: " + entity.getEstado());
+                
                 compradorOrdenLogic.eliminarOrden(comprador.getId(), entity.getId());
             }
             catch(Exception e)
             {
                 for(int i = 0; i < data.size(); i++)
                 {
-                    System.out.println(data.get(i).getEstado());
-                    System.out.println(compradorOrdenLogic.getOrdenes(comprador.getId()).get(i).getEstado());
+                    
+                    //System.out.println("El estado es: " + data.get(i).getEstado());
+                    //System.out.println("El estado es: " + compradorOrdenLogic.getOrdenes(comprador.getId()).get(i).getEstado());
                 }
                 System.out.println(e.getMessage());
                 Assert.fail("No debería generar exception");

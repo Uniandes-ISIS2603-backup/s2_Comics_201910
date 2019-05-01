@@ -26,10 +26,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Clase que implementa el recurso "comprador/{id}/carro"
+ * Clase que implementa el recurso "comprador/{idComprador}/comics/"
  * @author juan pablo cano
  */
-@Path("/comprador/{compradorId: \\d+}/carro/{comicId: \\d*}")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CompradorComicResource
@@ -52,7 +51,7 @@ public class CompradorComicResource
      * Error de lógica que se genera cuando no se encuentra el comic.
      */
     @POST
-    @Path("comicId: \\d+")
+    @Path("{comicId: \\d+}")
     public ComicDetailDTO addComic(@PathParam("compradorId") long compradorId, @PathParam("comicId") long comicId)
     {
         LOGGER.log(Level.INFO, "CompradorComicResource addComic: input: compradorId: {0}, comicId: {1}", new Object[]{compradorId, comicId});
@@ -61,7 +60,7 @@ public class CompradorComicResource
             throw new WebApplicationException("El recurso /comic/" + comicId + " no existe.", 404);
         }
         ComicDetailDTO comic = new ComicDetailDTO(compradorLogic.addComicCarrito(compradorId, comicId));
-        LOGGER.log(Level.INFO, "CompradorComicResource addComic: output: ", comic);
+        LOGGER.log(Level.INFO, "CompradorComicResource addComic: output: {0}", comic);
         return comic;
     }
     
@@ -76,6 +75,7 @@ public class CompradorComicResource
     public List<ComicDetailDTO> getCarro(@PathParam("compradorId")long compradorId)
     {
         LOGGER.log(Level.INFO, "CompradorComicResource getCarro: input: {0}", compradorId);
+        System.out.println("Tamanio: " + compradorLogic.getComics(compradorId).size());
         List<ComicDetailDTO> comics = listEntity2DTO(compradorLogic.getComics(compradorId));
         LOGGER.log(Level.INFO, "CompradorComicResoruce getCarro: output: {0}", comics);
         return comics;
@@ -94,7 +94,7 @@ public class CompradorComicResource
      * Error de lógica que se genera cuando no se encuentra el comic deseo.
      */
     @GET
-    @Path("comicId: \\d+")
+    @Path("{comicId: \\d+}")
     public ComicDetailDTO getComic(@PathParam("compradorId") long compradorId, @PathParam("comicId") long comicId)
     {
         LOGGER.log(Level.INFO, "CompradorOrdenPedidoResource getComic: input: compradorId: {0}, comicId: {1}", new Object[]{compradorId, comicId});
@@ -145,7 +145,7 @@ public class CompradorComicResource
      * Error de lógica que se genera cuando no se encuentra el comic.
      */
     @DELETE
-    @Path("comicId: \\d+")
+    @Path("{comicId: \\d+}")
     public void deleteComic(@PathParam("compradorId") long compradorId, @PathParam("comicId")long comicId)
     {
         LOGGER.log(Level.INFO, "CompradorComicResource removeComic: input: compradorId: {0}, comicId: {1}", new Object[]{compradorId, comicId});

@@ -55,6 +55,12 @@ public class CompradorDetailDTO extends CompradorDTO implements Serializable
             {
                 listaDeseos.add(new ComicDeseoDTO(deseo));
             }
+            
+            carro = new ArrayList();
+            for(ComicEntity comic : entity.getCarro())
+            {
+                carro.add(new ComicDTO(comic));
+            }
         }
     }
     
@@ -91,7 +97,7 @@ public class CompradorDetailDTO extends CompradorDTO implements Serializable
             List<ComicEntity> comics = new ArrayList();
             for(ComicDTO comic : getCarro())
             {
-                //comics.add(comic.to)
+                comics.add(comic.toEntity());
             }
             compradorEntity.setCarro(comics);
         }
