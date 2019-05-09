@@ -181,12 +181,9 @@ public class OrdenPedidoLogicTest {
          entity.setComic(dataComic.get(1));
          entity.setTrueque(dataTrueque.get(1));
          OrdenPedidoEntity result ;
-       if(entity.getTrueque()!=null)
-       {   
-            result = ordenPedido.createOrdenPedidoTrueque(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId() );
-       }
-      else{    result = ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId() );
-      }
+        
+            result = ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId() );
+      
             Assert.assertNotNull(result);
             OrdenPedidoEntity newEntity = em.find(OrdenPedidoEntity.class, result.getId());
 
@@ -211,15 +208,9 @@ public class OrdenPedidoLogicTest {
       
             entity.setId(data.get(2).getId());
             Assert.assertEquals(entity.getId(), data.get(2).getId());
-            if(entity.getTrueque()!=null)
-            {
-                OrdenPedidoEntity a =ordenPedido.createOrdenPedidoTrueque(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId());
-            Assert.assertNull("No debería crear un comprador con un Id existente",a );}
-            else{
-                OrdenPedidoEntity a =ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId());
+           
+                OrdenPedidoEntity a =ordenPedido.createOrdenPedido(entity, entity.getVendedor().getId(),entity.getComprador().getId(), entity.getComic().getId(), entity.getTrueque().getId());
             Assert.assertNull("No debería crear un comprador con un Id existente",a );
-            }
-        
             
             
         }

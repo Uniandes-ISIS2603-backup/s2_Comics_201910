@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.comics.resources;
 
 import co.edu.uniandes.csw.comics.dtos.OrdenPedidoDTO;
 import co.edu.uniandes.csw.comics.dtos.CompradorDTO;
-import co.edu.uniandes.csw.comics.dtos.CompradorDetailDTO;
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoLogic;
 import co.edu.uniandes.csw.comics.ejb.OrdenPedidoCompradorLogic;
 import co.edu.uniandes.csw.comics.ejb.CompradorLogic;
@@ -70,11 +69,10 @@ public class OrdenPedidoCompradorResource {
     
     public void crearOrdenCarrito(List<OrdenPedidoEntity> carrito) throws BusinessLogicException{
         for(int i =0; i< carrito.size(); i++){
-          if(  carrito.get(i).getComic().getEnVenta())
-          {
+          
             OrdenPedidoEntity orden=  carrito.get(i);
-              ordenPedidoLogic.createOrdenPedido(orden,orden.getVendedor().getId(), orden.getComprador().getId(),orden.getComic().getId() );
-          }
+              ordenPedidoLogic.createOrdenPedido(orden,orden.getVendedor().getId(), orden.getComprador().getId(),orden.getComic().getId(), orden.getTrueque().getId() );
+          
         }
     }
 }

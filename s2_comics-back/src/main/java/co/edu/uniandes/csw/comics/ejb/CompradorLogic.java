@@ -94,6 +94,10 @@ public class CompradorLogic
         return comprador;
     }
     
+    public CompradorEntity getComprador(Long id){
+         CompradorEntity comprador = persistencia.find(id);
+       return comprador;
+    }
     /**
      * Obtiene los datos de una instancia de Comprador a partir de su email.
      *

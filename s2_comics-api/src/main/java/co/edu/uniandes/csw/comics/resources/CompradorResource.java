@@ -127,7 +127,7 @@ public class CompradorResource
      */
     @GET
     @Path("{compradorId: \\d+}")
-    public CompradorDetailDTO getComprador(@PathParam("compradorId") long id)
+    public CompradorDTO getComprador(@PathParam("compradorId") long id)
     {
         LOGGER.log(Level.INFO, "CompradorResource getComprador: input: {0}", id);
         CompradorEntity entity = compradorLogic.findComprador(id);
@@ -135,7 +135,7 @@ public class CompradorResource
         {
             throw new WebApplicationException("El recurso /comprador/" + id + " no existe.", 404);
         }
-        CompradorDetailDTO comprador = new CompradorDetailDTO(entity);
+        CompradorDTO comprador = new CompradorDTO(entity);
         LOGGER.log(Level.INFO, "CompradorResource getComprador: output:{0}", comprador);
         return comprador;
     }
