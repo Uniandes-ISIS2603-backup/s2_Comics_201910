@@ -125,7 +125,7 @@ public class OrdenPedidoResource {
      */
     @PUT
     @Path("{ordenesPedidoId: \\d+}")
-    public OrdenPedidoDTO updateOrdenPedido(@PathParam("ordenesPedidoId") Long ordenesPedidoId, OrdenPedidoDTO ordenPedido) throws WebApplicationException {
+    public OrdenPedidoDTO updateOrdenPedido(@PathParam("ordenesPedidoId") Long ordenesPedidoId, OrdenPedidoDTO ordenPedido) throws WebApplicationException, BusinessLogicException {
         LOGGER.log(Level.INFO, "ordenPedidoResource updateOrdenPedido: input: id:{0} , editorial: {1}", new Object[]{ordenesPedidoId, ordenPedido});
         ordenPedido.setId(ordenesPedidoId);
         if (ordenPedidoLogic.getOrdenPedido(ordenesPedidoId) == null) {

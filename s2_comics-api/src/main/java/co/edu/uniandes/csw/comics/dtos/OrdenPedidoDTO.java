@@ -237,8 +237,9 @@ public class OrdenPedidoDTO implements Serializable
       ordenPedidoEntity.setVendedor(this.vendedor.toEntity());
       ordenPedidoEntity.setComentario(this.comentario);
       LOGGER.log(Level.INFO, "convertido a Entity 1");
+     if(this.trueque!=null){
       ordenPedidoEntity.setTrueque(this.trueque.toEntity());
-      LOGGER.log(Level.INFO, "convertido a Entity");
+      LOGGER.log(Level.INFO, "convertido a Entity");}
    
       return ordenPedidoEntity;
         

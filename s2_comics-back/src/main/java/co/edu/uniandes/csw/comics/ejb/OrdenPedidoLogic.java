@@ -68,8 +68,9 @@ public class OrdenPedidoLogic {
          ComicEntity comic = comicPersistence.find(comicId);
          ordenPedido.setComic(comic);
       
-         ComicEntity comicTrueque = comicPersistence.find(truequeId);
-         ordenPedido.setTrueque(comicTrueque);
+         if(truequeId!=null)
+         { ComicEntity comicTrueque = comicPersistence.find(truequeId);
+         ordenPedido.setTrueque(comicTrueque);}
        
         if(persistence.find(ordenPedido.getId())!=null ){
         new BusinessLogicException("ya existe una ordenPedido con esta id"); 
@@ -116,14 +117,35 @@ public class OrdenPedidoLogic {
      * @param ordenPedidoEntity , entidad con la informacion de la ordenPedido
      * @return la ordenPedido actualizada
      */
-          public OrdenPedidoEntity updateOrdenPedido(Long id, OrdenPedidoEntity ordenPedidoEntity) {
+          public OrdenPedidoEntity updateOrdenPedido(Long id, OrdenPedidoEntity ordenPedidoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la ordenPedido con id = {0}", id);
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
-       
-        OrdenPedidoEntity newEntity = persistence.update(ordenPedidoEntity);
+         OrdenPedidoEntity orden = persistence.find(id);
+              
+         if(orden.getEstado()==OrdenPedidoEntity.Estado.FINALIZADO && (orden.getEstado()!= ordenPedidoEntity.getEstado())){
+                  throw new BusinessLogicException("la orden ya se encuentra finalizada");
+              }
+              if(orden.getEstado()==OrdenPedidoEntity.Estado.ACEPTADO && ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.RECHAZADO){
+                  throw new BusinessLogicException("la orden se encuentra aceptada, no se puede rechazar");
+              }
+               if(orden.getEstado()== ordenPedidoEntity.getEstado()){
+                  throw new BusinessLogicException("la orden ya se encuentra en este estado");
+              } 
+                if(orden.getEstado()!=OrdenPedidoEntity.Estado.ENVIADO && ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.FINALIZADO){
+                  throw new BusinessLogicException("No se puede registrar el recibido si no esta en estado enviado");
+              } 
+                 if(orden.getEstado()!=OrdenPedidoEntity.Estado.EN_ESPERA && (ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.ACEPTADO || ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.RECHAZADO)){
+                  throw new BusinessLogicException("Solo se puede aceptao o rechazar una orden si esta en espera");
+              } 
+                   if( ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.EN_ESPERA  ){
+                  throw new BusinessLogicException("No se puede volver al estado EN_ESPERA luego de salir de esste estado");
+              } 
+                 
+               
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la ordenPedido con id = {0}", ordenPedidoEntity.getId());
-        return newEntity;
-   
+        
+    OrdenPedidoEntity newEntity = persistence.update(ordenPedidoEntity);
+       return newEntity;
     }
           
           public void ActualizarEstado(Long id, OrdenPedidoEntity.Estado nuevoEstado) throws BusinessLogicException{

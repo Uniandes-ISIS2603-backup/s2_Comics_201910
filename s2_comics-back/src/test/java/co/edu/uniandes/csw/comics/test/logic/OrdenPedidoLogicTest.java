@@ -248,13 +248,17 @@ public class OrdenPedidoLogicTest {
      * test que verifica el funcionamiento del metodo UpdateOrdenPeido
      */
     @Test
-    public void updateTest()
+    public void updateTest() 
     {
         OrdenPedidoEntity entity = data.get(0);
         OrdenPedidoEntity pojoEntity = factory.manufacturePojo(OrdenPedidoEntity.class);
         
         pojoEntity.setId(entity.getId());
-        ordenPedido.updateOrdenPedido(pojoEntity.getId(), pojoEntity);
+        try{
+        ordenPedido.updateOrdenPedido(pojoEntity.getId(), pojoEntity);}
+        catch(BusinessLogicException e){
+            e.getMessage();
+        }
         OrdenPedidoEntity result = em.find(OrdenPedidoEntity.class, entity.getId());
         
         Assert.assertEquals(result.getId(), pojoEntity.getId());
