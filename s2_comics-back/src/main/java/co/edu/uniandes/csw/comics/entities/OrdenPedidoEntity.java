@@ -5,10 +5,14 @@
  */
 package co.edu.uniandes.csw.comics.entities;
 
+import co.edu.uniandes.csw.comics.ejb.OrdenPedidoLogic;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -21,6 +25,9 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class OrdenPedidoEntity  extends BaseEntity implements Serializable
 {
+    private final static Logger LOGGER = Logger.getLogger(OrdenPedidoEntity.class.getName());
+   
+     
     /**
      * estado de la orden, es una enumeracion, puede estar 
      * 1. en espera: se genero la orden y esta esperando la confirmacion del vendedor
@@ -41,6 +48,12 @@ public class OrdenPedidoEntity  extends BaseEntity implements Serializable
      * estado de la orden, es una enumeracion
      */
     private Estado estado;
+    
+         /**
+     * fecha estimada de enrega
+     */
+    private String fechaEstimadaEntrega;
+    
     
     /**
      * comprador asociado a la ordenPedido
@@ -70,7 +83,11 @@ public class OrdenPedidoEntity  extends BaseEntity implements Serializable
     @OneToOne
     private ComicEntity trueque;
     
-    
+    /**
+     * comentario de rechazo
+     */
+    private String comentario;
+          
     /**
      * tarjeta de credito asiciada con la compra
      */
@@ -81,15 +98,8 @@ public class OrdenPedidoEntity  extends BaseEntity implements Serializable
      */
     private Integer numeroComprasComprador;
 
-        /**
-     * fecha estimada de enrega
-     */
-    private String fechaEstimadaEntrega;
+   
     
-    /**
-     * comentario de rechazo
-     */
-    private String comentario;
 
     
    
@@ -190,8 +200,36 @@ public class OrdenPedidoEntity  extends BaseEntity implements Serializable
         this.trueque = trueque;
     }
     
-  
+    /**
+     * @return the fechaEstimadaEntrega
+     */
+    public String getFechaEstimadaEntrega() {
+        LOGGER.log(Level.INFO, "fecha :..2" + this.fechaEstimadaEntrega); 
+     
+        return fechaEstimadaEntrega;
+    }
 
+    /**
+     * @param fechaEstimadaEntrega the fechaEstimadaEntrega to set
+     */
+    public void setFechaEstimadaEntrega(String fechaEstimadaEntrega) {
+      
+        this.fechaEstimadaEntrega = fechaEstimadaEntrega;
+    }
+ /**
+     * @return the comentario
+     */
+    public String getComentario() {
+        
+        return this.comentario;
+    }
+
+    /**
+     * @param comentario the comentario to set
+     */
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
 
     /**
      * @param estado the estado to set
@@ -207,32 +245,8 @@ public class OrdenPedidoEntity  extends BaseEntity implements Serializable
         return estado;
     }
 
-    /**
-     * @return the fechaEstimadaEntrega
-     */
-    public String getFechaEstimadaEntrega() {
-        return fechaEstimadaEntrega;
-    }
+  
 
-    /**
-     * @param fechaEstimadaEntrega the fechaEstimadaEntrega to set
-     */
-    public void setFechaEstimadaEntrega(String fechaEstimadaEntrega) {
-        this.fechaEstimadaEntrega = fechaEstimadaEntrega;
-    }
-
-    /**
-     * @return the comentario
-     */
-    public String getComentario() {
-        return comentario;
-    }
-
-    /**
-     * @param comentario the comentario to set
-     */
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
+   
     
 }

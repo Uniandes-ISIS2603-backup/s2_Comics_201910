@@ -61,12 +61,8 @@ public class OrdenPedidoResource {
         //invoca la logica para crear la nueva orden de pedido
          LOGGER.log(Level.INFO, "Iniciando create ordenesPedido");
          OrdenPedidoEntity nuevaOrdenPedidoEntity;
-   if(ordenPedido.getComic().getEnVenta())
-   { 
-        nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId()  );}
-   else{
-        nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedidoTrueque(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId(), ordenPedido.getTrueque().getId());
-   }
+       nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId() , ordenPedido.getTrueque().getId() );
+   
         //como debe retornar un DTO (json) se invoca el contructor de DTO con argumento el entity nuevo
         OrdenPedidoDTO nuevaOrdenPedidoDTO= new OrdenPedidoDTO(nuevaOrdenPedidoEntity);
        
@@ -129,7 +125,7 @@ public class OrdenPedidoResource {
      */
     @PUT
     @Path("{ordenesPedidoId: \\d+}")
-    public OrdenPedidoDTO updateOrdenPedido(@PathParam("ordenesPedidoId") Long ordenesPedidoId, OrdenPedidoDTO ordenPedido) throws WebApplicationException {
+    public OrdenPedidoDTO updateOrdenPedido(@PathParam("ordenesPedidoId") Long ordenesPedidoId, OrdenPedidoDTO ordenPedido) throws WebApplicationException, BusinessLogicException {
         LOGGER.log(Level.INFO, "ordenPedidoResource updateOrdenPedido: input: id:{0} , editorial: {1}", new Object[]{ordenesPedidoId, ordenPedido});
         ordenPedido.setId(ordenesPedidoId);
         if (ordenPedidoLogic.getOrdenPedido(ordenesPedidoId) == null) {

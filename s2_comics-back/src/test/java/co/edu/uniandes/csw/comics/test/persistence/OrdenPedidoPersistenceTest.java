@@ -172,7 +172,7 @@ public class OrdenPedidoPersistenceTest {
      */
       @Test
     public void updateOrdenesPedidoTest() {
-            OrdenPedidoEntity entity = data.get(0);
+         OrdenPedidoEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
        OrdenPedidoEntity newEntity = factory.manufacturePojo(OrdenPedidoEntity.class);
 
@@ -182,7 +182,7 @@ public class OrdenPedidoPersistenceTest {
 
         OrdenPedidoEntity resp = em.find(OrdenPedidoEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getTarjetaCredito(), resp.getTarjetaCredito());
+        Assert.assertEquals(newEntity.getComentario(), resp.getComentario());
     
     }
     

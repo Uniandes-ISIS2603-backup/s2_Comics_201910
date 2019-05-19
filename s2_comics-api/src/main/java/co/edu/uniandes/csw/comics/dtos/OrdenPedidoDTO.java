@@ -6,9 +6,7 @@
 package co.edu.uniandes.csw.comics.dtos;
 
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
-import co.edu.uniandes.csw.comics.resources.OrdenPedidoResource;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -99,13 +97,17 @@ public class OrdenPedidoDTO implements Serializable
             this.id = ordenPedidoEntity.getId();
             this.estado = ordenPedidoEntity.getEstado();
             this.tarjetaCredito=ordenPedidoEntity.getTarjetaCredito();
-            this.numeroCompras=ordenPedidoEntity.getNumeroComprasComprador(); 
+            this.numeroCompras=ordenPedidoEntity.getNumeroComprasComprador();
+            
+            this.comentario = ordenPedidoEntity.getComentario();
+             LOGGER.log(Level.INFO, "fecha :.." + ordenPedidoEntity.getFechaEstimadaEntrega()); 
+     
+            this.fechaEstimadaEntrega= ordenPedidoEntity.getFechaEstimadaEntrega();
+            
             CompradorDTO c= new CompradorDTO(ordenPedidoEntity.getComprador());
             this.comprador=c;
             VendedorDTO v= new VendedorDTO(ordenPedidoEntity.getVendedor());
             this.vendedor=v;
-            this.comentario = ordenPedidoEntity.getComentario();
-            this.fechaEstimadaEntrega= ordenPedidoEntity.getFechaEstimadaEntrega();
             ComicDTO d= new ComicDTO(ordenPedidoEntity.getComic());
             this.comic=d;
             ComicDTO t= new ComicDTO(ordenPedidoEntity.getTrueque());
@@ -233,9 +235,11 @@ public class OrdenPedidoDTO implements Serializable
         ordenPedidoEntity.setComic(this.comic.toEntity());
       ordenPedidoEntity.setComprador(this.comprador.toEntity());
       ordenPedidoEntity.setVendedor(this.vendedor.toEntity());
+      ordenPedidoEntity.setComentario(this.comentario);
       LOGGER.log(Level.INFO, "convertido a Entity 1");
+     if(this.trueque!=null){
       ordenPedidoEntity.setTrueque(this.trueque.toEntity());
-      LOGGER.log(Level.INFO, "convertido a Entity");
+      LOGGER.log(Level.INFO, "convertido a Entity");}
    
       return ordenPedidoEntity;
         

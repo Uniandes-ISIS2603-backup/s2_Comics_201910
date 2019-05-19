@@ -55,10 +55,10 @@ public class OrdenPedidoLogic {
      * Error cuando : no se tiene asociado ningun vendedor, comprador o comic
      * Error cuando : el comic esta para truque y no se asocia ningun comic para trueque
      */
-    public OrdenPedidoEntity createOrdenPedidoTrueque(OrdenPedidoEntity ordenPedido, Long vendedorId, Long compradoraiD, Long comicId, Long truequeId)throws BusinessLogicException
+    public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido, Long vendedorId, Long compradoraiD, Long comicId, Long truequeId)throws BusinessLogicException
     {
          LOGGER.log(Level.INFO, "creando ordenPedido");
-      
+      LOGGER.log(Level.INFO, "comentario " + ordenPedido.getComentario());
        ordenPedido.setEstado(OrdenPedidoEntity.Estado.EN_ESPERA);
          VendedorEntity vendedor=vendedorPersistence.find(vendedorId);
          ordenPedido.setVendedor(vendedor);
@@ -68,8 +68,9 @@ public class OrdenPedidoLogic {
          ComicEntity comic = comicPersistence.find(comicId);
          ordenPedido.setComic(comic);
       
-         ComicEntity comicTrueque = comicPersistence.find(truequeId);
-         ordenPedido.setTrueque(comicTrueque);
+         if(truequeId!=null)
+         { ComicEntity comicTrueque = comicPersistence.find(truequeId);
+         ordenPedido.setTrueque(comicTrueque);}
        
         if(persistence.find(ordenPedido.getId())!=null ){
         new BusinessLogicException("ya existe una ordenPedido con esta id"); 
@@ -92,53 +93,7 @@ public class OrdenPedidoLogic {
          return ordenPedido;
     }
     
-    /**
-     * crea una nueva orden de pedido verifica las reglas de negocio
-     * @param ordenPedido el ordenPedidoEntity con la informacion de la nueva ordenPedido
-     * @param vendedorId el id del vendedor asociado a la nueva ordenPedido
-     * @param compradoraiD el id del comprador asociado a la nueva ordenPedido
-     * @param comicId el id del comic asociado a la nueva ordenPedido
-     * @param truequeId el id del comicTrueque asociado a ala nueva ordenPedido
-     * @return la nueva ordenPedido creada
-     * @throws BusinessLogicException 
-     * Error cuando : ya existe una orden con esta id,
-     * Error cuando : no se tiene asociado ningun vendedor, comprador o comic
-     * Error cuando : el comic esta para truque y no se asocia ningun comic para trueque
-     */
-    public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido, Long vendedorId, Long compradoraiD, Long comicId)throws BusinessLogicException
-    {
-         LOGGER.log(Level.INFO, "creando ordenPedido");
-      
-       ordenPedido.setEstado(OrdenPedidoEntity.Estado.EN_ESPERA);
-         VendedorEntity vendedor=vendedorPersistence.find(vendedorId);
-         ordenPedido.setVendedor(vendedor);
-         
-         CompradorEntity comprador =compradorPersistence.find(compradoraiD);
-         ordenPedido.setComprador(comprador);
-         ComicEntity comic = comicPersistence.find(comicId);
-         ordenPedido.setComic(comic);
-      if(persistence.find(ordenPedido.getId())!=null ){
-        new BusinessLogicException("ya existe una ordenPedido con esta id"); 
-        }     
-     
-        if(ordenPedido.getComprador()==null || ordenPedido.getVendedor()==null ){
-            throw new BusinessLogicException("La orden Pedido debe tener un cliente y un vendedor asociado.");
-        }
-         if(ordenPedido.getComic()==null  ){
-            throw new BusinessLogicException("La orden Pedido debe tener uaunquesea un comic asociado.");
-        }
-        if( ordenPedido.getComic().getEnVenta()==false && ordenPedido.getTrueque()==null ){
-            throw new BusinessLogicException("Si el  comic asociado a la orden esta para truque debe tener asociado el comic con el cual se hara el truque.");
-        }
-        
-       
-         ordenPedido= persistence.create(ordenPedido);
-         
-         LOGGER.log(Level.INFO, "creando ordenPedido 3");
     
-         return ordenPedido;
-    }
-         
 
 /**
  * Devuelve la ordenPedido con la id proporcionada
@@ -162,14 +117,35 @@ public class OrdenPedidoLogic {
      * @param ordenPedidoEntity , entidad con la informacion de la ordenPedido
      * @return la ordenPedido actualizada
      */
-          public OrdenPedidoEntity updateOrdenPedido(Long id, OrdenPedidoEntity ordenPedidoEntity) {
+          public OrdenPedidoEntity updateOrdenPedido(Long id, OrdenPedidoEntity ordenPedidoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la ordenPedido con id = {0}", id);
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
-       
-        OrdenPedidoEntity newEntity = persistence.update(ordenPedidoEntity);
+         OrdenPedidoEntity orden = persistence.find(id);
+              
+         if(orden.getEstado()==OrdenPedidoEntity.Estado.FINALIZADO && (orden.getEstado()!= ordenPedidoEntity.getEstado())){
+                  throw new BusinessLogicException("la orden ya se encuentra finalizada");
+              }
+              if(orden.getEstado()==OrdenPedidoEntity.Estado.ACEPTADO && ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.RECHAZADO){
+                  throw new BusinessLogicException("la orden se encuentra aceptada, no se puede rechazar");
+              }
+               if(orden.getEstado()== ordenPedidoEntity.getEstado()){
+                  throw new BusinessLogicException("la orden ya se encuentra en este estado");
+              } 
+                if(orden.getEstado()!=OrdenPedidoEntity.Estado.ENVIADO && ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.FINALIZADO){
+                  throw new BusinessLogicException("No se puede registrar el recibido si no esta en estado enviado");
+              } 
+                 if(orden.getEstado()!=OrdenPedidoEntity.Estado.EN_ESPERA && (ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.ACEPTADO || ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.RECHAZADO)){
+                  throw new BusinessLogicException("Solo se puede aceptao o rechazar una orden si esta en espera");
+              } 
+                   if( ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.EN_ESPERA  ){
+                  throw new BusinessLogicException("No se puede volver al estado EN_ESPERA luego de salir de esste estado");
+              } 
+                 
+               
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la ordenPedido con id = {0}", ordenPedidoEntity.getId());
-        return newEntity;
-   
+        
+    OrdenPedidoEntity newEntity = persistence.update(ordenPedidoEntity);
+       return newEntity;
     }
           
           public void ActualizarEstado(Long id, OrdenPedidoEntity.Estado nuevoEstado) throws BusinessLogicException{

@@ -30,6 +30,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author ca.orduz
  */
+@Path("/vendedores/{vendedoresId: \\d+}/comics/")
 @Consumes("application/json")
 @Produces("application/json")
 public class VendedorComicResource {
