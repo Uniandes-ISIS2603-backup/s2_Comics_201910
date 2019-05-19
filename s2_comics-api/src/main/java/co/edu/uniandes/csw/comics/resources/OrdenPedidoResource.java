@@ -96,6 +96,21 @@ public class OrdenPedidoResource {
       
     }
     
+    @GET
+    @Path("{Estado}")
+    public List<OrdenPedidoDTO> getOrdenesPedidoEstado ( @PathParam("Estado")OrdenPedidoEntity.Estado estado) throws WebApplicationException
+    {
+      List<OrdenPedidoDTO> listaordenesPedido = listEntity2DetailDTO(ordenPedidoLogic.getOrdenesPedido());
+     List<OrdenPedidoDTO> lista2= new ArrayList<>();
+     for(int i =0; i < listaordenesPedido.size(); i++){
+         if( listaordenesPedido.get(i).getEstado().equals(estado)){
+             lista2.add(listaordenesPedido.get(i));
+         }
+     }
+        return lista2;
+      
+    }
+    
     /**
      * Busca y devuelve todas las ordenesPedido que existen en la aplicacion.
      *
