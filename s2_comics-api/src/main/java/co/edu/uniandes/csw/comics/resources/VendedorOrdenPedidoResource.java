@@ -12,6 +12,7 @@ import co.edu.uniandes.csw.comics.ejb.VendedorOrdenPedidoLogic;
 import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -51,6 +52,21 @@ public class VendedorOrdenPedidoResource {
       
        List<OrdenPedidoDTO> ordenes= ordenesListEntity2DTO(vendedorOrdenLogic.getOrdenes(vendedoresId));
     return ordenes;
+    }
+    
+    @GET
+    @Path("{Estado}")
+    public List<OrdenPedidoDTO> getOrdenesPedidoEstado ( @PathParam("vendedoresId") long idComprador, @PathParam("Estado")OrdenPedidoEntity.Estado estado) throws WebApplicationException
+    {
+         List<OrdenPedidoDTO> dtos= ordenesListEntity2DTO(vendedorOrdenLogic.getOrdenes(idComprador));
+    List<OrdenPedidoDTO> lista2= new ArrayList<>();
+     for(int i =0; i < dtos.size(); i++){
+         if( dtos.get(i).getEstado().equals(estado)){
+             lista2.add(dtos.get(i));
+         }
+     }
+        return lista2;
+      
     }
       @GET
       @Path("{OrdenesPedidoId: \\d+}")
