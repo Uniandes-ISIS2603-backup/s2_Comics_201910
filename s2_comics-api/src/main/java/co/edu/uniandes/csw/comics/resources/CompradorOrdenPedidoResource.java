@@ -79,6 +79,23 @@ public class CompradorOrdenPedidoResource
         return dtos;
     }
     
+    @GET
+    @Path("{Estado}")
+    public List<OrdenPedidoDTO> getOrdenesPedidoEstado ( @PathParam("compradorId") long idComprador, @PathParam("Estado")OrdenPedidoEntity.Estado estado) throws WebApplicationException
+    {
+     LOGGER.log(Level.INFO, "CompradorOrden");
+        List<OrdenPedidoDTO> dtos = listEntity2DTO(compradorOrdenLogic.getOrdenes(idComprador));
+        LOGGER.log(Level.INFO, "");
+        List<OrdenPedidoDTO> lista2= new ArrayList<>();
+     for(int i =0; i < dtos.size(); i++){
+         if( dtos.get(i).getEstado().equals(estado)){
+             lista2.add(dtos.get(i));
+         }
+     }
+        return lista2;
+      
+    }
+    
     /**
      * Busca y devuelve el pedido con el ID recibido en la URL, relativo a un
      * comprador.

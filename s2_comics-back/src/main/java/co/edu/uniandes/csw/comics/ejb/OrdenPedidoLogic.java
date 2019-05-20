@@ -142,9 +142,9 @@ public class OrdenPedidoLogic {
               } 
                  
                
+    OrdenPedidoEntity newEntity = persistence.update(ordenPedidoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la ordenPedido con id = {0}", ordenPedidoEntity.getId());
         
-    OrdenPedidoEntity newEntity = persistence.update(ordenPedidoEntity);
        return newEntity;
     }
           

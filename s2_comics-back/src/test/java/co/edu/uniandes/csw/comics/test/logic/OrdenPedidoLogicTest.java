@@ -15,6 +15,8 @@ import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.comics.persistence.OrdenPedidoPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,6 +39,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class OrdenPedidoLogicTest {
     
+    private static final Logger LOGGER=Logger.getLogger(OrdenPedidoLogicTest.class.getName());
+   
      private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
@@ -251,18 +255,29 @@ public class OrdenPedidoLogicTest {
     public void updateTest() 
     {
         OrdenPedidoEntity entity = data.get(0);
+           LOGGER.log(Level.INFO, "tarjeta data" + entity.getTarjetaCredito());
+      
         OrdenPedidoEntity pojoEntity = factory.manufacturePojo(OrdenPedidoEntity.class);
-        
+        LOGGER.log(Level.INFO, "tarjeta pojo" + pojoEntity.getTarjetaCredito());
+      
         pojoEntity.setId(entity.getId());
         try{
-        ordenPedido.updateOrdenPedido(pojoEntity.getId(), pojoEntity);}
+             LOGGER.log(Level.INFO, "comienzo la actualizacion "  );
+       
+        ordenPedido.updateOrdenPedido(pojoEntity.getId(), pojoEntity);
+       
+        LOGGER.log(Level.INFO, "tarjeta pojo2 " + pojoEntity.getTarjetaCredito() +  " " + entity.getTarjetaCredito() );
+        
+        }
         catch(BusinessLogicException e){
             e.getMessage();
         }
         OrdenPedidoEntity result = em.find(OrdenPedidoEntity.class, entity.getId());
         
+        
         Assert.assertEquals(result.getId(), pojoEntity.getId());
-        Assert.assertEquals(result.getTarjetaCredito(), pojoEntity.getTarjetaCredito());
+        Assert.assertEquals(result.getComentario(), pojoEntity.getComentario());
+         
         Assert.assertEquals(result.getEstado(), pojoEntity.getEstado());
     }
     
