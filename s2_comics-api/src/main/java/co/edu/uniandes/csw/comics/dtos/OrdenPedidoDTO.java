@@ -110,8 +110,9 @@ public class OrdenPedidoDTO implements Serializable
             this.vendedor=v;
             ComicDTO d= new ComicDTO(ordenPedidoEntity.getComic());
             this.comic=d;
-            ComicDTO t= new ComicDTO(ordenPedidoEntity.getTrueque());
-            this.trueque=t;
+            if(ordenPedidoEntity.getTrueque()!=null)
+            { ComicDTO t= new ComicDTO(ordenPedidoEntity.getTrueque());
+            this.trueque=t;}
         }
     }
     

@@ -1,3 +1,5 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,10 +14,18 @@ import co.edu.uniandes.csw.comics.entities.OrdenPedidoEntity;
 import co.edu.uniandes.csw.comics.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -61,14 +71,23 @@ public class OrdenPedidoResource {
         //invoca la logica para crear la nueva orden de pedido
          LOGGER.log(Level.INFO, "Iniciando create ordenesPedido");
          OrdenPedidoEntity nuevaOrdenPedidoEntity;
-       nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId() , ordenPedido.getTrueque().getId() );
-   
+          LOGGER.log(Level.INFO, "Iniciando create ordenesPedido 1");
+        Long idTrueque=null;
+          if(ordenPedido.getTrueque()!=null){
+               idTrueque= ordenPedido.getTrueque().getId();
+          }
+         nuevaOrdenPedidoEntity= ordenPedidoLogic.createOrdenPedido(ordenPedidoEntity, ordenPedido.getVendedor().getId(),ordenPedido.getComprador().getId(),ordenPedido.getComic().getId() , idTrueque );
+          LOGGER.log(Level.INFO, "Iniciando create ordenesPedido 2");
+        
+        
         //como debe retornar un DTO (json) se invoca el contructor de DTO con argumento el entity nuevo
         OrdenPedidoDTO nuevaOrdenPedidoDTO= new OrdenPedidoDTO(nuevaOrdenPedidoEntity);
        
       return nuevaOrdenPedidoDTO;
               
     }
+    
+  
     
     /**
      * Busca la ordenPedido con el id asociado recibido en la URL y la devuelve.
@@ -96,17 +115,35 @@ public class OrdenPedidoResource {
       
     }
     
+   
+    
     @GET
     @Path("{Estado}")
     public List<OrdenPedidoDTO> getOrdenesPedidoEstado ( @PathParam("Estado")OrdenPedidoEntity.Estado estado) throws WebApplicationException
     {
       List<OrdenPedidoDTO> listaordenesPedido = listEntity2DetailDTO(ordenPedidoLogic.getOrdenesPedido());
      List<OrdenPedidoDTO> lista2= new ArrayList<>();
-     for(int i =0; i < listaordenesPedido.size(); i++){
+  
+        if(!(estado.equals(OrdenPedidoEntity.Estado.TRUEQUE)|| estado.equals(OrdenPedidoEntity.Estado.VENTA))){
+       for(int i =0; i < listaordenesPedido.size(); i++){
          if( listaordenesPedido.get(i).getEstado().equals(estado)){
              lista2.add(listaordenesPedido.get(i));
          }
-     }
+     }}
+        else {
+           for(int i =0; i < listaordenesPedido.size(); i++){
+            if(estado.equals(OrdenPedidoEntity.Estado.VENTA)){
+                 if( listaordenesPedido.get(i).getComic().getEnVenta()){
+                lista2.add(listaordenesPedido.get(i));   
+             }
+         }
+             if(estado.equals(OrdenPedidoEntity.Estado.TRUEQUE)){
+                 if( !listaordenesPedido.get(i).getComic().getEnVenta()){
+                lista2.add(listaordenesPedido.get(i));   
+             }
+         }
+         } 
+        }
         return lista2;
       
     }
@@ -144,8 +181,13 @@ public class OrdenPedidoResource {
         LOGGER.log(Level.INFO, "ordenPedidoResource updateOrdenPedido: input: id:{0} , editorial: {1}", new Object[]{ordenesPedidoId, ordenPedido});
         ordenPedido.setId(ordenesPedidoId);
         if (ordenPedidoLogic.getOrdenPedido(ordenesPedidoId) == null) {
-            throw new WebApplicationException("El recurso /editorials/" + ordenesPedidoId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /ordenes/" + ordenesPedidoId + " no existe.", 404);
         }
+       enviarConGMail("jp.rodriguezv@uniandes.edu.co", "estado", "datos ojala");
+         LOGGER.log(Level.INFO, "llega hasta aqui");
+      // SendMail();
+          LOGGER.log(Level.INFO, "llega hasta aqui x3");
+      
         OrdenPedidoDTO detailDTO = new OrdenPedidoDTO(ordenPedidoLogic.updateOrdenPedido(ordenesPedidoId, ordenPedido.toEntity()));
         LOGGER.log(Level.INFO, "OrdenPedidoResource updateOrdenPedido: output: {0}", detailDTO);
         return detailDTO;
@@ -193,6 +235,70 @@ public class OrdenPedidoResource {
         }
         return list;
     }
-    
+        private static void enviarConGMail(String destinatario, String asunto, String cuerpo) {
+            System.out.println("llego hasta aqui");
+    // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
+     String remitente = "bm.florez99@gmail.com";  //Para la dirección nomcuenta@gmail.com
+     String clave = "60309268";
+            System.out.println("llego hasta aqui 2");
+    Properties props = System.getProperties();
+    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
+    props.put("mail.smtp.user", remitente);
+    props.put("mail.smtp.clave", clave);    //La clave de la cuenta
+    props.put("mail.smtp.auth", "true"); //Usar autenticación mediante usuario y clave
+            System.out.println("llego hasta aqui 3");
    
+    props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+    props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+ System.out.println("llego hasta aqui 4");
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage message = new MimeMessage(session);
+System.out.println("llego hasta aqui 5");
+ 
+    try {
+        message.setFrom(new InternetAddress(remitente));
+        message.addRecipients(Message.RecipientType.TO, destinatario);   //Se podrían añadir varios de la misma manera
+        message.setSubject(asunto);
+        message.setText(cuerpo);
+        Transport transport = session.getTransport("smtp");
+        transport.connect("smtp.gmail.com", remitente, clave);
+        transport.sendMessage(message, message.getAllRecipients());
+        transport.close();
+        System.out.println("en teoria deberia enviar el correo ");
+    }
+    catch (MessagingException me) {
+        me.printStackTrace();   //Si se produce un error
+    }
+}
+   
+        public void SendMail() {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+  String remitente = "bm.florez99@gmail.com";  //Para la dirección nomcuenta@gmail.com
+     String clave = "60309268";
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(remitente, clave);
+                    }
+                });
+ 
+        try {
+ 
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(remitente));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse("jp.rodriguezv@uniandes.edu.co"));
+            message.setSubject("prueba 1");
+            message.setText("mensaje 1");
+ 
+            Transport.send(message);
+           
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
