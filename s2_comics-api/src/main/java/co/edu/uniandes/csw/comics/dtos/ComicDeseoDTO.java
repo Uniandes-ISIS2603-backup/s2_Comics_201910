@@ -52,12 +52,11 @@ public class ComicDeseoDTO implements Serializable {
        this.fechaAgregado = entity.getFechaAgregado();
          if(entity.getComic() != null){
      
-             this.comic = new ComicDTO(entity.getComic());
+            comic = new ComicDTO(entity.getComic());
+            fechaAgregado = entity.getFechaAgregado();
+            
              
-        }else{
-             
-             this.comic = null;
-         }
+        }
        
    }
    /**
@@ -71,10 +70,10 @@ public class ComicDeseoDTO implements Serializable {
        
        comicD.setFechaAgregado(this.fechaAgregado);
       
-       if(this.comic != null){
-       
-           comicD.setComic(this.comic.toEntity());
+       if(comic !=null){
+           comicD.setComic(comic.toEntity());
        }
+       
        return comicD;
        
        

@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.comics.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -69,7 +70,7 @@ public class ComicEntity extends BaseEntity implements Serializable {
     private ComicEntity deTrueque;
     
     @PodamExclude
-    @OneToMany(mappedBy = "comic")
+    @OneToMany(mappedBy = "comic", cascade = CascadeType.PERSIST)
     private List<ComicDeseoEntity> comicsDeseo = new ArrayList<ComicDeseoEntity>();
     
     @PodamExclude

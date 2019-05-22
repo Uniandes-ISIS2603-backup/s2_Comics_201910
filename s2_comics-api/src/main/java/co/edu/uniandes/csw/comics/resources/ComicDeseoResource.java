@@ -30,7 +30,7 @@ import javax.ws.rs.WebApplicationException;
  * @author Sebastian Baquero
  */
 
-@Path("/comicDeseo")
+@Path("comicDeseo")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -51,21 +51,19 @@ public class ComicDeseoResource {
    */
  
    @POST
-  public ComicDeseoDTO createComicDeseo (@PathParam("comicDeseoId") Long comicId,ComicDeseoDTO pComicD)throws BusinessLogicException, Exception{
+  public ComicDeseoDTO createComicDeseo (ComicDeseoDTO pComicD)throws BusinessLogicException, Exception{
   
         
         LOGGER.log(Level.INFO, "ComicDeseoResource createComicDeseo: input: {0}", pComicD);
-        ComicDeseoDTO nComicDDTO = new ComicDeseoDTO(comicDLogic.createComicDeseo(comicId, pComicD.toEntity()));
+        ComicDeseoEntity cde = pComicD.toEntity();
+        LOGGER.log(Level.INFO, "1", pComicD);
+       ComicDeseoEntity cDE = comicDLogic.createComicDeseo(cde);
+        LOGGER.log(Level.INFO, "2", pComicD);
+        ComicDeseoDTO nComicDDTO = new ComicDeseoDTO(cDE);
+        
         LOGGER.log(Level.INFO, "ComicDeseoResource createComicDeseo: output: {0}",nComicDDTO );
         return nComicDDTO;
-        
        
-        
-      
-     
-      
-      
-     
   }
   
   /**
@@ -76,7 +74,7 @@ public class ComicDeseoResource {
   public List<ComicDeseoDTO> getComicsDeseos (){
       
        LOGGER.log(Level.INFO, "ComicDeseoResource getComicsDeseo: input: {0}");
-       List<ComicDeseoDTO> listaComicsDDTO = listEntity2DTO(comicDLogic.getComicsDeseo());
+       List<ComicDeseoDTO> listaComicsDDTO = this.listEntity2DTO(comicDLogic.getComicsDeseo());
        LOGGER.log(Level.INFO, "ComicDeseoResource getComicDeseos: output: {0}", listaComicsDDTO);
        return listaComicsDDTO;
   }
@@ -103,29 +101,14 @@ public class ComicDeseoResource {
       
   }
   
-  /*
-  * Borrar el comic deseo 
-  */
- 
-  @DELETE
-  @Path("{comicDeseoId: \\d+}")
-  public void deleteComicDeseo ( @PathParam("comicDeseoId") Long comicsDeseoId) throws BusinessLogicException{
- 
-      ComicDeseoEntity entity = comicDLogic.getComicDeseo( comicsDeseoId);
-      if(entity == null){
-      throw new WebApplicationException("El recurso/comicsDeseo/"+comicsDeseoId+"no existe.", 404);
-      }
-      comicDLogic.deleteComicDeseo( comicsDeseoId);
-  }
   
-  //@PUT
-  //@Path("{comicDeseoId: \\d+}")
-  //public ComicDeseoDTO updateComicDeseo(@PathParam("compradoresAlias") String compradoresAlias,@PathParam("comicsDeseoId")Long comicsDeseoId, ComicDeseoDTO comicDeseo){
-  //LOGGER.log(Level.INFO, "ComicDeseoResource updateComicDeseo: input: compradoresAlias: {0}, comicsDeseoId: {1}, comicDeseo: {2}", new Object[]{compradoresAlias,comicsDeseoId,comicDeseo});
-    //  if(comicsDeseoId.equals(comicDeseo.ge)){
-      
-    //  }
- // }
+  
+  @PUT
+  @Path("{comicDeseoId: \\d+}")
+  public ComicDeseoDTO updateComicDeseo(@PathParam("comicDeseoId") long id, ComicDeseoDTO comicDeseo){
+  LOGGER.log(Level.INFO, "ComicDeseoResource updateComicDeseo: input: compradoresAlias: {0}, comicsDeseoId: {1}, comicDeseo: {2}", new Object[]{id,comicDeseo});
+      return new ComicDeseoDTO(comicDLogic.updateComicDeseo(id,comicDeseo.toEntity()));
+     }
   
   /*
   *Recibe lista de comic deseo entity y lo convierte en lista de DTO

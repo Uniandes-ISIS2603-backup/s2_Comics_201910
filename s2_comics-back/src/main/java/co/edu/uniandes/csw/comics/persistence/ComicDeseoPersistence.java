@@ -85,10 +85,5 @@ public class ComicDeseoPersistence {
     return em.merge(pComicDeseoEn);
     }
    
-    public void delete(Long pComicDeseoId){
-    
-        LOGGER.log(Level.INFO, "Se esta borrando el comic Deseo con el id = {0}", pComicDeseoId);
-        ComicDeseoEntity cE = em.find(ComicDeseoEntity.class, pComicDeseoId);
-        em.remove(cE);
-    }
+  
 }

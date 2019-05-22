@@ -117,7 +117,7 @@ public class CompradorComicDeseoLogicTest
     public void addComicDeseoTest()throws BusinessLogicException
     {
         ComicDeseoEntity entity = factory.manufacturePojo(ComicDeseoEntity.class);
-        comicDeseoLogic.createComicDeseo(comicEntity.getId(), entity);
+        comicDeseoLogic.createComicDeseo( entity);
         ComicDeseoEntity creado = compradorComicDeseoLogic.addComicListaDeseo(comprador.getId(), entity.getId());
         Assert.assertNotNull(creado);
         
@@ -159,7 +159,7 @@ public class CompradorComicDeseoLogicTest
         {
             ComicDeseoEntity entity = factory.manufacturePojo(ComicDeseoEntity.class);
             entity.setComic(comicEntity);
-            comicDeseoLogic.createComicDeseo(comicEntity.getId(), entity);
+            comicDeseoLogic.createComicDeseo( entity);
             nuevaLista.add(entity);
         }
         
