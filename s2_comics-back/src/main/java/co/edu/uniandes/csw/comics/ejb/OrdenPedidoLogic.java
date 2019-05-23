@@ -166,9 +166,7 @@ public class OrdenPedidoLogic {
               if(orden.getEstado()==OrdenPedidoEntity.Estado.ACEPTADO && ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.RECHAZADO){
                   throw new BusinessLogicException("la orden se encuentra aceptada, no se puede rechazar");
               }
-               if(orden.getEstado()== ordenPedidoEntity.getEstado()){
-                  throw new BusinessLogicException("la orden ya se encuentra en este estado");
-              } 
+               
                 if(orden.getEstado()!=OrdenPedidoEntity.Estado.ENVIADO && ordenPedidoEntity.getEstado()==OrdenPedidoEntity.Estado.FINALIZADO){
                   throw new BusinessLogicException("No se puede registrar el recibido si no esta en estado enviado");
               } 
