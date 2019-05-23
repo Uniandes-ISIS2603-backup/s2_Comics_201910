@@ -31,6 +31,12 @@ public class ComicDeseoDTO implements Serializable {
      * Modela el comic asociado al comic deseo
      */
    private ComicDTO comic;
+   
+   /**
+    * Modela el comprador del comic deseo
+    */
+   
+   private CompradorDTO comprador;
     
     /**
      * Constructor vacio
@@ -50,10 +56,12 @@ public class ComicDeseoDTO implements Serializable {
         
         
        this.fechaAgregado = entity.getFechaAgregado();
+        this.comprador = new CompradorDTO(entity.getComprador()) ;
          if(entity.getComic() != null){
      
             comic = new ComicDTO(entity.getComic());
             fechaAgregado = entity.getFechaAgregado();
+            comprador = new CompradorDTO(entity.getComprador());
             
              
         }
@@ -69,6 +77,9 @@ public class ComicDeseoDTO implements Serializable {
        ComicDeseoEntity comicD = new ComicDeseoEntity();
        
        comicD.setFechaAgregado(this.fechaAgregado);
+      if(comprador != null){
+      comicD.setComprador(comprador.toEntity());
+      }
       
        if(comic !=null){
            comicD.setComic(comic.toEntity());
@@ -87,12 +98,15 @@ public class ComicDeseoDTO implements Serializable {
         return fechaAgregado;
     }
 
+     
     /**
      * @param fechaAgregado the fechaAgregado to set
      */
     public void setFechaAgregado(String fechaAgregado) {
         this.fechaAgregado = fechaAgregado;
     }
+    
+    
 
     /**
      * @return the comic
@@ -106,6 +120,20 @@ public class ComicDeseoDTO implements Serializable {
      */
     public void setComic(ComicDTO comic) {
         this.comic = comic;
+    }
+
+    /**
+     * @return the comprador
+     */
+    public CompradorDTO getComprador() {
+        return comprador;
+    }
+
+    /**
+     * @param comprador the comprador to set
+     */
+    public void setComprador(CompradorDTO comprador) {
+        this.comprador = comprador;
     }
   
    

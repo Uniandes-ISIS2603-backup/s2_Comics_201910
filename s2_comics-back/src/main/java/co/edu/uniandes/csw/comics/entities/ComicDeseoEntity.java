@@ -35,6 +35,10 @@ public class ComicDeseoEntity extends BaseEntity implements Serializable {
     @ManyToOne
     private ComicEntity comic;
     
+     @PodamExclude
+     @ManyToOne
+     private CompradorEntity comprador;
+    
    // @PodamExclude
   //  @OneToOne
   //  private ComicEntity comic;
@@ -73,6 +77,20 @@ public class ComicDeseoEntity extends BaseEntity implements Serializable {
      */
     public void setComic(ComicEntity comic) {
         this.comic = comic;
+    }
+
+    /**
+     * @return the comprador
+     */
+    public CompradorEntity getComprador() {
+        return comprador;
+    }
+
+    /**
+     * @param comprador the comprador to set
+     */
+    public void setComprador(CompradorEntity comprador) {
+        this.comprador = comprador;
     }
     
    

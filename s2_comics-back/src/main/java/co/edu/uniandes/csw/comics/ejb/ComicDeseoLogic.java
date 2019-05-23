@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
 
 
 /**
@@ -90,6 +91,12 @@ public class ComicDeseoLogic {
          return persistenceComicD.update(comicDEntity);
        
         
+    }
+    
+    public void deleteComicD(long id) {
+        if(persistenceComicD.find(id) == null)
+            throw new WebApplicationException("no existe el comic");
+        persistenceComicD.delete(id);
     }
         
         

@@ -110,6 +110,21 @@ public class ComicDeseoResource {
       return new ComicDeseoDTO(comicDLogic.updateComicDeseo(id,comicDeseo.toEntity()));
      }
   
+  @DELETE
+  @Path("{id:\\d+}")
+  public void deleteComic(@PathParam("id")long id){
+  LOGGER.log(Level.INFO, "ComicDeseoResource deleteComic: input {0}", id);
+      try {
+          ComicDeseoEntity ent =comicDLogic.getComicDeseo(id);
+          
+          if(ent == null)
+              throw new WebApplicationException("El recurso /Comic/" + id + " no existe" , 404);
+              comicDLogic.deleteComicD(id);
+          
+      } catch (BusinessLogicException ex) {
+          Logger.getLogger(ComicDeseoResource.class.getName()).log(Level.SEVERE, null, ex);
+      }
+  }
   /*
   *Recibe lista de comic deseo entity y lo convierte en lista de DTO
   */
