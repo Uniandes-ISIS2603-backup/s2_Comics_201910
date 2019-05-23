@@ -82,7 +82,16 @@ public class OrdenPedidoResource {
         
         //como debe retornar un DTO (json) se invoca el contructor de DTO con argumento el entity nuevo
         OrdenPedidoDTO nuevaOrdenPedidoDTO= new OrdenPedidoDTO(nuevaOrdenPedidoEntity);
-       
+     String mensaje="se ha generado una nueva ordenPedido,"
+             + " informacion de la nueva ordenPedido :  alias del comprador:" + nuevaOrdenPedidoDTO.getComprador().getAlias()+
+             " nombre del comic: "+ nuevaOrdenPedidoDTO.getComic().getNombre()  ;
+     if(nuevaOrdenPedidoDTO.getTrueque()!=null){
+         mensaje= mensaje + " comic asociado para el trueque: " + nuevaOrdenPedidoDTO.getTrueque().getNombre();
+     }
+     else{
+         mensaje= mensaje + " precio del comic: " + nuevaOrdenPedidoDTO.getComic().getPrecio();
+     }
+        enviarConGMail("jp.rodriguezv@uniandes.edu.co", "creacion de nueva Orden", mensaje);
       return nuevaOrdenPedidoDTO;
               
     }
@@ -183,11 +192,10 @@ public class OrdenPedidoResource {
         if (ordenPedidoLogic.getOrdenPedido(ordenesPedidoId) == null) {
             throw new WebApplicationException("El recurso /ordenes/" + ordenesPedidoId + " no existe.", 404);
         }
-       enviarConGMail("jp.rodriguezv@uniandes.edu.co", "estado", "datos ojala");
-         LOGGER.log(Level.INFO, "llega hasta aqui");
-      // SendMail();
-          LOGGER.log(Level.INFO, "llega hasta aqui x3");
-      
+        String mensaje = "querido cliente, se ha actualizado el estado de su ordenPedido a " + ordenPedido.getEstado();
+        
+       enviarConGMail("jp.rodriguezv@uniandes.edu.co", "cambio de estado orden", mensaje);
+       
         OrdenPedidoDTO detailDTO = new OrdenPedidoDTO(ordenPedidoLogic.updateOrdenPedido(ordenesPedidoId, ordenPedido.toEntity()));
         LOGGER.log(Level.INFO, "OrdenPedidoResource updateOrdenPedido: output: {0}", detailDTO);
         return detailDTO;
