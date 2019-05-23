@@ -19,39 +19,13 @@ import java.text.SimpleDateFormat;
 
 public class ComicDeseoDTO implements Serializable {
 
-    /**
-     * @return the fechaAgregado
-     */
-    public SimpleDateFormat getFechaAgregado() {
-        return fechaAgregado;
-    }
-
-    /**
-     * @param fechaAgregado the fechaAgregado to set
-     */
-    public void setFechaAgregado(SimpleDateFormat fechaAgregado) {
-        this.fechaAgregado = fechaAgregado;
-    }
-
-    /**
-     * @return the comic
-     */
-    public ComicDTO getComic() {
-        return comic;
-    }
-
-    /**
-     * @param comic the comic to set
-     */
-    public void setComic(ComicDTO comic) {
-        this.comic = comic;
-    }
+   
  
     /**
      * Modela la fecha de agregado del comic al la lista de comic deoseo
      */
    
-   private SimpleDateFormat fechaAgregado;
+   private String fechaAgregado;
    
    /**
      * Modela el comic asociado al comic deseo
@@ -78,12 +52,11 @@ public class ComicDeseoDTO implements Serializable {
        this.fechaAgregado = entity.getFechaAgregado();
          if(entity.getComic() != null){
      
-             this.comic = new ComicDTO(entity.getComic());
+            comic = new ComicDTO(entity.getComic());
+            fechaAgregado = entity.getFechaAgregado();
+            
              
-        }else{
-             
-             this.comic = null;
-         }
+        }
        
    }
    /**
@@ -97,17 +70,43 @@ public class ComicDeseoDTO implements Serializable {
        
        comicD.setFechaAgregado(this.fechaAgregado);
       
-       if(this.comic != null){
-       
-           comicD.setComic(this.comic.toEntity());
+       if(comic !=null){
+           comicD.setComic(comic.toEntity());
        }
+       
        return comicD;
        
        
    }
    
     
-    
+     /**
+     * @return the fechaAgregado
+     */
+    public String getFechaAgregado() {
+        return fechaAgregado;
+    }
+
+    /**
+     * @param fechaAgregado the fechaAgregado to set
+     */
+    public void setFechaAgregado(String fechaAgregado) {
+        this.fechaAgregado = fechaAgregado;
+    }
+
+    /**
+     * @return the comic
+     */
+    public ComicDTO getComic() {
+        return comic;
+    }
+
+    /**
+     * @param comic the comic to set
+     */
+    public void setComic(ComicDTO comic) {
+        this.comic = comic;
+    }
   
    
    

@@ -57,6 +57,44 @@ public class OrdenPedidoLogic {
      */
     public OrdenPedidoEntity createOrdenPedido(OrdenPedidoEntity ordenPedido, Long vendedorId, Long compradoraiD, Long comicId, Long truequeId)throws BusinessLogicException
     {
+        
+         LOGGER.log(Level.INFO, "creando ordenPedido 70");
+      LOGGER.log(Level.INFO, "comentario " + ordenPedido.getComentario());
+       ordenPedido.setEstado(OrdenPedidoEntity.Estado.EN_ESPERA);
+         VendedorEntity vendedor=vendedorPersistence.find(vendedorId);
+         ordenPedido.setVendedor(vendedor);
+         
+         CompradorEntity comprador =compradorPersistence.find(compradoraiD);
+         ordenPedido.setComprador(comprador);
+         ComicEntity comic = comicPersistence.find(comicId);
+         ordenPedido.setComic(comic);
+      
+       //  if(truequeId!=null)
+       //  { ComicEntity comicTrueque = comicPersistence.find(truequeId);
+       //  ordenPedido.setTrueque(comicTrueque);}
+       
+        if(persistence.find(ordenPedido.getId())!=null ){
+        new BusinessLogicException("ya existe una ordenPedido con esta id"); 
+        }     
+     
+        if(ordenPedido.getComprador()==null || ordenPedido.getVendedor()==null ){
+            throw new BusinessLogicException("La orden Pedido debe tener un cliente y un vendedor asociado.");
+        }
+         if(ordenPedido.getComic()==null  ){
+            throw new BusinessLogicException("La orden Pedido debe tener uaunquesea un comic asociado.");
+        }
+        if( ordenPedido.getComic().getEnVenta()==false && ordenPedido.getTrueque()==null ){
+            throw new BusinessLogicException("Si el  comic asociado a la orden esta para truque debe tener asociado el comic con el cual se hara el truque.");
+        }
+        
+         ordenPedido= persistence.create(ordenPedido);
+         
+         LOGGER.log(Level.INFO, "creando ordenPedido 3");
+    
+         return ordenPedido;
+    }
+     public OrdenPedidoEntity createOrdenPedidoTrueque(OrdenPedidoEntity ordenPedido, Long vendedorId, Long compradoraiD, Long comicId, Long truequeId)throws BusinessLogicException
+    {
          LOGGER.log(Level.INFO, "creando ordenPedido");
       LOGGER.log(Level.INFO, "comentario " + ordenPedido.getComentario());
        ordenPedido.setEstado(OrdenPedidoEntity.Estado.EN_ESPERA);
@@ -143,7 +181,7 @@ public class OrdenPedidoLogic {
                  
                
     OrdenPedidoEntity newEntity = persistence.update(ordenPedidoEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la ordenPedido con id = {0}", ordenPedidoEntity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la ordenPedido  2 con id = {0}", ordenPedidoEntity.getId());
         
        return newEntity;
     }

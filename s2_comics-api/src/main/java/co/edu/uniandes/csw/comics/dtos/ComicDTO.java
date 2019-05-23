@@ -17,8 +17,10 @@ public class ComicDTO implements Serializable {
     private Boolean perteneceColeccion;
     private Boolean perteneceSerie;
     private Double precio;
+   
     private ComicEntity.TemaGlobal tema;
     private Boolean enVenta;
+    //Falto
     private VendedorDTO vendedor;
     private String informacion;
     private String imagen;

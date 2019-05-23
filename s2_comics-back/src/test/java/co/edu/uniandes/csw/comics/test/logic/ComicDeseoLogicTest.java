@@ -127,13 +127,15 @@ public class ComicDeseoLogicTest {
      */
     @Test
     public void createComicDeseoTest() throws BusinessLogicException, Exception {
+       
+        
         ComicDeseoEntity newEntity = factory.manufacturePojo(ComicDeseoEntity.class);
-        newEntity.setComic(dataComics.get(1));
-        ComicDeseoEntity result = comicDLogic.createComicDeseo(dataComics.get(1).getId(), newEntity);
-        Assert.assertNotNull(result);
-        ComicDeseoEntity entity = em.find(ComicDeseoEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.getFechaAgregado(), entity.getFechaAgregado());
+       ComicDeseoEntity ans = comicDLogic.createComicDeseo(newEntity);
+       
+        Assert.assertNotNull(ans);
+        
+        Assert.assertEquals(newEntity.getId(),ans.getId());
+        Assert.assertEquals(newEntity.getFechaAgregado(), ans.getFechaAgregado());
        
         
     }
@@ -200,15 +202,6 @@ public class ComicDeseoLogicTest {
      *
      * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
      */
-    @Test
-    public void deleteComicDeseoTest() throws BusinessLogicException {
-        ComicDeseoEntity entity = data.get(0);
-        comicDLogic.deleteComicDeseo(dataComics.get(1).getId());
-        ComicDeseoEntity borrado = em.find(ComicDeseoEntity.class, entity.getId());
-        Assert.assertNull(borrado);
-        
-       
-    }
     
    
 

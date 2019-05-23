@@ -40,8 +40,12 @@ public class OrdenPedidoEntity  extends BaseEntity implements Serializable
         ACEPTADO,
         RECHAZADO,
         ENVIADO,
-        FINALIZADO
+        FINALIZADO,
+        VENTA,
+        TRUEQUE
+        
     }
+    
    
     
     /**

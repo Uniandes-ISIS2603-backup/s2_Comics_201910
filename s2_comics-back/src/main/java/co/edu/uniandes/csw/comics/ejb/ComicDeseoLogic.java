@@ -38,18 +38,16 @@ public class ComicDeseoLogic {
     @Inject
     private ComicPersistence persistenceC;
     
-    public ComicDeseoEntity createComicDeseo (Long comicId, ComicDeseoEntity comicDeseoEntity)throws BusinessLogicException{
+    public ComicDeseoEntity createComicDeseo(ComicDeseoEntity comicDeseoEntity)throws BusinessLogicException{
       
         LOGGER.log(Level.INFO,"Inicia proceso de crear comic deseo");
         
-        if(persistenceC.find(comicId)== null){
+//        if(persistenceC.find(comicDeseoEntity.getId())== null){
+//            LOGGER.log(Level.INFO,"1L");
+//            throw new BusinessLogicException("El comic deseo con id"+comicDeseoEntity.getId()+"no existe en comics");
+//        }
+        LOGGER.log(Level.INFO,"2L");
         
-            throw new BusinessLogicException("El comic deseo con id"+comicId+"no existe en comics");
-        }
-        
-        ComicEntity comic =  persistenceC.find(comicId);
-        comicDeseoEntity.setComic(comic);
-        LOGGER.log(Level.INFO,"Termina proceso de crear comic deseo");
         return persistenceComicD.create(comicDeseoEntity);
      
     }
@@ -73,35 +71,28 @@ public class ComicDeseoLogic {
         ComicEntity c = comic.getComic();
         if(c == null){
         
-            throw new BusinessLogicException("El comic deseo con id"+comicsDeseoId+"no existe en comics");
+            throw new BusinessLogicException("El comic deseo con id"+comicsDeseoId+"no existe en comics"+c.getId());
         }
         return comic;
     
     }
     
-    public void deleteComicDeseo( Long comicsDeseoId) {
-         LOGGER.log(Level.INFO, "Inicia proceso de borrar el comic deseo con id = {0}", comicsDeseoId);
-         
-         ComicDeseoEntity comic = persistenceComicD.find(comicsDeseoId);
-        ComicEntity c = comic.getComic();
+   
+    
+    public ComicDeseoEntity updateComicDeseo(Long comicDeseoId, ComicDeseoEntity comicDEntity) {
+        
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el comic con id = {0}", comicDeseoId);
+        if(persistenceComicD.find(comicDeseoId)== null){
+        
+            
+        }
+         comicDEntity.setId(comicDeseoId);
+         return persistenceComicD.update(comicDEntity);
        
         
-        persistenceComicD.delete(comicsDeseoId);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el libro con id = {0}", comicsDeseoId);
-    
     }
+        
+        
     
-    public ComicDeseoEntity updateComicDeseo(Long comicId, ComicDeseoEntity comicDEntity) {
-        
-         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el comic con id = {0}", comicId);
-        
-        ComicDeseoEntity newEntity = persistenceComicD.update(comicDEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el comic deseo con id = {0}", comicDEntity.getId());
-        return newEntity;
-        
-        
-        
-        
-    }
        
 }

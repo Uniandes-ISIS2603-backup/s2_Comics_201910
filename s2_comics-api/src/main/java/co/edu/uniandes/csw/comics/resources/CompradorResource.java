@@ -19,6 +19,12 @@ import javax.ws.rs.Produces;
 import java.util.*;
 import java.util.logging.Level;
 import javax.inject.Inject;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.ws.rs.GET;
 
 /**
@@ -199,5 +205,7 @@ public class CompradorResource
         }
         return list;
     }
+    
+
 }
     

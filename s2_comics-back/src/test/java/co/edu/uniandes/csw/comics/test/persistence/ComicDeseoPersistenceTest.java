@@ -137,16 +137,6 @@ public class ComicDeseoPersistenceTest {
     }
     
     
-    /**
-     * Prueba para eliminar un ComicDeseo
-     */
-    @Test
-    public void deleteComicDeseoTest() {
-        ComicDeseoEntity entity = data.get(0);
-        comicPersistence.delete(entity.getId());
-        ComicDeseoEntity deleted = em.find(ComicDeseoEntity.class, entity.getId());
-        Assert.assertNull(deleted);
-    }
     
     
     /**

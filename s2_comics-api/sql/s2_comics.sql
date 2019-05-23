@@ -31,6 +31,8 @@ insert into vendedorentity (id, alias, email, foto, intereses, nombre, password)
 insert into vendedorentity (id, alias, email, foto, intereses, nombre, password) values (20, 'edej', 'edej@free.fr', 'https://robohash.org/abofficiisquia.jpg?size=500x500&set=set1', 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.', 'Eustace de Glanville', 'OadVdU');
 
 
+
+select * from CompradorEntity;
 select * from CalificacionEntity;
 select * from VendedorEntity;
 delete from CalificacionEntity;
