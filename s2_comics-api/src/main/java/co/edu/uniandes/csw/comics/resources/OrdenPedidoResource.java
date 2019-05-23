@@ -91,7 +91,7 @@ public class OrdenPedidoResource {
      else{
          mensaje= mensaje + " precio del comic: " + nuevaOrdenPedidoDTO.getComic().getPrecio();
      }
-        enviarConGMail("jp.rodriguezv@uniandes.edu.co", "creacion de nueva Orden", mensaje);
+        enviarConGMail("Pietroehrlich@gmail.com", "creacion de nueva Orden", mensaje);
       return nuevaOrdenPedidoDTO;
               
     }
@@ -194,7 +194,7 @@ public class OrdenPedidoResource {
         }
         String mensaje = "querido cliente, se ha actualizado el estado de su ordenPedido a " + ordenPedido.getEstado();
         
-       enviarConGMail("jp.rodriguezv@uniandes.edu.co", "cambio de estado orden", mensaje);
+       enviarConGMail("Pietroehrlich@gmail.com", "cambio de estado orden", mensaje);
        
         OrdenPedidoDTO detailDTO = new OrdenPedidoDTO(ordenPedidoLogic.updateOrdenPedido(ordenesPedidoId, ordenPedido.toEntity()));
         LOGGER.log(Level.INFO, "OrdenPedidoResource updateOrdenPedido: output: {0}", detailDTO);
